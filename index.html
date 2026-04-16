@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruckPartsXL | The Reverse Marketplace for Heavy-Duty Parts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f4f4f5; 
+            color: #18181b; 
+        }
+
+        .xl-card {
+            background: white;
+            border: 1px solid #e4e4e7;
+            transition: all 0.3s ease;
+        }
+
+        .xl-card:hover {
+            border-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .accent-blue { color: #2563eb; }
+        .bg-blue { background-color: #2563eb; }
+    </style>
+</head>
+<body class="selection:bg-blue-100 selection:text-blue-900">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-zinc-200 py-4 px-8 flex justify-between items-center">
+        <div class="text-2xl font-black tracking-tighter uppercase text-zinc-900">TruckParts<span class="accent-blue">XL</span></div>
+        <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-zinc-500">
+            <a href="#about" class="hover:text-blue-600 transition">Our Strategy</a>
+            <a href="#marketplace" class="hover:text-blue-600 transition">The Bounty Board</a>
+            <a href="#login" class="text-blue-600 font-black">Login / Register</a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20">
+        <div class="max-w-5xl">
+            <h2 class="text-xs font-black uppercase tracking-[0.4em] accent-blue mb-6">Matchmaking for the 18-Wheel Industry</h2>
+            <h1 class="text-5xl md:text-8xl font-extrabold mb-8 tracking-tighter leading-none text-zinc-900 uppercase">
+                STOP SEARCHING.<br><span class="italic text-zinc-400">START REQUESTING.</span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-12 text-zinc-600 font-medium">
+                The first **Reverse Marketplace** for Class 8 parts. Post what you need—our network of verified sellers bids for your business.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="#post-bounty" class="bg-blue text-white font-bold py-6 px-14 rounded-sm hover:bg-blue-700 transition uppercase text-sm tracking-widest shadow-xl">Post a Buy Request</a>
+                <a href="#marketplace" class="border-2 border-zinc-900 text-zinc-900 font-bold py-6 px-14 rounded-sm hover:bg-zinc-900 hover:text-white transition uppercase text-sm tracking-widest">Browse Parts</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 px-8 bg-zinc-100">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-xs font-black uppercase tracking-[0.4em] accent-blue mb-4">The About</h2>
+                <h3 class="text-4xl font-bold mb-8 tracking-tighter text-zinc-900 uppercase">A Purity-First Parts Infrastructure.</h3>
+                <p class="text-zinc-600 text-lg mb-6 leading-relaxed">
+                    Standard inventory platforms are broken. They rely on sellers to manually update stock—leading to 30% "ghost listings." 
+                </p>
+                <p class="text-zinc-900 font-bold text-lg mb-8">
+                    TruckPartsXL flips the model. We prioritize the **Buyer’s Intent.** </p>
+                <ul class="space-y-4 text-zinc-600">
+                    <li class="flex items-center gap-3"><span class="accent-blue font-black">01.</span> Request-Driven: Sellers only talk to ready buyers.</li>
+                    <li class="flex items-center gap-3"><span class="accent-blue font-black">02.</span> AI-Vetted: Every part is verified via technical data.</li>
+                    <li class="flex items-center gap-3"><span class="accent-blue font-black">03.</span> No-Fee Entry: Free to post. Fees only apply for priority visibility.</li>
+                </ul>
+            </div>
+            <div class="xl-card p-4">
+                <img src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=2070&auto=format&fit=crop" class="w-full h-[500px] object-cover rounded-sm grayscale hover:grayscale-0 transition duration-700">
+            </div>
+        </div>
+    </section>
+
+    <section id="marketplace" class="py-32 px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-6xl font-black tracking-tighter text-zinc-900 uppercase">Live Bounty Board</h2>
+            <p class="text-zinc-500 mt-4 font-bold text-lg uppercase tracking-widest italic">Sellers: These buyers are ready to pay now.</p>
+        </div>
+        
+        <div class="grid gap-4">
+            <div class="xl-card p-8 flex flex-col md:flex-row justify-between items-center border-l-8 border-blue-600">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 font-black uppercase tracking-widest mb-2 inline-block">Transmission</span>
+                    <h4 class="text-xl font-bold uppercase">Eaton Fuller 10-Speed (Used)</h4>
+                    <p class="text-zinc-500 text-sm">Target Price: <span class="text-zinc-900 font-bold">$2,800</span> | Location: Ontario, CA</p>
+                </div>
+                <button class="bg-zinc-900 text-white font-bold py-4 px-10 rounded-sm hover:bg-blue-600 transition uppercase text-xs tracking-widest">Submit Bid</button>
+            </div>
+
+            <div class="xl-card p-8 flex flex-col md:flex-row justify-between items-center border-l-8 border-zinc-300">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-[10px] bg-zinc-200 text-zinc-600 px-3 py-1 font-black uppercase tracking-widest mb-2 inline-block">Engine Parts</span>
+                    <h4 class="text-xl font-bold uppercase">Cummins ISX Turbocharger</h4>
+                    <p class="text-zinc-500 text-sm">Target Price: <span class="text-zinc-900 font-bold">$1,200</span> | Location: Chicago, IL</p>
+                </div>
+                <button class="bg-zinc-900 text-white font-bold py-4 px-10 rounded-sm hover:bg-blue-600 transition uppercase text-xs tracking-widest">Submit Bid</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="post-bounty" class="py-32 px-8 bg-zinc-900 text-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-black mb-4 uppercase tracking-tighter">Cannot find your part?</h2>
+            <p class="text-zinc-400 mb-12 font-medium italic">Post a request. Let the sellers find you.</p>
+            
+            <form action="#" class="grid grid-cols-1 gap-4 text-left">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Part Name / Number" class="bg-transparent border-2 border-zinc-700 p-5 font-bold text-xs uppercase tracking-widest focus:border-blue-500 outline-none transition">
+                    <input type="text" placeholder="Truck Make/Model" class="bg-transparent border-2 border-zinc-700 p-5 font-bold text-xs uppercase tracking-widest focus:border-blue-500 outline-none transition">
+                </div>
+                <select class="bg-zinc-800 border-2 border-zinc-700 p-5 font-bold text-xs uppercase tracking-widest appearance-none outline-none">
+                    <option>Condition: Used (Good)</option>
+                    <option>Condition: Refurbished</option>
+                    <option>Condition: New OEM</option>
+                </select>
+                <textarea placeholder="Describe technical requirements or specific damage..." rows="4" class="bg-transparent border-2 border-zinc-700 p-5 font-bold text-xs uppercase tracking-widest focus:border-blue-500 outline-none transition"></textarea>
+                
+                <button class="bg-blue text-white font-bold py-6 px-10 rounded-sm hover:bg-white hover:text-blue-900 transition uppercase text-xs tracking-widest">Broadcast Request to Network</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-20 px-8 border-t border-zinc-200 text-center bg-white">
+        <div class="text-xl font-black tracking-tighter text-zinc-900 uppercase mb-4">TruckParts<span class="accent-blue">XL</span></div>
+        <p class="text-zinc-400 text-[10px] uppercase tracking-[0.3em] font-bold">
+            © 2026 TRUCKPARTSXL. THE REVERSE MARKETPLACE. MODERN LOGISTICS.
+        </p>
+    </footer>
+
+</body>
+</html>
