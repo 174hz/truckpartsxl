@@ -8,7 +8,21 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800;900&display=swap');
         
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1a1a1a; overflow-x: hidden; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #e2e8f0; /* Light gray background for the "outer" area */
+            color: #1a1a1a; 
+            overflow-x: hidden; 
+        }
+
+        /* BOXED LAYOUT WRAPPER */
+        .site-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
 
         .bg-raney-red { background-color: #cc0000; }
         .text-raney-red { color: #cc0000; }
@@ -26,170 +40,168 @@
         .xl-card:hover { border-color: #cc0000; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body class="selection:bg-red-600 selection:text-white">
-
-    <div class="bg-raney-red text-white text-[10px] font-black uppercase tracking-[0.2em] py-2 text-center">
-        Matchmaking Infrastructure: Connecting Fleet Managers to Global Inventory
-    </div>
-
-    <nav class="sticky top-0 w-full z-50 bg-slate-dark py-4 px-8 flex justify-between items-center shadow-2xl">
-        <div class="text-2xl font-black tracking-tighter uppercase text-white">
-            TruckParts<span class="text-raney-red">XL</span>
+<body class="selection:bg-red-600 selection:text-white p-0 md:p-8"> <div class="site-wrapper">
+        <div class="bg-raney-red text-white text-[10px] font-black uppercase tracking-[0.2em] py-2 text-center">
+            Matchmaking Infrastructure: Connecting Fleet Managers to Global Inventory
         </div>
-        <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest text-zinc-300">
-            <a href="#about" class="hover:text-white transition">Concept</a>
-            <a href="#marketplace" class="hover:text-white transition">Bounty Board</a>
-            <a href="#register" class="bg-raney-red text-white px-5 py-2 hover:bg-red-700 transition">Join Network</a>
-        </div>
-    </nav>
 
-    <section class="relative h-[70vh] flex items-center px-8 bg-black">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/14633492247499395888_0" class="absolute inset-0 w-full h-full object-cover opacity-40">
-        <div class="relative z-10 max-w-4xl">
-            <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tighter text-white uppercase leading-none">
-                STOP SEARCHING.<br><span class="text-raney-red">START REQUESTING.</span>
-            </h1>
-            <p class="text-xl mb-8 text-zinc-200 font-bold max-w-xl">
-                The first Reverse Marketplace for Class 8 parts. Post your OEM requirements and let verified yards bid for your business.
-            </p>
-            <div class="flex gap-4">
-                <a href="#register" class="bg-raney-red text-white font-black py-4 px-10 uppercase text-xs tracking-widest hover:bg-white hover:text-black transition">Create Free Account</a>
-                <a href="#marketplace" class="bg-white text-slate-dark font-black py-4 px-10 uppercase text-xs tracking-widest hover:bg-zinc-200 transition">View Live Bounties</a>
+        <nav class="sticky top-0 w-full z-50 bg-slate-dark py-4 px-8 flex justify-between items-center shadow-2xl">
+            <div class="text-2xl font-black tracking-tighter uppercase text-white">
+                TruckParts<span class="text-raney-red">XL</span>
             </div>
-        </div>
-    </section>
-
-    <section id="marketplace" class="py-12 bg-zinc-100 overflow-hidden border-y-2 border-zinc-200">
-        <div class="px-8 mb-6 flex justify-between items-center">
-            <h2 class="text-sm font-black uppercase tracking-[0.3em] text-zinc-900 flex items-center gap-2">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Live Demand Ticker
-            </h2>
-            <span class="text-[10px] font-bold text-zinc-400 uppercase italic">Hover to Pause & Bid</span>
-        </div>
-
-        <div class="ticker-wrapper flex">
-            <div class="ticker-container gap-6">
-                <div class="xl-card min-w-[400px] p-6 border-l-4 border-raney-red bg-white">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-[9px] font-black text-raney-red uppercase tracking-widest">Bounty #7721</span>
-                        <span class="text-[10px] font-bold text-zinc-400">2m ago</span>
-                    </div>
-                    <h4 class="font-black text-lg uppercase truncate">Turbocharger Assembly</h4>
-                    <p class="text-[10px] font-bold text-zinc-600 mb-2">OEM: <span class="text-black">4033317H</span> | Cummins ISX</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xl font-black">$1,150.00</span>
-                        <button class="text-[9px] font-black bg-slate-dark text-white px-4 py-2 uppercase tracking-widest">Submit Quote</button>
-                    </div>
-                </div>
-                <div class="xl-card min-w-[400px] p-6 border-l-4 border-zinc-900 bg-white">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Bounty #7719</span>
-                        <span class="text-[10px] font-bold text-zinc-400">12m ago</span>
-                    </div>
-                    <h4 class="font-black text-lg uppercase truncate">Eaton Transmission Gear</h4>
-                    <p class="text-[10px] font-bold text-zinc-600 mb-2">OEM: <span class="text-black">S-2129</span> | 10-Speed</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xl font-black">$450.00</span>
-                        <button class="text-[9px] font-black bg-slate-dark text-white px-4 py-2 uppercase tracking-widest">Submit Quote</button>
-                    </div>
-                </div>
-                <div class="xl-card min-w-[400px] p-6 border-l-4 border-raney-red bg-white">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-[9px] font-black text-raney-red uppercase tracking-widest">Bounty #7715</span>
-                        <span class="text-[10px] font-bold text-zinc-400">1h ago</span>
-                    </div>
-                    <h4 class="font-black text-lg uppercase truncate">Freightliner Bumper</h4>
-                    <p class="text-[10px] font-bold text-zinc-600 mb-2">OEM: <span class="text-black">A22-68048-000</span></p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xl font-black">$1,800.00</span>
-                        <button class="text-[9px] font-black bg-slate-dark text-white px-4 py-2 uppercase tracking-widest">Submit Quote</button>
-                    </div>
-                </div>
+            <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest text-zinc-300">
+                <a href="#about" class="hover:text-white transition">Concept</a>
+                <a href="#marketplace" class="hover:text-white transition">Bounty Board</a>
+                <a href="#register" class="bg-raney-red text-white px-5 py-2 hover:bg-red-700 transition">Join Network</a>
             </div>
-        </div>
-    </section>
+        </nav>
 
-    <section id="about" class="py-24 px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        <div>
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/2533754255724632166_0" class="w-full h-[500px] object-cover shadow-2xl border-b-8 border-raney-red" alt="Logistics Infrastructure">
-        </div>
-        <div>
-            <h2 class="text-raney-red text-xs font-black uppercase tracking-[0.4em] mb-4">The Pivot</h2>
-            <h3 class="text-4xl font-black mb-8 tracking-tighter uppercase leading-tight">Eliminating Revenue Leakage in the Parts Market.</h3>
-            <p class="text-zinc-600 font-bold mb-8 leading-relaxed">
-                Static inventory is a liability. TruckPartsXL creates a self-operating ecosystem where buyers broadcast demand and sellers respond instantly with verified OEM matches.
-            </p>
-            <div class="space-y-4 text-sm font-black uppercase tracking-widest text-zinc-900">
-                <div class="flex items-center gap-4"><span class="w-8 h-8 bg-raney-red text-white flex items-center justify-center">01</span> OEM-First Precision</div>
-                <div class="flex items-center gap-4"><span class="w-8 h-8 bg-raney-red text-white flex items-center justify-center">02</span> Real-Time Demand Ticker</div>
-                <div class="flex items-center gap-4"><span class="w-8 h-8 bg-raney-red text-white flex items-center justify-center">03</span> Automated Seller Matching</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="register" class="py-24 px-8 bg-zinc-50 border-y border-zinc-200">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20">
-            <div>
-                <h2 class="text-raney-red text-xs font-black uppercase tracking-[0.4em] mb-4">Network Access</h2>
-                <h3 class="text-4xl font-black mb-8 tracking-tighter uppercase leading-tight">Join the Verified Professional Network.</h3>
-                <p class="text-zinc-600 font-bold mb-10 leading-relaxed">
-                    Access high-ticket bounties and secure a regional monopoly on specific OEM categories. Register as a Buyer to post, or a Seller to quote.
+        <section class="relative h-[60vh] flex items-center px-8 bg-black">
+            <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50">
+            <div class="relative z-10 max-w-3xl">
+                <h1 class="text-5xl md:text-6xl font-black mb-4 tracking-tighter text-white uppercase leading-none">
+                    STOP SEARCHING.<br><span class="text-raney-red">START REQUESTING.</span>
+                </h1>
+                <p class="text-lg mb-8 text-zinc-200 font-bold max-w-xl">
+                    The first Reverse Marketplace for Class 8 parts. Post your OEM requirements and let verified yards bid for your business.
                 </p>
-                <div class="p-8 bg-white border-2 border-zinc-100 shadow-lg">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/12707443924471929304_0" class="w-full h-48 object-cover grayscale mb-6">
-                    <h4 class="font-black text-sm uppercase mb-2">Verified Professional Infrastructure</h4>
-                    <p class="text-xs text-zinc-400 font-medium">Join 500+ verified yards and fleet managers using the XL protocol.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#register" class="bg-raney-red text-white font-black py-4 px-10 uppercase text-xs tracking-widest hover:bg-white hover:text-black transition">Create Account</a>
+                    <a href="#marketplace" class="bg-white text-slate-dark font-black py-4 px-10 uppercase text-xs tracking-widest hover:bg-zinc-200 transition">Live Bounties</a>
                 </div>
             </div>
+        </section>
 
-            <div class="bg-white border-2 border-zinc-100 p-10 shadow-2xl">
-                <div class="flex gap-4 mb-8">
-                    <button class="flex-1 pb-4 border-b-4 border-raney-red font-black text-xs uppercase tracking-widest">Register</button>
-                    <button class="flex-1 pb-4 border-b-4 border-zinc-100 font-black text-xs uppercase tracking-widest text-zinc-400">Login</button>
+        <section id="marketplace" class="py-12 bg-zinc-100 overflow-hidden border-y-2 border-zinc-200">
+            <div class="px-8 mb-6 flex justify-between items-center">
+                <h2 class="text-sm font-black uppercase tracking-[0.3em] text-zinc-900 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Live Demand Ticker
+                </h2>
+                <span class="text-[10px] font-bold text-zinc-400 uppercase italic">Hover to Pause & Bid</span>
+            </div>
+
+            <div class="ticker-wrapper flex">
+                <div class="ticker-container gap-6">
+                    <div class="xl-card min-w-[350px] p-6 border-l-4 border-raney-red bg-white">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[9px] font-black text-raney-red uppercase tracking-widest">Bounty #7721</span>
+                            <span class="text-[10px] font-bold text-zinc-400">2m ago</span>
+                        </div>
+                        <h4 class="font-black text-lg uppercase truncate">Turbocharger Assembly</h4>
+                        <p class="text-[10px] font-bold text-zinc-600 mb-2">OEM: <span class="text-black">4033317H</span> | Cummins ISX</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-black">$1,150.00</span>
+                            <button class="text-[9px] font-black bg-slate-dark text-white px-4 py-2 uppercase tracking-widest">Submit Quote</button>
+                        </div>
+                    </div>
+                    <div class="xl-card min-w-[350px] p-6 border-l-4 border-zinc-900 bg-white">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Bounty #7719</span>
+                            <span class="text-[10px] font-bold text-zinc-400">12m ago</span>
+                        </div>
+                        <h4 class="font-black text-lg uppercase truncate">Eaton Transmission Gear</h4>
+                        <p class="text-[10px] font-bold text-zinc-600 mb-2">OEM: <span class="text-black">S-2129</span> | 10-Speed</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-black">$450.00</span>
+                            <button class="text-[9px] font-black bg-slate-dark text-white px-4 py-2 uppercase tracking-widest">Submit Quote</button>
+                        </div>
+                    </div>
+                    <div class="xl-card min-w-[350px] p-6 border-l-4 border-raney-red bg-white">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[9px] font-black text-raney-red uppercase tracking-widest">Bounty #7721</span>
+                            <span class="text-[10px] font-bold text-zinc-400">2m ago</span>
+                        </div>
+                        <h4 class="font-black text-lg uppercase truncate">Turbocharger Assembly</h4>
+                        <p class="text-[10px] font-bold text-zinc-600 mb-2">OEM: <span class="text-black">4033317H</span></p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-black">$1,150.00</span>
+                            <button class="text-[9px] font-black bg-slate-dark text-white px-4 py-2 uppercase tracking-widest">Submit Quote</button>
+                        </div>
+                    </div>
                 </div>
-                <form class="space-y-4">
-                    <input type="text" placeholder="Full Name / Company Name" class="w-full border-2 border-zinc-100 p-4 font-bold text-xs uppercase focus:border-raney-red outline-none">
-                    <input type="email" placeholder="Professional Email" class="w-full border-2 border-zinc-100 p-4 font-bold text-xs uppercase focus:border-raney-red outline-none">
-                    <select class="w-full border-2 border-zinc-100 p-4 font-bold text-xs uppercase outline-none focus:border-raney-red transition bg-white">
-                        <option>Account Type: Buyer / Fleet Manager</option>
-                        <option>Account Type: Seller / Parts Yard</option>
-                    </select>
-                    <input type="password" placeholder="Create Password" class="w-full border-2 border-zinc-100 p-4 font-bold text-xs uppercase focus:border-raney-red outline-none">
-                    <button class="w-full bg-raney-red text-white font-black py-5 uppercase text-xs tracking-widest shadow-xl">Complete Registration</button>
+            </div>
+        </section>
+
+        <section id="about" class="py-24 px-8 grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop" class="w-full h-[450px] object-cover shadow-2xl border-b-8 border-raney-red" alt="Warehouse Operations">
+            </div>
+            <div>
+                <h2 class="text-raney-red text-xs font-black uppercase tracking-[0.4em] mb-4">The Pivot</h2>
+                <h3 class="text-4xl font-black mb-8 tracking-tighter uppercase leading-tight">Eliminating Revenue Leakage in the Parts Market.</h3>
+                <p class="text-zinc-600 font-bold mb-8 leading-relaxed">
+                    Static inventory is a liability. TruckPartsXL creates a self-operating ecosystem where buyers broadcast demand and sellers respond instantly with verified OEM matches.
+                </p>
+                <div class="space-y-4 text-sm font-black uppercase tracking-widest text-zinc-900">
+                    <div class="flex items-center gap-4"><span class="w-8 h-8 bg-raney-red text-white flex items-center justify-center">01</span> OEM-First Precision</div>
+                    <div class="flex items-center gap-4"><span class="w-8 h-8 bg-raney-red text-white flex items-center justify-center">02</span> Real-Time Demand Ticker</div>
+                    <div class="flex items-center gap-4"><span class="w-8 h-8 bg-raney-red text-white flex items-center justify-center">03</span> Automated Seller Matching</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="register" class="py-24 px-8 bg-zinc-50 border-y border-zinc-200">
+            <div class="grid md:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="text-raney-red text-xs font-black uppercase tracking-[0.4em] mb-4">Network Access</h2>
+                    <h3 class="text-4xl font-black mb-8 tracking-tighter uppercase leading-tight">Join the Verified Professional Network.</h3>
+                    <p class="text-zinc-600 font-bold mb-10 leading-relaxed">
+                        Access high-ticket bounties and secure a regional monopoly on specific OEM categories. Register as a Buyer to post, or a Seller to quote.
+                    </p>
+                    <div class="p-8 bg-white border-2 border-zinc-100 shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=2070&auto=format&fit=crop" class="w-full h-48 object-cover grayscale mb-6">
+                        <h4 class="font-black text-sm uppercase mb-2">Verified Infrastructure</h4>
+                        <p class="text-xs text-zinc-400 font-medium">Join 500+ verified yards and fleet managers using the XL protocol.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border-2 border-zinc-100 p-10 shadow-2xl self-center">
+                    <div class="flex gap-4 mb-8">
+                        <button class="flex-1 pb-4 border-b-4 border-raney-red font-black text-xs uppercase tracking-widest">Register</button>
+                        <button class="flex-1 pb-4 border-b-4 border-zinc-100 font-black text-xs uppercase tracking-widest text-zinc-400">Login</button>
+                    </div>
+                    <form class="space-y-4">
+                        <input type="text" placeholder="Full Name / Company Name" class="w-full border-2 border-zinc-100 p-4 font-bold text-xs uppercase focus:border-raney-red outline-none">
+                        <input type="email" placeholder="Professional Email" class="w-full border-2 border-zinc-100 p-4 font-bold text-xs uppercase focus:border-raney-red outline-none">
+                        <select class="w-full border-2 border-zinc-100 p-4 font-bold text-xs uppercase outline-none focus:border-raney-red transition bg-white">
+                            <option>Account Type: Buyer / Fleet Manager</option>
+                            <option>Account Type: Seller / Parts Yard</option>
+                        </select>
+                        <input type="password" placeholder="Create Password" class="w-full border-2 border-zinc-100 p-4 font-bold text-xs uppercase focus:border-raney-red outline-none">
+                        <button class="w-full bg-raney-red text-white font-black py-5 uppercase text-xs tracking-widest shadow-xl">Complete Registration</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-slate-dark text-white px-8">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-black mb-12 uppercase text-center tracking-tighter">Broadcast a Part Bounty</h2>
+                <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-zinc-500 mb-2 tracking-widest">OEM / Part Number</label>
+                        <input type="text" placeholder="REQUIRED FOR AI MATCHING" class="w-full bg-zinc-800 border-2 border-zinc-700 p-5 font-bold text-sm uppercase focus:border-raney-red outline-none transition text-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-zinc-500 mb-2 tracking-widest">Target Budget ($)</label>
+                        <input type="number" placeholder="Enter target price" class="w-full bg-zinc-800 border-2 border-zinc-700 p-5 font-bold text-sm uppercase focus:border-raney-red outline-none transition text-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-black uppercase text-zinc-500 mb-2 tracking-widest">Technical Requirements</label>
+                        <textarea rows="4" placeholder="List Year, Make, Model, and any specific variations..." class="w-full bg-zinc-800 border-2 border-zinc-700 p-5 font-bold text-sm uppercase focus:border-raney-red outline-none transition text-white"></textarea>
+                    </div>
+                    <button class="md:col-span-2 bg-raney-red text-white font-black py-7 uppercase text-sm tracking-widest hover:bg-white hover:text-black transition">Broadcast Bounty Request</button>
                 </form>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="py-24 bg-slate-dark text-white px-8">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-black mb-12 uppercase text-center tracking-tighter">Broadcast a Part Bounty</h2>
-            <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-zinc-500 mb-2 tracking-widest">OEM / Part Number</label>
-                    <input type="text" placeholder="REQUIRED FOR AI MATCHING" class="w-full bg-zinc-800 border-2 border-zinc-700 p-5 font-bold text-sm uppercase focus:border-raney-red outline-none transition text-white">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-zinc-500 mb-2 tracking-widest">Target Budget ($)</label>
-                    <input type="number" placeholder="Enter target price" class="w-full bg-zinc-800 border-2 border-zinc-700 p-5 font-bold text-sm uppercase focus:border-raney-red outline-none transition text-white">
-                </div>
-                <div class="md:col-span-2">
-                    <label class="block text-[10px] font-black uppercase text-zinc-500 mb-2 tracking-widest">Technical Requirements</label>
-                    <textarea rows="4" placeholder="List Year, Make, Model, and any specific variations..." class="w-full bg-zinc-800 border-2 border-zinc-700 p-5 font-bold text-sm uppercase focus:border-raney-red outline-none transition text-white"></textarea>
-                </div>
-                <button class="md:col-span-2 bg-raney-red text-white font-black py-7 uppercase text-sm tracking-widest hover:bg-white hover:text-black transition">Broadcast Bounty Request</button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="bg-black py-16 px-8 text-center">
-        <div class="text-3xl font-black tracking-tighter uppercase text-white mb-4">
-            TruckParts<span class="text-raney-red">XL</span>
-        </div>
-        <p class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.4em]">
-            © 2026 TRUCKPARTSXL. THE REVERSE MARKETPLACE. MODERN INFRASTRUCTURE.
-        </p>
-    </footer>
-
-</body>
+        <footer class="bg-black py-16 px-8 text-center border-t border-zinc-800">
+            <div class="text-3xl font-black tracking-tighter uppercase text-white mb-4">
+                TruckParts<span class="text-raney-red">XL</span>
+            </div>
+            <p class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.4em]">
+                © 2026 TRUCKPARTSXL. THE REVERSE MARKETPLACE. MODERN INFRASTRUCTURE.
+            </p>
+        </footer>
+    </div> </body>
 </html>
