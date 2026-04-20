@@ -3,49 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruckPartsXL | Heavy-Duty Bounty Board</title>
+    <title>TruckPartsXL | The Industrial Bounty Board</title>
     <style>
-        :root {
-            --primary: #e63946;
-            --bg: #0a0a0a;
-            --card: #141414;
-            --accent: #252525;
-        }
-
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; margin: 0; }
+        :root { --primary: #e63946; --bg: #0a0a0a; --card: #141414; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; margin: 0; overflow-x: hidden; }
         
-        /* High-Energy Header */
-        nav { background: #000; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); }
+        nav { background: #000; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; }
         .logo span { color: var(--primary); }
         nav a { color: #fff; text-decoration: none; font-weight: 700; text-transform: uppercase; margin-left: 20px; font-size: 0.9rem; }
 
-        /* Hero Section with Energy */
         .hero { 
-            padding: 120px 5%; 
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=2000');
+            padding: 140px 5% 100px; 
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1591768793355-74d75b060e97?auto=format&fit=crop&q=80&w=2000');
             background-size: cover; background-position: center; text-align: center;
         }
-        .hero h1 { font-size: 4.5rem; font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.9; }
-        .hero p { font-size: 1.5rem; color: #ccc; max-width: 700px; margin: 20px auto; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.9; letter-spacing: -2px; }
+        .hero p { font-size: 1.4rem; color: #ccc; max-width: 800px; margin: 25px auto; font-weight: 500; }
 
-        /* The Mission / About Section */
-        .about-section { padding: 80px 10%; background: var(--accent); display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .about-content h2 { color: var(--primary); font-size: 2.5rem; text-transform: uppercase; }
-        .about-content p { font-size: 1.1rem; color: #bbb; line-height: 1.8; }
-        .mission-badge { background: var(--primary); color: #fff; padding: 30px; border-radius: 8px; font-weight: 800; font-size: 1.4rem; text-transform: uppercase; }
+        .form-wrap { max-width: 1000px; margin: -80px auto 80px; background: var(--card); border-radius: 16px; padding: 15px; border: 1px solid #333; box-shadow: 0 40px 80px rgba(0,0,0,0.9); }
+        iframe { width: 100%; min-height: 850px; border: none; border-radius: 12px; }
 
-        /* Form Overlay */
-        .form-wrap { max-width: 1000px; margin: -100px auto 100px; background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid #333; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-        iframe { width: 100%; min-height: 850px; border: none; border-radius: 8px; }
+        .mission-grid { padding: 100px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; background: #111; }
+        .mission-item h2 { color: var(--primary); font-size: 2.2rem; text-transform: uppercase; margin-top: 0; }
+        .mission-item p { font-size: 1.1rem; color: #bbb; line-height: 1.8; }
+        
+        .badge { border: 2px solid var(--primary); padding: 40px; border-radius: 12px; text-align: center; display: flex; align-items: center; justify-content: center; }
+        .badge h3 { font-size: 1.8rem; text-transform: uppercase; margin: 0; line-height: 1.2; font-weight: 900; }
 
-        /* Direct CTA Footer */
-        .cta-footer { background: var(--primary); padding: 60px 5%; text-align: center; }
-        .cta-footer h2 { font-size: 3rem; font-weight: 900; margin-bottom: 20px; }
-        .cta-btn { background: #fff; color: #000; padding: 20px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; text-transform: uppercase; font-size: 1.2rem; }
+        .final-cta { padding: 80px 5%; text-align: center; background: var(--primary); }
+        .final-cta h2 { font-size: 2.5rem; font-weight: 900; margin: 0 0 30px; text-transform: uppercase; }
+        .cta-btn { background: #000; color: #fff; padding: 18px 45px; border-radius: 5px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
 
-        footer { padding: 40px; text-align: center; background: #000; color: #555; font-size: 0.8rem; }
-        .footer-links a { color: #555; text-decoration: none; margin: 0 10px; }
+        footer { padding: 50px; text-align: center; background: #000; color: #444; font-size: 0.8rem; border-top: 1px solid #222; }
     </style>
 </head>
 <body>
@@ -53,41 +43,37 @@
     <nav>
         <div class="logo">TRUCKPARTS<span>XL</span></div>
         <div class="links">
-            <a href="board.html" style="color:var(--primary)">Live Bounty Board</a>
-            <a href="index.html">Request Part</a>
+            <a href="board.html">Live Bounties</a>
+            <a href="index.html" style="color:var(--primary)">Request a Part</a>
         </div>
     </nav>
 
     <div class="hero">
-        <h1>WE FIND THE GEAR<br>THAT KEEPS YOU MOVING.</h1>
-        <p>The "Reverse Marketplace" for the Heavy-Duty Industry.</p>
+        <h1>THE HIGH-VELOCITY<br>PARTS PIPELINE.</h1>
+        <p>Eliminate the middleman and the wait times. We connect owner-operators directly to the heavy-duty inventory they need to stay profitable.</p>
     </div>
 
     <div class="form-wrap">
         <iframe src="https://anlz6wbhdh.zite.so"></iframe>
     </div>
 
-    <div class="about-section">
-        <div class="about-content">
-            <h2>Our Purpose</h2>
-            <p>At TruckPartsXL, we believe every minute a rig sits idle is a minute the economy stops. We've replaced the old-school "phone tag" method of finding parts with a high-velocity <strong>Bounty Board</strong>.</p>
-            <p>Our mission is simple: To empower owner-operators by putting their needs in front of the largest network of verified salvage yards and OEM suppliers in North America instantly.</p>
+    <div class="mission-grid">
+        <div class="mission-item">
+            <h2>The Mission</h2>
+            <p>Every minute a rig is dead in the yard is a loss for the driver and the industry. TruckPartsXL was engineered to kill the friction of parts-hunting. By creating a reverse-marketplace, we force the supply chain to respond to <strong>your</strong> demand instantly.</p>
         </div>
-        <div class="mission-badge">
-            "Eliminating Downtime Through Modern Infrastructure and Ancestral Grit."
+        <div class="badge">
+            <h3>Heavy-Duty Supply.<br>Zero-Downtime Logic.</h3>
         </div>
     </div>
 
-    <div class="cta-footer">
-        <h2>NEED A PART YESTERDAY?</h2>
+    <div class="final-cta">
+        <h2>Built for the Long Haul.</h2>
         <a href="index.html" class="cta-btn">Post Your Bounty Now</a>
     </div>
 
     <footer>
-        <div class="footer-links">
-            <a href="#">About Us</a> | <a href="#">Operating Standards</a> | <a href="#">Privacy</a> | <a href="#">Terms</a>
-        </div>
-        <p>© 2026 TRUCKPARTSXL.</p>
+        <p>© 2026 TRUCKPARTSXL. All Rights Reserved. <br> Operating Standards | Privacy | Terms</p>
     </footer>
 
 </body>
