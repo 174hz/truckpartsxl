@@ -9,15 +9,13 @@
         :root { 
             --primary-red: #e63946; 
             --navy-blue: #1d3557; 
-            --accent-blue: #457b9d;
-            --light-bg: #f8f9fa;
+            --light-bg: #f4f7f9;
         }
         body { font-family: 'Inter', sans-serif; background: var(--light-bg); color: #333; margin: 0; overflow-x: hidden; }
         
-        /* Clean Navigation */
+        /* Glassmorphism Nav */
         nav { 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98); 
             padding: 20px 5%; 
             display: flex; 
             justify-content: space-between; 
@@ -26,79 +24,94 @@
             position: sticky; 
             top: 0; 
             z-index: 1000; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
         }
         .logo { font-size: 1.8rem; font-weight: 900; color: var(--navy-blue); letter-spacing: -1px; text-decoration: none; }
         .logo span { color: var(--primary-red); }
-        nav a { color: var(--navy-blue); text-decoration: none; font-weight: 700; text-transform: uppercase; margin-left: 20px; font-size: 0.85rem; letter-spacing: 1px; }
+        nav a { color: var(--navy-blue); text-decoration: none; font-weight: 700; text-transform: uppercase; margin-left: 20px; font-size: 0.8rem; letter-spacing: 1px; }
 
-        /* Powerful Hero Section */
+        /* Hero Section */
         .hero { 
-            position: relative;
-            padding: 140px 5% 200px; 
-            background: linear-gradient(rgba(29, 53, 87, 0.7), rgba(29, 53, 87, 0.4)), url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed; /* Parallax effect */
-            text-align: center; 
-            color: #fff;
+            padding: 100px 5% 180px; 
+            background: linear-gradient(rgba(29, 53, 87, 0.75), rgba(29, 53, 87, 0.85)), url('https://images.unsplash.com/photo-1591768793355-74d75b060e97?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; text-align: center; color: #fff;
         }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.85; letter-spacing: -3px; }
-        .hero p { font-size: 1.4rem; margin: 30px auto; max-width: 900px; font-weight: 500; text-shadow: 0 2px 15px rgba(0,0,0,0.3); }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.9; letter-spacing: -2px; }
+        .hero p { font-size: 1.3rem; margin: 25px auto; max-width: 800px; opacity: 0.9; }
 
-        /* Form Wrap Overlay */
-        .form-wrap { 
-            max-width: 1100px; 
-            margin: -120px auto 80px; 
-            background: #fff; 
-            border-radius: 16px; 
-            padding: 15px; 
-            box-shadow: 0 40px 80px rgba(29, 53, 87, 0.15); 
-            border: 1px solid #eee;
-            position: relative;
-            z-index: 10;
+        /* The Framed Form Section */
+        .form-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: -120px;
+            padding: 0 20px 80px;
+            gap: 20px;
         }
-        iframe { width: 100%; min-height: 900px; border: none; border-radius: 8px; }
 
-        /* Content Section with Side Image */
-        .mission-strip { 
-            padding: 100px 10%; 
-            background: #fff; 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 80px; 
-            align-items: center; 
-        }
-        .mission-img {
-            width: 100%;
-            height: 400px;
-            background: url('https://images.unsplash.com/photo-1591768793355-74d75b060e97?auto=format&fit=crop&q=80&w=1200');
+        /* Side Photos */
+        .side-photo {
+            flex: 1;
+            height: 850px;
+            border-radius: 12px;
             background-size: cover;
             background-position: center;
-            border-radius: 12px;
-            border-bottom: 8px solid var(--primary-red);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-bottom: 6px solid var(--navy-blue);
+            display: none; 
         }
-        .mission-text h2 { color: var(--navy-blue); font-size: 3rem; text-transform: uppercase; font-weight: 900; line-height: 1; }
-        .mission-text span { color: var(--primary-red); }
-        .mission-text p { font-size: 1.2rem; line-height: 1.8; color: #555; margin-top: 25px; }
+        @media (min-width: 1200px) { .side-photo { display: block; } }
 
-        /* Secondary Badge Styling */
-        .badge-bar { 
+        .photo-left { background-image: url('https://images.unsplash.com/photo-1586191582151-f70932d849c3?auto=format&fit=crop&q=80&w=800'); }
+        .photo-right { background-image: url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800'); }
+
+        /* Narrower Form Wrap */
+        .form-wrap { 
+            width: 100%;
+            max-width: 750px; 
+            z-index: 10;
+        }
+
+        /* The Boost Badge */
+        .boost-badge {
+            text-align: center; 
+            margin-bottom: 15px;
+        }
+        .boost-badge span {
             background: var(--navy-blue); 
             color: #fff; 
-            padding: 60px 10%; 
-            text-align: center; 
-            text-transform: uppercase; 
+            padding: 8px 20px; 
+            border-radius: 50px; 
+            font-size: 0.75rem; 
             font-weight: 900; 
-            font-size: 2.2rem;
-            letter-spacing: 2px;
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(29, 53, 87, 0.3);
         }
 
-        /* Footer CTA */
-        .cta-strip { padding: 100px 5%; text-align: center; background: #fff; border-top: 1px solid #eee; }
-        .cta-btn { background: var(--primary-red); color: #fff; padding: 22px 60px; text-decoration: none; font-weight: 900; text-transform: uppercase; border-radius: 4px; display: inline-block; transition: 0.3s; font-size: 1.2rem; }
-        .cta-btn:hover { background: var(--navy-blue); transform: translateY(-5px); }
+        .form-container {
+            background: #fff; 
+            border-radius: 16px; 
+            padding: 10px; 
+            box-shadow: 0 40px 100px rgba(29, 53, 87, 0.2); 
+            border: 1px solid #ddd;
+        }
+
+        iframe { width: 100%; min-height: 850px; border: none; border-radius: 8px; }
+
+        /* Mission & Footer Content */
+        .mission-strip { padding: 100px 10%; background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .mission-text h2 { color: var(--navy-blue); font-size: 2.5rem; text-transform: uppercase; font-weight: 900; }
+        .mission-text span { color: var(--primary-red); }
+        
+        .badge-box { 
+            background: var(--light-bg); border-left: 10px solid var(--primary-red); padding: 50px; 
+            color: var(--navy-blue); font-weight: 900; font-size: 1.8rem; text-transform: uppercase;
+        }
+
+        .cta-strip { padding: 80px 5%; text-align: center; background: var(--navy-blue); color: #fff; }
+        .cta-btn { background: var(--primary-red); color: #fff; padding: 20px 50px; text-decoration: none; font-weight: 900; text-transform: uppercase; border-radius: 4px; display: inline-block; transition: 0.3s; }
+        .cta-btn:hover { background: #fff; color: var(--primary-red); }
 
         footer { padding: 60px 20px; text-align: center; background: #fff; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; }
     </style>
@@ -115,27 +128,36 @@
 
     <div class="hero">
         <h1>High-Velocity<br>Parts Logistics.</h1>
-        <p>The reverse-marketplace for heavy-duty inventory. Eliminate downtime and get your fleet back in service instantly.</p>
+        <p>Eliminate downtime. Post your bounty and let the supply chain come to you.</p>
     </div>
 
-    <div class="form-wrap">
-        <iframe src="https://anlz6wbhdh.zite.so"></iframe>
+    <div class="form-section">
+        <div class="side-photo photo-left"></div>
+        
+        <div class="form-wrap">
+            <div class="boost-badge">
+                <span>🚀 Instant Board Posting Enabled</span>
+            </div>
+            <div class="form-container">
+                <iframe src="https://anlz6wbhdh.zite.so"></iframe>
+            </div>
+        </div>
+
+        <div class="side-photo photo-right"></div>
     </div>
 
     <div class="mission-strip">
-        <div class="mission-img"></div>
         <div class="mission-text">
             <h2>Our <span>Mission</span></h2>
-            <p>Every minute your rig sits idle is a direct loss to your bottom line. TruckPartsXL kills the friction of traditional parts-hunting by connecting demand directly to the supply chain.</p>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">Connecting owner-operators directly to massive inventory networks. We kill the friction of traditional parts-hunting to keep your wheels turning.</p>
+        </div>
+        <div class="badge-box">
+            Industrial Supply.<br>Modern Infrastructure.
         </div>
     </div>
 
-    <div class="badge-bar">
-        Industrial Supply. Modern Infrastructure.
-    </div>
-
     <div class="cta-strip">
-        <h2 style="font-size: 3rem; font-weight: 900; color: var(--navy-blue); margin-bottom: 40px;">BUILT FOR THE LONG HAUL.</h2>
+        <h2 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 30px;">BUILT FOR THE LONG HAUL.</h2>
         <a href="index.html" class="cta-btn">Post Your Bounty Now</a>
     </div>
 
