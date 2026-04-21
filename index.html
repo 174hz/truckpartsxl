@@ -3,116 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruckPartsXL | The Industrial Bounty Board</title>
+    <title>TruckPartsXL | Heavy-Duty Bounty Board</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #e63946; --bg: #0a0a0a; --card: #141414; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; margin: 0; overflow-x: hidden; }
+        :root { 
+            --primary-red: #e63946; 
+            --navy-blue: #1d3557; 
+            --accent-blue: #457b9d;
+            --light-bg: #f8f9fa;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--light-bg); color: #333; margin: 0; overflow-x: hidden; }
         
-        /* High-Contrast Nav */
-        nav { background: rgba(0,0,0,0.95); padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; }
-        .logo span { color: var(--primary); }
-        nav a { color: #fff; text-decoration: none; font-weight: 700; text-transform: uppercase; margin-left: 20px; font-size: 0.9rem; letter-spacing: 1px; }
+        /* Clean Navigation */
+        nav { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px);
+            padding: 20px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 4px solid var(--primary-red); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+        }
+        .logo { font-size: 1.8rem; font-weight: 900; color: var(--navy-blue); letter-spacing: -1px; text-decoration: none; }
+        .logo span { color: var(--primary-red); }
+        nav a { color: var(--navy-blue); text-decoration: none; font-weight: 700; text-transform: uppercase; margin-left: 20px; font-size: 0.85rem; letter-spacing: 1px; }
 
-        /* Full-Bleed Hero Section */
+        /* Powerful Hero Section */
         .hero { 
             position: relative;
-            min-height: 85vh; /* Covers 85% of the screen height */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1591768793355-74d75b060e97?auto=format&fit=crop&q=80&w=2000');
+            padding: 140px 5% 200px; 
+            background: linear-gradient(rgba(29, 53, 87, 0.7), rgba(29, 53, 87, 0.4)), url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=2000');
             background-size: cover; 
-            background-position: center;
-            background-attachment: fixed; /* Parallax Effect */
-            text-align: center;
-            padding: 0 5%;
+            background-position: center; 
+            background-attachment: fixed; /* Parallax effect */
+            text-align: center; 
+            color: #fff;
         }
-        
-        .hero h1 { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.85; letter-spacing: -3px; }
-        .hero p { font-size: clamp(1.1rem, 3vw, 1.6rem); color: #ddd; max-width: 900px; margin: 30px auto; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.85; letter-spacing: -3px; }
+        .hero p { font-size: 1.4rem; margin: 30px auto; max-width: 900px; font-weight: 500; text-shadow: 0 2px 15px rgba(0,0,0,0.3); }
 
-        /* Form Overlay - Now perfectly positioned over the photo gap */
+        /* Form Wrap Overlay */
         .form-wrap { 
             max-width: 1100px; 
-            margin: -150px auto 100px; 
-            background: var(--card); 
-            border-radius: 20px; 
-            padding: 10px; 
-            border: 1px solid #333; 
-            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
+            margin: -120px auto 80px; 
+            background: #fff; 
+            border-radius: 16px; 
+            padding: 15px; 
+            box-shadow: 0 40px 80px rgba(29, 53, 87, 0.15); 
+            border: 1px solid #eee;
             position: relative;
             z-index: 10;
         }
-        iframe { width: 100%; min-height: 850px; border: none; border-radius: 16px; }
+        iframe { width: 100%; min-height: 900px; border: none; border-radius: 8px; }
 
-        /* The Mission Section */
-        .mission-grid { padding: 120px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 80px; background: #000; align-items: center; }
-        .mission-item h2 { color: var(--primary); font-size: 3rem; text-transform: uppercase; margin-top: 0; font-weight: 900; letter-spacing: -1px; }
-        .mission-item p { font-size: 1.2rem; color: #aaa; line-height: 1.8; }
-        
-        /* Refined Badge */
-        .badge { 
-            border: 4px solid var(--primary); 
-            padding: 60px 40px; 
-            border-radius: 4px; 
-            text-align: center; 
-            background: #111;
-            transform: skewX(-5deg); /* Industrial angled look */
+        /* Content Section with Side Image */
+        .mission-strip { 
+            padding: 100px 10%; 
+            background: #fff; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 80px; 
+            align-items: center; 
         }
-        .badge h3 { font-size: 2.2rem; text-transform: uppercase; margin: 0; line-height: 1.1; font-weight: 900; transform: skewX(5deg); }
+        .mission-img {
+            width: 100%;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1591768793355-74d75b060e97?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            border-bottom: 8px solid var(--primary-red);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .mission-text h2 { color: var(--navy-blue); font-size: 3rem; text-transform: uppercase; font-weight: 900; line-height: 1; }
+        .mission-text span { color: var(--primary-red); }
+        .mission-text p { font-size: 1.2rem; line-height: 1.8; color: #555; margin-top: 25px; }
 
-        /* High-Impact Footer CTA */
-        .final-cta { padding: 100px 5%; text-align: center; background: var(--primary); color: #fff; }
-        .final-cta h2 { font-size: 3.5rem; font-weight: 900; margin: 0 0 40px; text-transform: uppercase; letter-spacing: -1px; }
-        .cta-btn { background: #000; color: #fff; padding: 22px 60px; border-radius: 0; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem; transition: 0.3s; display: inline-block; }
-        .cta-btn:hover { background: #fff; color: #000; }
+        /* Secondary Badge Styling */
+        .badge-bar { 
+            background: var(--navy-blue); 
+            color: #fff; 
+            padding: 60px 10%; 
+            text-align: center; 
+            text-transform: uppercase; 
+            font-weight: 900; 
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+        }
 
-        footer { padding: 60px 20px; text-align: center; background: #000; color: #444; font-size: 0.85rem; border-top: 1px solid #222; }
-        .foot-links a { color: #666; text-decoration: none; margin: 0 15px; text-transform: uppercase; font-weight: 700; }
+        /* Footer CTA */
+        .cta-strip { padding: 100px 5%; text-align: center; background: #fff; border-top: 1px solid #eee; }
+        .cta-btn { background: var(--primary-red); color: #fff; padding: 22px 60px; text-decoration: none; font-weight: 900; text-transform: uppercase; border-radius: 4px; display: inline-block; transition: 0.3s; font-size: 1.2rem; }
+        .cta-btn:hover { background: var(--navy-blue); transform: translateY(-5px); }
+
+        footer { padding: 60px 20px; text-align: center; background: #fff; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">TRUCKPARTS<span>XL</span></div>
+        <a href="index.html" class="logo">TRUCKPARTS<span>XL</span></a>
         <div class="links">
             <a href="board.html">Live Bounties</a>
-            <a href="index.html" style="color:var(--primary)">Request a Part</a>
+            <a href="index.html" style="color:var(--primary-red)">Request a Part</a>
         </div>
     </nav>
 
     <div class="hero">
-        <h1>THE HIGH-VELOCITY<br>PARTS PIPELINE.</h1>
-        <p>Your rig belongs on the road, not in the yard. We connect owner-operators directly to a massive inventory network to kill downtime and maximize profit.</p>
+        <h1>High-Velocity<br>Parts Logistics.</h1>
+        <p>The reverse-marketplace for heavy-duty inventory. Eliminate downtime and get your fleet back in service instantly.</p>
     </div>
 
     <div class="form-wrap">
         <iframe src="https://anlz6wbhdh.zite.so"></iframe>
     </div>
 
-    <div class="mission-grid">
-        <div class="mission-item">
-            <h2>The Mission</h2>
-            <p>TruckPartsXL was engineered to break the friction of traditional parts-hunting. No more endless phone calls or waiting on "maybe." We've built a reverse-marketplace where the supply chain responds to <strong>your</strong> demand instantly.</p>
-        </div>
-        <div class="badge">
-            <h3>HEAVY-DUTY SUPPLY.<br>ZERO-DOWNTIME LOGIC.</h3>
+    <div class="mission-strip">
+        <div class="mission-img"></div>
+        <div class="mission-text">
+            <h2>Our <span>Mission</span></h2>
+            <p>Every minute your rig sits idle is a direct loss to your bottom line. TruckPartsXL kills the friction of traditional parts-hunting by connecting demand directly to the supply chain.</p>
         </div>
     </div>
 
-    <div class="final-cta">
-        <h2>BUILT FOR THE LONG HAUL.</h2>
+    <div class="badge-bar">
+        Industrial Supply. Modern Infrastructure.
+    </div>
+
+    <div class="cta-strip">
+        <h2 style="font-size: 3rem; font-weight: 900; color: var(--navy-blue); margin-bottom: 40px;">BUILT FOR THE LONG HAUL.</h2>
         <a href="index.html" class="cta-btn">Post Your Bounty Now</a>
     </div>
 
     <footer>
-        <div class="foot-links">
-            <a href="#">About Us</a> <a href="#">Operating Standards</a> <a href="#">Privacy</a> <a href="#">Terms</a>
-        </div>
-        <p style="margin-top: 20px;">© 2026 TRUCKPARTSXL. Industrial Supply. Modern Infrastructure.</p>
+        <p>© 2026 TRUCKPARTSXL. Industrial Supply. Modern Infrastructure.</p>
     </footer>
 
 </body>
