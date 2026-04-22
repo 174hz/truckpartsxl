@@ -52,27 +52,25 @@
         /* Side Photos */
         .side-photo {
             flex: 1;
-            height: 850px;
+            height: 950px; /* Increased to match new form length */
             border-radius: 12px;
             background-size: cover;
             background-position: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             border-bottom: 6px solid var(--navy-blue);
-            display: none; /* Auto-hide on mobile for usability */
+            display: none; 
         }
         @media (min-width: 1200px) { .side-photo { display: block; } }
 
         .photo-left { background-image: url('https://images.unsplash.com/photo-1586191582151-f70932d849c3?auto=format&fit=crop&q=80&w=800'); }
         .photo-right { background-image: url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800'); }
 
-        /* Narrower Form Wrap */
         .form-wrap { 
             width: 100%;
             max-width: 750px; 
             z-index: 10;
         }
 
-        /* The Boost Badge - Updated to $9.99 */
         .boost-badge {
             text-align: center; 
             margin-bottom: 15px;
@@ -92,12 +90,19 @@
         .form-container {
             background: #fff; 
             border-radius: 16px; 
-            padding: 10px; 
+            padding: 5px; /* Tighter padding for the Google Frame */
             box-shadow: 0 40px 100px rgba(29, 53, 87, 0.2); 
             border: 1px solid #ddd;
+            overflow: hidden;
         }
 
-        iframe { width: 100%; min-height: 850px; border: none; border-radius: 8px; }
+        /* Google Form Iframe Styling */
+        .form-container iframe { 
+            width: 100%; 
+            height: 950px; /* Adjusted height to avoid inner scrollbars */
+            border: none; 
+            border-radius: 8px; 
+        }
 
         /* Mission Section */
         .mission-strip { padding: 100px 10%; background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -113,7 +118,6 @@
         .cta-btn { background: var(--primary-red); color: #fff; padding: 20px 50px; text-decoration: none; font-weight: 900; text-transform: uppercase; border-radius: 4px; display: inline-block; transition: 0.3s; }
         .cta-btn:hover { background: #fff; color: var(--primary-red); }
 
-        /* Footer - Updated to $9.99 */
         footer { padding: 60px 20px; text-align: center; background: #fff; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; }
     </style>
 </head>
@@ -140,7 +144,7 @@
                 <span>🚀 Instant Board Posting: $9.99 USD</span>
             </div>
             <div class="form-container">
-                <iframe src="https://anlz6wbhdh.zite.so"></iframe>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             </div>
         </div>
 
@@ -150,7 +154,7 @@
     <div class="mission-strip">
         <div class="mission-text">
             <h2>Our <span>Mission</span></h2>
-            <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">We provide the modern infrastructure for ancestral supply chain speed. No more calling ten yards—let the yards compete for your business.</p>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">No more calling ten yards—let the yards compete for your business. We provide the modern infrastructure for high-speed part sourcing.</p>
         </div>
         <div class="badge-box">
             Industrial Supply.<br>Modern Infrastructure.
