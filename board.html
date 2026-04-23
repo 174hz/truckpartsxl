@@ -3,67 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruckPartsXL | Public Bounty Board</title>
+    <title>TruckPartsXL | Bounty Board</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary-red: #e63946; --navy-blue: #1d3557; --light-bg: #f0f4f8; }
-        body { font-family: 'Inter', sans-serif; background: var(--light-bg); margin: 0; padding: 0; }
+        :root { --navy: #1d3557; --red: #e63946; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; margin: 0; }
         
-        nav { 
-            background: #fff; padding: 20px 5%; display: flex; justify-content: space-between; 
-            align-items: center; border-bottom: 4px solid var(--primary-red); box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        .logo { font-size: 1.8rem; font-weight: 900; color: var(--navy-blue); text-decoration: none; }
-        .logo span { color: var(--primary-red); }
-
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .nav { background: #fff; padding: 20px 5%; border-bottom: 4px solid var(--red); display: flex; justify-content: space-between; }
+        .logo { font-weight: 900; color: var(--navy); text-decoration: none; font-size: 1.5rem; }
         
-        .board-header {
-            background: var(--navy-blue); color: white; padding: 20px;
-            border-radius: 12px 12px 0 0; text-align: center; font-weight: 900;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
+        .board-container { width: 95%; max-width: 1200px; margin: 40px auto; }
+        .header { background: var(--navy); color: white; padding: 15px; border-radius: 8px 8px 0 0; text-align: center; font-weight: 700; text-transform: uppercase; }
 
-        /* This container allows the table to be wide without breaking the site */
-        .table-scroll-wrap {
+        /* THE FIX: This container allows horizontal scrolling */
+        .scroll-box {
             background: white;
-            border: 5px solid var(--navy-blue);
-            border-radius: 0 0 12px 12px;
-            overflow-x: auto; /* Allows left-to-right swiping */
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 4px solid var(--navy);
+            border-radius: 0 0 8px 8px;
+            overflow-x: auto; /* Enables the left-to-right swipe */
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* Forces the Google Sheet to stay wide so entries line up */
+        /* THE FIX: This forces the sheet to stay wide so data stays in one line */
         iframe {
-            width: 1400px; /* Adjust this number to match the width of your columns */
-            height: 900px;
+            width: 1500px; 
+            height: 800px;
             border: none;
         }
-
-        footer { text-align: center; padding: 40px; color: #888; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <nav>
+    <div class="nav">
         <a href="index.html" class="logo">TRUCKPARTS<span>XL</span></a>
-        <div>
-            <a href="index.html" style="text-decoration:none; color:var(--navy-blue); font-weight:700;">Back to Request Form</a>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="board-header">
-            Live Parts Bounties & Master Leads
-        </div>
-        <div class="table-scroll-wrap">
-            <iframe src="YOUR_PUBLISHED_GOOGLE_SHEET_LINK_HERE&headers=false"></iframe>
-        </div>
+        <a href="index.html" style="text-decoration:none; color:var(--navy); font-weight:700;">← Back</a>
     </div>
 
-    <footer>
-        © 2026 TRUCKPARTSXL • Heavy Duty Logistics Infrastructure
-    </footer>
+    <div class="board-container">
+        <div class="header">Live Master Bounty Board</div>
+        <div class="scroll-box">
+            <iframe src="YOUR_GOOGLE_SHEET_PUBLISH_LINK_HERE&headers=false"></iframe>
+        </div>
+    </div>
 
 </body>
 </html>
