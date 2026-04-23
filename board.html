@@ -3,48 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruckPartsXL | Bounty Board</title>
+    <title>Live Sales Feed | TruckPartsXL</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --navy: #1d3557; --red: #e63946; }
-        body { font-family: 'Inter', sans-serif; background: #f0f4f8; margin: 0; }
+        :root { --primary-red: #e63946; --navy-blue: #1d3557; --light-bg: #f8f9fa; }
+        body { font-family: 'Inter', sans-serif; background: var(--light-bg); color: #333; margin: 0; text-align: center; }
         
-        .nav { background: #fff; padding: 20px 5%; border-bottom: 4px solid var(--red); display: flex; justify-content: space-between; }
-        .logo { font-weight: 900; color: var(--navy); text-decoration: none; font-size: 1.5rem; }
-        
-        .board-container { width: 95%; max-width: 1200px; margin: 40px auto; }
-        .header { background: var(--navy); color: white; padding: 15px; border-radius: 8px 8px 0 0; text-align: center; font-weight: 700; text-transform: uppercase; }
+        nav { background: #fff; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--primary-red); }
+        .logo { font-size: 1.8rem; font-weight: 900; text-decoration: none; color: var(--navy-blue); }
+        .logo span { color: var(--primary-red); }
 
-        /* THE FIX: This container allows horizontal scrolling */
-        .scroll-box {
-            background: white;
-            border: 4px solid var(--navy);
-            border-radius: 0 0 8px 8px;
-            overflow-x: auto; /* Enables the left-to-right swipe */
-            -webkit-overflow-scrolling: touch;
+        .header-box { 
+            padding: 80px 5% 120px; 
+            background: linear-gradient(rgba(29, 53, 87, 0.85), rgba(29, 53, 87, 0.85)), url('https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&q=80&w=2000'); 
+            background-size: cover;
+            background-position: center;
+            color: #fff; 
+        }
+        h1 { font-size: 3.5rem; font-weight: 900; margin: 0; text-transform: uppercase; letter-spacing: -2px; }
+        
+        .board-container { 
+            max-width: 1200px; 
+            margin: -60px auto 60px; 
+            background: #fff; 
+            border-radius: 12px; 
+            border: 1px solid #ddd;
+            overflow: hidden; 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
         }
 
-        /* THE FIX: This forces the sheet to stay wide so data stays in one line */
-        iframe {
-            width: 1500px; 
-            height: 800px;
-            border: none;
+        iframe { width: 100%; height: 800px; border: none; }
+
+        .seller-section { padding: 100px 20px; background: #fff; }
+        .btn-contact { 
+            display: inline-block; padding: 22px 60px; 
+            background: var(--primary-red); color: #fff; 
+            text-decoration: none; font-weight: 900; text-transform: uppercase; border-radius: 4px;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
         }
+
+        footer { padding: 60px; color: #999; font-size: 0.85rem; background: #fff; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
-    <div class="nav">
+    <nav>
         <a href="index.html" class="logo">TRUCKPARTS<span>XL</span></a>
-        <a href="index.html" style="text-decoration:none; color:var(--navy); font-weight:700;">← Back</a>
+        <a href="index.html" style="color:var(--navy-blue); text-decoration: none; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;">← POST A BOUNTY</a>
+    </nav>
+
+    <div class="header-box">
+        <h1>Live Bounty Board</h1>
+        <p style="opacity: 0.9; font-size: 1.2rem; margin-top: 15px; font-weight: 500;">Real-time parts demand. Respond to active leads and close inventory today.</p>
     </div>
 
     <div class="board-container">
-        <div class="header">Live Master Bounty Board</div>
-        <div class="scroll-box">
-            <iframe src="YOUR_GOOGLE_SHEET_PUBLISH_LINK_HERE&headers=false"></iframe>
-        </div>
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pubhtml?gid=51250039&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     </div>
+
+    <div class="seller-section">
+        <h2 style="font-weight: 900; text-transform: uppercase; color: var(--navy-blue); font-size: 2.5rem; letter-spacing: -1px;">Inventory in Stock?</h2>
+        <p style="color:#666; margin-bottom: 40px; font-size: 1.2rem;">Claim the lead and finalize the sale through our secure network.</p>
+        <a href="mailto:support@truckpartsxl.com" class="btn-contact">Contact Administration</a>
+    </div>
+
+    <footer>© 2026 TRUCKPARTSXL. Industrial Supply. Modern Infrastructure.</footer>
 
 </body>
 </html>
