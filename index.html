@@ -9,7 +9,7 @@
         :root { 
             --primary-red: #e63946; 
             --navy-blue: #1d3557; 
-            --light-bg: #f0f4f8; /* Slightly deeper tint for better contrast */
+            --light-bg: #f0f4f8; 
         }
         body { font-family: 'Inter', sans-serif; background: var(--light-bg); color: #333; margin: 0; overflow-x: hidden; }
         
@@ -51,7 +51,7 @@
 
         .side-photo {
             flex: 1;
-            height: 1200px; 
+            height: 1250px; 
             border-radius: 12px;
             background-size: cover;
             background-position: center;
@@ -66,8 +66,8 @@
         /* Narrower Form Wrap */
         .form-wrap { width: 100%; max-width: 600px; z-index: 10; }
 
-        .boost-badge { text-align: center; margin-bottom: 15px; }
-        .boost-badge span {
+        .portal-badge { text-align: center; margin-bottom: 15px; }
+        .portal-badge span {
             background: var(--navy-blue); color: #fff; padding: 8px 20px; border-radius: 50px; 
             font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
         }
@@ -87,36 +87,27 @@
 
         /* Industrial Container */
         .form-container {
-            background: #fdfdfd; 
+            background: #fff; 
             border-radius: 12px; 
             padding: 0; 
             box-shadow: 0 40px 100px rgba(29, 53, 87, 0.2); 
             border: 5px solid var(--navy-blue); 
             overflow: hidden;
         }
-        .form-container iframe { width: 100%; height: 950px; border: none; background: transparent; }
+        /* Adjusted Height for Multi-Section Form */
+        .form-container iframe { width: 100%; height: 1100px; border: none; background: transparent; }
 
-        /* Boost Section */
-        .payment-callout {
-            background: #fff; border: 4px solid var(--navy-blue); margin-top: 30px; 
-            text-align: left; padding: 35px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        /* Trust Footer */
+        .trust-bar {
+            background: #f8f9fa; 
+            padding: 12px; 
+            text-align: center; 
+            font-size: 0.65rem; 
+            color: #777; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            border-top: 1px solid #ddd;
         }
-        .pro-tag { background: var(--primary-red); color: white; padding: 5px 12px; display: inline-block; border-radius: 4px; font-weight: 900; font-size: 0.7rem; margin-bottom: 15px; text-transform: uppercase; }
-        .payment-callout h2 { color: var(--navy-blue); font-weight: 900; margin: 0 0 10px; text-transform: uppercase; font-size: 1.8rem; letter-spacing: -1px; }
-        .payment-callout ul { list-style: none; padding: 0; margin: 20px 0; }
-        .payment-callout li { margin-bottom: 14px; font-weight: 700; display: flex; align-items: center; font-size: 1rem; }
-        .payment-callout li span { color: var(--primary-red); margin-right: 12px; font-size: 1.2rem; }
-
-        .price-row { display: flex; align-items: center; justify-content: space-between; border-top: 2px solid #eee; margin-top: 25px; padding-top: 25px; }
-        .price-text { font-size: 2.2rem; font-weight: 900; color: var(--navy-blue); }
-        .price-sub { display: block; font-size: 0.8rem; font-weight: 700; color: #666; text-transform: uppercase; }
-
-        .stripe-btn { 
-            background: var(--primary-red); color: #fff; padding: 18px 35px; text-decoration: none; 
-            font-weight: 900; text-transform: uppercase; border-radius: 4px; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
-        }
-        .stripe-btn:hover { background: #b91c1c; transform: translateY(-2px); }
 
         /* Mission Section */
         .mission-strip { padding: 80px 10%; background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -145,7 +136,7 @@
         <div class="side-photo photo-left"></div>
         
         <div class="form-wrap">
-            <div class="boost-badge">
+            <div class="portal-badge">
                 <span>🚀 OFFICIAL BOUNTY PORTAL</span>
             </div>
             
@@ -154,29 +145,15 @@
                     Verified Parts Request Submission
                 </div>
                 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?embedded=true" frameborder="0">Loading…</iframe>
-            </div>
-
-            <div class="payment-callout">
-                <div class="pro-tag">Pro Upgrade</div>
-                <h2>Boost Your Bounty</h2>
-                <p style="font-weight: 700; color: var(--navy-blue); font-size: 1.1rem; line-height: 1.4;">
-                    Move your request to the top of our seller alerts and reach our full network of verified heavy-duty parts dealers instantly.
-                </p>
                 
-                <ul>
-                    <li><span>✓</span> Priority placement in seller notifications</li>
-                    <li><span>✓</span> 4x more responses on average</li>
-                    <li><span>✓</span> Featured badge on your bounty listing</li>
-                    <li><span>✓</span> One-time fee - no subscription</li>
-                </ul>
-
-                <div class="price-row">
-                    <div>
-                        <span class="price-text">$9.99</span>
-                        <span class="price-sub">One-time boost fee</span>
-                    </div>
-                    <a href="#" class="stripe-btn">Boost Listing</a>
+                <div class="trust-bar">
+                    🛡️ Secure Transaction Infrastructure • Verified Dealer Network Dispatch
                 </div>
+            </div>
+            
+            <div style="margin-top: 25px; padding: 20px; background: white; border-left: 5px solid var(--primary-red); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <h4 style="margin: 0 0 5px; color: var(--navy-blue); text-transform: uppercase; font-size: 0.9rem;">Dispatch Notice</h4>
+                <p style="margin: 0; font-size: 0.85rem; color: #666; font-weight: 600;">Priority Boosted bounties are transmitted to our SMS alert network within 60 seconds of submission.</p>
             </div>
         </div>
 
