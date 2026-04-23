@@ -39,7 +39,7 @@
         .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.9; letter-spacing: -2px; }
         .hero p { font-size: 1.3rem; margin: 25px auto; max-width: 800px; opacity: 0.9; }
 
-        /* The Framed Form Section */
+        /* Form & Boost Section */
         .form-section {
             display: flex;
             justify-content: center;
@@ -49,10 +49,9 @@
             gap: 20px;
         }
 
-        /* Side Photos */
         .side-photo {
             flex: 1;
-            height: 950px; /* Increased to match new form length */
+            height: 1100px; 
             border-radius: 12px;
             background-size: cover;
             background-position: center;
@@ -61,62 +60,52 @@
             display: none; 
         }
         @media (min-width: 1200px) { .side-photo { display: block; } }
-
         .photo-left { background-image: url('https://images.unsplash.com/photo-1586191582151-f70932d849c3?auto=format&fit=crop&q=80&w=800'); }
         .photo-right { background-image: url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800'); }
 
-        .form-wrap { 
-            width: 100%;
-            max-width: 750px; 
-            z-index: 10;
-        }
+        .form-wrap { width: 100%; max-width: 750px; z-index: 10; }
 
-        .boost-badge {
-            text-align: center; 
-            margin-bottom: 15px;
-        }
+        .boost-badge { text-align: center; margin-bottom: 15px; }
         .boost-badge span {
-            background: var(--navy-blue); 
-            color: #fff; 
-            padding: 8px 20px; 
-            border-radius: 50px; 
-            font-size: 0.75rem; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(29, 53, 87, 0.3);
+            background: var(--navy-blue); color: #fff; padding: 8px 20px; border-radius: 50px; 
+            font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
         }
 
+        /* Industrial Container Styling */
         .form-container {
             background: #fff; 
-            border-radius: 16px; 
-            padding: 5px; /* Tighter padding for the Google Frame */
+            border-radius: 12px; 
+            padding: 5px; 
             box-shadow: 0 40px 100px rgba(29, 53, 87, 0.2); 
-            border: 1px solid #ddd;
+            border: 5px solid var(--navy-blue); 
             overflow: hidden;
         }
+        .form-container iframe { width: 100%; height: 950px; border: none; }
 
-        /* Google Form Iframe Styling */
-        .form-container iframe { 
-            width: 100%; 
-            height: 950px; /* Adjusted height to avoid inner scrollbars */
-            border: none; 
-            border-radius: 8px; 
+        /* Payment Callout Box */
+        .payment-callout {
+            background: #fff; border: 4px solid var(--navy-blue); margin-top: 30px; 
+            text-align: left; padding: 30px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
+        .payment-callout h2 { color: var(--primary-red); font-weight: 900; margin: 0 0 10px; text-transform: uppercase; font-size: 1.8rem; }
+        .payment-callout ul { list-style: none; padding: 0; margin: 20px 0; }
+        .payment-callout li { margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; }
+        .payment-callout li span { color: var(--primary-red); margin-right: 10px; font-size: 1.2rem; }
 
-        /* Mission Section */
-        .mission-strip { padding: 100px 10%; background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .price-row { display: flex; align-items: center; justify-content: space-between; border-top: 2px solid #eee; margin-top: 20px; padding-top: 20px; }
+        .price-text { font-size: 2.2rem; font-weight: 900; color: var(--navy-blue); }
+        .price-sub { display: block; font-size: 0.8rem; font-weight: 700; color: #666; text-transform: uppercase; }
+
+        .stripe-btn { 
+            background: var(--primary-red); color: #fff; padding: 18px 35px; text-decoration: none; 
+            font-weight: 900; text-transform: uppercase; border-radius: 4px; transition: 0.3s;
+        }
+        .stripe-btn:hover { background: var(--navy-blue); transform: translateY(-2px); }
+
+        /* Sections */
+        .mission-strip { padding: 80px 10%; background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .mission-text h2 { color: var(--navy-blue); font-size: 2.5rem; text-transform: uppercase; font-weight: 900; }
-        .mission-text span { color: var(--primary-red); }
-        
-        .badge-box { 
-            background: var(--light-bg); border-left: 10px solid var(--primary-red); padding: 50px; 
-            color: var(--navy-blue); font-weight: 900; font-size: 1.8rem; text-transform: uppercase;
-        }
-
-        .cta-strip { padding: 80px 5%; text-align: center; background: var(--navy-blue); color: #fff; }
-        .cta-btn { background: var(--primary-red); color: #fff; padding: 20px 50px; text-decoration: none; font-weight: 900; text-transform: uppercase; border-radius: 4px; display: inline-block; transition: 0.3s; }
-        .cta-btn:hover { background: #fff; color: var(--primary-red); }
+        .badge-box { background: var(--light-bg); border-left: 10px solid var(--primary-red); padding: 50px; color: var(--navy-blue); font-weight: 900; font-size: 1.8rem; text-transform: uppercase; }
 
         footer { padding: 60px 20px; text-align: center; background: #fff; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; }
     </style>
@@ -133,7 +122,7 @@
 
     <div class="hero">
         <h1>High-Velocity<br>Parts Logistics.</h1>
-        <p>The reverse-marketplace for heavy-duty iron. Post your bounty and let the supply chain find you.</p>
+        <p>The reverse-marketplace for heavy-duty iron. Establish your budget benchmark and let the supply chain find you.</p>
     </div>
 
     <div class="form-section">
@@ -141,10 +130,31 @@
         
         <div class="form-wrap">
             <div class="boost-badge">
-                <span>🚀 Instant Board Posting: $9.99 USD</span>
+                <span>🚀 SECURE BOUNTY SUBMISSION</span>
             </div>
+            
             <div class="form-container">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?embedded=true" frameborder="0">Loading…</iframe>
+            </div>
+
+            <div class="payment-callout">
+                <h2>Boost Your Bounty</h2>
+                <p style="font-weight: 700; color: var(--navy-blue); font-size: 1.1rem;">Move your request to the top of our seller alerts and reach our full network of verified heavy-duty parts dealers instantly.</p>
+                
+                <ul>
+                    <li><span>✓</span> Priority placement in seller notifications</li>
+                    <li><span>✓</span> 4x more responses on average</li>
+                    <li><span>✓</span> Featured badge on your bounty listing</li>
+                    <li><span>✓</span> One-time fee - no subscription</li>
+                </ul>
+
+                <div class="price-row">
+                    <div>
+                        <span class="price-text">$9.99</span>
+                        <span class="price-sub">One-time boost fee</span>
+                    </div>
+                    <a href="INSERT_YOUR_STRIPE_LINK_HERE" class="stripe-btn">Secure Boost via Stripe</a>
+                </div>
             </div>
         </div>
 
@@ -154,16 +164,11 @@
     <div class="mission-strip">
         <div class="mission-text">
             <h2>Our <span>Mission</span></h2>
-            <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">No more calling ten yards—let the yards compete for your business. We provide the modern infrastructure for high-speed part sourcing.</p>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #555;"><strong>Budget Benchmarking:</strong> By including your target price, you filter out low-quality leads and attract sellers ready to deal. We provide the infrastructure for high-speed industrial sourcing.</p>
         </div>
         <div class="badge-box">
             Industrial Supply.<br>Modern Infrastructure.
         </div>
-    </div>
-
-    <div class="cta-strip">
-        <h2 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 30px;">BUILT FOR THE LONG HAUL.</h2>
-        <a href="index.html" class="cta-btn">Post Your Bounty Now</a>
     </div>
 
     <footer>
