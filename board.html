@@ -7,7 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --navy: #1d3557; --red: #e63946; --bg: #f0f4f8; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        
         nav { 
             background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; 
             align-items: center; border-bottom: 4px solid var(--red); box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -17,21 +18,29 @@
         .nav-links a { text-decoration: none; color: var(--navy); font-weight: 700; border: 2px solid var(--navy); padding: 8px 15px; border-radius: 5px; }
 
         .board-hero {
-            height: 120px; background: var(--navy); color: white;
+            height: 180px; 
+            background: linear-gradient(rgba(29, 53, 87, 0.6), rgba(29, 53, 87, 0.6)), 
+                        url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover; background-position: center;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 1.5rem; text-transform: uppercase;
+            color: white; font-weight: 900; font-size: 1.8rem; text-transform: uppercase; text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
-        .main-content { padding: 20px 10px; display: flex; flex-direction: column; align-items: center; }
+        .main-content { padding: 20px 10px; display: flex; flex-direction: column; align-items: center; flex: 1; }
         .board-wrapper {
             background: white; border: 3px solid var(--navy); border-radius: 12px;
             overflow-x: auto; width: 100%; max-width: 1000px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-top: -30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-top: -40px;
             -webkit-overflow-scrolling: touch;
         }
         iframe { width: 1000px; height: 800px; border: none; display: block; }
-        @media (max-width: 600px) { nav { flex-direction: column; gap: 15px; } }
-        footer { text-align: center; padding: 40px; color: #555; font-size: 0.85rem; line-height: 1.8; border-top: 1px solid #ddd; }
+
+        @media (max-width: 600px) {
+            nav { flex-direction: column; gap: 15px; text-align: center; }
+            .board-hero { font-size: 1.4rem; height: 140px; }
+        }
+
+        footer { text-align: center; padding: 40px; color: #555; font-size: 0.85rem; line-height: 1.8; border-top: 1px solid #ddd; background: #fff; }
         footer a { color: var(--navy); text-decoration: none; font-weight: 700; margin: 0 10px; }
     </style>
 </head>
