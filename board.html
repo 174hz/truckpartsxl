@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruckPartsXL | Master Bounty Board</title>
+    <title>TruckPartsXL | Bounty Board</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --navy: #1d3557; --red: #e63946; --bg: #f0f4f8; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 0; }
-        
         nav { 
             background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; 
             align-items: center; border-bottom: 4px solid var(--red); box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -20,26 +19,20 @@
         .board-hero {
             height: 120px; background: var(--navy); color: white;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 1.5rem; text-transform: uppercase; text-align: center; padding: 0 10px;
+            font-weight: 900; font-size: 1.5rem; text-transform: uppercase;
         }
 
         .main-content { padding: 20px 10px; display: flex; flex-direction: column; align-items: center; }
-        
         .board-wrapper {
             background: white; border: 3px solid var(--navy); border-radius: 12px;
-            overflow-x: auto; /* Allows side-swiping on mobile */
-            width: 100%; max-width: 1000px;
+            overflow-x: auto; width: 100%; max-width: 1000px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-top: -30px;
             -webkit-overflow-scrolling: touch;
         }
-
         iframe { width: 1000px; height: 800px; border: none; display: block; }
-
-        @media (max-width: 600px) {
-            nav { flex-direction: column; gap: 15px; }
-        }
-
-        footer { text-align: center; padding: 40px; color: #888; font-size: 0.8rem; }
+        @media (max-width: 600px) { nav { flex-direction: column; gap: 15px; } }
+        footer { text-align: center; padding: 40px; color: #555; font-size: 0.85rem; line-height: 1.8; border-top: 1px solid #ddd; }
+        footer a { color: var(--navy); text-decoration: none; font-weight: 700; margin: 0 10px; }
     </style>
 </head>
 <body>
@@ -47,7 +40,7 @@
     <nav>
         <a href="index.html" class="logo">TRUCKPARTS<span>XL</span></a>
         <div class="nav-links">
-            <a href="index.html">← REQUEST A PART</a>
+            <a href="index.html">← HEAVY-DUTY BOUNTY BOARD</a>
         </div>
     </nav>
 
@@ -60,7 +53,8 @@
     </div>
 
     <footer>
-        © 2026 TRUCKPARTSXL • Fast. Affordable. Confidential.
+        © 2026 TRUCKPARTSXL • Fast, Reliable, and Convenient.<br>
+        <a href="about.html">About Us</a> | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a>
     </footer>
 
 </body>
