@@ -3,57 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Bounty Board | TruckPartsXL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>TruckPartsXL | Live Parts Board</title>
     <style>
-        :root { --navy: #1d3557; --red: #e63946; --bg: #f0f4f8; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 0; }
-        
-        nav { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; border-bottom: 4px solid var(--red); }
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--navy); text-decoration: none; }
-        .logo span { color: var(--red); }
-
-        .board-header { text-align: center; padding: 40px 20px; background: var(--navy); color: white; }
-        .board-header h1 { margin: 0; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* WIDE BOARD SETTINGS */
-        .board-wrapper { 
-            max-width: 98%; /* Forced nearly full width */
-            margin: -20px auto 40px;
-            background: white; border-radius: 12px; border: 3px solid var(--navy);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); overflow: hidden;
+        /* Modern Reset and Page Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .sheet-container {
+        .header {
+            background-color: #1d3557;
+            color: white;
             width: 100%;
-            height: 800px;
-            overflow-x: auto; /* Enables horizontal swipe if columns get too many */
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        iframe { width: 100%; height: 100%; border: none; }
-
-        .dealer-callout {
-            max-width: 1200px; margin: 0 auto 50px; text-align: center;
-            background: #fff; padding: 30px; border-radius: 12px; border: 2px solid var(--red);
+        /* THE "SQUEEZE" CONTAINER - This fixes the width issue */
+        .board-container {
+            width: 95%;
+            max-width: 950px; /* Limits the width so the 9 columns fill the box */
+            margin-bottom: 50px;
         }
-        .contact-btn {
-            background: var(--navy); color: white; padding: 15px 30px; 
-            text-decoration: none; border-radius: 5px; font-weight: 700;
+
+        .board-wrapper { 
+            position: relative;
+            background: white;
+            border: 4px solid #1d3557;
+            border-radius: 12px;
+            overflow: hidden; /* Hides the extra empty Google Sheet columns */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        /* Makes the iframe responsive within the wrapper */
+        iframe {
+            width: 100%;
+            height: 900px;
+            border: none;
+            display: block;
+        }
+
+        /* Instructions below the board */
+        .footer-text {
+            margin-top: 15px;
+            color: #457b9d;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <nav><a href="index.html" class="logo">TRUCKPARTS<span>XL</span></a></nav>
-    <div class="board-header"><h1>Live Parts Bounty Board</h1></div>
-    <div class="board-wrapper">
-        <div class="sheet-container">
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pubhtml?gid=51250039&single=true&widget=true&headers=false"></iframe>
+
+    <div class="header">
+        <h1>Live Parts Wanted Board</h1>
+        <p>Real-time leads for truck parts buyers and sellers</p>
+    </div>
+
+    <div class="board-container">
+        <div class="board-wrapper">
+            <iframe src="https://docs.google.com/spreadsheets/d/e/YOUR_PUBLISH_LINK_HERE/pubhtml?widget=true&amp;headers=false"></iframe>
+        </div>
+        <div class="footer-text">
+            * Board updates automatically every 5 minutes. High-priority (Yellow) leads are pinned to the top.
         </div>
     </div>
-    <div class="dealer-callout">
-        <h2>Have one of these parts?</h2>
-        <p>Click below to provide your quote and contact information to the buyer.</p><br>
-        <a href="https://forms.gle/YOUR_SECOND_FORM_LINK" class="contact-btn">I HAVE A PART - CONTACT BUYER</a>
-    </div>
+
 </body>
 </html>
