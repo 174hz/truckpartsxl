@@ -48,6 +48,7 @@
             margin-top: 15px;
             transition: transform 0.2s, background-color 0.2s;
             box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+            cursor: pointer;
         }
         .stripe-button:hover {
             background-color: #c1121f;
@@ -86,7 +87,14 @@
     <div class="payment-boost">
         <h2>🚀 Priority Bounty Boost ($9.99)</h2>
         <p>Click the button directly below to complete your transaction and move to the top of the board.</p>
-        <a href="https://buy.stripe.com/bJe7st6Smeiq55e11Ba7C0n" class="stripe-button" target="_blank" rel="noopener noreferrer">COMPLETE $9.99 BOOST PAYMENT</a>
+        
+        <a href="https://buy.stripe.com/bJe7st6Smeiq55e11Ba7C0n" 
+           class="stripe-button" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           onclick="window.open('https://buy.stripe.com/bJe7st6Smeiq55e11Ba7C0n', '_blank'); return false;">
+           COMPLETE $9.99 BOOST PAYMENT
+        </a>
     </div>
 
     <footer>
