@@ -19,9 +19,40 @@
         /* FORM SECTION */
         .form-section { width: 95%; max-width: 900px; margin: 30px 0; }
         .form-wrapper { background: white; border: 3px solid #1d3557; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        
-        /* The Iframe with your verified form link */
         iframe { width: 100%; height: 950px; border: none; display: block; }
+
+        /* PAYMENT BOOST SECTION */
+        .payment-boost {
+            width: 95%;
+            max-width: 900px;
+            background-color: #ffffff;
+            border: 2px dashed #e63946;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .payment-boost h2 { color: #1d3557; margin-top: 0; }
+        .payment-boost p { font-size: 1.1rem; color: #457b9d; font-weight: 600; }
+        
+        .stripe-button {
+            display: inline-block;
+            background-color: #e63946;
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+        }
+        .stripe-button:hover {
+            background-color: #c1121f;
+            transform: translateY(-2px);
+        }
 
         /* FOOTER */
         footer { background-color: #1d3557; color: white; width: 100%; padding: 40px 0; margin-top: auto; text-align: center; }
@@ -50,6 +81,12 @@
         <div class="form-wrapper">
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?embedded=true">Loading…</iframe>
         </div>
+    </div>
+
+    <div class="payment-boost">
+        <h2>🚀 Priority Bounty Boost ($9.99)</h2>
+        <p>Click the button directly below to complete your transaction and move to the top of the board.</p>
+        <a href="https://buy.stripe.com/bJe7st6Smeiq55e11Ba7C0n" class="stripe-button">COMPLETE $9.99 BOOST PAYMENT</a>
     </div>
 
     <footer>
