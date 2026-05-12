@@ -7,123 +7,139 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
     <style>
         body { 
-            font-family: 'Segoe UI', Roboto, sans-serif; 
-            background-color: #0d1b2a; color: white; margin: 0; 
-            padding-bottom: 50px; 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; padding: 0; 
+            display: flex; flex-direction: column; min-height: 100vh;
+            background-color: #0d1b2a; 
         }
         
-        .header-box { text-align: center; padding: 60px 20px; background: #1d3557; border-bottom: 4px solid #e63946; }
-        
-        /* THE SEARCH BOX */
-        .search-wrapper { width: 90%; max-width: 800px; margin: -30px auto 40px; position: relative; z-index: 100; }
-        .search { 
-            width: 100%; padding: 22px; border-radius: 50px; border: 4px solid #39FF14; 
-            background: white; color: #1d3557; font-size: 1.2rem; font-weight: bold;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6); outline: none; box-sizing: border-box;
+        /* BACKGROUND CLARITY */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2070'); 
+            background-size: cover; background-position: center 20%; opacity: 0.3; z-index: -1;
         }
 
-        .board-container { width: 95%; max-width: 900px; margin: 0 auto; }
+        nav { 
+            background-color: #1d3557; width: 100%; padding: 12px 30px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 10; box-sizing: border-box;
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 900; letter-spacing: -1px; text-decoration: none; }
+        .logo-truck { color: #ffffff; } .logo-parts { color: #a8dadc; } .logo-xl { color: #e63946; }
+
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; }
+        
+        .header { background-color: rgba(255, 255, 255, 0.98); color: #1d3557; width: 100%; padding: 45px 0; text-align: center; border-bottom: 2px solid #e63946; }
+
+        /* SEARCH SECTION */
+        .search-wrapper { width: 95%; max-width: 900px; margin: -25px auto 40px; }
+        .search { 
+            width: 100%; padding: 18px; border-radius: 8px; border: 3px solid #39FF14; 
+            background: white; font-size: 1.1rem; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .board-container { width: 95%; max-width: 900px; margin: 0 auto; flex-grow: 1; }
         .list { list-style: none; padding: 0; }
 
-        /* POST CARD STYLING */
-        .post-card { 
-            background: white; color: #1d3557; margin-bottom: 15px; 
-            padding: 25px; border-radius: 12px; display: flex; 
-            flex-direction: column; position: relative; transition: 0.3s;
-        }
-
-        /* NEON BOOSTED STYLE */
+        /* CARDS */
+        .post-card { background: white; color: #1d3557; margin-bottom: 15px; padding: 20px; border-radius: 10px; display: flex; flex-direction: column; position: relative; }
+        
         .boosted { 
-            background-color: #fbff00 !important; /* Fluorescent Yellow */
-            border: 4px solid #39FF14 !important; /* Neon Green Border */
-            box-shadow: 0 0 25px rgba(57, 255, 20, 0.7);
-            transform: scale(1.02);
-            z-index: 5;
+            background-color: #fbff00 !important; border: 4px solid #39FF14 !important; 
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5); transform: scale(1.01);
         }
+        .priority-badge { display: none; background: #e63946; color: white; padding: 4px 8px; font-size: 0.7rem; border-radius: 4px; position: absolute; top: -10px; left: 15px; }
         .boosted .priority-badge { display: block; }
-        .priority-badge {
-            display: none; background: #e63946; color: white; 
-            padding: 5px 12px; font-size: 0.75rem; font-weight: 900;
-            border-radius: 4px; position: absolute; top: -12px; left: 20px;
-        }
 
-        .part-header { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; margin: 0; color: #1d3557; }
-        .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; font-size: 0.95rem; }
-        .label { font-weight: bold; color: #457b9d; text-transform: uppercase; font-size: 0.75rem; display: block; }
-        .value { color: #1d3557; font-weight: 600; }
+        .part-name { font-size: 1.4rem; font-weight: 800; text-transform: uppercase; margin: 0; }
+        .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; font-size: 0.9rem; }
+        .label { font-weight: bold; color: #457b9d; }
+
+        /* FOOTER */
+        footer { background-color: #1d3557; color: white; width: 100%; padding: 40px 0; text-align: center; border-top: 2px solid #a8dadc; margin-top: 50px; }
+        .footer-links a { color: #a8dadc; margin: 0 15px; text-decoration: none; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <div class="header-box">
-        <h1 style="margin:0; font-size: 2.5rem;">BOUNTY BOARD</h1>
-        <p style="opacity: 0.8;">Active Heavy-Duty Parts Requests Across North America</p>
+    <nav>
+        <a href="index.html" class="logo">
+            <span class="logo-truck">TRUCK</span><span class="logo-parts">PARTS</span><span class="logo-xl">XL</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="board.html">Bounty Board</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1>Live Bounty Board</h1>
+        <p>Real-time high-intent parts requests.</p>
     </div>
 
-    <div id="bounty-system">
+    <div id="bounty-engine">
         <div class="search-wrapper">
-            <input class="search" placeholder="🔍 Search by OEM#, Part Name, Truck Model, or Category...">
+            <input class="search" placeholder="🔍 Search OEM#, Part Name, or Truck Model...">
         </div>
 
         <div class="board-container">
-            <ul class="list" id="inject-rows">
-                <p style="text-align:center;">Syncing with live inventory...</p>
+            <ul class="list" id="parts-data">
+                <p style="text-align:center; color:white;">Loading active bounties...</p>
             </ul>
         </div>
     </div>
 
+    <footer>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <a href="contact.html">Contact & Support</a>
+        </div>
+    </footer>
+
     <script>
-        // PASTE YOUR CSV LINK HERE
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=796391633&single=true&output=csv';
 
-        async function loadBounties() {
+        async function fetchSheet() {
             try {
                 const response = await fetch(CSV_URL);
-                const csvData = await response.text();
-                const lines = csvData.split('\n').slice(1); // Remove header
-                
-                let boardHtml = '';
+                const text = await response.text();
+                const rows = text.split('\n').slice(1);
+                let html = '';
 
-                lines.forEach(line => {
-                    // This handles commas inside quotes correctly
-                    const parts = line.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$)/g);
-                    if (!parts || parts.length < 12) return;
+                rows.forEach(row => {
+                    const cols = row.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$)/g);
+                    if (!cols || cols.length < 12) return;
 
-                    const partName = parts[1]?.replace(/"/g, '') || "N/A";
-                    const oem = parts[2]?.replace(/"/g, '') || "N/A";
-                    const category = parts[3]?.replace(/"/g, '') || "N/A";
-                    const truck = parts[4]?.replace(/"/g, '') || "N/A";
-                    const boostValue = parts[11]?.replace(/"/g, '') || ""; // Column L
+                    const name = cols[1]?.replace(/"/g, '') || "N/A";
+                    const oem = cols[2]?.replace(/"/g, '') || "N/A";
+                    const cat = cols[3]?.replace(/"/g, '') || "N/A";
+                    const truck = cols[4]?.replace(/"/g, '') || "N/A";
+                    const boost = cols[11]?.replace(/"/g, '') || "";
 
-                    const isBoosted = boostValue.includes("🚀");
-                    const cardClass = isBoosted ? 'boosted' : '';
+                    const isBoosted = boost.includes("🚀");
 
-                    boardHtml += `
-                        <li class="post-card ${cardClass}">
+                    html += `
+                        <li class="post-card ${isBoosted ? 'boosted' : ''}">
                             <span class="priority-badge">🔥 PRIORITY BOUNTY</span>
-                            <h3 class="part-header part-search">${partName}</h3>
-                            <div class="details-grid">
-                                <div><span class="label">OEM Number</span><span class="value oem-search">${oem}</span></div>
-                                <div><span class="label">Category</span><span class="value cat-search">${category}</span></div>
-                                <div><span class="label">Truck Make/Model</span><span class="value truck-search">${truck}</span></div>
+                            <h3 class="part-name p-search">${name}</h3>
+                            <div class="meta">
+                                <div><span class="label">OEM:</span> <span class="o-search">${oem}</span></div>
+                                <div><span class="label">CAT:</span> <span class="c-search">${cat}</span></div>
+                                <div><span class="label">TRUCK:</span> <span class="t-search">${truck}</span></div>
                             </div>
-                        </li>
-                    `;
+                        </li>`;
                 });
 
-                document.getElementById('inject-rows').innerHTML = boardHtml;
-
-                // ACTIVATES THE SEARCH BAR
-                new List('bounty-system', {
-                    valueNames: ['part-search', 'oem-search', 'cat-search', 'truck-search']
-                });
-
-            } catch (err) {
-                console.error("Board sync failed:", err);
-            }
+                document.getElementById('parts-data').innerHTML = html;
+                new List('bounty-engine', { valueNames: ['p-search', 'o-search', 'c-search', 't-search'] });
+            } catch (e) { console.error(e); }
         }
-
-        loadBounties();
+        fetchSheet();
     </script>
 </body>
 </html>
