@@ -13,7 +13,6 @@
             background-color: #0d1b2a; 
         }
         
-        /* BACKGROUND CLARITY */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2070'); 
@@ -34,31 +33,30 @@
         
         .header { background-color: rgba(255, 255, 255, 0.98); color: #1d3557; width: 100%; padding: 45px 0; text-align: center; border-bottom: 2px solid #e63946; }
 
-        /* SEARCH SECTION */
         .search-wrapper { width: 95%; max-width: 900px; margin: -25px auto 40px; }
         .search { 
             width: 100%; padding: 18px; border-radius: 8px; border: 3px solid #39FF14; 
-            background: white; font-size: 1.1rem; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: white; font-size: 1.1rem; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.3); outline: none;
         }
 
         .board-container { width: 95%; max-width: 900px; margin: 0 auto; flex-grow: 1; }
         .list { list-style: none; padding: 0; }
 
-        /* CARDS */
-        .post-card { background: white; color: #1d3557; margin-bottom: 15px; padding: 20px; border-radius: 10px; display: flex; flex-direction: column; position: relative; }
+        .post-card { background: white; color: #1d3557; margin-bottom: 15px; padding: 25px; border-radius: 12px; display: flex; flex-direction: column; position: relative; }
         
         .boosted { 
             background-color: #fbff00 !important; border: 4px solid #39FF14 !important; 
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5); transform: scale(1.01);
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.6); transform: scale(1.01);
         }
-        .priority-badge { display: none; background: #e63946; color: white; padding: 4px 8px; font-size: 0.7rem; border-radius: 4px; position: absolute; top: -10px; left: 15px; }
+        .priority-badge { display: none; background: #e63946; color: white; padding: 5px 12px; font-size: 0.75rem; font-weight: 900; border-radius: 4px; position: absolute; top: -12px; left: 15px; }
         .boosted .priority-badge { display: block; }
 
-        .part-name { font-size: 1.4rem; font-weight: 800; text-transform: uppercase; margin: 0; }
-        .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; font-size: 0.9rem; }
-        .label { font-weight: bold; color: #457b9d; }
+        .part-name { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; margin: 0; }
+        .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; font-size: 0.95rem; }
+        .label { font-weight: bold; color: #457b9d; text-transform: uppercase; font-size: 0.75rem; display: block; margin-bottom: 2px; }
+        .value { color: #1d3557; font-weight: 700; }
+        .budget-value { color: #2a9d8f; font-size: 1.1rem; }
 
-        /* FOOTER */
         footer { background-color: #1d3557; color: white; width: 100%; padding: 40px 0; text-align: center; border-top: 2px solid #a8dadc; margin-top: 50px; }
         .footer-links a { color: #a8dadc; margin: 0 15px; text-decoration: none; font-size: 0.9rem; }
     </style>
@@ -80,17 +78,17 @@
 
     <div class="header">
         <h1>Live Bounty Board</h1>
-        <p>Real-time high-intent parts requests.</p>
+        <p>Real-time high-intent parts requests across the supply chain.</p>
     </div>
 
     <div id="bounty-engine">
         <div class="search-wrapper">
-            <input class="search" placeholder="🔍 Search OEM#, Part Name, or Truck Model...">
+            <input class="search" placeholder="🔍 Search by OEM#, Part Name, or Model Year...">
         </div>
 
         <div class="board-container">
             <ul class="list" id="parts-data">
-                <p style="text-align:center; color:white;">Loading active bounties...</p>
+                <p style="text-align:center; color:white;">Syncing live bounties...</p>
             </ul>
         </div>
     </div>
@@ -118,7 +116,8 @@
                     const name = cols[1]?.replace(/"/g, '') || "N/A";
                     const oem = cols[2]?.replace(/"/g, '') || "N/A";
                     const cat = cols[3]?.replace(/"/g, '') || "N/A";
-                    const truck = cols[4]?.replace(/"/g, '') || "N/A";
+                    const year = cols[4]?.replace(/"/g, '') || "N/A"; // Labeled as Year now
+                    const budget = cols[5]?.replace(/"/g, '') || "Contact for Quote"; // Assuming Budget is Column F (Index 5)
                     const boost = cols[11]?.replace(/"/g, '') || "";
 
                     const isBoosted = boost.includes("🚀");
@@ -128,16 +127,17 @@
                             <span class="priority-badge">🔥 PRIORITY BOUNTY</span>
                             <h3 class="part-name p-search">${name}</h3>
                             <div class="meta">
-                                <div><span class="label">OEM:</span> <span class="o-search">${oem}</span></div>
-                                <div><span class="label">CAT:</span> <span class="c-search">${cat}</span></div>
-                                <div><span class="label">TRUCK:</span> <span class="t-search">${truck}</span></div>
+                                <div><span class="label">OEM Number:</span> <span class="value o-search">${oem}</span></div>
+                                <div><span class="label">Category:</span> <span class="value c-search">${cat}</span></div>
+                                <div><span class="label">Model Year:</span> <span class="value y-search">${year}</span></div>
+                                <div><span class="label">Target Budget:</span> <span class="value budget-value">${budget}</span></div>
                             </div>
                         </li>`;
                 });
 
                 document.getElementById('parts-data').innerHTML = html;
-                new List('bounty-engine', { valueNames: ['p-search', 'o-search', 'c-search', 't-search'] });
-            } catch (e) { console.error(e); }
+                new List('bounty-engine', { valueNames: ['p-search', 'o-search', 'c-search', 'y-search'] });
+            } catch (e) { console.error("Sync Error:", e); }
         }
         fetchSheet();
     </script>
