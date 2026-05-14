@@ -42,19 +42,18 @@
         .board-container { width: 95%; max-width: 1100px; margin: 0 auto; flex-grow: 1; }
         .list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px; }
 
-        /* THE TIDY CARD */
         .post-card { 
             background: white; color: #1d3557; padding: 25px; border-radius: 8px; 
             display: flex; flex-direction: column; position: relative; 
-            border-left: 6px solid #1d3557; transition: transform 0.2s ease;
+            border-left: 6px solid #1d3557; transition: 0.2s ease;
         }
         
         /* REFINED SUBTLE BOOST STYLE */
         .boosted { 
-            background-color: #fffbeb !important; /* Soft Cream/Yellow */
-            border-left: 8px solid #f59e0b !important; /* Bold Amber/Gold Stripe */
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15); /* Subtle Glow */
-            transform: translateY(-2px); /* Slight lift */
+            background-color: #fffbeb !important; 
+            border-left: 8px solid #f59e0b !important; 
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15); 
+            transform: translateY(-2px); 
         }
 
         .priority-badge { 
@@ -67,7 +66,6 @@
 
         .part-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0 0 15px 0; color: #1d3557; border-bottom: 1px solid #eee; padding-bottom: 8px; }
 
-        /* DATA GRID - Tidy layout for 8 columns */
         .data-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
@@ -121,15 +119,62 @@
     </footer>
 
     <script>
+        // Updated with the correct CSV-specific link structure
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=796391633&single=true&output=csv';
 
         async function fetchSheet() {
             try {
                 const response = await fetch(CSV_URL);
+                if (!response.ok) throw new Error('Network response was not ok');
                 const text = await response.text();
-                // Simple CSV parser for standard Google Sheets CSV output
+                
                 const rows = text.split('\n').slice(1);
                 let html = '';
 
                 rows.forEach(row => {
-                    const cols = row.match(/(".*?"|[^",\r\
+                    const cols = row.match(/(".*?"|[^",\r\n]+)(?=\s*,|\s*$)/g);
+                    // Ensure the row has enough columns to be valid
+                    if (!cols || cols.length < 9) return;
+
+                    const partName = cols[1]?.replace(/"/g, '') || "N/A";
+                    const oem      = cols[2]?.replace(/"/g, '') || "N/A";
+                    const category = cols[3]?.replace(/"/g, '') || "N/A";
+                    const year     = cols[4]?.replace(/"/g, '') || "N/A";
+                    const make     = cols[5]?.replace(/"/g, '') || "N/A";
+                    const model    = cols[6]?.replace(/"/g, '') || "N/A";
+                    const location = cols[7]?.replace(/"/g, '') || "N/A";
+                    const budget   = cols[8]?.replace(/"/g, '') || "Contact for Quote";
+                    const boost    = cols[11]?.replace(/"/g, '') || "";
+
+                    const isBoosted = boost.includes("🚀");
+
+                    html += `
+                        <li class="post-card ${isBoosted ? 'boosted' : ''}">
+                            <div class="priority-badge">Priority Bounty</div>
+                            <h3 class="part-title s-part">${partName}</h3>
+                            <div class="data-grid">
+                                <div class="data-item"><span class="label">OEM Number</span><span class="value s-oem">${oem}</span></div>
+                                <div class="data-item"><span class="label">Category</span><span class="value s-cat">${category}</span></div>
+                                <div class="data-item"><span class="label">Model Year</span><span class="value s-year">${year}</span></div>
+                                <div class="data-item"><span class="label">Make</span><span class="value s-make">${make}</span></div>
+                                <div class="data-item"><span class="label">Model</span><span class="value s-model">${model}</span></div>
+                                <div class="data-item"><span class="label">Location</span><span class="value s-loc">${location}</span></div>
+                                <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value s-budget">${budget}</span></div>
+                            </div>
+                        </li>`;
+                });
+
+                document.getElementById('parts-data').innerHTML = html;
+                new List('bounty-engine', { 
+                    valueNames: ['s-part', 's-oem', 's-cat', 's-year', 's-make', 's-model', 's-loc', 's-budget'] 
+                });
+
+            } catch (e) { 
+                console.error("Sync Failure:", e);
+                document.getElementById('parts-data').innerHTML = '<p style="color:white; text-align:center;">Checking for live bounty updates... If this persists, please check your Sheet publishing settings.</p>';
+            }
+        }
+        fetchSheet();
+    </script>
+</body>
+</html>
