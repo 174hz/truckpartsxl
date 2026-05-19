@@ -176,12 +176,11 @@
                 const lines = text.split('\n');
                 if (lines.length < 2) return;
 
-                // Dynamic Header Resolution Engine
                 const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase().trim());
                 
                 const idxPartName = headers.findIndex(h => h.includes('part') || h.includes('looking for'));
                 const idxCategory = headers.findIndex(h => h.includes('category') || h.includes('component'));
-                const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('serial'));
+                const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number') || h.includes('serial'));
                 const idxYear     = headers.findIndex(h => h.includes('year'));
                 const makeIdx     = headers.findIndex(h => h.includes('make'));
                 const modelIdx    = headers.findIndex(h => h.includes('model'));
@@ -209,15 +208,16 @@
                     let budget   = idxBudget !== -1 ? cols[idxBudget] : 'Contact for Quote';
                     const boost  = idxBoost !== -1 ? (cols[idxBoost] || "") : "";
 
-                    // Dynamic Smart Cleanups for Row Shifts
-                    if ((oem === 'N/A' || oem === '') && category.length > 8 && !isNaN(category)) {
-                        oem = category;
-                        category = 'Engine & Drivetrain';
+                    // Cross-reference data discovery to rescue dropped OEM allocations
+                    if (oem === 'N/A' || oem === '') {
+                        for (let val of cols) {
+                            if (val && val.length > 8 && !isNaN(val.replace(/[- ]/g, ''))) {
+                                oem = val;
+                                break;
+                            }
+                        }
                     }
-                    if (budget.length === 5 && !isNaN(budget) && (location === 'N/A' || location.length < 5)) {
-                        location = budget;
-                        budget = 'Contact for Quote';
-                    }
+                    if (category === oem) category = 'Engine & Drivetrain';
 
                     const isBoosted = boost.includes("🚀");
                     validCount++;
