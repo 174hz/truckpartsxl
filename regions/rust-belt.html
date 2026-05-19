@@ -182,10 +182,10 @@
                     const cols = parseCSVLine(row);
                     if (cols.length < 2 || !cols[1]) return;
 
-                    // Corrected Column Mapping Strategy
+                    // Corrected Operational Index Order
                     const partName = cols[1] || "N/A";
-                    const oem      = cols[2] || "N/A";
-                    const category = cols[3] || "N/A";
+                    const category = cols[2] || "N/A";
+                    const oem      = cols[3] || "N/A";
                     const year     = cols[4] || "N/A";
                     const make     = cols[5] || "N/A";
                     const model    = cols[6] || "N/A";
