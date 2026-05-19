@@ -45,38 +45,88 @@
         .post-card { 
             background: white; color: #1d3557; padding: 25px; border-radius: 8px; 
             display: flex; flex-direction: column; position: relative; 
-            border-left: 6px solid #1d3557; transition: 0.2s ease;
+            border-left: 6px solid #1d3557; transition: all 0.25s ease-on-out;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
         
+        .post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Enhanced Premium Boosted Styling */
         .boosted { 
-            background-color: #fffbeb !important; 
-            border-left: 8px solid #f59e0b !important; 
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15); 
-            transform: translateY(-2px); 
+            background-color: #ffffff !important; 
+            border-left: 8px solid #ff4757 !important; 
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.15) !important; 
+            position: relative;
+            overflow: hidden;
         }
 
+        .boosted::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; width: 150px; height: 150px;
+            background: linear-gradient(135deg, rgba(255,71,87,0.05) 0%, rgba(255,71,87,0) 100%);
+            pointer-events: none;
+        }
+
+        /* Premium High-Visibility Badge */
         .priority-badge { 
-            display: none; background: #f59e0b; color: #ffffff; 
-            padding: 4px 12px; font-size: 0.7rem; font-weight: 900; 
-            border-radius: 0 0 4px 4px; position: absolute; top: 0; right: 20px; 
+            display: none; 
+            background: linear-gradient(135deg, #ff4757, #ff6b81); 
+            color: #ffffff; 
+            padding: 6px 14px; 
+            font-size: 0.75rem; 
+            font-weight: 900; 
+            border-radius: 0 0 0 8px; 
+            position: absolute; 
+            top: 0; 
+            right: 0; 
             text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
         }
         .boosted .priority-badge { display: block; }
 
         .part-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0 0 15px 0; color: #1d3557; border-bottom: 1px solid #eee; padding-bottom: 8px; }
 
+        /* Responsive Grid Strategy */
         .data-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
             gap: 15px; 
         }
         .data-item { display: flex; flex-direction: column; }
         .label { font-size: 0.65rem; font-weight: 800; color: #457b9d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
         .value { font-size: 0.95rem; font-weight: 600; color: #1d3557; }
-        .budget-value { color: #2a9d8f; font-weight: 800; font-size: 1.1rem; }
+        .budget-value { color: #2e7d32; font-weight: 800; font-size: 1.15rem; }
 
         footer { background-color: #1d3557; color: white; width: 100%; padding: 30px 0; text-align: center; border-top: 2px solid #a8dadc; margin-top: 50px; }
         .footer-links a { color: #a8dadc; margin: 0 15px; text-decoration: none; font-size: 0.85rem; }
+
+        /* Specific Mobile Optimization Breakpoint */
+        @media (max-width: 768px) {
+            nav { padding: 12px 15px; flex-direction: column; gap: 10px; }
+            .header { padding: 25px 15px; }
+            .search-wrapper { margin: -15px auto 25px; }
+            .search { padding: 14px; font-size: 1rem; }
+            .post-card { padding: 18px; border-left-width: 4px; }
+            .boosted { border-left-width: 6px !important; }
+            
+            .data-grid { grid-template-columns: 1fr; gap: 10px; }
+            .data-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px dashed #eef2f5;
+                padding-bottom: 6px;
+            }
+            .label { margin-bottom: 0; }
+            .value { font-size: 0.9rem; text-align: right; }
+            .budget-value { font-size: 1rem; }
+            .part-title { font-size: 1.2rem; margin-bottom: 10px; padding-right: 120px; }
+        }
     </style>
 </head>
 <body>
@@ -120,7 +170,6 @@
     <script>
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=1018885482&single=true&output=csv';
 
-        // Robust CSV row splitter that cleanly handles empty columns
         function parseCSVLine(text) {
             let p = '', c = '', r = [];
             let q = false;
@@ -128,7 +177,7 @@
                 c = text[i];
                 if (c === '"') { q = !q; }
                 else if (c === ',' && !q) { r.push(p.trim()); p = ''; }
-                else if (c === '\r' || c === '\n') { /* Skip newlines within elements */ }
+                else if (c === '\r' || c === '\n') { }
                 else { p += c; }
             }
             r.push(p.trim());
@@ -148,8 +197,6 @@
                 rows.forEach(row => {
                     if (!row.trim()) return;
                     const cols = parseCSVLine(row);
-                    
-                    // Allow parsing even if columns are short due to omitted data
                     if (cols.length < 2 || !cols[1]) return; 
 
                     const partName = cols[1] || "N/A";
