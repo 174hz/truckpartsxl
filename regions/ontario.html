@@ -178,7 +178,6 @@
 
                 const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase().trim());
                 
-                // Absolute precise column tracking to stop mixing fields
                 const idxPartName = headers.findIndex(h => h === 'part' || h === 'part name' || h.includes('looking for'));
                 const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
                 const idxOem      = headers.findIndex(h => h === 'oem' || h === 'oem number' || h.includes('casting number') || h === 'oem / casting number');
@@ -210,8 +209,8 @@
                     let budget   = idxBudget !== -1 ? cols[idxBudget] : 'Contact for Quote';
                     const boost  = idxBoost !== -1 ? (cols[idxBoost] || "") : "";
 
-                    // Safe structural validation instead of regex text matching
-                    if (!oem || oem.trim() === '' || oem.trim() === location.trim()) {
+                    // Removed structure check that forced fallback on numerical strings
+                    if (!oem || oem.trim() === '') {
                         oem = 'N/A';
                     }
 
@@ -224,7 +223,7 @@
                             <h3 class="part-title s-part">${partName}</h3>
                             <div class="vehicle-fitment s-fitment">${year} ${make} ${model}</div>
                             <div class="data-grid">
-                                <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value s-oem">${oem || 'N/A'}</span></div>
+                                <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value s-oem">${oem}</span></div>
                                 <div class="data-item"><span class="label">Category Component</span><span class="value s-cat">${category || 'General Heavy Duty'}</span></div>
                                 <div class="data-item"><span class="label">Delivery Location</span><span class="value s-loc">${location || 'N/A'}</span></div>
                                 <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value s-budget">${budget || 'Contact for Quote'}</span></div>
