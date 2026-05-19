@@ -178,9 +178,10 @@
 
                 const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase().trim());
                 
+                // Absolute precise column tracking to stop mixing fields
                 const idxPartName = headers.findIndex(h => h === 'part' || h === 'part name' || h.includes('looking for'));
                 const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
-                const idxOem      = headers.findIndex(h => h === 'oem' || h === 'oem number' || h.includes('casting number'));
+                const idxOem      = headers.findIndex(h => h === 'oem' || h === 'oem number' || h.includes('casting number') || h === 'oem / casting number');
                 const idxYear     = headers.findIndex(h => h === 'year');
                 const makeIdx     = headers.findIndex(h => h === 'make');
                 const modelIdx    = headers.findIndex(h => h === 'model');
@@ -196,8 +197,9 @@
                     if (!row.trim()) return;
                     const cols = parseCSVLine(row);
                     
-                    const partName = idxPartName !== -1 ? cols[idxPartName] : cols[1];
-                    if (!partName || partName.toLowerCase() === 'part name') return;
+                    if (idxPartName === -1) return;
+                    const partName = cols[idxPartName];
+                    if (!partName || partName.toLowerCase() === 'part name' || partName.toLowerCase() === 'part') return;
 
                     let category = idxCategory !== -1 ? cols[idxCategory] : 'N/A';
                     let oem      = idxOem !== -1 ? cols[idxOem] : 'N/A';
@@ -208,8 +210,8 @@
                     let budget   = idxBudget !== -1 ? cols[idxBudget] : 'Contact for Quote';
                     const boost  = idxBoost !== -1 ? (cols[idxBoost] || "") : "";
 
-                    // Strict validation: Clear out phone formats or accidental zip echoes from OEM matching slot
-                    if (oem.match(/^\d{3}-\d{3}-\d{4}$/) || oem === location) {
+                    // Safe structural validation instead of regex text matching
+                    if (!oem || oem.trim() === '' || oem.trim() === location.trim()) {
                         oem = 'N/A';
                     }
 
