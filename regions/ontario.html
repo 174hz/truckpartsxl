@@ -45,7 +45,7 @@
         .post-card { 
             background: white; color: #1d3557; padding: 25px; border-radius: 8px; 
             display: flex; flex-direction: column; position: relative; 
-            border-left: 6px solid #1d3557; transition: all 0.25s ease-on-out;
+            border-left: 6px solid #1d3557; transition: all 0.25s ease-in-out;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
         
@@ -173,25 +173,51 @@
                 if (!response.ok) throw new Error('Network response was not ok');
                 const text = await response.text();
                 
-                const rows = text.split('\n').slice(1);
+                const lines = text.split('\n');
+                if (lines.length < 2) return;
+
+                // Dynamic Header Resolution Engine
+                const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase().trim());
+                
+                const idxPartName = headers.findIndex(h => h.includes('part') || h.includes('looking for'));
+                const idxCategory = headers.findIndex(h => h.includes('category') || h.includes('component'));
+                const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('serial'));
+                const idxYear     = headers.findIndex(h => h.includes('year'));
+                const makeIdx     = headers.findIndex(h => h.includes('make'));
+                const modelIdx    = headers.findIndex(h => h.includes('model'));
+                const idxLocation = headers.findIndex(h => h.includes('location') || h.includes('delivery') || h.includes('where'));
+                const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('payout') || h.includes('price'));
+                const idxBoost    = headers.findIndex(h => h.includes('boost') || h.includes('premium') || h.includes('status'));
+
+                const rows = lines.slice(1);
                 let html = '';
                 let validCount = 0;
 
                 rows.forEach(row => {
                     if (!row.trim()) return;
                     const cols = parseCSVLine(row);
-                    if (cols.length < 2 || !cols[1]) return; 
+                    
+                    const partName = idxPartName !== -1 ? cols[idxPartName] : cols[1];
+                    if (!partName || partName.toLowerCase() === 'part name') return;
 
-                    // Corrected Operational Index Order
-                    const partName = cols[1] || "N/A";
-                    const category = cols[2] || "N/A";
-                    const oem      = cols[3] || "N/A";
-                    const year     = cols[4] || "N/A";
-                    const make     = cols[5] || "N/A";
-                    const model    = cols[6] || "N/A";
-                    const location = cols[7] || "N/A";
-                    const budget   = cols[8] || "Contact for Quote";
-                    const boost    = cols[11] || "";
+                    let category = idxCategory !== -1 ? cols[idxCategory] : 'N/A';
+                    let oem      = idxOem !== -1 ? cols[idxOem] : 'N/A';
+                    const year   = idxYear !== -1 ? cols[idxYear] : '';
+                    const make   = makeIdx !== -1 ? cols[makeIdx] : '';
+                    const model  = modelIdx !== -1 ? cols[modelIdx] : '';
+                    let location = idxLocation !== -1 ? cols[idxLocation] : 'N/A';
+                    let budget   = idxBudget !== -1 ? cols[idxBudget] : 'Contact for Quote';
+                    const boost  = idxBoost !== -1 ? (cols[idxBoost] || "") : "";
+
+                    // Dynamic Smart Cleanups for Row Shifts
+                    if ((oem === 'N/A' || oem === '') && category.length > 8 && !isNaN(category)) {
+                        oem = category;
+                        category = 'Engine & Drivetrain';
+                    }
+                    if (budget.length === 5 && !isNaN(budget) && (location === 'N/A' || location.length < 5)) {
+                        location = budget;
+                        budget = 'Contact for Quote';
+                    }
 
                     const isBoosted = boost.includes("🚀");
                     validCount++;
@@ -202,10 +228,10 @@
                             <h3 class="part-title s-part">${partName}</h3>
                             <div class="vehicle-fitment s-fitment">${year} ${make} ${model}</div>
                             <div class="data-grid">
-                                <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value s-oem">${oem}</span></div>
-                                <div class="data-item"><span class="label">Category Component</span><span class="value s-cat">${category}</span></div>
-                                <div class="data-item"><span class="label">Delivery Location</span><span class="value s-loc">${location}</span></div>
-                                <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value s-budget">${budget}</span></div>
+                                <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value s-oem">${oem || 'N/A'}</span></div>
+                                <div class="data-item"><span class="label">Category Component</span><span class="value s-cat">${category || 'General Heavy Duty'}</span></div>
+                                <div class="data-item"><span class="label">Delivery Location</span><span class="value s-loc">${location || 'N/A'}</span></div>
+                                <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value s-budget">${budget || 'Contact for Quote'}</span></div>
                             </div>
                         </li>`;
                 });
