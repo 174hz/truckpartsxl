@@ -84,21 +84,27 @@
             const idxYear     = headers.findIndex(h => h === 'year' || h.includes('model year'));
             const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
             const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number'));
-            const idxLocation = headers.findIndex(h => h === 'location' || h.includes('delivery'));
+            const idxLocation = headers.findIndex(h => h === 'location' || h.includes('delivery') || h.includes('city'));
             const idxBudget   = headers.findIndex(h => h === 'budget' || h.includes('target'));
             const idxBoost    = headers.findIndex(h => h.includes('boost') || h.includes('priority'));
 
             let totalRendered = 0;
+            const dataRows = data.slice(1);
 
-            for (let i = 1; i < data.length; i++) {
-                const row = data[i];
-                const location = idxLocation !== -1 ? row[idxLocation] : '';
-                
-                // Specific filter ensuring only US Rust Belt or key distribution centers manifest
+            dataRows.forEach(row => {
+                const location = idxLocation !== -1 && row[idxLocation] ? row[idxLocation] : '';
                 const locLower = location.toLowerCase();
-                const isRustBelt = locLower.includes('mi') || locLower.includes('oh') || locLower.includes('pa') || locLower.includes('il') || locLower.includes('ny') || locLower.includes('windsor');
                 
-                if (!isRustBelt && i !== 1) continue; // Forces visibility for test listings
+                const isRustBelt = locLower.includes('mi') || 
+                                   locLower.includes('oh') || 
+                                   locLower.includes('pa') || 
+                                   locLower.includes('il') || 
+                                   locLower.includes('ny') || 
+                                   locLower.includes('windsor') ||
+                                   locLower.includes('michigan') ||
+                                   locLower.includes('ohio');
+                
+                if (!isRustBelt) return;
 
                 const partName = idxPartName !== -1 ? row[idxPartName] : 'Industrial HD Component';
                 const make     = idxMake     !== -1 ? row[idxMake]     : '';
@@ -120,7 +126,7 @@
                         <div class="data-grid">
                             <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">${oem}</span></div>
                             <div class="data-item"><span class="label">Category Component</span><span class="value">${category}</span></div>
-                            <div class="data-item"><span class="label">Delivery Target</span><span class="value">${location || 'Rust Belt Hub'}</span></div>
+                            <div class="data-item"><span class="label">Delivery Target</span><span class="value">${location}</span></div>
                             <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
                         </div>
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
@@ -129,7 +135,8 @@
                         </a>
                     </li>`;
                 gridContainer.insertAdjacentHTML('beforeend', html);
-            }
+            });
+
             if (totalRendered === 0) {
                 gridContainer.innerHTML = '<li class="no-results">No regional Rust Belt parameters matched today.</li>';
             }
