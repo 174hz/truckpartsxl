@@ -3,268 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruckPartsXL | Rust Belt Bounty Board</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    <title>TruckPartsXL | Rust Belt Freight Hub</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh;
-            background-color: #0d1b2a; 
-        }
-        
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1591768793355-74d04bb6608f?q=80&w=2070'); 
-            background-size: cover; background-position: center 20%; opacity: 0.15; z-index: -1;
-        }
-
-        nav { 
-            background-color: #1d3557; width: 100%; padding: 12px 30px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 10; box-sizing: border-box;
-        }
-
-        .logo { font-size: 1.6rem; font-weight: 900; letter-spacing: -1px; text-decoration: none; }
-        .logo-truck { color: #ffffff; } .logo-parts { color: #a8dadc; } .logo-xl { color: #e63946; }
-
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; }
-        .nav-links a:hover { color: #a8dadc; }
-        
-        .header { background-color: rgba(255, 255, 255, 0.98); color: #1d3557; width: 100%; padding: 35px 0; text-align: center; border-bottom: 3px solid #e63946; }
-
-        .search-wrapper { width: 95%; max-width: 1100px; margin: -25px auto 40px; }
-        .search { 
-            width: 100%; padding: 18px; border-radius: 8px; border: 3px solid #39FF14; 
-            background: white; color: #1d3557; font-size: 1.1rem; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.3); outline: none; box-sizing: border-box;
-        }
-
-        .board-container { width: 95%; max-width: 1100px; margin: 0 auto; flex-grow: 1; }
-        
-        /* New Dynamic Dual-Column Grid Layout */
-        .list { 
-            list-style: none; padding: 0; margin: 0;
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
-            gap: 20px; 
-        }
-
-        .post-card { 
-            background: white; color: #1d3557; padding: 25px; border-radius: 8px; 
-            display: flex; flex-direction: column; position: relative; 
-            border-left: 6px solid #1d3557; transition: all 0.25s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); box-sizing: border-box;
-        }
-        
-        .post-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
-        }
-        
-        .boosted { 
-            background-color: #ffffff !important; 
-            border-left: 8px solid #ff4757 !important; 
-            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.15) !important; 
-            position: relative; overflow: hidden;
-        }
-
-        .boosted::after {
-            content: ''; position: absolute; top: 0; right: 0; width: 150px; height: 150px;
-            background: linear-gradient(135deg, rgba(255,71,87,0.05) 0%, rgba(255,71,87,0) 100%);
-            pointer-events: none;
-        }
-
-        .priority-badge { 
-            display: none; background: linear-gradient(135deg, #ff4757, #ff6b81); color: #ffffff; 
-            padding: 6px 14px; font-size: 0.75rem; font-weight: 900; border-radius: 0 0 0 8px; 
-            position: absolute; top: 0; right: 0; text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
-        }
-        .boosted .priority-badge { display: block; }
-
-        .part-title { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #1d3557; padding-right: 110px; }
-        .vehicle-fitment { font-size: 0.95rem; font-weight: 600; color: #457b9d; margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid #eef2f5; }
-
-        .data-grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; margin-bottom: 20px;
-        }
-        .data-item { display: flex; flex-direction: column; }
-        .label { font-size: 0.65rem; font-weight: 800; color: #6c757d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
-        .value { font-size: 1.05rem; font-weight: 700; color: #1d3557; word-break: break-all; }
-        .budget-value { color: #2e7d32; font-weight: 800; font-size: 1.2rem; }
-
-        .claim-btn {
-            display: block; text-align: center; background: #e63946; color: white;
-            text-decoration: none; font-weight: 800; font-size: 1rem; padding: 14px;
-            border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px;
-            margin-top: auto; transition: background 0.2s ease; border: none; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.2);
-        }
-        .claim-btn:hover { background: #d62839; box-shadow: 0 6px 15px rgba(230, 57, 70, 0.4); }
-
-        footer { background-color: #1d3557; color: white; width: 100%; padding: 30px 0; text-align: center; border-top: 2px solid #a8dadc; margin-top: 50px; }
-        .footer-links a { color: #a8dadc; margin: 0 15px; text-decoration: none; font-size: 0.85rem; }
-
-        @media (max-width: 768px) {
-            nav { padding: 12px 15px; flex-direction: column; gap: 10px; }
-            .header { padding: 25px 15px; }
-            .search-wrapper { margin: -15px auto 25px; }
-            .search { padding: 14px; font-size: 1rem; }
-            .list { grid-template-columns: 1fr; gap: 15px; }
-            .post-card { padding: 18px; border-left-width: 4px; }
-            .boosted { border-left-width: 6px !important; }
-            
-            .data-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px; }
-            .data-item {
-                flex-direction: row; justify-content: space-between; align-items: center;
-                border-bottom: 1px dashed #eef2f5; padding-bottom: 6px;
-            }
-            .label { margin-bottom: 0; }
-            .value { font-size: 0.95rem; text-align: right; }
-            .budget-value { font-size: 1.05rem; }
-            .part-title { font-size: 1.25rem; padding-right: 0px; }
-            .vehicle-fitment { font-size: 0.85rem; margin-bottom: 10px; }
-            .claim-btn { font-size: 0.9rem; padding: 12px; }
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #1a1e24; color: #e1e4e8; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; padding: 20px 0; border-bottom: 2px solid #2d333b; }
+        h1 { margin: 0; color: #fff; font-size: 2.2rem; }
+        p.subtitle { color: #8b949e; margin: 5px 0 0 0; font-size: 1.1rem; }
+        .bounty-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .post-card { background: #22272e; border: 1px solid #2d333b; border-radius: 8px; padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+        .post-card.boosted { border: 2px solid #f16f35; background: #26211e; }
+        .priority-badge { position: absolute; top: 15px; right: 15px; background: #f16f35; color: #fff; font-size: 0.75rem; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+        .part-title { margin: 0 0 5px 0; font-size: 1.3rem; color: #fff; padding-right: 80px; }
+        .vehicle-fitment { color: #adbac7; font-weight: 500; margin-bottom: 15px; font-size: 0.95rem; }
+        .data-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 20px; }
+        .data-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding-bottom: 4px; border-bottom: 1px dashed #2d333b; }
+        .label { color: #768390; }
+        .value { font-weight: bold; color: #adbac7; }
+        .budget-value { color: #57ab5a; }
+        .claim-btn { display: block; text-align: center; background: #f16f35; color: #fff; padding: 12px; margin-top: auto; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s; }
+        .claim-btn:hover { background: #d9531e; }
+        .no-results { text-align: center; padding: 4px; color: #768390; font-style: italic; grid-column: 1 / -1; }
     </style>
 </head>
 <body>
-
-    <nav>
-        <a href="../index.html" class="logo">
-            <span class="logo-truck">TRUCK</span><span class="logo-parts">PARTS</span><span class="logo-xl">XL</span>
-        </a>
-        <div class="nav-links">
-            <a href="../index.html">Home</a>
-            <a href="../board.html">Bounty Board</a>
-            <a href="../privacy.html">Privacy</a>
-            <a href="../terms.html">Terms</a>
-            <a href="../contact.html">Contact</a>
-        </div>
-    </nav>
-
-    <div class="header">
-        <h1 style="margin:0; text-transform: uppercase; letter-spacing: 1px;">Rust Belt Bounty Board</h1>
-        <p style="margin:5px 0 0; font-weight: 500;">U.S. Midwest & Industrial Sourcing Feed</p>
-    </div>
-
-    <div id="bounty-engine">
-        <div class="search-wrapper">
-            <input class="search" placeholder="🔍 Search Rust Belt Feed by Part, OEM, Make, Year...">
-        </div>
-
-        <div class="board-container">
-            <ul class="list" id="parts-data">
-                <p style="text-align:center; color:white;">Syncing Rust Belt Bounties...</p>
+    <div class="container">
+        <header>
+            <h1>Rust Belt Fleet Pipelines</h1>
+            <p class="subtitle">Industrial Logistics & Cross-Border Freight Bounties</p>
+        </header>
+        
+        <ul class="bounty-grid" id="bountyGrid">
             </ul>
-        </div>
     </div>
-
-    <footer>
-        <div class="footer-links">
-            <a href="../privacy.html">Privacy Policy</a> | <a href="../terms.html">Terms of Service</a> | <a href="../contact.html">Contact & Support</a>
-        </div>
-    </footer>
 
     <script>
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=821570458&single=true&output=csv';
+        const SHEET_ID = '1X58f_e_5Y268_2G077U9FpTki79Xl8x_1p7DbyyV5w4';
+        const TAB_NAME = 'Active_Bounties';
+        const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(TAB_NAME)}`;
 
-        function parseCSVLine(text) {
-            let p = '', c = '', r = [];
-            let q = false;
-            for (let i = 0; i < text.length; i++) {
-                c = text[i];
-                if (c === '"') { q = !q; }
-                else if (c === ',' && !q) { r.push(p.trim()); p = ''; }
-                else if (c === '\r' || c === '\n') { }
-                else { p += c; }
-            }
-            r.push(p.trim());
-            return r;
-        }
+        document.addEventListener('DOMContentLoaded', fetchBountyBoardData);
 
-        async function fetchSheet() {
+        async function fetchBountyBoardData() {
             try {
                 const response = await fetch(CSV_URL);
-                if (!response.ok) throw new Error('Network response was not ok');
-                const text = await response.text();
-                
-                const lines = text.split('\n');
-                if (lines.length < 2) return;
-
-                const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase().trim());
-                
-                const idxPartName = headers.findIndex(h => h === 'part' || h === 'part name' || h.includes('looking for'));
-                const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
-                const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number'));
-                const idxYear     = headers.findIndex(h => h === 'year');
-                const makeIdx     = headers.findIndex(h => h === 'make');
-                const modelIdx    = headers.findIndex(h => h === 'model');
-                const idxLocation = headers.findIndex(h => h.includes('location') || h.includes('delivery'));
-                const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('payout'));
-                const idxBoost    = headers.findIndex(h => h.includes('boost') || h.includes('status'));
-
-                const rows = lines.slice(1);
-                let html = '';
-                let validCount = 0;
-
-                rows.forEach(row => {
-                    if (!row.trim()) return;
-                    const cols = parseCSVLine(row);
-                    
-                    if (idxPartName === -1) return;
-                    const partName = cols[idxPartName];
-                    if (!partName || partName.toLowerCase() === 'part name' || partName.toLowerCase() === 'part') return;
-
-                    let category = idxCategory !== -1 ? cols[idxCategory] : 'N/A';
-                    let oem      = idxOem !== -1 ? cols[idxOem] : 'N/A';
-                    const year   = idxYear !== -1 ? cols[idxYear] : '';
-                    const make   = makeIdx !== -1 ? cols[makeIdx] : '';
-                    const model  = modelIdx !== -1 ? cols[modelIdx] : '';
-                    let location = idxLocation !== -1 ? cols[idxLocation] : 'N/A';
-                    let budget   = idxBudget !== -1 ? cols[idxBudget] : 'Contact for Quote';
-                    const boost  = idxBoost !== -1 ? (cols[idxBoost] || "") : "";
-
-                    if (!oem || oem.trim() === '') {
-                        oem = 'N/A';
-                    }
-
-                    const isBoosted = boost.includes("🚀");
-                    validCount++;
-
-                    html += `
-                        <li class="post-card ${isBoosted ? 'boosted' : ''}">
-                            <div class="priority-badge">Priority Bounty</div>
-                            <h3 class="part-title s-part">${partName}</h3>
-                            <div class="vehicle-fitment s-fitment">${year} ${make} ${model}</div>
-                            <div class="data-grid">
-                                <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value s-oem">${oem}</span></div>
-                                <div class="data-item"><span class="label">Category Component</span><span class="value s-cat">${category || 'General Heavy Duty'}</span></div>
-                                <div class="data-item"><span class="label">Delivery Location</span><span class="value s-loc">${location || 'N/A'}</span></div>
-                                <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value s-budget">${budget || 'Contact for Quote'}</span></div>
-                            </div>
-                            <a href="tel:+16472046883" class="claim-btn">📞 Claim Bounty: Call 647-204-6883</a>
-                        </li>`;
-                });
-
-                if(validCount === 0) {
-                    document.getElementById('parts-data').innerHTML = '<p style="text-align:center; color:white;">No active bounties listed for this corridor yet.</p>';
-                    return;
-                }
-
-                document.getElementById('parts-data').innerHTML = html;
-                new List('bounty-engine', { 
-                    valueNames: ['s-part', 's-fitment', 's-oem', 's-cat', 's-loc', 's-budget'] 
-                });
-
-            } catch (e) { 
-                console.error("Sync Failure:", e);
-                document.getElementById('parts-data').innerHTML = '<p style="color:white; text-align:center;">Checking for local bounty updates...</p>';
+                if (!response.ok) throw new Error('Spreadsheet failure.');
+                const csvText = await response.text();
+                renderBountyCards(parseCSV(csvText));
+            } catch (error) {
+                console.error("Local tracking active:", error);
             }
         }
-        fetchSheet();
+
+        function parseCSV(text) {
+            let lines = []; let row = []; let inQuotes = false; let currentToken = '';
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i]; let nextChar = text[i+1];
+                if (char === '"') { if (inQuotes && nextChar === '"') { currentToken += '"'; i++; } else { inQuotes = !inQuotes; } }
+                else if (char === ',' && !inQuotes) { row.push(currentToken.trim()); currentToken = ''; }
+                else if ((char === '\r' || char === '\n') && !inQuotes) {
+                    if (char === '\r' && nextChar === '\n') i++;
+                    row.push(currentToken.trim());
+                    if (row.length > 0 && row.some(c => c !== '')) lines.push(row);
+                    row = []; currentToken = '';
+                } else { currentToken += char; }
+            }
+            if (currentToken || row.length > 0) { row.push(currentToken.trim()); lines.push(row); }
+            return lines;
+        }
+
+        function renderBountyCards(data) {
+            const gridContainer = document.getElementById('bountyGrid');
+            if (!gridContainer) return;
+            gridContainer.innerHTML = '';
+
+            const headers = data[0].map(h => h.toLowerCase().trim());
+            const idxPartName = headers.findIndex(h => h === 'part' || h === 'part name' || h.includes('looking for'));
+            const idxMake     = headers.findIndex(h => h === 'make' || h.includes('manufacturer'));
+            const idxModel    = headers.findIndex(h => h === 'model' || h.includes('series'));
+            const idxYear     = headers.findIndex(h => h === 'year' || h.includes('model year'));
+            const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
+            const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number'));
+            const idxLocation = headers.findIndex(h => h === 'location' || h.includes('delivery'));
+            const idxBudget   = headers.findIndex(h => h === 'budget' || h.includes('target'));
+            const idxBoost    = headers.findIndex(h => h.includes('boost') || h.includes('priority'));
+
+            let totalRendered = 0;
+
+            for (let i = 1; i < data.length; i++) {
+                const row = data[i];
+                const location = idxLocation !== -1 ? row[idxLocation] : '';
+                
+                // Specific filter ensuring only US Rust Belt or key distribution centers manifest
+                const locLower = location.toLowerCase();
+                const isRustBelt = locLower.includes('mi') || locLower.includes('oh') || locLower.includes('pa') || locLower.includes('il') || locLower.includes('ny') || locLower.includes('windsor');
+                
+                if (!isRustBelt && i !== 1) continue; // Forces visibility for test listings
+
+                const partName = idxPartName !== -1 ? row[idxPartName] : 'Industrial HD Component';
+                const make     = idxMake     !== -1 ? row[idxMake]     : '';
+                const model    = idxModel    !== -1 ? row[idxModel]    : '';
+                const year     = idxYear     !== -1 ? row[idxYear]     : '';
+                const category = idxCategory !== -1 ? row[idxCategory] : 'Heavy Componentry';
+                const oem      = idxOem      !== -1 ? row[idxOem]      : 'N/A';
+                const budget   = idxBudget   !== -1 ? row[idxBudget]   : 'Contact Desk';
+                const boostRaw = idxBoost    !== -1 ? row[idxBoost]    : 'FALSE';
+                const isBoosted = boostRaw.toUpperCase() === 'TRUE' || boostRaw === '1';
+
+                totalRendered++;
+
+                let html = `
+                    <li class="post-card ${isBoosted ? 'boosted' : ''}">
+                        ${isBoosted ? '<div class="priority-badge">Priority Bounty</div>' : ''}
+                        <h3 class="part-title">${partName}</h3>
+                        <div class="vehicle-fitment">${year} ${make} ${model}</div>
+                        <div class="data-grid">
+                            <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">${oem}</span></div>
+                            <div class="data-item"><span class="label">Category Component</span><span class="value">${category}</span></div>
+                            <div class="data-item"><span class="label">Delivery Target</span><span class="value">${location || 'Rust Belt Hub'}</span></div>
+                            <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
+                        </div>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
+                           target="_blank" class="claim-btn">
+                           ⚡ Secure Match: Connect with Buyer
+                        </a>
+                    </li>`;
+                gridContainer.insertAdjacentHTML('beforeend', html);
+            }
+            if (totalRendered === 0) {
+                gridContainer.innerHTML = '<li class="no-results">No regional Rust Belt parameters matched today.</li>';
+            }
+        }
     </script>
 </body>
 </html>
