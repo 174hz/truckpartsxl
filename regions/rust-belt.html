@@ -33,20 +33,27 @@
         
         .header { background-color: rgba(255, 255, 255, 0.98); color: #1d3557; width: 100%; padding: 35px 0; text-align: center; border-bottom: 3px solid #e63946; }
 
-        .search-wrapper { width: 95%; max-width: 900px; margin: -25px auto 40px; }
+        .search-wrapper { width: 95%; max-width: 1100px; margin: -25px auto 40px; }
         .search { 
             width: 100%; padding: 18px; border-radius: 8px; border: 3px solid #39FF14; 
-            background: white; color: #1d3557; font-size: 1.1rem; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.3); outline: none;
+            background: white; color: #1d3557; font-size: 1.1rem; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.3); outline: none; box-sizing: border-box;
         }
 
         .board-container { width: 95%; max-width: 1100px; margin: 0 auto; flex-grow: 1; }
-        .list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px; }
+        
+        /* New Dynamic Dual-Column Grid Layout */
+        .list { 
+            list-style: none; padding: 0; margin: 0;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+            gap: 20px; 
+        }
 
         .post-card { 
             background: white; color: #1d3557; padding: 25px; border-radius: 8px; 
             display: flex; flex-direction: column; position: relative; 
             border-left: 6px solid #1d3557; transition: all 0.25s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); box-sizing: border-box;
         }
         
         .post-card:hover {
@@ -75,12 +82,12 @@
         }
         .boosted .priority-badge { display: block; }
 
-        .part-title { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #1d3557; }
+        .part-title { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #1d3557; padding-right: 110px; }
         .vehicle-fitment { font-size: 0.95rem; font-weight: 600; color: #457b9d; margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid #eef2f5; }
 
         .data-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            grid-template-columns: repeat(2, 1fr); 
             gap: 15px; margin-bottom: 20px;
         }
         .data-item { display: flex; flex-direction: column; }
@@ -88,12 +95,11 @@
         .value { font-size: 1.05rem; font-weight: 700; color: #1d3557; word-break: break-all; }
         .budget-value { color: #2e7d32; font-weight: 800; font-size: 1.2rem; }
 
-        /* Sourcing CTA Button Styling */
         .claim-btn {
             display: block; text-align: center; background: #e63946; color: white;
             text-decoration: none; font-weight: 800; font-size: 1rem; padding: 14px;
             border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px;
-            transition: background 0.2s ease; border: none; cursor: pointer;
+            margin-top: auto; transition: background 0.2s ease; border: none; cursor: pointer;
             box-shadow: 0 4px 10px rgba(230, 57, 70, 0.2);
         }
         .claim-btn:hover { background: #d62839; box-shadow: 0 6px 15px rgba(230, 57, 70, 0.4); }
@@ -106,6 +112,7 @@
             .header { padding: 25px 15px; }
             .search-wrapper { margin: -15px auto 25px; }
             .search { padding: 14px; font-size: 1rem; }
+            .list { grid-template-columns: 1fr; gap: 15px; }
             .post-card { padding: 18px; border-left-width: 4px; }
             .boosted { border-left-width: 6px !important; }
             
@@ -117,7 +124,7 @@
             .label { margin-bottom: 0; }
             .value { font-size: 0.95rem; text-align: right; }
             .budget-value { font-size: 1.05rem; }
-            .part-title { font-size: 1.25rem; padding-right: 120px; }
+            .part-title { font-size: 1.25rem; padding-right: 0px; }
             .vehicle-fitment { font-size: 0.85rem; margin-bottom: 10px; }
             .claim-btn { font-size: 0.9rem; padding: 12px; }
         }
@@ -238,7 +245,7 @@
                                 <div class="data-item"><span class="label">Delivery Location</span><span class="value s-loc">${location || 'N/A'}</span></div>
                                 <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value s-budget">${budget || 'Contact for Quote'}</span></div>
                             </div>
-                            <a href="tel:6472046883" class="claim-btn">📞 Claim Bounty: Call 647-204-6883</a>
+                            <a href="tel:+16472046883" class="claim-btn">📞 Claim Bounty: Call 647-204-6883</a>
                         </li>`;
                 });
 
