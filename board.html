@@ -81,12 +81,22 @@
         .data-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 15px; 
+            gap: 15px; margin-bottom: 20px;
         }
         .data-item { display: flex; flex-direction: column; }
         .label { font-size: 0.65rem; font-weight: 800; color: #6c757d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
         .value { font-size: 1.05rem; font-weight: 700; color: #1d3557; word-break: break-all; }
         .budget-value { color: #2e7d32; font-weight: 800; font-size: 1.2rem; }
+
+        /* Sourcing CTA Button Styling */
+        .claim-btn {
+            display: block; text-align: center; background: #e63946; color: white;
+            text-decoration: none; font-weight: 800; font-size: 1rem; padding: 14px;
+            border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+            transition: background 0.2s ease; border: none; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.2);
+        }
+        .claim-btn:hover { background: #d62839; box-shadow: 0 6px 15px rgba(230, 57, 70, 0.4); }
 
         footer { background-color: #1d3557; color: white; width: 100%; padding: 30px 0; text-align: center; border-top: 2px solid #a8dadc; margin-top: 50px; }
         .footer-links a { color: #a8dadc; margin: 0 15px; text-decoration: none; font-size: 0.85rem; }
@@ -99,7 +109,7 @@
             .post-card { padding: 18px; border-left-width: 4px; }
             .boosted { border-left-width: 6px !important; }
             
-            .data-grid { grid-template-columns: 1fr; gap: 10px; }
+            .data-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px; }
             .data-item {
                 flex-direction: row; justify-content: space-between; align-items: center;
                 border-bottom: 1px dashed #eef2f5; padding-bottom: 6px;
@@ -109,6 +119,7 @@
             .budget-value { font-size: 1.05rem; }
             .part-title { font-size: 1.25rem; padding-right: 120px; }
             .vehicle-fitment { font-size: 0.85rem; margin-bottom: 10px; }
+            .claim-btn { font-size: 0.9rem; padding: 12px; }
         }
     </style>
 </head>
@@ -180,10 +191,7 @@
                 
                 const idxPartName = headers.findIndex(h => h === 'part' || h === 'part name' || h.includes('looking for'));
                 const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
-                
-                // Loose search catching "oem", "casting", or "number" to support form variations
-                const idxOem = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number'));
-                
+                const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number'));
                 const idxYear     = headers.findIndex(h => h === 'year');
                 const makeIdx     = headers.findIndex(h => h === 'make');
                 const modelIdx    = headers.findIndex(h => h === 'model');
@@ -230,6 +238,7 @@
                                 <div class="data-item"><span class="label">Delivery Location</span><span class="value s-loc">${location || 'N/A'}</span></div>
                                 <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value s-budget">${budget || 'Contact for Quote'}</span></div>
                             </div>
+                            <a href="tel:6472046883" class="claim-btn">📞 Claim Bounty: Call 647-204-6883</a>
                         </li>`;
                 });
 
