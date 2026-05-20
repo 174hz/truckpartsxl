@@ -84,21 +84,24 @@
             const idxYear     = headers.findIndex(h => h === 'year' || h.includes('model year'));
             const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
             const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number'));
-            const idxLocation = headers.findIndex(h => h === 'location' || h.includes('delivery'));
+            const idxLocation = headers.findIndex(h => h === 'location' || h.includes('delivery') || h.includes('city'));
             const idxBudget   = headers.findIndex(h => h === 'budget' || h.includes('target'));
             const idxBoost    = headers.findIndex(h => h.includes('boost') || h.includes('priority'));
 
             let totalRendered = 0;
+            const dataRows = data.slice(1);
 
-            for (let i = 1; i < data.length; i++) {
-                const row = data[i];
-                const location = idxLocation !== -1 ? row[idxLocation] : '';
-                
-                // Specific filter ensuring only Canadian/Ontario shipping terminals are processed
+            dataRows.forEach(row => {
+                const location = idxLocation !== -1 && row[idxLocation] ? row[idxLocation] : '';
                 const locLower = location.toLowerCase();
-                const isOntario = locLower.includes('on') || locLower.includes('toronto') || locLower.includes('peterborough') || locLower.includes('oshawa') || locLower.includes('millbrook');
                 
-                if (!isOntario && i > 3) continue; // Includes first entries for comprehensive staging matrix
+                const isOntario = locLower.includes('on') || 
+                                  locLower.includes('toronto') || 
+                                  locLower.includes('peterborough') || 
+                                  locLower.includes('oshawa') || 
+                                  locLower.includes('millbrook');
+                
+                if (!isOntario) return;
 
                 const partName = idxPartName !== -1 ? row[idxPartName] : 'Component Assembly';
                 const make     = idxMake     !== -1 ? row[idxMake]     : '';
@@ -120,7 +123,7 @@
                         <div class="data-grid">
                             <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">${oem}</span></div>
                             <div class="data-item"><span class="label">Category Component</span><span class="value">${category}</span></div>
-                            <div class="data-item"><span class="label">Delivery Location</span><span class="value">${location || 'Ontario Terminal'}</span></div>
+                            <div class="data-item"><span class="label">Delivery Location</span><span class="value">${location}</span></div>
                             <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
                         </div>
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
@@ -129,7 +132,8 @@
                         </a>
                     </li>`;
                 gridContainer.insertAdjacentHTML('beforeend', html);
-            }
+            });
+
             if (totalRendered === 0) {
                 gridContainer.innerHTML = '<li class="no-results">No active local Ontario requests listed.</li>';
             }
