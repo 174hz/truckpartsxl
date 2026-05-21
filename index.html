@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruckPartsXL | Heavy-Duty Sourcing Board</title>
+    <title>TruckPartsXL | Heavy-Duty Sourcing Marketplace</title>
     <style>
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -14,7 +14,7 @@
         }
         .container { max-width: 1200px; margin: 0 auto; }
         
-        /* Fixed Top Navigation Bar System */
+        /* Navigation Network Links */
         nav { 
             background: #1e293b; 
             padding: 15px; 
@@ -28,39 +28,62 @@
         nav a { color: #38bdf8; text-decoration: none; font-weight: bold; font-size: 1rem; }
         nav a:hover { text-decoration: underline; color: #7dd3fc; }
 
-        header { text-align: center; margin-bottom: 30px; }
-        h1 { margin: 0; color: #ffffff; font-size: 2.5rem; font-weight: 800; }
-        p.subtitle { color: #94a3b8; margin: 8px 0 0 0; font-size: 1.2rem; }
+        header { text-align: center; margin-bottom: 40px; padding: 10px 0; }
+        h1 { margin: 0; color: #ffffff; font-size: 2.8rem; font-weight: 800; letter-spacing: -0.05em; }
+        h1 span { color: #38bdf8; }
+        p.subtitle { color: #94a3b8; margin: 10px 0 0 0; font-size: 1.25rem; font-weight: 500; }
         
-        /* Green Submission Form Block */
-        .form-section {
+        /* Double-Sided Value Proposition Grid */
+        .marketplace-split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .market-card {
             background: #1e293b;
-            border: 2px solid #38bdf8;
             border-radius: 12px;
             padding: 30px;
-            margin-bottom: 40px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .form-section h2 { margin-top: 0; color: #ffffff; }
-        .form-section p { color: #94a3b8; margin-bottom: 20px; }
-        .submit-btn {
-            display: inline-block;
-            background: #22c55e;
-            color: #ffffff;
-            padding: 15px 30px;
+        .buyer-zone { border: 2px solid #22c55e; } /* Green Highlights for Demand Side */
+        .seller-zone { border: 2px solid #38bdf8; } /* Blue Highlights for Supply Side */
+        
+        .market-card h2 { margin-top: 0; font-size: 1.6rem; color: #ffffff; }
+        .market-card p { color: #94a3b8; font-size: 1.05rem; line-height: 1.5; margin-bottom: 25px; }
+        
+        /* Explicit Action Buttons */
+        .action-btn {
+            display: block;
+            text-align: center;
+            padding: 16px;
             border-radius: 8px;
-            font-weight: bold;
+            font-weight: 800;
             font-size: 1.1rem;
             text-decoration: none;
+            transition: background 0.15s ease;
         }
-        .submit-btn:hover { background: #16a34a; }
+        .btn-buyer { background: #22c55e; color: #ffffff; }
+        .btn-buyer:hover { background: #16a34a; }
+        .btn-seller { background: transparent; border: 2px solid #38bdf8; color: #38bdf8; }
+        .btn-seller:hover { background: rgba(56, 189, 248, 0.1); }
 
-        /* Core Bounty Cards Grid Design */
+        /* Sourcing Board Section Header */
+        .board-title-area {
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        .board-title-area h2 { margin: 0; font-size: 1.5rem; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+
+        /* Dynamic Bounty Board Grid */
         .bounty-grid { 
             list-style: none; 
             padding: 0; 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); 
             gap: 24px; 
         }
         .post-card { 
@@ -80,7 +103,6 @@
         .value { font-weight: 700; color: #cbd5e1; }
         .budget-value { color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 6px; border-radius: 4px; }
         
-        /* Direct Action Click-to-Call/Match Button */
         .claim-btn { 
             display: block; 
             text-align: center; 
@@ -93,6 +115,7 @@
             text-decoration: none; 
         }
         .claim-btn:hover { background: #7dd3fc; }
+        .status-message { text-align: center; padding: 44px; color: #94a3b8; font-style: italic; grid-column: 1 / -1; }
     </style>
 </head>
 <body>
@@ -104,46 +127,143 @@
         </nav>
 
         <header>
-            <h1>TruckPartsXL Sourcing Board</h1>
-            <p class="subtitle">Live Heavy-Duty Fleet Demands & Active Bounties</p>
+            <h1>TruckParts<span>XL</span></h1>
+            <p class="subtitle">The Heavy-Duty Fleet Sourcing & Procurement Network</p>
         </header>
 
-        <div class="form-section">
-            <h2>Have a Heavy-Duty Part to List?</h2>
-            <p>Submit your availability details directly to our procurement network dashboard.</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform" target="_blank" class="submit-btn">
-                ➕ Launch Part Submission Form
-            </a>
+        <div class="marketplace-split">
+            
+            <div class="market-card buyer-zone">
+                <div>
+                    <h2>Looking for Heavy-Duty Truck Parts?</h2>
+                    <p>Post your parts request for free and let our proprietary system look for matching inventory from our continental-wide salvage and dealer network.</p>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform" target="_blank" class="action-btn btn-buyer">
+                    ➕ Post Your Parts Request Free
+                </a>
+            </div>
+
+            <div class="market-card seller-zone">
+                <div>
+                    <h2>Have Salvage Commercial Inventory?</h2>
+                    <p>Connect with our high-intent fleet buyers by joining our fulfillment network. Scan the open request pool below and secure an instant match for components you have sitting on shelves right now.</p>
+                </div>
+                <a href="#open-bounties" class="action-btn btn-seller">
+                    🔍 Browse Open Fleet Demands
+                </a>
+            </div>
+
+        </div>
+
+        <div class="board-title-area" id="open-bounties">
+            <h2>⚡ Active Live Fleet Demands & Sourcing Bounties</h2>
         </div>
         
         <ul class="bounty-grid" id="bountyGrid">
-            <li class="post-card">
-                <h3 class="part-title">Eaton Fuller 13-Speed Transmission</h3>
-                <div class="vehicle-fitment">2018 Peterbilt 579</div>
-                <div class="data-grid">
-                    <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">RTLO18913A</span></div>
-                    <div class="data-item"><span class="label">Category Component</span><span class="value">Powertrain</span></div>
-                    <div class="data-item"><span class="label">Location</span><span class="value">Peterborough, ON</span></div>
-                    <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">$4,500 CAD</span></div>
-                </div>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=RTLO18913A" target="_blank" class="claim-btn">
-                   ⚡ Secure Match: Connect with Buyer
-                </a>
-            </li>
-            <li class="post-card">
-                <h3 class="part-title">Cummins ISX15 EGR Cooler</h3>
-                <div class="vehicle-fitment">2015 Kenworth W900</div>
-                <div class="data-grid">
-                    <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">4309433EX</span></div>
-                    <div class="data-item"><span class="label">Category Component</span><span class="value">Engine Emissions</span></div>
-                    <div class="data-item"><span class="label">Location</span><span class="value">Toronto, ON</span></div>
-                    <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">$1,200 CAD</span></div>
-                </div>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=4309433EX" target="_blank" class="claim-btn">
-                   ⚡ Secure Match: Connect with Buyer
-                </a>
-            </li>
+            <li class="status-message" id="loadingState">🔄 Synching live marketplace metrics with data registry...</li>
         </ul>
     </div>
+
+    <script>
+        // Directly maps directly to sheet export parameters (Gid=0 targets your first tab sheet database)
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1X58f_e_5Y268_2G077U9FpTki79Xl8x_1p7DbyyV5w4/export?format=csv&gid=0';
+
+        document.addEventListener('DOMContentLoaded', fetchBountyBoardData);
+
+        async function fetchBountyBoardData() {
+            const gridContainer = document.getElementById('bountyGrid');
+            try {
+                const response = await fetch(CSV_URL);
+                if (!response.ok) throw new Error('Data drop disconnect error.');
+                const csvText = await response.text();
+                
+                const rows = parseCSV(csvText);
+                if (!rows || rows.length <= 1) {
+                    gridContainer.innerHTML = '<li class="status-message">No active fleet components found in registry sheet.</li>';
+                    return;
+                }
+                
+                renderBountyCards(rows);
+            } catch (error) {
+                console.error("Pipeline failure:", error);
+                gridContainer.innerHTML = '<li class="status-message" style="color: #ef4444;">⚠️ Error establishing dynamic pipeline. Ensure sheet access setting is configured to "Anyone with the link can view".</li>';
+            }
+        }
+
+        function parseCSV(text) {
+            let lines = []; let row = []; let inQuotes = false; let currentToken = '';
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i]; let nextChar = text[i+1];
+                if (char === '"') { if (inQuotes && nextChar === '"') { currentToken += '"'; i++; } else { inQuotes = !inQuotes; } }
+                else if (char === ',' && !inQuotes) { row.push(currentToken.trim()); currentToken = ''; }
+                else if ((char === '\r' || char === '\n') && !inQuotes) {
+                    if (char === '\r' && nextChar === '\n') i++;
+                    row.push(currentToken.trim());
+                    if (row.length > 0) lines.push(row);
+                    row = []; currentToken = '';
+                } else { currentToken += char; }
+            }
+            if (currentToken || row.length > 0) { row.push(currentToken.trim()); lines.push(row); }
+            return lines;
+        }
+
+        function renderBountyCards(data) {
+            const gridContainer = document.getElementById('bountyGrid');
+            gridContainer.innerHTML = '';
+
+            // Clean headers completely to guarantee match optimization
+            const headers = data[0].map(h => h.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().trim());
+            
+            const idxPartName = headers.findIndex(h => h.includes('part') || h.includes('look'));
+            const idxMake     = headers.findIndex(h => h.includes('make') || h.includes('manuf'));
+            const idxModel    = headers.findIndex(h => h.includes('model') || h.includes('seri'));
+            const idxYear     = headers.findIndex(h => h.includes('year'));
+            const idxCategory = headers.findIndex(h => h.includes('cat'));
+            const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('cast') || h.includes('num'));
+            const idxLocation = headers.findIndex(h => h.includes('loc')); 
+            const idxBudget   = headers.findIndex(h => h.includes('budg') || h.includes('targ') || h.includes('price'));
+
+            const dataRows = data.slice(1);
+            let validCards = 0;
+
+            dataRows.forEach(row => {
+                if (row.length === 0 || !row.some(val => val !== '')) return;
+
+                const getCleanVal = (idx) => (idx !== -1 && row[idx]) ? row[idx].replace(/[\"\']/g, "").trim() : 'N/A';
+                
+                const partName = idxPartName !== -1 ? getCleanVal(idxPartName) : 'HD Component Assembly';
+                const make     = getCleanVal(idxMake);
+                const model    = getCleanVal(idxModel);
+                const year     = getCleanVal(idxYear);
+                const category = idxCategory !== -1 ? getCleanVal(idxCategory) : 'Fleet Sourced';
+                const oem      = idxOem      !== -1 ? getCleanVal(idxOem)      : 'N/A';
+                const location = idxLocation !== -1 ? getCleanVal(idxLocation) : 'Registry Desk';
+                const budget   = idxBudget   !== -1 ? getCleanVal(idxBudget)   : 'Contact Desk';
+
+                validCards++;
+
+                let html = `
+                    <li class="post-card">
+                        <h3 class="part-title">${partName}</h3>
+                        <div class="vehicle-fitment">${year !== 'N/A' ? year : ''} ${make !== 'N/A' ? make : ''} ${model !== 'N/A' ? model : ''}</div>
+                        <div class="data-grid">
+                            <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">${oem}</span></div>
+                            <div class="data-item"><span class="label">Category Component</span><span class="value">${category}</span></div>
+                            <div class="data-item"><span class="label">Location</span><span class="value">${location}</span></div>
+                            <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
+                        </div>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
+                           target="_blank" class="claim-btn">
+                           ⚡ Secure Match: Connect with Buyer
+                        </a>
+                    </li>`;
+                gridContainer.insertAdjacentHTML('beforeend', html);
+            });
+
+            if (validCards === 0) {
+                gridContainer.innerHTML = '<li class="status-message">No active fleet listings found in data rows.</li>';
+            }
+        }
+    </script>
 </body>
 </html>
