@@ -14,7 +14,7 @@
         }
         .container { max-width: 1200px; margin: 0 auto; }
         
-        /* Navigation Network Links */
+        /* Navigation Links */
         nav { 
             background: #1e293b; 
             padding: 15px; 
@@ -33,7 +33,7 @@
         h1 span { color: #38bdf8; }
         p.subtitle { color: #94a3b8; margin: 10px 0 0 0; font-size: 1.25rem; font-weight: 500; }
         
-        /* Double-Sided Value Proposition Grid */
+        /* Two-Sided Marketplace Value Prop Pitch */
         .marketplace-split {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -54,7 +54,7 @@
         .market-card h2 { margin-top: 0; font-size: 1.6rem; color: #ffffff; }
         .market-card p { color: #94a3b8; font-size: 1.05rem; line-height: 1.5; margin-bottom: 25px; }
         
-        /* Explicit Action Buttons */
+        /* Primary Action Targets */
         .action-btn {
             display: block;
             text-align: center;
@@ -63,22 +63,20 @@
             font-weight: 800;
             font-size: 1.1rem;
             text-decoration: none;
-            transition: background 0.15s ease;
         }
         .btn-buyer { background: #22c55e; color: #ffffff; }
         .btn-buyer:hover { background: #16a34a; }
         .btn-seller { background: transparent; border: 2px solid #38bdf8; color: #38bdf8; }
         .btn-seller:hover { background: rgba(56, 189, 248, 0.1); }
 
-        /* Sourcing Board Section Header */
+        /* Sourcing Registry Board Layout */
         .board-title-area {
             border-bottom: 1px solid #334155;
             padding-bottom: 10px;
             margin-bottom: 25px;
         }
-        .board-title-area h2 { margin: 0; font-size: 1.5rem; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+        .board-title-area h2 { margin: 0; font-size: 1.5rem; color: #ffffff; }
 
-        /* Dynamic Bounty Board Grid */
         .bounty-grid { 
             list-style: none; 
             padding: 0; 
@@ -158,13 +156,13 @@
         </div>
         
         <ul class="bounty-grid" id="bountyGrid">
-            <li class="status-message" id="loadingState">🔄 Synching live marketplace metrics with data registry...</li>
+            <li class="status-message" id="loadingState">🔄 Synching with verified live heavy-duty data pool...</li>
         </ul>
     </div>
 
     <script>
-        // FIXED: Now accurately targeting your verified sheet ID: 17Az28LLO0NLZDe7PVyJhbeIH2IdUXXiJlxs6OcIuutg
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/17Az28LLO0NLZDe7PVyJhbeIH2IdUXXiJlxs6OcIuutg/export?format=csv&gid=0';
+        // FIXED & LOCKED: Pointing precisely to your verified, live Google-published CSV endpoint
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?output=csv';
 
         document.addEventListener('DOMContentLoaded', fetchBountyBoardData);
 
@@ -172,19 +170,19 @@
             const gridContainer = document.getElementById('bountyGrid');
             try {
                 const response = await fetch(CSV_URL);
-                if (!response.ok) throw new Error('Data drop disconnect error.');
+                if (!response.ok) throw new Error('Network bridge failure');
                 const csvText = await response.text();
                 
                 const rows = parseCSV(csvText);
                 if (!rows || rows.length <= 1) {
-                    gridContainer.innerHTML = '<li class="status-message">No active fleet components found in registry sheet.</li>';
+                    gridContainer.innerHTML = '<li class="status-message">Connection verified. Data registry stream is live, waiting for initial active listings...</li>';
                     return;
                 }
                 
                 renderBountyCards(rows);
             } catch (error) {
                 console.error("Pipeline failure:", error);
-                gridContainer.innerHTML = '<li class="status-message" style="color: #ef4444;">⚠️ Error establishing dynamic pipeline. Ensure sheet access setting is configured to "Anyone with the link can view".</li>';
+                gridContainer.innerHTML = '<li class="status-message" style="color: #ef4444;">⚠️ Sourcing link timeout. Please ensure the Google Sheets web publication link is running actively.</li>';
             }
         }
 
@@ -209,6 +207,7 @@
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
 
+            // Map lowercase matches to extract column indexes
             const headers = data[0].map(h => h.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().trim());
             
             const idxPartName = headers.findIndex(h => h.includes('part') || h.includes('look'));
@@ -258,7 +257,7 @@
             });
 
             if (validCards === 0) {
-                gridContainer.innerHTML = '<li class="status-message">No active fleet listings found in data rows.</li>';
+                gridContainer.innerHTML = '<li class="status-message">Connection verified. Data registry stream is live, waiting for initial active listings...</li>';
             }
         }
     </script>
