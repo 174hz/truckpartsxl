@@ -66,7 +66,6 @@
         .btn-seller { background: transparent; border: 2px solid #38bdf8; color: #38bdf8; }
         .btn-seller:hover { background: rgba(56, 189, 248, 0.1); }
 
-        /* Dynamic Search Filter Bar Styles */
         .search-container {
             margin-bottom: 30px;
             display: flex;
@@ -110,7 +109,6 @@
             flex-direction: column; 
             justify-content: space-between; 
         }
-        /* CSS Class used to dynamically hide items matching search filters */
         .hidden-bounty {
             display: none !important;
         }
@@ -190,7 +188,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchBountyBoardData();
-            // Attach input event listener for dynamic search filtering
             document.getElementById('boardSearch').addEventListener('input', filterBountyBoard);
         });
 
@@ -267,6 +264,7 @@
 
                 validCards++;
 
+                // FIXED: Routing directly to Form 2 ("Secure Sourcing Match") and passing the OEM value
                 let html = `
                     <li class="post-card" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()} ${year.toLowerCase()} ${location.toLowerCase()}">
                         <h3 class="part-title">${partName}</h3>
@@ -278,7 +276,7 @@
                             <div class="data-item"><span class="label">Location</span><span class="value">${location}</span></div>
                             <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
                         </div>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?viewform" 
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
                            target="_blank" class="claim-btn">
                            ⚡ Secure Match: Connect with Buyer
                         </a>
@@ -291,7 +289,6 @@
             }
         }
 
-        // Live filtering logic mapping inputs directly to data cards
         function filterBountyBoard() {
             const query = this.value.toLowerCase().trim();
             const cards = document.querySelectorAll('#bountyGrid .post-card');
