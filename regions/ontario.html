@@ -5,31 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TruckPartsXL | Golden Horseshoe & Ontario Boards</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #fdfdfd; color: #2c3e50; margin: 0; padding: 20px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
-        nav { text-align: center; margin-bottom: 20px; padding: 10px; background: #f1f5f9; border-radius: 8px; }
-        nav a { color: #0f766e; text-decoration: none; font-weight: 600; margin: 0 15px; }
-        nav a:hover { text-decoration: underline; }
-        header { text-align: center; margin-bottom: 40px; padding: 25px 0; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; }
-        h1 { margin: 0; color: #0f172a; font-size: 2.4rem; font-weight: 800; }
-        p.subtitle { color: #64748b; margin: 8px 0 0 0; font-size: 1.1rem; }
+        
+        /* Universal Navigation Style */
+        nav { background: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; gap: 20px; justify-content: center; border: 1px solid #334155; }
+        nav a { color: #38bdf8; text-decoration: none; font-weight: bold; font-size: 1rem; }
+        nav a:hover { text-decoration: underline; color: #7dd3fc; }
+
+        header { text-align: center; margin-bottom: 40px; padding: 25px 0; }
+        h1 { margin: 0; color: #ffffff; font-size: 2.4rem; font-weight: 800; }
+        p.subtitle { color: #94a3b8; margin: 8px 0 0 0; font-size: 1.1rem; }
         .bounty-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-        .post-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .post-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+        .part-title { margin: 0 0 6px 0; font-size: 1.35rem; color: #ffffff; font-weight: 700; }
+        .vehicle-fitment { color: #94a3b8; font-weight: 600; margin-bottom: 18px; font-size: 0.95rem; }
         .data-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 22px; }
-        .data-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding-bottom: 6px; border-bottom: 1px solid #f1f5f9; }
-        .label { color: #94a3b8; }
-        .value { font-weight: 700; color: #334155; }
-        .budget-value { color: #0f766e; background: #ccfbf1; padding: 2px 6px; border-radius: 4px; }
-        .claim-btn { display: block; text-align: center; background: #1e293b; color: #fff; padding: 14px; margin-top: auto; border-radius: 8px; font-weight: 700; text-decoration: none; }
-        .claim-btn:hover { background: #0f172a; }
-        .no-results { text-align: center; padding: 4px; color: #64748b; font-style: italic; grid-column: 1 / -1; }
+        .data-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding-bottom: 6px; border-bottom: 1px solid #334155; }
+        .label { color: #64748b; }
+        .value { font-weight: 700; color: #cbd5e1; }
+        .budget-value { color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 6px; border-radius: 4px; }
+        .claim-btn { display: block; text-align: center; background: #38bdf8; color: #0f172a; padding: 14px; margin-top: auto; border-radius: 8px; font-weight: 700; text-decoration: none; transition: background 0.15s ease; }
+        .claim-btn:hover { background: #7dd3fc; }
+        .no-results { text-align: center; padding: 4px; color: #94a3b8; font-style: italic; grid-column: 1 / -1; }
     </style>
 </head>
 <body>
     <div class="container">
         <nav>
-            <a href="../board.html">🏠 Back to Global Home</a>
-            <a href="rust-belt.html">🇺🇸 Switch to Rust Belt Board</a>
+            <a href="../board.html">🏠 Global Home</a>
+            <a href="index.html">🗺️ Regional Pipelines</a>
+            <a href="ontario.html">🇨🇦 Ontario Board</a>
+            <a href="rust-belt.html">🇺🇸 Rust Belt Board</a>
         </nav>
 
         <header>
