@@ -85,7 +85,6 @@
             if (!gridContainer || !data || data.length === 0) return;
             gridContainer.innerHTML = '';
 
-            // Repaired Header Mapping (Removes quotes purely for locating indices safely)
             const headers = data[0].map(h => h.replace(/["']/g, "").toLowerCase().trim());
             
             const idxPartName = headers.findIndex(h => h === 'part' || h === 'part name' || h.includes('looking for'));
@@ -101,7 +100,6 @@
             const dataRows = data.slice(1);
 
             dataRows.forEach(row => {
-                // Safely read raw row values and strip internal quote wrapping safely
                 const getVal = (idx) => (idx !== -1 && row[idx]) ? row[idx].replace(/["']/g, "").trim() : '';
                 
                 const location = getVal(idxLocation);
@@ -150,3 +148,4 @@
     </script>
 </body>
 </html>
+                
