@@ -7,12 +7,9 @@
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
-        
-        /* Universal Navigation Style */
         nav { background: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; gap: 20px; justify-content: center; border: 1px solid #334155; }
         nav a { color: #38bdf8; text-decoration: none; font-weight: bold; font-size: 1rem; }
         nav a:hover { text-decoration: underline; color: #7dd3fc; }
-
         header { text-align: center; margin-bottom: 40px; padding: 25px 0; }
         h1 { margin: 0; color: #ffffff; font-size: 2.4rem; font-weight: 800; }
         p.subtitle { color: #94a3b8; margin: 8px 0 0 0; font-size: 1.1rem; }
@@ -85,10 +82,11 @@
 
         function renderBountyCards(data) {
             const gridContainer = document.getElementById('bountyGrid');
-            if (!gridContainer) return;
+            if (!gridContainer || !data || data.length === 0) return;
             gridContainer.innerHTML = '';
 
-            const headers = data[0].map(h => h.toLowerCase().replace(/["']/g, "").trim());
+            // Repaired Header Mapping (Removes quotes purely for locating indices safely)
+            const headers = data[0].map(h => h.replace(/["']/g, "").toLowerCase().trim());
             
             const idxPartName = headers.findIndex(h => h === 'part' || h === 'part name' || h.includes('looking for'));
             const idxMake     = headers.findIndex(h => h === 'make' || h.includes('manufacturer'));
@@ -103,7 +101,10 @@
             const dataRows = data.slice(1);
 
             dataRows.forEach(row => {
-                const location = (idxLocation !== -1 && row[idxLocation]) ? row[idxLocation] : '';
+                // Safely read raw row values and strip internal quote wrapping safely
+                const getVal = (idx) => (idx !== -1 && row[idx]) ? row[idx].replace(/["']/g, "").trim() : '';
+                
+                const location = getVal(idxLocation);
                 const locLower = location.toLowerCase();
                 
                 const isOntario = locLower.includes('on') || 
@@ -114,13 +115,13 @@
                 
                 if (!isOntario) return;
 
-                const partName = idxPartName !== -1 ? row[idxPartName] : 'Component Assembly';
-                const make     = idxMake     !== -1 ? row[idxMake]     : '';
-                const model    = idxModel    !== -1 ? row[idxModel]    : '';
-                const year     = idxYear     !== -1 ? row[idxYear]     : '';
-                const category = idxCategory !== -1 ? row[idxCategory] : 'Fleet Mechanics';
-                const oem      = idxOem      !== -1 ? row[idxOem]      : 'N/A';
-                const budget   = idxBudget   !== -1 ? row[idxBudget]   : 'Contact Desk';
+                const partName = idxPartName !== -1 ? getVal(idxPartName) : 'Component Assembly';
+                const make     = getVal(idxMake);
+                const model    = getVal(idxModel);
+                const year     = getVal(idxYear);
+                const category = idxCategory !== -1 ? getVal(idxCategory) : 'Fleet Mechanics';
+                const oem      = idxOem      !== -1 ? getVal(idxOem)      : 'N/A';
+                const budget   = idxBudget   !== -1 ? getVal(idxBudget)   : 'Contact Desk';
 
                 totalRendered++;
 
