@@ -48,8 +48,8 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        .buyer-zone { border: 2px solid #22c55e; } /* Green Highlights for Demand Side */
-        .seller-zone { border: 2px solid #38bdf8; } /* Blue Highlights for Supply Side */
+        .buyer-zone { border: 2px solid #22c55e; } 
+        .seller-zone { border: 2px solid #38bdf8; } 
         
         .market-card h2 { margin-top: 0; font-size: 1.6rem; color: #ffffff; }
         .market-card p { color: #94a3b8; font-size: 1.05rem; line-height: 1.5; margin-bottom: 25px; }
@@ -132,7 +132,6 @@
         </header>
 
         <div class="marketplace-split">
-            
             <div class="market-card buyer-zone">
                 <div>
                     <h2>Looking for Heavy-Duty Truck Parts?</h2>
@@ -152,7 +151,6 @@
                     🔍 Browse Open Fleet Demands
                 </a>
             </div>
-
         </div>
 
         <div class="board-title-area" id="open-bounties">
@@ -165,8 +163,8 @@
     </div>
 
     <script>
-        // Directly maps directly to sheet export parameters (Gid=0 targets your first tab sheet database)
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1X58f_e_5Y268_2G077U9FpTki79Xl8x_1p7DbyyV5w4/export?format=csv&gid=0';
+        // FIXED: Now accurately targeting your verified sheet ID: 17Az28LLO0NLZDe7PVyJhbeIH2IdUXXiJlxs6OcIuutg
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/17Az28LLO0NLZDe7PVyJhbeIH2IdUXXiJlxs6OcIuutg/export?format=csv&gid=0';
 
         document.addEventListener('DOMContentLoaded', fetchBountyBoardData);
 
@@ -211,7 +209,6 @@
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
 
-            // Clean headers completely to guarantee match optimization
             const headers = data[0].map(h => h.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().trim());
             
             const idxPartName = headers.findIndex(h => h.includes('part') || h.includes('look'));
