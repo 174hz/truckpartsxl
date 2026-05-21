@@ -66,6 +66,27 @@
         .btn-seller { background: transparent; border: 2px solid #38bdf8; color: #38bdf8; }
         .btn-seller:hover { background: rgba(56, 189, 248, 0.1); }
 
+        /* Dynamic Search Filter Bar Styles */
+        .search-container {
+            margin-bottom: 30px;
+            display: flex;
+            width: 100%;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+        .search-bar:focus {
+            border-color: #38bdf8;
+        }
+
         .board-title-area {
             border-bottom: 1px solid #334155;
             padding-bottom: 10px;
@@ -88,6 +109,10 @@
             display: flex; 
             flex-direction: column; 
             justify-content: space-between; 
+        }
+        /* CSS Class used to dynamically hide items matching search filters */
+        .hidden-bounty {
+            display: none !important;
         }
         .part-title { margin: 0 0 6px 0; font-size: 1.35rem; color: #ffffff; font-weight: 700; }
         .vehicle-fitment { color: #94a3b8; font-weight: 600; margin-bottom: 18px; font-size: 0.95rem; }
@@ -150,6 +175,10 @@
         <div class="board-title-area" id="open-bounties">
             <h2>⚡ Active Live Fleet Demands & Sourcing Bounties</h2>
         </div>
+
+        <div class="search-container">
+            <input type="text" id="boardSearch" class="search-bar" placeholder="🔍 Search by Part, Make, Model, VIN, or OEM Number...">
+        </div>
         
         <ul class="bounty-grid" id="bountyGrid">
             <li class="status-message" id="loadingState">🔄 Synching with verified live heavy-duty data pool...</li>
@@ -159,7 +188,11 @@
     <script>
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?output=csv';
 
-        document.addEventListener('DOMContentLoaded', fetchBountyBoardData);
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchBountyBoardData();
+            // Attach input event listener for dynamic search filtering
+            document.getElementById('boardSearch').addEventListener('input', filterBountyBoard);
+        });
 
         async function fetchBountyBoardData() {
             const gridContainer = document.getElementById('bountyGrid');
@@ -202,7 +235,6 @@
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
 
-            // Clean headers completely to handle special formatting characters like parentheses 
             const headers = data[0].map(h => h.toLowerCase().trim());
             
             const idxPartName = headers.findIndex(h => h.includes('part name'));
@@ -236,7 +268,7 @@
                 validCards++;
 
                 let html = `
-                    <li class="post-card">
+                    <li class="post-card" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()} ${year.toLowerCase()} ${location.toLowerCase()}">
                         <h3 class="part-title">${partName}</h3>
                         <div class="vehicle-fitment">${year !== 'N/A' ? year : ''} ${make !== 'N/A' ? make : ''} ${model !== 'N/A' ? model : ''}</div>
                         <div class="data-grid">
@@ -257,6 +289,21 @@
             if (validCards === 0) {
                 gridContainer.innerHTML = '<li class="status-message">Connection verified. Stream live, waiting for active data rows...</li>';
             }
+        }
+
+        // Live filtering logic mapping inputs directly to data cards
+        function filterBountyBoard() {
+            const query = this.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('#bountyGrid .post-card');
+            
+            cards.forEach(card => {
+                const searchContent = card.getAttribute('data-searchable') || '';
+                if (searchContent.includes(query)) {
+                    card.classList.remove('hidden-bounty');
+                } else {
+                    card.classList.add('hidden-bounty');
+                }
+            });
         }
     </script>
 </body>
