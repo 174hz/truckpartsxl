@@ -55,7 +55,22 @@
             }
         }
 
-        ... [rest of parseCSV function remains identical] ...
+        function parseCSV(text) {
+            let lines = []; let row = []; let inQuotes = false; let currentToken = '';
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i]; let nextChar = text[i+1];
+                if (char === '"') { if (inQuotes && nextChar === '"') { currentToken += '"'; i++; } else { inQuotes = !inQuotes; } }
+                else if (char === ',' && !inQuotes) { row.push(currentToken.trim()); currentToken = ''; }
+                else if ((char === '\r' || char === '\n') && !inQuotes) {
+                    if (char === '\r' && nextChar === '\n') i++;
+                    row.push(currentToken.trim());
+                    if (row.length > 0 && row.some(c => c !== '')) lines.push(row);
+                    row = []; currentToken = '';
+                } else { currentToken += char; }
+            }
+            if (currentToken || row.length > 0) { row.push(currentToken.trim()); lines.push(row); }
+            return lines;
+        }
 
         function renderBountyCards(data) {
             const gridContainer = document.getElementById('bountyGrid');
@@ -69,7 +84,7 @@
             const idxYear     = headers.findIndex(h => h === 'year' || h.includes('model year'));
             const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
             const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number'));
-            const idxLocation = headers.findIndex(h => h === 'location' || h === 'delivery location' || h.includes('city'));
+            const idxLocation = headers.findIndex(h => h === 'location'); 
             const idxBudget   = headers.findIndex(h => h === 'budget' || h.includes('target'));
             const idxBoost    = headers.findIndex(h => h.includes('boost') || h.includes('priority'));
 
@@ -77,7 +92,7 @@
             const dataRows = data.slice(1);
 
             dataRows.forEach(row => {
-                const location = idxLocation !== -1 && row[idxLocation] ? row[idxLocation] : '';
+                const location = (idxLocation !== -1 && row[idxLocation]) ? row[idxLocation] : '';
                 const locLower = location.toLowerCase();
                 
                 const isRustBelt = locLower.includes('mi') || 
