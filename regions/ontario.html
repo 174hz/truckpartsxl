@@ -55,22 +55,7 @@
             }
         }
 
-        function parseCSV(text) {
-            let lines = []; let row = []; let inQuotes = false; let currentToken = '';
-            for (let i = 0; i < text.length; i++) {
-                let char = text[i]; let nextChar = text[i+1];
-                if (char === '"') { if (inQuotes && nextChar === '"') { currentToken += '"'; i++; } else { inQuotes = !inQuotes; } }
-                else if (char === ',' && !inQuotes) { row.push(currentToken.trim()); currentToken = ''; }
-                else if ((char === '\r' || char === '\n') && !inQuotes) {
-                    if (char === '\r' && nextChar === '\n') i++;
-                    row.push(currentToken.trim());
-                    if (row.length > 0 && row.some(c => c !== '')) lines.push(row);
-                    row = []; currentToken = '';
-                } else { currentToken += char; }
-            }
-            if (currentToken || row.length > 0) { row.push(currentToken.trim()); lines.push(row); }
-            return lines;
-        }
+        ... [rest of parseCSV function remains identical] ...
 
         function renderBountyCards(data) {
             const gridContainer = document.getElementById('bountyGrid');
@@ -84,7 +69,7 @@
             const idxYear     = headers.findIndex(h => h === 'year' || h.includes('model year'));
             const idxCategory = headers.findIndex(h => h === 'category' || h.includes('component'));
             const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting') || h.includes('number'));
-            const idxLocation = headers.findIndex(h => h === 'location' || h.includes('delivery') || h.includes('city'));
+            const idxLocation = headers.findIndex(h => h === 'location' || h === 'delivery location' || h.includes('city'));
             const idxBudget   = headers.findIndex(h => h === 'budget' || h.includes('target'));
             const idxBoost    = headers.findIndex(h => h.includes('boost') || h.includes('priority'));
 
@@ -123,7 +108,7 @@
                         <div class="data-grid">
                             <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">${oem}</span></div>
                             <div class="data-item"><span class="label">Category Component</span><span class="value">${category}</span></div>
-                            <div class="data-item"><span class="label">Delivery Location</span><span class="value">${location}</span></div>
+                            <div class="data-item"><span class="label">Location</span><span class="value">${location}</span></div>
                             <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
                         </div>
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
