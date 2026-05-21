@@ -5,23 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TruckPartsXL | Regional Sourcing Hubs</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 40px 20px; text-align: center; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; text-align: center; }
         .container { max-width: 800px; margin: 0 auto; }
-        h1 { font-size: 2.5rem; margin-bottom: 10px; color: #fff; font-weight: 800; }
-        p { color: #94a3b8; font-size: 1.2rem; margin-bottom: 40px; }
+        
+        /* Universal Navigation Style */
+        nav { background: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; gap: 20px; justify-content: center; border: 1px solid #334155; }
+        nav a { color: #38bdf8; text-decoration: none; font-weight: bold; font-size: 1rem; }
+        nav a:hover { text-decoration: underline; color: #7dd3fc; }
+
+        h1 { font-size: 2.5rem; margin-top: 20px; margin-bottom: 10px; color: #fff; font-weight: 800; }
+        p.desc { color: #94a3b8; font-size: 1.2rem; margin-bottom: 40px; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
         .menu-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 30px; text-decoration: none; color: #fff; transition: all 0.2s ease; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         .menu-card:hover { transform: translateY(-4px); border-color: #38bdf8; background: #1e293b; box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.1); }
         .menu-card h2 { margin: 0 0 10px 0; font-size: 1.5rem; color: #38bdf8; }
         .menu-card p { margin: 0; font-size: 0.95rem; color: #94a3b8; line-height: 1.5; }
-        .back-btn { display: inline-block; margin-top: 40px; color: #64748b; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.15s; }
-        .back-btn:hover { color: #94a3b8; }
     </style>
 </head>
 <body>
     <div class="container">
+        <nav>
+            <a href="../board.html">🏠 Global Home</a>
+            <a href="index.html">🗺️ Regional Pipelines</a>
+            <a href="ontario.html">🇨🇦 Ontario Board</a>
+            <a href="rust-belt.html">🇺🇸 Rust Belt Board</a>
+        </nav>
+
         <h1>Regional Sourcing Hubs</h1>
-        <p>Select a tactical freight corridor to view active regional heavy-duty buyer bounties.</p>
+        <p class="desc">Select a tactical freight corridor to view active regional heavy-duty buyer bounties.</p>
         
         <div class="menu-grid">
             <a href="ontario.html" class="menu-card">
@@ -34,9 +45,6 @@
                 <p>Access cross-border manufacturing supply chains across MI, OH, PA, NY, and IL.</p>
             </a>
         </div>
-        
-        <br>
-        <a href="../board.html" class="back-btn">← Return to Master Global Board</a>
     </div>
 </body>
 </html>
