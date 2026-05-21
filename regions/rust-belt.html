@@ -63,7 +63,7 @@
             }
         }
 
-        bin rows formatting function parseCSV(text) {
+        function parseCSV(text) {
             let lines = []; let row = []; let inQuotes = false; let currentToken = '';
             for (let i = 0; i < text.length; i++) {
                 let char = text[i]; let nextChar = text[i+1];
