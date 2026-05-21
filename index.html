@@ -14,7 +14,6 @@
         }
         .container { max-width: 1200px; margin: 0 auto; }
         
-        /* Navigation Links */
         nav { 
             background: #1e293b; 
             padding: 15px; 
@@ -33,7 +32,6 @@
         h1 span { color: #38bdf8; }
         p.subtitle { color: #94a3b8; margin: 10px 0 0 0; font-size: 1.25rem; font-weight: 500; }
         
-        /* Two-Sided Marketplace Value Prop Pitch */
         .marketplace-split {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -54,7 +52,6 @@
         .market-card h2 { margin-top: 0; font-size: 1.6rem; color: #ffffff; }
         .market-card p { color: #94a3b8; font-size: 1.05rem; line-height: 1.5; margin-bottom: 25px; }
         
-        /* Primary Action Targets */
         .action-btn {
             display: block;
             text-align: center;
@@ -69,7 +66,6 @@
         .btn-seller { background: transparent; border: 2px solid #38bdf8; color: #38bdf8; }
         .btn-seller:hover { background: rgba(56, 189, 248, 0.1); }
 
-        /* Sourcing Registry Board Layout */
         .board-title-area {
             border-bottom: 1px solid #334155;
             padding-bottom: 10px;
@@ -98,7 +94,7 @@
         .data-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 22px; }
         .data-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding-bottom: 6px; border-bottom: 1px solid #334155; }
         .label { color: #64748b; }
-        .value { font-weight: 700; color: #cbd5e1; }
+        .value { font-weight: 700; color: #cbd5e1; word-break: break-all; }
         .budget-value { color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 6px; border-radius: 4px; }
         
         .claim-btn { 
@@ -135,7 +131,7 @@
                     <h2>Looking for Heavy-Duty Truck Parts?</h2>
                     <p>Post your parts request for free and let our proprietary system look for matching inventory from our continental-wide salvage and dealer network.</p>
                 </div>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform" target="_blank" class="action-btn btn-buyer">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform" target="_blank" class="action-btn btn-buyer">
                     ➕ Post Your Parts Request Free
                 </a>
             </div>
@@ -161,7 +157,6 @@
     </div>
 
     <script>
-        // FIXED & LOCKED: Pointing precisely to your verified, live Google-published CSV endpoint
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?output=csv';
 
         document.addEventListener('DOMContentLoaded', fetchBountyBoardData);
@@ -175,14 +170,14 @@
                 
                 const rows = parseCSV(csvText);
                 if (!rows || rows.length <= 1) {
-                    gridContainer.innerHTML = '<li class="status-message">Connection verified. Data registry stream is live, waiting for initial active listings...</li>';
+                    gridContainer.innerHTML = '<li class="status-message">Connection verified. Stream live, waiting for active data rows...</li>';
                     return;
                 }
                 
                 renderBountyCards(rows);
             } catch (error) {
                 console.error("Pipeline failure:", error);
-                gridContainer.innerHTML = '<li class="status-message" style="color: #ef4444;">⚠️ Sourcing link timeout. Please ensure the Google Sheets web publication link is running actively.</li>';
+                gridContainer.innerHTML = '<li class="status-message" style="color: #ef4444;">⚠️ Sourcing link timeout. Please verify spreadsheet publication status.</li>';
             }
         }
 
@@ -207,17 +202,18 @@
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
 
-            // Map lowercase matches to extract column indexes
-            const headers = data[0].map(h => h.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().trim());
+            // Clean headers completely to handle special formatting characters like parentheses 
+            const headers = data[0].map(h => h.toLowerCase().trim());
             
-            const idxPartName = headers.findIndex(h => h.includes('part') || h.includes('look'));
-            const idxMake     = headers.findIndex(h => h.includes('make') || h.includes('manuf'));
-            const idxModel    = headers.findIndex(h => h.includes('model') || h.includes('seri'));
+            const idxPartName = headers.findIndex(h => h.includes('part name'));
+            const idxOem      = headers.findIndex(h => h.includes('oem number'));
+            const idxVin      = headers.findIndex(h => h.includes('vin'));
+            const idxCategory = headers.findIndex(h => h.includes('category'));
             const idxYear     = headers.findIndex(h => h.includes('year'));
-            const idxCategory = headers.findIndex(h => h.includes('cat'));
-            const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('cast') || h.includes('num'));
-            const idxLocation = headers.findIndex(h => h.includes('loc')); 
-            const idxBudget   = headers.findIndex(h => h.includes('budg') || h.includes('targ') || h.includes('price'));
+            const idxMake     = headers.findIndex(h => h.includes('make'));
+            const idxModel    = headers.findIndex(h => h.includes('model'));
+            const idxLocation = headers.findIndex(h => h.includes('location')); 
+            const idxBudget   = headers.findIndex(h => h.includes('budget'));
 
             const dataRows = data.slice(1);
             let validCards = 0;
@@ -227,13 +223,14 @@
 
                 const getCleanVal = (idx) => (idx !== -1 && row[idx]) ? row[idx].replace(/[\"\']/g, "").trim() : 'N/A';
                 
-                const partName = idxPartName !== -1 ? getCleanVal(idxPartName) : 'HD Component Assembly';
+                const partName = idxPartName !== -1 ? getCleanVal(idxPartName) : 'HD Component';
+                const oem      = idxOem      !== -1 ? getCleanVal(idxOem)      : 'N/A';
+                const vin      = idxVin      !== -1 ? getCleanVal(idxVin)      : 'N/A';
+                const category = idxCategory !== -1 ? getCleanVal(idxCategory) : 'N/A';
+                const year     = getCleanVal(idxYear);
                 const make     = getCleanVal(idxMake);
                 const model    = getCleanVal(idxModel);
-                const year     = getCleanVal(idxYear);
-                const category = idxCategory !== -1 ? getCleanVal(idxCategory) : 'Fleet Sourced';
-                const oem      = idxOem      !== -1 ? getCleanVal(idxOem)      : 'N/A';
-                const location = idxLocation !== -1 ? getCleanVal(idxLocation) : 'Registry Desk';
+                const location = idxLocation !== -1 ? getCleanVal(idxLocation) : 'N/A';
                 const budget   = idxBudget   !== -1 ? getCleanVal(idxBudget)   : 'Contact Desk';
 
                 validCards++;
@@ -244,11 +241,12 @@
                         <div class="vehicle-fitment">${year !== 'N/A' ? year : ''} ${make !== 'N/A' ? make : ''} ${model !== 'N/A' ? model : ''}</div>
                         <div class="data-grid">
                             <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">${oem}</span></div>
+                            <div class="data-item"><span class="label">VIN Number</span><span class="value">${vin}</span></div>
                             <div class="data-item"><span class="label">Category Component</span><span class="value">${category}</span></div>
                             <div class="data-item"><span class="label">Location</span><span class="value">${location}</span></div>
                             <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
                         </div>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?viewform" 
                            target="_blank" class="claim-btn">
                            ⚡ Secure Match: Connect with Buyer
                         </a>
@@ -257,7 +255,7 @@
             });
 
             if (validCards === 0) {
-                gridContainer.innerHTML = '<li class="status-message">Connection verified. Data registry stream is live, waiting for initial active listings...</li>';
+                gridContainer.innerHTML = '<li class="status-message">Connection verified. Stream live, waiting for active data rows...</li>';
             }
         }
     </script>
