@@ -77,7 +77,9 @@
             if (!gridContainer) return;
             gridContainer.innerHTML = '';
 
-            const headers = data[0].map(h => h.toLowerCase().trim());
+            // Strips out double/single quotes to handle CSV text exports perfectly
+            const headers = data[0].map(h => h.toLowerCase().replace(/["']/g, "").trim());
+            
             const idxPartName = headers.findIndex(h => h === 'part' || h === 'part name' || h.includes('looking for'));
             const idxMake     = headers.findIndex(h => h === 'make' || h.includes('manufacturer'));
             const idxModel    = headers.findIndex(h => h === 'model' || h.includes('series'));
