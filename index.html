@@ -259,7 +259,7 @@
                 }
                 renderBountyCards(rows);
             } catch (error) {
-                console.error(error);
+                console.error("Sync Error Details: ", error);
                 gridContainer.innerHTML = '<li class="status-message" style="color: #ef4444;">⚠️ Sourcing link timeout.</li>';
             }
         }
@@ -270,12 +270,8 @@
                 let char = text[i]; let nextChar = text[i+1];
                 if (char === '"') { if (inQuotes && nextChar === '"') { currentToken += '"'; i++; } else { inQuotes = !inQuotes; } }
                 else if (char === ',' && !inQuotes) { row.push(currentToken.trim()); currentToken = ''; }
-                else if ((char === '
-' || char === '
-') && !inQuotes) {
-                    if (char === '
-' && nextChar === '
-') i++;
+                else if ((char === '\r' || char === '\n') && !inQuotes) {
+                    if (char === '\r' && nextChar === '\n') i++;
                     row.push(currentToken.trim());
                     if (row.length > 0) lines.push(row);
                     row = []; currentToken = '';
@@ -315,7 +311,7 @@
             dataRows.forEach(row => {
                 if (row.length === 0 || !row.some(val => val !== '')) return;
 
-                const getCleanVal = (idx) => (idx !== -1 && row[idx]) ? row[idx].replace(/["']/g, "").trim() : 'N/A';
+                const getCleanVal = (idx) => (idx !== -1 && row[idx]) ? row[idx].replace(/[\"\']/g, "").trim() : 'N/A';
                 
                 const partName = idxPartName !== -1 ? getCleanVal(idxPartName) : 'HD Component';
                 const oem      = idxOem      !== -1 ? getCleanVal(idxOem)      : 'N/A';
