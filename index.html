@@ -239,7 +239,6 @@
     </div>
 
     <script>
-        // Appended anti-cache parameter to force a breakthrough pull from Google's content servers
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?output=csv&clear_cache=' + new Date().getTime();
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -254,28 +253,19 @@
                 if (!response.ok) throw new Error('HTTP network error status: ' + response.status);
                 const csvText = await response.text();
                 
-                // Secondary check if file is completely blank
                 if (!csvText || csvText.trim().length === 0) {
-                    throw new Error('Spreadsheet returned empty text. Is it still Published to Web?');
+                    throw new Error('Spreadsheet returned empty text.');
                 }
 
                 const rows = parseCSV(csvText);
                 if (!rows || rows.length <= 1) {
-                    gridContainer.innerHTML = '<li class="status-message">Connected to sheet, but no active row rows found.</li>';
+                    gridContainer.innerHTML = '<li class="status-message">Connection verified. Board empty.</li>';
                     return;
                 }
                 renderBountyCards(rows);
             } catch (error) {
                 console.error("Sync Error Blocked: ", error);
-                gridContainer.innerHTML = `
-                    <li class="status-message" style="color: #ef4444; border: 2px dashed #ef4444; background: rgba(239, 68, 68, 0.05); padding: 25px; border-radius: 6px;">
-                        <strong>⚠️ CRITICAL CONNECTION TIMEOUT</strong><br><br>
-                        <span style="color: #cbd5e1; font-size: 0.9rem; font-style: normal;">
-                            The layout couldn't stream data from your spreadsheet. <br>
-                            <strong>Diagnostic Message:</strong> "${error.message}"<br><br>
-                            <em>Action Required:</em> Ensure your Google Sheet is set to <strong>File -> Share -> Publish to Web -> Comma-separated values (.csv)</strong>.
-                        </span>
-                    </li>`;
+                gridContainer.innerHTML = `<li class="status-message" style="color: #ef4444;">⚠️ Sourcing link timeout. Connection failed.</li>`;
             }
         }
 
@@ -300,30 +290,51 @@
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
 
-            // Skip headers, process row entries purely by column sequence index to ensure safety
+            // Extract headers and sanitize text to lowercase for reliable matching
+            const headers = data[0].map(h => h.toLowerCase().trim());
+            
+            // SMART SCANNER: Explicitly hunts for key text variations in headers. Completely avoids position reliance.
+            // Also explicitly ignores "email" fields to safeguard privacy.
+            const idxPartName = headers.findIndex(h => h.includes('part') && !h.includes('email'));
+            const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting'));
+            const idxVin      = headers.findIndex(h => h.includes('vin')); 
+            const idxCategory = headers.findIndex(h => h.includes('category') || h.includes('group') || h.includes('component'));
+            const idxYear     = headers.findIndex(h => h.includes('year'));
+            const idxMake     = headers.findIndex(h => h.includes('make'));
+            const idxModel    = headers.findIndex(h => h.includes('model'));
+            const idxLocation = headers.findIndex(h => h.includes('location') || h.includes('region') || h.includes('city')); 
+            const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('price') || h.includes('target'));
+            const idxStatus   = headers.findIndex(h => h.includes('status') || h.includes('premium') || h.includes('tier'));
+
             const dataRows = data.slice(1);
+            
+            // Sort Boosted premium items to top
+            dataRows.sort((a, b) => {
+                const statusA = idxStatus !== -1 ? (a[idxStatus] || '').toLowerCase() : '';
+                const statusB = idxStatus !== -1 ? (b[idxStatus] || '').toLowerCase() : '';
+                const isA_Boosted = statusA.includes('boost') || statusA.includes('paid');
+                const isB_Boosted = statusB.includes('boost') || statusB.includes('paid');
+                return isB_Boosted - isA_Boosted;
+            });
 
             dataRows.forEach(row => {
                 if (row.length === 0 || !row.some(val => val !== '')) return;
 
-                // Fallback extractor if array placement shrinks or expands dynamically
-                const grabVal = (positionIndex) => {
-                    return (row[positionIndex] !== undefined && row[positionIndex] !== null) ? row[positionIndex].replace(/[\"\']/g, "").trim() : 'N/A';
-                };
+                const getCleanVal = (idx) => (idx !== -1 && row[idx] !== undefined) ? row[idx].replace(/[\"\']/g, "").trim() : 'N/A';
                 
-                // ORDER BASED DECODING: Safe regardless of precise text naming strings
-                const partName = grabVal(0); // Column A
-                const oem      = grabVal(1); // Column B
-                const vin      = grabVal(2); // Column C (Catches VIN flawlessly now!)
-                const category = grabVal(3); // Column D
-                const year     = grabVal(4); // Column E
-                const make     = grabVal(5); // Column F
-                const model    = grabVal(6); // Column G
-                const location = grabVal(7); // Column H
-                const budget   = grabVal(8); // Column I
-                const status   = grabVal(9).toLowerCase(); // Column J
+                // Fetch perfectly targeted elements matching detected index markers
+                const partName = idxPartName !== -1 ? getCleanVal(idxPartName) : 'HD Component';
+                const oem      = idxOem      !== -1 ? getCleanVal(idxOem)      : 'N/A';
+                const vin      = idxVin      !== -1 ? getCleanVal(idxVin)      : 'N/A';
+                const category = idxCategory !== -1 ? getCleanVal(idxCategory) : 'N/A';
+                const year     = getCleanVal(idxYear);
+                const make     = getCleanVal(idxMake);
+                const model    = getCleanVal(idxModel);
+                const location = idxLocation !== -1 ? getCleanVal(idxLocation) : 'N/A';
+                const budget   = idxBudget   !== -1 ? getCleanVal(idxBudget)   : 'Contact Desk';
+                const rawStatus= idxStatus   !== -1 ? getCleanVal(idxStatus).toLowerCase() : '';
 
-                const isBoosted = status.includes('boost') || status.includes('paid');
+                const isBoosted = rawStatus.includes('boost') || rawStatus.includes('paid');
 
                 let html = `
                     <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()}">
@@ -347,9 +358,8 @@
                 gridContainer.insertAdjacentHTML('beforeend', html);
             });
 
-            // Fallback message if every row was parsed but filtered out as empty
             if (gridContainer.children.length === 0) {
-                gridContainer.innerHTML = '<li class="status-message">No records found matching current structure parameters.</li>';
+                gridContainer.innerHTML = '<li class="status-message">No matching contract rows detected.</li>';
             }
         }
 
