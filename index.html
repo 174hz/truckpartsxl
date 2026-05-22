@@ -7,131 +7,167 @@
     <style>
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background: #0f172a; 
-            color: #f8fafc; 
+            background: #0c0f17; 
+            color: #e2e8f0; 
             margin: 0; 
             padding: 20px; 
         }
         .container { max-width: 1200px; margin: 0 auto; }
         
         nav { 
-            background: #1e293b; 
+            background: #141b2d; 
             padding: 15px; 
-            border-radius: 8px; 
-            margin-bottom: 30px; 
+            border-radius: 6px; 
+            margin-bottom: 25px; 
             display: flex; 
-            gap: 20px; 
+            gap: 25px; 
             justify-content: center; 
-            border: 1px solid #334155; 
+            border: 2px solid #1f293d; 
         }
-        nav a { color: #38bdf8; text-decoration: none; font-weight: bold; font-size: 1rem; }
-        nav a:hover { text-decoration: underline; color: #7dd3fc; }
+        nav a { color: #facc15; text-decoration: none; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        nav a:hover { color: #ffffff; text-decoration: underline; }
 
-        header { text-align: center; margin-bottom: 40px; padding: 10px 0; }
-        h1 { margin: 0; color: #ffffff; font-size: 2.8rem; font-weight: 800; letter-spacing: -0.05em; }
-        h1 span { color: #38bdf8; }
-        p.subtitle { color: #94a3b8; margin: 10px 0 0 0; font-size: 1.25rem; font-weight: 500; }
+        header { text-align: center; margin-bottom: 35px; padding: 15px 0; border-bottom: 3px solid #facc15; }
+        h1 { margin: 0; color: #ffffff; font-size: 3.2rem; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; }
+        h1 span { color: #facc15; }
+        p.subtitle { color: #94a3b8; margin: 8px 0 0 0; font-size: 1.3rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; }
         
+        .market-ticker {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        .ticker-stat {
+            background: #141b2d;
+            border-left: 4px solid #facc15;
+            padding: 15px 20px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .ticker-val { font-size: 1.6rem; font-weight: 900; color: #ffffff; margin: 0; }
+        .ticker-lbl { font-size: 0.8rem; font-weight: 700; color: #facc15; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
         .marketplace-split {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 24px;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
         .market-card {
-            background: #1e293b;
-            border-radius: 12px;
+            background: #141b2d;
+            border-radius: 8px;
             padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
-        .buyer-zone { border: 2px solid #22c55e; } 
-        .seller-zone { border: 2px solid #38bdf8; } 
+        .buyer-zone { border: 2px solid #22c55e; background: linear-gradient(180deg, #141b2d 0%, rgba(34, 197, 94, 0.03) 100%); } 
+        .seller-zone { border: 2px solid #facc15; background: linear-gradient(180deg, #141b2d 0%, rgba(250, 204, 21, 0.03) 100%); } 
         
-        .market-card h2 { margin-top: 0; font-size: 1.6rem; color: #ffffff; }
-        .market-card p { color: #94a3b8; font-size: 1.05rem; line-height: 1.5; margin-bottom: 25px; }
+        .market-card h2 { margin-top: 0; font-size: 1.7rem; font-weight: 800; color: #ffffff; text-transform: uppercase; margin-bottom: 12px; }
+        .market-card p { color: #94a3b8; font-size: 1.1rem; line-height: 1.5; margin-bottom: 25px; }
         
+        /* Tiered Buyer Buttons Container */
+        .buyer-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
         .action-btn {
             display: block;
             text-align: center;
             padding: 16px;
-            border-radius: 8px;
-            font-weight: 800;
+            border-radius: 4px;
+            font-weight: 900;
             font-size: 1.1rem;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            transition: all 0.15s ease;
         }
-        .btn-buyer { background: #22c55e; color: #ffffff; }
-        .btn-buyer:hover { background: #16a34a; }
-        .btn-seller { background: transparent; border: 2px solid #38bdf8; color: #38bdf8; }
-        .btn-seller:hover { background: rgba(56, 189, 248, 0.1); }
+        .btn-buyer-free { background: transparent; border: 2px solid #22c55e; color: #22c55e; }
+        .btn-buyer-free:hover { background: rgba(34, 197, 94, 0.1); }
+        
+        /* High-Impact Boosted Button styling */
+        .btn-buyer-boost { 
+            background: #22c55e; 
+            color: #ffffff; 
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-buyer-boost:hover { background: #16a34a; transform: translateY(-1px); }
+        .boost-tag {
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            font-size: 0.65rem;
+            background: #ffffff;
+            color: #16a34a;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-weight: 900;
+        }
 
-        .search-container {
-            margin-bottom: 30px;
-            display: flex;
-            width: 100%;
-        }
+        .btn-seller { background: #facc15; color: #0c0f17; }
+        .btn-seller:hover { background: #eab308; transform: translateY(-1px); }
+
+        .search-container { margin-bottom: 30px; display: flex; width: 100%; }
         .search-bar {
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 1.1rem;
-            background: #1e293b;
-            border: 2px solid #334155;
-            border-radius: 8px;
-            color: #ffffff;
-            outline: none;
-            transition: border-color 0.15s ease;
+            width: 100%; padding: 18px 24px; font-size: 1.15rem; background: #141b2d;
+            border: 2px solid #1f293d; border-radius: 6px; color: #ffffff; outline: none;
         }
-        .search-bar:focus {
-            border-color: #38bdf8;
-        }
+        .search-bar:focus { border-color: #facc15; }
 
-        .board-title-area {
-            border-bottom: 1px solid #334155;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-        .board-title-area h2 { margin: 0; font-size: 1.5rem; color: #ffffff; }
+        .board-title-area { border-bottom: 2px solid #1f293d; padding-bottom: 12px; margin-bottom: 25px; }
+        .board-title-area h2 { margin: 0; font-size: 1.6rem; color: #ffffff; text-transform: uppercase; font-weight: 900; }
 
-        .bounty-grid { 
-            list-style: none; 
-            padding: 0; 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); 
-            gap: 24px; 
-        }
+        .bounty-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; }
         .post-card { 
-            background: #1e293b; 
-            border: 1px solid #334155; 
-            border-radius: 12px; 
-            padding: 24px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
+            background: #141b2d; border: 2px solid #1f293d; border-radius: 6px; padding: 24px; 
+            display: flex; flex-direction: column; justify-content: space-between; position: relative; 
         }
-        .hidden-bounty {
-            display: none !important;
+        .hidden-bounty { display: none !important; }
+        
+        /* Live vs Boosted Card Badges */
+        .live-badge {
+            position: absolute; top: 20px; right: 24px;
+            padding: 4px 8px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; border-radius: 3px;
         }
-        .part-title { margin: 0 0 6px 0; font-size: 1.35rem; color: #ffffff; font-weight: 700; }
-        .vehicle-fitment { color: #94a3b8; font-weight: 600; margin-bottom: 18px; font-size: 0.95rem; }
-        .data-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 22px; }
-        .data-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding-bottom: 6px; border-bottom: 1px solid #334155; }
-        .label { color: #64748b; }
+        .badge-standard { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #ef4444; }
+        .badge-boosted { background: rgba(250, 204, 21, 0.15); border: 1px solid #facc15; color: #facc15; animation: pulse 2s infinite; }
+        
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; box-shadow: 0 0 10px rgba(250, 204, 21, 0.4); }
+            100% { opacity: 0.8; }
+        }
+
+        /* Gold styling wrapper for Premium Boosted entries */
+        .card-boosted-style {
+            border-color: #facc15 !important;
+            background: linear-gradient(145deg, #141b2d 0%, #1c263f 100%) !important;
+        }
+
+        .part-title { margin: 0 100px 6px 0; font-size: 1.45rem; color: #ffffff; font-weight: 900; text-transform: uppercase; }
+        .vehicle-fitment { color: #facc15; font-weight: 700; margin-bottom: 20px; font-size: 1rem; text-transform: uppercase; }
+        
+        .data-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
+        .data-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; padding-bottom: 8px; border-bottom: 1px solid #1f293d; }
+        .label { color: #64748b; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; }
         .value { font-weight: 700; color: #cbd5e1; word-break: break-all; }
-        .budget-value { color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 6px; border-radius: 4px; }
+        .budget-value { color: #0c0f17; background: #facc15; padding: 4px 10px; border-radius: 3px; font-weight: 900; }
         
         .claim-btn { 
-            display: block; 
-            text-align: center; 
-            background: #38bdf8; 
-            color: #0f172a; 
-            padding: 14px; 
-            margin-top: auto; 
-            border-radius: 8px; 
-            font-weight: 700; 
-            text-decoration: none; 
+            display: block; text-align: center; background: transparent; border: 2px solid #facc15;
+            color: #facc15; padding: 14px; margin-top: auto; border-radius: 4px; font-weight: 900; 
+            font-size: 1rem; text-transform: uppercase; text-decoration: none; 
         }
-        .claim-btn:hover { background: #7dd3fc; }
+        .claim-btn:hover { background: #facc15; color: #0c0f17; }
         .status-message { text-align: center; padding: 44px; color: #94a3b8; font-style: italic; grid-column: 1 / -1; }
     </style>
 </head>
@@ -145,41 +181,53 @@
 
         <header>
             <h1>TruckParts<span>XL</span></h1>
-            <p class="subtitle">The Heavy-Duty Fleet Sourcing & Procurement Network</p>
+            <p class="subtitle">Commercial Fleet Sourcing & Procurement Exchange</p>
         </header>
+
+        <div class="market-ticker">
+            <div class="ticker-stat"><p class="ticker-val">⚡ ACTIVE EXCHANGE</p><p class="ticker-lbl">Real-Time Procurement Feed</p></div>
+            <div class="ticker-stat"><p class="ticker-val">$50,000+</p><p class="ticker-lbl">Open Sourcing Budgets</p></div>
+            <div class="ticker-stat"><p class="ticker-val">&lt; 45 Mins</p><p class="ticker-lbl">Average Component Match Time</p></div>
+        </div>
 
         <div class="marketplace-split">
             <div class="market-card buyer-zone">
                 <div>
-                    <h2>Looking for Heavy-Duty Truck Parts?</h2>
-                    <p>Post your parts request for free and let our proprietary system look for matching inventory from our continental-wide salvage and dealer network.</p>
+                    <h2>Need Commercial Components?</h2>
+                    <p>Broadcast your parts requirement across our global yard network. Standard listings are free, or boost your posting to pin it to the top of the board.</p>
                 </div>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform" target="_blank" class="action-btn btn-buyer">
-                    ➕ Post Your Parts Request Free
-                </a>
+                <div class="buyer-actions">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?usp=pp_url&entry.YOUR_STATUS_FIELD_ID=FREE" target="_blank" class="action-btn btn-buyer-free">
+                        Standard Post (Free)
+                    </a>
+                    <a href="https://buy.stripe.com/mock_truckpartsxl_999" target="_blank" class="action-btn btn-buyer-boost">
+                        🚀 Boost Request ($9.99)
+                        <span class="boost-tag">FAST TRACK</span>
+                    </a>
+                </div>
             </div>
 
             <div class="market-card seller-zone">
                 <div>
-                    <h2>Have Salvage Commercial Inventory?</h2>
-                    <p>Connect with our high-intent fleet buyers by joining our fulfillment network. Scan the open request pool below and secure an instant match for components you have sitting on shelves right now.</p>
+                    <h2>Have Heavy-Duty Inventory?</h2>
+                    <p>Monetize components sitting on your shelves right now. Scan the live contract board below, isolate your matching component asset, and claim the fulfillment voucher.</p>
                 </div>
                 <a href="#open-bounties" class="action-btn btn-seller">
-                    🔍 Browse Open Fleet Demands
+                    🔍 Scan Open Demands
                 </a>
             </div>
         </div>
 
         <div class="board-title-area" id="open-bounties">
-            <h2>⚡ Active Live Fleet Demands & Sourcing Bounties</h2>
+            <h2>⚡ Verified Live Sourcing Contracts</h2>
         </div>
 
         <div class="search-container">
-            <input type="text" id="boardSearch" class="search-bar" placeholder="🔍 Search by Part, Make, Model, VIN, or OEM Number...">
+            <input type="text" id="boardSearch" class="search-bar" placeholder="🔍 Filter by Component Name, Fitment, Truck Model, VIN, or OEM Number...">
         </div>
         
         <ul class="bounty-grid" id="bountyGrid">
-            <li class="status-message" id="loadingState">🔄 Synching with verified live heavy-duty data pool...</li>
+            <li class="status-message" id="loadingState">🔄 Syncing with live heavy-duty commercial registry...</li>
         </ul>
     </div>
 
@@ -197,17 +245,15 @@
                 const response = await fetch(CSV_URL);
                 if (!response.ok) throw new Error('Network bridge failure');
                 const csvText = await response.text();
-                
                 const rows = parseCSV(csvText);
                 if (!rows || rows.length <= 1) {
-                    gridContainer.innerHTML = '<li class="status-message">Connection verified. Stream live, waiting for active data rows...</li>';
+                    gridContainer.innerHTML = '<li class="status-message">Connection verified. Stream live...</li>';
                     return;
                 }
-                
                 renderBountyCards(rows);
             } catch (error) {
-                console.error("Pipeline failure:", error);
-                gridContainer.innerHTML = '<li class="status-message" style="color: #ef4444;">⚠️ Sourcing link timeout. Please verify spreadsheet publication status.</li>';
+                console.error(error);
+                gridContainer.innerHTML = '<li class="status-message" style="color: #ef4444;">⚠️ Sourcing link timeout.</li>';
             }
         }
 
@@ -243,9 +289,19 @@
             const idxModel    = headers.findIndex(h => h.includes('model'));
             const idxLocation = headers.findIndex(h => h.includes('location')); 
             const idxBudget   = headers.findIndex(h => h.includes('budget'));
+            // New layout property reading the premium token flag column from your sheet
+            const idxStatus   = headers.findIndex(h => h.includes('status') || h.includes('premium') || h.includes('tier'));
 
             const dataRows = data.slice(1);
-            let validCards = 0;
+            
+            // SORTING MECHANISM: Sort boosted cards to the absolute top of the feed array
+            dataRows.sort((a, b) => {
+                const statusA = idxStatus !== -1 ? (a[idxStatus] || '').toLowerCase() : '';
+                const statusB = idxStatus !== -1 ? (b[idxStatus] || '').toLowerCase() : '';
+                const isA_Boosted = statusA.includes('boost') || statusA.includes('paid');
+                const isB_Boosted = statusB.includes('boost') || statusB.includes('paid');
+                return isB_Boosted - isA_Boosted;
+            });
 
             dataRows.forEach(row => {
                 if (row.length === 0 || !row.some(val => val !== '')) return;
@@ -261,19 +317,22 @@
                 const model    = getCleanVal(idxModel);
                 const location = idxLocation !== -1 ? getCleanVal(idxLocation) : 'N/A';
                 const budget   = idxBudget   !== -1 ? getCleanVal(idxBudget)   : 'Contact Desk';
+                const rawStatus= idxStatus   !== -1 ? getCleanVal(idxStatus).toLowerCase() : '';
 
-                validCards++;
+                const isBoosted = rawStatus.includes('boost') || rawStatus.includes('paid');
 
-                // FIXED: Routing directly to Form 2 ("Secure Sourcing Match") and passing the OEM value
                 let html = `
-                    <li class="post-card" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()} ${year.toLowerCase()} ${location.toLowerCase()}">
+                    <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()} ${year.toLowerCase()}">
+                        <span class="live-badge ${isBoosted ? 'badge-boosted' : 'badge-standard'}">
+                            ${isBoosted ? '🔥 BOOSTED DEMAND' : '🔴 LIVE DEMAND'}
+                        </span>
                         <h3 class="part-title">${partName}</h3>
                         <div class="vehicle-fitment">${year !== 'N/A' ? year : ''} ${make !== 'N/A' ? make : ''} ${model !== 'N/A' ? model : ''}</div>
                         <div class="data-grid">
-                            <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">${oem}</span></div>
-                            <div class="data-item"><span class="label">VIN Number</span><span class="value">${vin}</span></div>
-                            <div class="data-item"><span class="label">Category Component</span><span class="value">${category}</span></div>
-                            <div class="data-item"><span class="label">Location</span><span class="value">${location}</span></div>
+                            <div class="data-item"><span class="label">OEM / Casting #</span><span class="value">${oem}</span></div>
+                            <div class="data-item"><span class="label">VIN Fitment</span><span class="value">${vin}</span></div>
+                            <div class="data-item"><span class="label">Component Group</span><span class="value">${category}</span></div>
+                            <div class="data-item"><span class="label">Region Source</span><span class="value">${location}</span></div>
                             <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
                         </div>
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
@@ -283,23 +342,14 @@
                     </li>`;
                 gridContainer.insertAdjacentHTML('beforeend', html);
             });
-
-            if (validCards === 0) {
-                gridContainer.innerHTML = '<li class="status-message">Connection verified. Stream live, waiting for active data rows...</li>';
-            }
         }
 
         function filterBountyBoard() {
             const query = this.value.toLowerCase().trim();
             const cards = document.querySelectorAll('#bountyGrid .post-card');
-            
             cards.forEach(card => {
                 const searchContent = card.getAttribute('data-searchable') || '';
-                if (searchContent.includes(query)) {
-                    card.classList.remove('hidden-bounty');
-                } else {
-                    card.classList.add('hidden-bounty');
-                }
+                card.classList.toggle('hidden-bounty', !searchContent.includes(query));
             });
         }
     </script>
