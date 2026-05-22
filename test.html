@@ -52,7 +52,6 @@
         nav a { color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s; }
         nav a:hover { color: var(--accent-yellow); }
 
-        /* Guaranteed High-Resolution Commercial Semi-Truck Headline Image */
         .hero-banner {
             position: relative;
             background: linear-gradient(rgba(7, 10, 18, 0.5), rgba(7, 10, 18, 0.85)), 
@@ -125,7 +124,7 @@
         .search-bar {
             width: 100%; padding: 20px 25px; font-size: 1.1rem; background: var(--bg-card);
             border: 1px solid var(--border-color); border-radius: 6px; color: #ffffff; box-sizing: border-box; outline: none; transition: border-color 0.2s;
-            box-shadow: 0 8px 24 rgba(0,0,0,0.5);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }
         .search-bar:focus { border-color: var(--accent-yellow); }
 
@@ -194,15 +193,15 @@
 
     <header class="hero-banner">
         <div class="container">
-            <h1>Heavy-Duty <span>Procurement</span> Exchange</h1>
-            <p class="subtitle">Commercial Fleet Sourcing & Asset Logistics</p>
+            <h1>Heavy Truck <span>Part Bounty</span> Board</h1>
+            <p class="subtitle">Buyers Broadcast Sourcing Needs. Suppliers & Yards Liquidate Heavy Inventory.</p>
         </div>
     </header>
 
     <div class="container">
         
         <div class="market-ticker">
-            <div class="ticker-stat"><p class="ticker-val">📦 ACTIVE DEMAND ENGINE</p><p class="ticker-lbl">Real-Time Core Stream</p></div>
+            <div class="ticker-stat"><p class="ticker-val">📦 LIVE DEMAND FEED</p><p class="ticker-lbl">Active Core Stream</p></div>
             <div class="ticker-stat"><p class="ticker-val">$50,000+</p><p class="ticker-lbl">Open Sourcing Budgets</p></div>
             <div class="ticker-stat"><p class="ticker-val">&lt; 45 Mins</p><p class="ticker-lbl">Average Fulfillment Match Time</p></div>
         </div>
@@ -336,20 +335,19 @@
                 return isB_Boosted - isA_Boosted;
             });
 
-            // Production-locked heavy logistics and component images
             const getComponentImage = (partText, catText) => {
                 const combined = (partText + ' ' + catText).toLowerCase();
                 
                 if (combined.includes('engine') || combined.includes('piston') || combined.includes('block') || combined.includes('motor')) {
-                    return 'https://images.unsplash.com/photo-1530047590133-aa8b1a678195?auto=format&fit=crop&q=80&w=500'; // Pure heavy engine close-up
+                    return 'https://images.unsplash.com/photo-1530047590133-aa8b1a678195?auto=format&fit=crop&q=80&w=500';
                 }
                 if (combined.includes('axle') || combined.includes('differential') || combined.includes('gear') || combined.includes('transmission')) {
-                    return 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=500'; // Pure transmission/gear system
+                    return 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=500';
                 }
                 if (combined.includes('tire') || combined.includes('wheel') || combined.includes('rim') || combined.includes('brake') || combined.includes('hub')) {
-                    return 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=500'; // Heavy chassis component machinery
+                    return 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=500';
                 }
-                return 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=500'; // Clean Big-Rig Commercial Trailer Profile
+                return 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=500';
             };
 
             dataRows.forEach(row => {
