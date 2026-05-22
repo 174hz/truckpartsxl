@@ -287,15 +287,16 @@
 
             const headers = data[0].map(h => h.toLowerCase().trim());
             
-            const idxPartName = headers.findIndex(h => h.includes('part name'));
-            const idxOem      = headers.findIndex(h => h.includes('oem number'));
-            const idxVin      = headers.findIndex(h => h.includes('vin'));
-            const idxCategory = headers.findIndex(h => h.includes('category'));
+            // SMART FILTERING: Matches columns if they contain these phrases anywhere in their text
+            const idxPartName = headers.findIndex(h => h.includes('part'));
+            const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting'));
+            const idxVin      = headers.findIndex(h => h.includes('vin')); // Seamless match for full phrases!
+            const idxCategory = headers.findIndex(h => h.includes('category') || h.includes('group'));
             const idxYear     = headers.findIndex(h => h.includes('year'));
             const idxMake     = headers.findIndex(h => h.includes('make'));
             const idxModel    = headers.findIndex(h => h.includes('model'));
-            const idxLocation = headers.findIndex(h => h.includes('location')); 
-            const idxBudget   = headers.findIndex(h => h.includes('budget'));
+            const idxLocation = headers.findIndex(h => h.includes('location') || h.includes('region')); 
+            const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('price'));
             const idxStatus   = headers.findIndex(h => h.includes('status') || h.includes('premium') || h.includes('tier'));
 
             const dataRows = data.slice(1);
@@ -327,7 +328,7 @@
                 const isBoosted = rawStatus.includes('boost') || rawStatus.includes('paid');
 
                 let html = `
-                    <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()} ${year.toLowerCase()}">
+                    <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()}">
                         <span class="live-badge ${isBoosted ? 'badge-boosted' : 'badge-standard'}">
                             ${isBoosted ? '🔥 BOOSTED DEMAND' : '🔴 LIVE DEMAND'}
                         </span>
