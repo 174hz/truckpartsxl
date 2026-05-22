@@ -70,7 +70,6 @@
         .market-card h2 { margin-top: 0; font-size: 1.7rem; font-weight: 800; color: #ffffff; text-transform: uppercase; margin-bottom: 12px; }
         .market-card p { color: #94a3b8; font-size: 1.1rem; line-height: 1.5; margin-bottom: 25px; }
         
-        /* Tiered Buyer Buttons Container */
         .buyer-actions {
             display: flex;
             flex-direction: column;
@@ -92,7 +91,6 @@
         .btn-buyer-free { background: transparent; border: 2px solid #22c55e; color: #22c55e; }
         .btn-buyer-free:hover { background: rgba(34, 197, 94, 0.1); }
         
-        /* High-Impact Boosted Button styling */
         .btn-buyer-boost { 
             background: #22c55e; 
             color: #ffffff; 
@@ -133,7 +131,6 @@
         }
         .hidden-bounty { display: none !important; }
         
-        /* Live vs Boosted Card Badges */
         .live-badge {
             position: absolute; top: 20px; right: 24px;
             padding: 4px 8px; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; border-radius: 3px;
@@ -147,7 +144,6 @@
             100% { opacity: 0.8; }
         }
 
-        /* Gold styling wrapper for Premium Boosted entries */
         .card-boosted-style {
             border-color: #facc15 !important;
             background: linear-gradient(145deg, #141b2d 0%, #1c263f 100%) !important;
@@ -197,7 +193,7 @@
                     <p>Broadcast your parts requirement across our global yard network. Standard listings are free, or boost your posting to pin it to the top of the board.</p>
                 </div>
                 <div class="buyer-actions">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform?usp=pp_url&entry.YOUR_STATUS_FIELD_ID=FREE" target="_blank" class="action-btn btn-buyer-free">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform" target="_blank" class="action-btn btn-buyer-free">
                         Standard Post (Free)
                     </a>
                     <a href="https://buy.stripe.com/mock_truckpartsxl_999" target="_blank" class="action-btn btn-buyer-boost">
@@ -229,6 +225,17 @@
         <ul class="bounty-grid" id="bountyGrid">
             <li class="status-message" id="loadingState">🔄 Syncing with live heavy-duty commercial registry...</li>
         </ul>
+
+        <footer style="margin-top: 60px; padding-top: 30px; border-top: 2px solid #1f293d; text-align: center;">
+            <div style="margin-bottom: 20px;">
+                <a href="index.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">🏠 Home Board</a>
+                <a href="ontario.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">🇨🇦 Ontario Feed</a>
+                <a href="privacy.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">⚖️ Privacy Policy</a>
+                <a href="terms.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">🛠️ Terms of Service</a>
+                <a href="contact.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">📞 Contact & Support</a>
+            </div>
+            <p style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin: 0;">© 2026 TruckPartsXL. All Rights Reserved.</p>
+        </footer>
     </div>
 
     <script>
@@ -263,8 +270,12 @@
                 let char = text[i]; let nextChar = text[i+1];
                 if (char === '"') { if (inQuotes && nextChar === '"') { currentToken += '"'; i++; } else { inQuotes = !inQuotes; } }
                 else if (char === ',' && !inQuotes) { row.push(currentToken.trim()); currentToken = ''; }
-                else if ((char === '\r' || char === '\n') && !inQuotes) {
-                    if (char === '\r' && nextChar === '\n') i++;
+                else if ((char === '
+' || char === '
+') && !inQuotes) {
+                    if (char === '
+' && nextChar === '
+') i++;
                     row.push(currentToken.trim());
                     if (row.length > 0) lines.push(row);
                     row = []; currentToken = '';
@@ -289,12 +300,10 @@
             const idxModel    = headers.findIndex(h => h.includes('model'));
             const idxLocation = headers.findIndex(h => h.includes('location')); 
             const idxBudget   = headers.findIndex(h => h.includes('budget'));
-            // New layout property reading the premium token flag column from your sheet
             const idxStatus   = headers.findIndex(h => h.includes('status') || h.includes('premium') || h.includes('tier'));
 
             const dataRows = data.slice(1);
             
-            // SORTING MECHANISM: Sort boosted cards to the absolute top of the feed array
             dataRows.sort((a, b) => {
                 const statusA = idxStatus !== -1 ? (a[idxStatus] || '').toLowerCase() : '';
                 const statusB = idxStatus !== -1 ? (b[idxStatus] || '').toLowerCase() : '';
@@ -306,7 +315,7 @@
             dataRows.forEach(row => {
                 if (row.length === 0 || !row.some(val => val !== '')) return;
 
-                const getCleanVal = (idx) => (idx !== -1 && row[idx]) ? row[idx].replace(/[\"\']/g, "").trim() : 'N/A';
+                const getCleanVal = (idx) => (idx !== -1 && row[idx]) ? row[idx].replace(/["']/g, "").trim() : 'N/A';
                 
                 const partName = idxPartName !== -1 ? getCleanVal(idxPartName) : 'HD Component';
                 const oem      = idxOem      !== -1 ? getCleanVal(idxOem)      : 'N/A';
