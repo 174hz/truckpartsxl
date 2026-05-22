@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-main: #0b0f19;
-            --bg-card: #121826;
+            --bg-card: rgba(18, 24, 38, 0.95); /* Semi-transparent to let background visuals subtly show through */
             --bg-nav: #161f32;
             --border-color: #22314d;
             --text-main: #f1f5f9;
@@ -19,7 +19,10 @@
 
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background: var(--bg-main); 
+            /* Full bleed industrial fleet background image with fixed overlay mask */
+            background: linear-gradient(rgba(11, 15, 25, 0.92), rgba(11, 15, 25, 0.92)), 
+                        url('https://images.unsplash.com/photo-1592838064575-70ed626d3a44?auto=format&fit=crop&q=80&w=1600') no-repeat center center fixed;
+            background-size: cover; 
             color: var(--text-main); 
             margin: 0; 
             padding: 0; 
@@ -54,19 +57,19 @@
         nav a { color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s; }
         nav a:hover { color: var(--accent-yellow); }
 
-        /* Cinematic Hero Section with Industrial Video/Visual Cues */
+        /* Cinematic Hero Section featuring Big Rig in Service Station Frame */
         .hero-banner {
             position: relative;
-            background: linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.95)), 
+            background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(11, 15, 25, 0.9)), 
                         url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200') no-repeat center center;
             background-size: cover;
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
             border-bottom: 4px solid var(--accent-yellow);
         }
-        .hero-banner h1 { margin: 0; font-size: 3.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; }
+        .hero-banner h1 { margin: 0; font-size: 3.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 4px 12px rgba(0,0,0,0.8); }
         .hero-banner h1 span { color: var(--accent-yellow); }
-        .hero-banner .subtitle { color: var(--text-muted); margin: 12px 0 0 0; font-size: 1.25rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .hero-banner .subtitle { color: #cbd5e1; margin: 12px 0 0 0; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
         
         /* Live Analytics Ticker Grid */
         .market-ticker {
@@ -83,7 +86,8 @@
             border-left: 4px solid var(--accent-yellow);
             padding: 20px;
             border-radius: 6px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
         }
         .ticker-val { font-size: 1.5rem; font-weight: 900; color: #ffffff; margin: 0; }
         .ticker-lbl { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
@@ -104,17 +108,15 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
         }
-        /* Heavy Truck Visual Accent Layers */
-        .market-card::before {
-            content: ''; position: absolute; bottom: 0; right: 0; width: 120px; height: 120px; opacity: 0.05; pointer-events: none;
-        }
+        
         .buyer-zone { border-top: 4px solid var(--accent-green); } 
         .seller-zone { border-top: 4px solid var(--accent-yellow); } 
         
         .market-card h2 { margin-top: 0; font-size: 1.8rem; font-weight: 800; color: #ffffff; text-transform: uppercase; }
-        .market-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 30px; }
+        .market-card p { color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 30px; }
         
         .buyer-actions { display: flex; flex-direction: column; gap: 15px; }
         .action-btn {
@@ -133,6 +135,7 @@
         .search-bar {
             width: 100%; padding: 20px 25px; font-size: 1.1rem; background: var(--bg-card);
             border: 1px solid var(--border-color); border-radius: 6px; color: #ffffff; box-sizing: border-box; outline: none; transition: border-color 0.2s;
+            backdrop-filter: blur(4px); box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         .search-bar:focus { border-color: var(--accent-yellow); }
 
@@ -144,6 +147,7 @@
         .post-card { 
             background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; padding: 25px; 
             display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); backdrop-filter: blur(4px);
         }
         .post-card:hover { transform: translateY(-4px); border-color: #3b527e; }
         .hidden-bounty { display: none !important; }
@@ -178,7 +182,7 @@
         .claim-btn:hover { background: var(--accent-yellow); color: #0b0f19; }
         .status-message { text-align: center; padding: 50px; color: var(--text-muted); font-style: italic; grid-column: 1 / -1; }
 
-        footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid var(--border-color); background: var(--bg-card); text-align: center; }
+        footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid var(--border-color); background: var(--bg-nav); text-align: center; }
         .footer-links { margin-bottom: 20px; }
         .footer-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; margin: 0 15px; text-transform: uppercase; font-size: 0.8rem; }
         .footer-links a:hover { color: #ffffff; }
@@ -203,7 +207,7 @@
     <header class="hero-banner">
         <div class="container">
             <h1>Heavy-Duty <span>Procurement</span> Exchange</h1>
-            <p class="subtitle">Commercial Fleet Fleet Sourcing & Asset Logistics</p>
+            <p class="subtitle">Commercial Fleet Sourcing & Asset Logistics</p>
         </div>
     </header>
 
@@ -323,7 +327,6 @@
 
             const headers = data[0].map(h => h.toLowerCase().trim());
             
-            // Safe flexible parsing mappings
             const idxPartName = headers.findIndex(h => h.includes('part') && !h.includes('email'));
             const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting'));
             const idxVin      = headers.findIndex(h => h.includes('vin')); 
@@ -345,19 +348,17 @@
                 return isB_Boosted - isA_Boosted;
             });
 
-            // Domain mapping dictionary to show real technical component images dynamically based on words matched
             const getComponentImage = (partText, catText) => {
                 const combined = (partText + ' ' + catText).toLowerCase();
                 if (combined.includes('engine') || combined.includes('piston') || combined.includes('block')) {
-                    return 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=400'; // Engine Block
+                    return 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=400';
                 }
                 if (combined.includes('axle') || combined.includes('differential') || combined.includes('gear')) {
-                    return 'https://images.unsplash.com/photo-1532634922-8fe0b757fb13?auto=format&fit=crop&q=80&w=400'; // Gears/Axles
+                    return 'https://images.unsplash.com/photo-1532634922-8fe0b757fb13?auto=format&fit=crop&q=80&w=400';
                 }
                 if (combined.includes('tire') || combined.includes('wheel') || combined.includes('rim')) {
-                    return 'https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&q=80&w=400'; // Fleet Maintenance
+                    return 'https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&q=80&w=400';
                 }
-                // Default Heavy Commercial Industry Cue
                 return 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=400';
             };
 
