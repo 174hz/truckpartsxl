@@ -177,9 +177,7 @@
         .footer-links a:hover { color: #ffffff; }
         footer p { color: #475569; font-size: 0.8rem; font-weight: 600; margin: 0; }
 
-        /* ==========================================================================
-           MOBILE OPTIMIZATION RESPONSIVE BREAKPOINTS
-           ========================================================================== */
+        /* Mobile Optimization Rules */
         @media (max-width: 768px) {
             nav { padding: 15px 0; }
             .nav-container { flex-direction: column; gap: 15px; text-align: center; }
@@ -366,19 +364,28 @@
             const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('price') || h.includes('target'));
             const idxStatus   = headers.findIndex(h => h.includes('status') || h.includes('premium') || h.includes('tier'));
 
-            const dataRows = data.slice(1);
-            
-            dataRows.sort((a, b) => {
-                const statusA = idxStatus !== -1 ? (a[idxStatus] || '').toLowerCase() : '';
-                const statusB = idxStatus !== -1 ? (b[idxStatus] || '').toLowerCase() : '';
+            // Map rows with their original array index to serve as a tie-breaker for chronology
+            const indexedRows = data.slice(1).map((row, index) => ({ row, originalIndex: index }));
+
+            // FIXED CHRONOLOGICAL SORT LOGIC: 
+            // 1. Boosted posts always rank over Standard posts.
+            // 2. Within the same tier, higher originalIndex (newest rows at bottom of sheet) ranks HIGHER on the website.
+            indexedRows.sort((a, b) => {
+                const statusA = idxStatus !== -1 ? (a.row[idxStatus] || '').toLowerCase() : '';
+                const statusB = idxStatus !== -1 ? (b.row[idxStatus] || '').toLowerCase() : '';
                 const isA_Boosted = statusA.includes('boost') || statusA.includes('paid');
                 const isB_Boosted = statusB.includes('boost') || statusB.includes('paid');
-                return isB_Boosted - isA_Boosted;
+                
+                if (isA_Boosted !== isB_Boosted) {
+                    return isB_Boosted - isA_Boosted; // Boosted goes to top
+                }
+                
+                // Tie-breaker: Newest spreadsheet row (largest originalIndex) comes first
+                return b.originalIndex - a.originalIndex;
             });
 
             const getComponentImage = (partText, catText) => {
                 const combined = (partText + ' ' + catText).toLowerCase();
-                
                 if (combined.includes('engine') || combined.includes('piston') || combined.includes('block') || combined.includes('motor')) {
                     return 'https://images.unsplash.com/photo-1530047590133-aa8b1a678195?auto=format&fit=crop&q=80&w=500';
                 }
@@ -391,7 +398,8 @@
                 return 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=500';
             };
 
-            dataRows.forEach(row => {
+            indexedRows.forEach(item => {
+                const row = item.row;
                 if (row.length === 0 || !row.some(val => val !== '')) return;
 
                 const getCleanVal = (idx) => (idx !== -1 && row[idx] !== undefined) ? row[idx].replace(/[\"\']/g, "").trim() : 'N/A';
