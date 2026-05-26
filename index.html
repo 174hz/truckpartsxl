@@ -179,7 +179,7 @@
 
         /* ==========================================================================
            MOBILE OPTIMIZATION RESPONSIVE BREAKPOINTS
-           ========================================================================== */
+           ========================================================================= */
         @media (max-width: 768px) {
             nav { padding: 15px 0; }
             .nav-container { flex-direction: column; gap: 15px; text-align: center; }
@@ -374,7 +374,6 @@
             dataRows.reverse();
 
             // 2. PREMIUM SORT TIER: Keep Boosted contracts pinned above standard entries.
-            // Because the array was already turned upside down, the newest rows naturally sit first in both layers.
             dataRows.sort((a, b) => {
                 const statusA = idxStatus !== -1 ? (a[idxStatus] || '').toLowerCase() : '';
                 const statusB = idxStatus !== -1 ? (b[idxStatus] || '').toLowerCase() : '';
@@ -420,6 +419,31 @@
                 const isBoosted = rawStatus.includes('boost') || rawStatus.includes('paid');
                 const cardGraphic = getComponentImage(partName, category);
 
+                // ==========================================================================
+                // AUTOMATED TIER ROUTING ENGINE (LIVE FORM CONNECTORS)
+                // ==========================================================================
+                const combinedText = (partName + ' ' + category).toLowerCase();
+                
+                // Define high-value Tier 1 identifiers
+                const tier1Keywords = ['engine', 'transmission', 'axle', 'differential', 'cab', 'carrier', 'block', 'motor'];
+                
+                // Check if current row contains any Tier 1 keywords
+                const isTier1 = tier1Keywords.some(keyword => combinedText.includes(keyword));
+                
+                let targetFormUrl = "";
+                
+                // Dynamically calculate physical spreadsheet row position (+2 accounts for header and 0-index)
+                const spreadsheetRowNumber = data.indexOf(row) + 1; 
+
+                if (isTier1) {
+                    // TIER 1 PREMIUM FORM CONFIGURATION ($25.00)
+                    targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSfNNeAUVU0z4PpPy4gN0KHJ0Z_fZnz494V1aT7JHyLUYx7qoQ/viewform?usp=pp_url&entry.773631869=${spreadsheetRowNumber}`;
+                } else {
+                    // TIER 2 STANDARD FORM CONFIGURATION ($10.00)
+                    targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLScN_cxQE-osbL3Af7N3eRfeMUe_PAqhlxtAs14AWMnkYZRhJA/viewform?usp=pp_url&entry.689808697=${spreadsheetRowNumber}`;
+                }
+                // ==========================================================================
+
                 let html = `
                     <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()}">
                         <span class="live-badge ${isBoosted ? 'badge-boosted' : 'badge-standard'}">
@@ -438,9 +462,9 @@
                             <div class="data-item"><span class="label">Location</span><span class="value">${location}</span></div>
                             <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
                         </div>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvaFtu1j7WZ45LO4zlJYk0znBr8I5lvxZmwDfMQUfxcFR0Eg/viewform?usp=pp_url&entry.784460779=${encodeURIComponent(oem)}" 
-                           target="_blank" class="claim-btn">
-                           ⚡ Secure Sourcing Match
+                        
+                        <a href="${targetFormUrl}" target="_blank" class="claim-btn">
+                           ⚡ Unlock Buyer Contact Details (${isTier1 ? '$25' : '$10'})
                         </a>
                     </li>`;
                 gridContainer.insertAdjacentHTML('beforeend', html);
