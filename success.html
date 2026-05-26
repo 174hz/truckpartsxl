@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Verified | TruckPartsXL</title>
+    <style>
+        :root {
+            --bg-main: #070a12;
+            --bg-card: #0f1626;
+            --bg-nav: #131c30;
+            --border-color: #22314d;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-yellow: #eab308;
+            --accent-green: #10b981;
+        }
+
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: var(--bg-main);
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 0; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .top-bar {
+            background: var(--accent-green);
+            color: #0b0f19;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; box-sizing: border-box; }
+        
+        nav { 
+            background: var(--bg-nav); 
+            padding: 20px; 
+            border-bottom: 2px solid var(--border-color); 
+        }
+        .nav-container {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .nav-logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; color: #ffffff;}
+        .nav-logo span { color: var(--accent-yellow); }
+        .nav-links { display: flex; gap: 30px; }
+        nav a { color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s; }
+        nav a:hover { color: var(--accent-yellow); }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .success-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--accent-green);
+            border-radius: 6px;
+            padding: 50px 40px;
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+        }
+
+        .success-icon {
+            font-size: 3.5rem;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+        }
+
+        .success-card h1 {
+            margin: 0 0 15px 0;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: #ffffff;
+        }
+
+        .success-card p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 0 0 30px 0;
+        }
+
+        .instruction-box {
+            background: rgba(16, 185, 129, 0.06);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 4px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 35px;
+        }
+
+        .instruction-box h3 {
+            margin: 0 0 8px 0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--accent-green);
+            font-weight: 800;
+            letter-spacing: 0.03em;
+        }
+
+        .instruction-box p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .return-btn {
+            display: inline-block;
+            background: var(--accent-yellow);
+            color: #0b0f19;
+            padding: 16px 32px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: background 0.2s ease;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.2);
+        }
+
+        .return-btn:hover {
+            background: #ca8a04;
+        }
+
+        footer { 
+            padding: 40px 0; 
+            border-top: 1px solid var(--border-color); 
+            background: var(--bg-nav); 
+            text-align: center; 
+        }
+        .footer-links { margin-bottom: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; margin: 0 15px; text-transform: uppercase; font-size: 0.8rem; }
+        .footer-links a:hover { color: #ffffff; }
+        footer p { color: #475569; font-size: 0.8rem; font-weight: 600; margin: 0; }
+
+        /* Mobile Optimization Rules */
+        @media (max-width: 768px) {
+            nav { padding: 15px 0; }
+            .nav-container { flex-direction: column; gap: 15px; text-align: center; }
+            .nav-links { gap: 15px; font-size: 0.8rem; }
+            .main-content { padding: 30px 15px; }
+            .success-card { padding: 35px 20px; }
+            .success-card h1 { font-size: 1.6rem; }
+            .success-card p { font-size: 0.95rem; }
+            .footer-links { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+            .footer-links a { margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">✔ VERIFICATION COMPLETE: LOGISTICS DISPATCH TERMINAL SECURITY CLEARED</div>
+
+    <nav>
+        <div class="container nav-container">
+            <div class="nav-logo">TruckParts<span>XL</span></div>
+            <div class="nav-links">
+                <a href="index.html">🏠 Global Exchange</a>
+                <a href="ontario.html">🇨🇦 Ontario Board</a>
+                <a href="contact.html">📞 Procurement Desk</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="success-card">
+            <div class="success-icon">⚡</div>
+            <h1>Lead Unlocked</h1>
+            <p>Your payment verification has been cleared successfully. The automated routing script has initiated the background matching process for your target commercial bounty line item.</p>
+            
+            <div class="instruction-box">
+                <h3>📥 Next Step for Parts Managers:</h3>
+                <p>Check the yard email address you submitted in the authorization form. A structured match document including verified phone connection numbers, fleet emails, and asset OEM casting specifications has been dispatched to your inbox.</p>
+            </div>
+
+            <a href="index.html" class="return-btn">
+                🔍 Return to Bounty Board
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">🏠 Home Exchange</a>
+                <a href="ontario.html">🇨🇦 Ontario Feed</a>
+                <a href="privacy.html">⚖️ Privacy Registry</a>
+                <a href="terms.html">🛠️ Terms of Service</a>
+                <a href="contact.html">📞 Contact & Support</a>
+            </div>
+            <p>© 2026 TruckPartsXL. All Rights Reserved. Heavy-Duty Sourcing Infrastructure Solutions.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
