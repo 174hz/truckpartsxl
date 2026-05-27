@@ -246,7 +246,6 @@
     </footer>
 
     <script>
-        // FORCED PERMISSIONS URL: Targets your sheet ID directly to bypass Google Web-Publishing delay bugs
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/1gHqK2gWj9_kY6UjKIsm438Oa6ZgI-kO_6IeT1wWw0zQ/gviz/tq?tqx=out:csv&sheet=Active_Bounties';
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -327,25 +326,28 @@
             const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('target'));
             const idxStatus   = headers.findIndex(h => h.includes('status'));
 
-            // Split out headers and get data rows
             let rowsToRender = data.slice(1);
-
-            // FIX: Reverse the rows so that the newest entries from the bottom of your sheet show up at the top!
             rowsToRender.reverse();
 
             rowsToRender.forEach(row => {
-                const getCleanVal = (idx) => (row[idx] && row[idx] !== '""') ? row[idx].replace(/^"|"$/g, '') : 'N/A';
+                // FIXED SAFETY LOGIC: If a value is missing or empty, replace it safely with 'N/A' instead of breaking
+                const getCleanVal = (idx) => {
+                    if (idx === -1 || !row[idx] || row[idx] === '""' || row[idx].trim() === '') {
+                        return 'N/A';
+                    }
+                    return row[idx].replace(/^"|"$/g, '').trim();
+                };
 
-                const partName = idxPart     !== -1 ? getCleanVal(idxPart)     : 'Unknown Component';
-                const oem      = idxOem      !== -1 ? getCleanVal(idxOem)      : 'N/A';
-                const vin      = idxVin      !== -1 ? getCleanVal(idxVin)      : 'N/A';
-                const category = idxCategory !== -1 ? getCleanVal(idxCategory) : 'Heavy Duty General';
-                const year     = idxYear     !== -1 ? getCleanVal(idxYear)     : 'N/A';
-                const make     = idxMake     !== -1 ? getCleanVal(idxMake)     : 'N/A';
-                const model    = idxModel    !== -1 ? getCleanVal(idxModel)    : 'N/A';
-                const location = idxLocation !== -1 ? getCleanVal(idxLocation) : 'N/A';
-                const budget   = idxBudget   !== -1 ? getCleanVal(idxBudget)   : 'Contact Desk';
-                const rawStatus= idxStatus   !== -1 ? getCleanVal(idxStatus).toLowerCase() : '';
+                const partName = getCleanVal(idxPart) === 'N/A' ? 'Unknown Component' : getCleanVal(idxPart);
+                const oem      = getCleanVal(idxOem);
+                const vin      = getCleanVal(idxVin);
+                const category = getCleanVal(idxCategory) === 'N/A' ? 'Heavy Duty General' : getCleanVal(idxCategory);
+                const year     = getCleanVal(idxYear);
+                const make     = getCleanVal(idxMake);
+                const model    = getCleanVal(idxModel);
+                const location = getCleanVal(idxLocation);
+                const budget   = getCleanVal(idxBudget) === 'N/A' ? 'Contact Desk' : getCleanVal(idxBudget);
+                const rawStatus= getCleanVal(idxStatus).toLowerCase();
 
                 const isBoosted = rawStatus.includes('boost') || rawStatus.includes('paid');
                 const cardGraphic = getComponentImage(partName, category);
@@ -355,8 +357,6 @@
                 const isTier1 = tier1Keywords.some(keyword => combinedText.includes(keyword));
                 
                 let targetFormUrl = "";
-                
-                // Keep tracks of absolute original spreadsheet position (+2 for 0-index offset & headers)
                 const spreadsheetRowNumber = data.indexOf(row) + 1; 
 
                 if (isTier1) {
