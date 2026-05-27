@@ -167,6 +167,9 @@
         .status-message { grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted); font-weight: 700; background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 6px; }
         
         footer { background: #04060b; padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 80px; text-align: center; font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+        .footer-links { margin-top: 15px; display: flex; justify-content: center; gap: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent-yellow); }
     </style>
 </head>
 <body>
@@ -242,11 +245,17 @@
     <footer>
         <div class="container">
             &copy; 2026 TruckPartsXL Logistics. All Rights Reserved. Commercial Sourcing Exchange Framework.
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact Support</a>
+            </div>
         </div>
     </footer>
 
     <script>
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1gHqK2gWj9_kY6UjKIsm438Oa6ZgI-kO_6IeT1wWw0zQ/gviz/tq?tqx=out:csv&sheet=Active_Bounties';
+        // STABLE PUBLIC EMBED URL: Uses the clean published output structure to completely sidestep API permission walls
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=2042881448&single=true&output=csv';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchBountyData();
@@ -261,7 +270,7 @@
                 renderBountyCards(rows);
             } catch (error) {
                 console.error("Database connection failure:", error);
-                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red);">Failed to retrieve live registry feed. Please check Google Sheet Share permissions.</li>';
+                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red);">Failed to retrieve live registry feed. Please refresh the page.</li>';
             }
         }
 
@@ -330,7 +339,6 @@
             rowsToRender.reverse();
 
             rowsToRender.forEach(row => {
-                // FIXED SAFETY LOGIC: If a value is missing or empty, replace it safely with 'N/A' instead of breaking
                 const getCleanVal = (idx) => {
                     if (idx === -1 || !row[idx] || row[idx] === '""' || row[idx].trim() === '') {
                         return 'N/A';
