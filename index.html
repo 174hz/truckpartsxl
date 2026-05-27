@@ -108,11 +108,11 @@
         .seller-zone { border-top: 4px solid var(--accent-yellow); } 
         
         .market-card h2 { margin-top: 0; font-size: 1.7rem; font-weight: 800; color: #ffffff; text-transform: uppercase; }
-        .market-card p { color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 30px; }
+        .market-card p { color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
         
         .buyer-actions { display: flex; flex-direction: column; gap: 15px; }
         .action-btn {
-            display: block; text-align: center; padding: 18px; border-radius: 4px; font-weight: 800; font-size: 1rem; 
+            display: block; text-align: center; padding: 18px; border-radius: 4px; font-weight: 800; font-size: 0.95rem; 
             text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease;
         }
         .btn-buyer-free { background: transparent; border: 2px solid var(--accent-green); color: var(--accent-green); }
@@ -213,10 +213,15 @@
             <div class="market-card buyer-zone">
                 <div>
                     <h2>Fleet Procurement Desk</h2>
-                    <p>Need components or cores for heavy-duty frameworks? Broadcast your asset requirement specs straight into our regional network of commercial dismantling operators.</p>
+                    <p>Need components or cores for heavy-duty frameworks? Broadcast your asset requirement specs straight into our dedicated commercial dismantling pipelines.</p>
                 </div>
                 <div class="buyer-actions">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-free">Post Standard Request (Free)</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-boost">
+                        📍 Post Request: Ontario (Golden Horseshoe)
+                    </a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-free">
+                        🌐 Post Request: Global Exchange (US Rust Belt / Int)
+                    </a>
                 </div>
             </div>
 
@@ -372,7 +377,6 @@
                 let targetFormUrl = "";
                 const spreadsheetRowNumber = data.indexOf(row) + 1; 
 
-                // LIVE USER INTERFACE PATHWAYS: Pointing directly to clean viewing forms with row pre-fill variables
                 if (isTier1) {
                     targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSfNNeAUVU0z4PpPy4gN0KHJ0Z_fZnz494V1aT7JHyLUYx7qoQ/viewform?entry.773631869=${spreadsheetRowNumber}`;
                 } else {
