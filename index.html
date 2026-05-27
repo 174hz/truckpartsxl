@@ -246,8 +246,8 @@
     </footer>
 
     <script>
-        // Injecting the live published Google Sheet CSV link
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=2042881448&single=true&output=csv';
+        // FORCED PERMISSIONS URL: Targets your sheet ID directly to bypass Google Web-Publishing delay bugs
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1gHqK2gWj9_kY6UjKIsm438Oa6ZgI-kO_6IeT1wWw0zQ/gviz/tq?tqx=out:csv&sheet=Active_Bounties';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchBountyData();
@@ -262,7 +262,7 @@
                 renderBountyCards(rows);
             } catch (error) {
                 console.error("Database connection failure:", error);
-                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red);">Failed to retrieve live registry feed. Please refresh the page.</li>';
+                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red);">Failed to retrieve live registry feed. Please check Google Sheet Share permissions.</li>';
             }
         }
 
@@ -327,7 +327,11 @@
             const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('target'));
             const idxStatus   = headers.findIndex(h => h.includes('status'));
 
-            const rowsToRender = data.slice(1);
+            // Split out headers and get data rows
+            let rowsToRender = data.slice(1);
+
+            // FIX: Reverse the rows so that the newest entries from the bottom of your sheet show up at the top!
+            rowsToRender.reverse();
 
             rowsToRender.forEach(row => {
                 const getCleanVal = (idx) => (row[idx] && row[idx] !== '""') ? row[idx].replace(/^"|"$/g, '') : 'N/A';
@@ -351,6 +355,8 @@
                 const isTier1 = tier1Keywords.some(keyword => combinedText.includes(keyword));
                 
                 let targetFormUrl = "";
+                
+                // Keep tracks of absolute original spreadsheet position (+2 for 0-index offset & headers)
                 const spreadsheetRowNumber = data.indexOf(row) + 1; 
 
                 if (isTier1) {
