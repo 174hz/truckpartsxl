@@ -68,7 +68,7 @@
         .hero-banner h1 span { color: var(--accent-yellow); }
         .hero-banner .subtitle { color: #ffffff; margin: 12px 0 0 0; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
         
-        /* RESTORED AND CLICKABLE NAVIGATION HUB TILES */
+        /* TICKER BUTTON BOARD FILTER CONTROLS */
         .market-ticker {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -86,12 +86,14 @@
             box-shadow: 0 12px 30px rgba(0,0,0,0.5);
             text-decoration: none;
             display: block;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            transition: all 0.2s ease;
             cursor: pointer;
+            text-align: left;
         }
-        .ticker-stat:hover {
+        .ticker-stat:hover, .ticker-stat.active-filter {
             transform: translateY(-4px);
             border-color: var(--accent-yellow);
+            background: #141e33;
             box-shadow: 0 16px 35px rgba(234, 179, 8, 0.15);
         }
         .ticker-val { font-size: 1.3rem; font-weight: 900; color: #ffffff; margin: 0; }
@@ -141,8 +143,9 @@
         }
         .search-bar:focus { border-color: var(--accent-yellow); }
 
-        .board-title-area { border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 30px; }
+        .board-title-area { border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
         .board-title-area h2 { margin: 0; font-size: 1.5rem; color: #ffffff; text-transform: uppercase; font-weight: 800; letter-spacing: 0.03em; }
+        .filter-status-tag { font-size: 0.8rem; font-weight: 800; background: #1e293b; color: var(--accent-yellow); padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border-color); text-transform: uppercase; }
 
         .bounty-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 30px; }
         .post-card { 
@@ -206,18 +209,18 @@
 
     <div class="container">
         <div class="market-ticker">
-            <a href="#global-form-link" class="ticker-stat">
+            <div class="ticker-stat" id="filter-global" onclick="setRegionFilter('global')">
                 <div class="ticker-val">🏠 Global Exchange</div>
-                <div class="ticker-lbl">North America Core Sourcing Network</div>
-            </a>
-            <a href="#ontario-form-link" class="ticker-stat">
+                <div class="ticker-lbl">US Rust Belt & International Feed</div>
+            </div>
+            <div class="ticker-stat" id="filter-ontario" onclick="setRegionFilter('ontario')">
                 <div class="ticker-val">🇨🇦 Ontario Board</div>
-                <div class="ticker-lbl">Regional Freight Hub Logging Node</div>
-            </a>
-            <a href="#board" class="ticker-stat">
+                <div class="ticker-lbl">Golden Horseshoe Logging Feed</div>
+            </div>
+            <div class="ticker-stat active-filter" id="filter-all" onclick="setRegionFilter('all')">
                 <div class="ticker-val">📞 Procurement Desk</div>
-                <div class="ticker-lbl">Direct Logistics Routing Access</div>
-            </a>
+                <div class="ticker-lbl">Show All Open Global/Regional Bids</div>
+            </div>
         </div>
 
         <div id="post" class="marketplace-split">
@@ -227,11 +230,8 @@
                     <p>Need components or cores for heavy-duty frameworks? Broadcast your asset requirement specs straight into our dedicated commercial dismantling pipelines.</p>
                 </div>
                 <div class="buyer-actions">
-                    <a id="ontario-form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-boost">
-                        🇨🇦 Ontario Board (Golden Horseshoe Region)
-                    </a>
-                    <a id="global-form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-free">
-                        🏠 Global Exchange (US Rust Belt & International)
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-boost">
+                        Submit Request to Ontario Pipeline
                     </a>
                 </div>
             </div>
@@ -251,6 +251,7 @@
 
         <div class="board-title-area">
             <h2>Active Commercial Procurement Requests</h2>
+            <div class="filter-status-tag" id="filterStatusLabel">Showing: All Listings</div>
         </div>
 
         <ul class="bounty-grid" id="bountyGrid">
@@ -271,10 +272,11 @@
 
     <script>
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=2042881448&single=true&output=csv';
+        let currentRegionFilter = 'all';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchBountyData();
-            document.getElementById('searchBar').addEventListener('input', filterBountyBoard);
+            document.getElementById('searchBar').addEventListener('input', applyCombinedFilters);
         });
 
         async function fetchBountyData() {
@@ -395,7 +397,9 @@
                 }
 
                 let html = `
-                    <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()}">
+                    <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" 
+                        data-region="${location.toLowerCase()}"
+                        data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()}">
                         <span class="live-badge ${isBoosted ? 'badge-boosted' : 'badge-standard'}">
                             ${isBoosted ? '🔥 PRIORITIZED CONTRACT' : '🔴 LIVE DEMAND'}
                         </span>
@@ -420,18 +424,71 @@
                 gridContainer.insertAdjacentHTML('beforeend', html);
             });
 
-            if (gridContainer.children.length === 0) {
-                gridContainer.innerHTML = '<li class="status-message">No active heavy truck contracts found matching registry profiles.</li>';
-            }
+            applyCombinedFilters();
         }
 
-        function filterBountyBoard() {
-            const query = this.value.toLowerCase().trim();
+        // MASTER FILTER CONTROLLER
+        function setRegionFilter(regionType) {
+            currentRegionFilter = regionType;
+            
+            // Toggle active visual states on header metric blocks
+            document.querySelectorAll('.ticker-stat').forEach(el => el.classList.remove('active-filter'));
+            if(regionType === 'global') document.getElementById('filter-global').classList.add('active-filter');
+            if(regionType === 'ontario') document.getElementById('filter-ontario').classList.add('active-filter');
+            if(regionType === 'all') document.getElementById('filter-all').classList.add('active-filter');
+
+            // Update human-readable board label
+            const labels = { 'all': 'Showing: All Listings', 'ontario': 'Showing: Ontario (Golden Horseshoe)', 'global': 'Showing: Global (US Rust Belt)' };
+            document.getElementById('filterStatusLabel').innerText = labels[regionType];
+
+            applyCombinedFilters();
+
+            // Smooth scroll directly to the filtered bounty results container
+            document.getElementById('board').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function applyCombinedFilters() {
+            const searchQuery = document.getElementById('searchBar').value.toLowerCase().trim();
             const cards = document.querySelectorAll('#bountyGrid .post-card');
+            let visibleCount = 0;
+
             cards.forEach(card => {
-                const searchContent = card.getAttribute('data-searchable') || '';
-                card.classList.toggle('hidden-bounty', !searchContent.includes(query));
+                const cardRegion = card.getAttribute('data-region') || '';
+                const cardSearch = card.getAttribute('data-searchable') || '';
+
+                // Step 1: Evaluate Regional Toggle Filter
+                let matchesRegion = false;
+                if (currentRegionFilter === 'all') {
+                    matchesRegion = true;
+                } else if (currentRegionFilter === 'ontario') {
+                    matchesRegion = cardRegion.includes('ontario') || cardRegion.includes('horseshoe') || cardRegion.includes('canada') || cardRegion.includes('ca');
+                } else if (currentRegionFilter === 'global') {
+                    matchesRegion = cardRegion.includes('us') || cardRegion.includes('rust') || cardRegion.includes('belt') || cardRegion.includes('global') || !cardRegion.includes('ontario');
+                }
+
+                // Step 2: Evaluate Input Search Field Filter
+                let matchesSearch = cardSearch.includes(searchQuery);
+
+                // Combine results
+                if (matchesRegion && matchesSearch) {
+                    card.classList.remove('hidden-bounty');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden-bounty');
+                }
             });
+
+            // Handle Empty Board States gracefully
+            const existingMsg = document.getElementById('emptyFilterMessage');
+            if (visibleCount === 0) {
+                if (!existingMsg) {
+                    document.getElementById('bountyGrid').insertAdjacentHTML('beforeend', 
+                        `<li id="emptyFilterMessage" class="status-message">No active heavy duty listings match your selected regional or keyword filters.</li>`
+                    );
+                }
+            } else if (existingMsg) {
+                existingMsg.remove();
+            }
         }
     </script>
 </body>
