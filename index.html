@@ -254,8 +254,8 @@
     </footer>
 
     <script>
-        // UNIVERSAL EXPORT INTERFACE: Pulls straight textual values using your targeted master Sheet identifier
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1gHqK2gWj9_kY6UjKIsm438Oa6ZgI-kO_6IeT1wWw0zQ/export?format=csv';
+        // STABLE VERIFIED LIVE FIELD STREAM
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=2042881448&single=true&output=csv';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchBountyData();
@@ -276,7 +276,7 @@
                 renderBountyCards(rows);
             } catch (error) {
                 console.error("Database connection failure:", error);
-                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red); line-height: 1.6;">⚠️ Google Sheet access blocked.<br><span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">To fix: Open your spreadsheet, click the blue "Share" button in the top right, and switch "General Access" from "Restricted" to "Anyone with the link".</span></li>';
+                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red); line-height: 1.6;">⚠️ Google Sheet access blocked.<br><span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Please ensure your Google Sheet has been successfully published to the web as a CSV file.</span></li>';
             }
         }
 
