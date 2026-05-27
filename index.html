@@ -140,278 +140,205 @@
             box-shadow: 0 12px 30px rgba(0,0,0,0.6);
         }
         .post-card:hover { transform: translateY(-4px); border-color: #3b527e; }
-        .hidden-bounty { display: none !important; }
         
-        .card-img-placeholder {
-            width: 100%; height: 170px; background-position: center center; background-repeat: no-repeat;
-            background-size: cover; border-radius: 4px; margin-bottom: 18px; border: 1px solid var(--border-color);
-        }
+        .card-boosted-style { border-color: var(--accent-green) !important; background: linear-gradient(145deg, #0f1626, #122133); }
+        .live-badge { position: absolute; top: 15px; right: 15px; font-size: 0.65rem; font-weight: 900; padding: 4px 8px; border-radius: 3px; letter-spacing: 0.05em; }
+        .badge-standard { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-boosted { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
         
-        .live-badge {
-            position: absolute; top: 15px; right: 15px; padding: 4px 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; border-radius: 3px; z-index: 5;
-        }
-        .badge-standard { background: rgba(239, 68, 68, 0.25); border: 1px solid var(--accent-red); color: #ff6b6b; font-weight: 900; }
-        .badge-boosted { background: rgba(250, 204, 21, 0.3); border: 1px solid var(--accent-yellow); color: #ffffff; font-weight: 900; }
-        .card-boosted-style { border-color: var(--accent-yellow) !important; }
+        .card-img-placeholder { height: 140px; background: #131c30; border-radius: 4px; margin-bottom: 20px; background-size: cover; background-position: center; border: 1px solid var(--border-color); }
+        .part-title { margin: 0 0 4px 0; font-size: 1.3rem; font-weight: 800; color: #ffffff; text-transform: uppercase; }
+        .vehicle-fitment { font-size: 0.85rem; font-weight: 700; color: var(--accent-yellow); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 20px; }
+        
+        .data-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
+        .data-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding-bottom: 8px; border-bottom: 1px dashed #1e293b; }
+        .data-item:last-child { border-bottom: none; }
+        .label { color: var(--text-muted); font-weight: 600; }
+        .value { color: #f8fafc; font-weight: 700; text-align: right; }
+        .budget-value { color: var(--accent-green); }
 
-        .part-title { margin: 0 0 4px 0; font-size: 1.3rem; color: #ffffff; font-weight: 800; text-transform: uppercase; }
-        .vehicle-fitment { color: var(--accent-yellow); font-weight: 700; margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.02em; }
-        
-        .data-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
-        .data-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); }
-        .label { color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 0.75rem; }
-        .value { font-weight: 600; color: #e2e8f0; text-align: right; }
-        .budget-value { color: #0b0f19; background: var(--accent-yellow); padding: 2px 8px; border-radius: 3px; font-weight: 800; }
-        
         .claim-btn { 
-            display: block; text-align: center; background: transparent; border: 1px solid var(--accent-yellow);
-            color: var(--accent-yellow); padding: 14px; margin-top: auto; border-radius: 4px; font-weight: 800; 
-            font-size: 0.9rem; text-transform: uppercase; text-decoration: none; transition: all 0.2s;
+            display: block; text-align: center; background: #1e293b; color: #ffffff; text-decoration: none; padding: 14px; 
+            border-radius: 4px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-color); transition: all 0.2s;
         }
-        .claim-btn:hover { background: var(--accent-yellow); color: #0b0f19; }
-        .status-message { text-align: center; padding: 50px; color: var(--text-muted); font-style: italic; grid-column: 1 / -1; }
-
-        footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid var(--border-color); background: var(--bg-nav); text-align: center; }
-        .footer-links { margin-bottom: 20px; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; margin: 0 15px; text-transform: uppercase; font-size: 0.8rem; }
-        .footer-links a:hover { color: #ffffff; }
-        footer p { color: #475569; font-size: 0.8rem; font-weight: 600; margin: 0; }
-
-        /* ==========================================================================
-           MOBILE OPTIMIZATION RESPONSIVE BREAKPOINTS
-           ========================================================================= */
-        @media (max-width: 768px) {
-            nav { padding: 15px 0; }
-            .nav-container { flex-direction: column; gap: 15px; text-align: center; }
-            .nav-links { gap: 15px; font-size: 0.8rem; }
-            
-            .hero-banner { padding: 60px 0; }
-            .hero-banner h1 { font-size: 2.1rem; padding: 0 10px; }
-            .hero-banner .subtitle { font-size: 1rem; padding: 0 15px; line-height: 1.4; }
-            
-            .market-ticker { grid-template-columns: 1fr; margin: -20px auto 30px auto; gap: 12px; }
-            .ticker-stat { padding: 15px; }
-            
-            .marketplace-split { grid-template-columns: 1fr; gap: 20px; margin-bottom: 35px; }
-            .market-card { padding: 25px; }
-            .market-card h2 { font-size: 1.4rem; }
-            .market-card p { margin-bottom: 20px; font-size: 0.95rem; }
-            
-            .search-bar { padding: 15px 20px; font-size: 1rem; }
-            .bounty-grid { grid-template-columns: 1fr; gap: 20px; }
-            
-            .footer-links { display: flex; flex-direction: column; gap: 12px; align-items: center; }
-            .footer-links a { margin: 0; }
-        }
-
-        @media (max-width: 480px) {
-            .data-item { 
-                flex-direction: column; 
-                align-items: flex-start; 
-                gap: 4px; 
-                padding-bottom: 10px; 
-            }
-            .value { text-align: left; word-break: break-all; font-size: 0.9rem; }
-            .part-title { font-size: 1.15rem; }
-            .card-img-placeholder { height: 140px; }
-        }
+        .claim-btn:hover { background: var(--accent-yellow); color: #0b0f19; border-color: var(--accent-yellow); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3); }
+        
+        .hidden-bounty { display: none !important; }
+        .status-message { grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted); font-weight: 700; background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 6px; }
+        
+        footer { background: #04060b; padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 80px; text-align: center; font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">⚡ SYSTEM MONITOR: Real-Time Commercial Logistics Feed Active</div>
+    <div class="top-bar">🚨 HEAVY TRUCK DEMAND INDEX — LIVE COMMERCIAL LOGISTICS FEED</div>
 
     <nav>
         <div class="container nav-container">
             <div class="nav-logo">TruckParts<span>XL</span></div>
             <div class="nav-links">
-                <a href="index.html">🏠 Global Exchange</a>
-                <a href="ontario.html">🇨🇦 Ontario Board</a>
-                <a href="contact.html">📞 Procurement Desk</a>
+                <a href="#board">Bounty Board</a>
+                <a href="#post">Post Contract</a>
             </div>
         </div>
     </nav>
 
-    <header class="hero-banner">
+    <div class="hero-banner">
         <div class="container">
-            <h1>Heavy Truck <span>Part Bounty</span> Board</h1>
-            <p class="subtitle">Buyers Broadcast Sourcing Needs. Suppliers & Yards Liquidate Heavy Inventory.</p>
+            <h1>Sourcing <span>Heavy Duty</span> Components</h1>
+            <div class="subtitle">B2B Core Exchange & Part Lead Pipeline</div>
         </div>
-    </header>
+    </div>
 
     <div class="container">
-        
         <div class="market-ticker">
-            <div class="ticker-stat"><p class="ticker-val">📦 LIVE DEMAND FEED</p><p class="ticker-lbl">Active Core Stream</p></div>
-            <div class="ticker-stat"><p class="ticker-val">$50,000+</p><p class="ticker-lbl">Open Sourcing Budgets</p></div>
-            <div class="ticker-stat"><p class="ticker-val">&lt; 45 Mins</p><p class="ticker-lbl">Average Fulfillment Match Time</p></div>
+            <div class="ticker-stat">
+                <div class="ticker-val">100% Verified</div>
+                <div class="ticker-lbl">Commercial Buyer Auth</div>
+            </div>
+            <div class="ticker-stat">
+                <div class="ticker-val">Fulfillment Regions</div>
+                <div class="ticker-lbl">North America Registry</div>
+            </div>
+            <div class="ticker-stat">
+                <div class="ticker-val">Zero Comm.</div>
+                <div class="ticker-lbl">Direct Sourcing Access</div>
+            </div>
         </div>
 
-        <div class="marketplace-split">
+        <div id="post" class="marketplace-split">
             <div class="market-card buyer-zone">
                 <div>
-                    <h2>Fleet Procurement</h2>
-                    <p>Broadcast commercial components requests to our global yard networks instantly. Access standard postings at zero cost, or leverage prioritized boost placement pipelines.</p>
+                    <h2>Fleet Procurement Desk</h2>
+                    <p>Need components or cores for heavy-duty frameworks? Broadcast your asset requirement specs straight into our regional network of commercial dismantling operators.</p>
                 </div>
                 <div class="buyer-actions">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScKq_uPly1Z80NYej0e7mnhZsx-qzzq2HMKpL-uGwdpAzf1Tg/viewform" target="_blank" class="action-btn btn-buyer-free">
-                        Standard Post (Free)
-                    </a>
-                    <a href="https://buy.stripe.com/mock_truckpartsxl_999" target="_blank" class="action-btn btn-buyer-boost">
-                        🚀 Fast-Track Request ($9.99)
-                    </a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-free">Post Standard Request (Free)</a>
                 </div>
             </div>
 
             <div class="market-card seller-zone">
                 <div>
-                    <h2>Asset & Inventory Liquidity</h2>
-                    <p>Monetize surplus commercial components and heavy-duty inventory sitting on shelves. Scan active contract demands below, locate matching assets, and claim fulfillment vouchers.</p>
+                    <h2>Commercial Dismantlers</h2>
+                    <p>Browse live, fully authorized hardware procurement requests. Instantly extract accurate contact logs and logistics parameters to fulfill pending open market bids.</p>
                 </div>
-                <a href="#open-bounties" class="action-btn btn-seller">
-                    🔍 Scan Open Contract Demands
-                </a>
+                <a href="#board" class="action-btn btn-seller">Access Live Bounty Registry</a>
             </div>
         </div>
 
-        <div class="board-title-area" id="open-bounties">
-            <h2>⚡ Verified Live Sourcing Contracts</h2>
+        <div id="board" class="search-container">
+            <input type="text" id="searchBar" class="search-bar" placeholder="Filter active registry by engine models, casting numbers, truck brands, or VIN sequences...">
         </div>
 
-        <div class="search-container">
-            <input type="text" id="boardSearch" class="search-bar" placeholder="Filter exchange data by Category, Make, Model, VIN Number, or OEM Casting numbers...">
+        <div class="board-title-area">
+            <h2>Active Commercial Procurement Requests</h2>
         </div>
-        
+
         <ul class="bounty-grid" id="bountyGrid">
-            <li class="status-message" id="loadingState">🔄 Synchronizing live logistics registry streams...</li>
+            <li class="status-message">Connecting to database registry node...</li>
         </ul>
-
     </div>
 
     <footer>
         <div class="container">
-            <div class="footer-links">
-                <a href="index.html">🏠 Home Exchange</a>
-                <a href="ontario.html">🇨🇦 Ontario Feed</a>
-                <a href="privacy.html">⚖️ Privacy Registry</a>
-                <a href="terms.html">🛠️ Terms of Service</a>
-                <a href="contact.html">📞 Contact & Support</a>
-            </div>
-            <p>© 2026 TruckPartsXL. All Rights Reserved. Heavy-Duty Sourcing Infrastructure Solutions.</p>
+            &copy; 2026 TruckPartsXL Logistics. All Rights Reserved. Commercial Sourcing Exchange Framework.
         </div>
     </footer>
 
     <script>
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?output=csv&clear_cache=' + new Date().getTime();
+        // Injecting the live published Google Sheet CSV link
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=2042881448&single=true&output=csv';
 
         document.addEventListener('DOMContentLoaded', () => {
-            fetchBountyBoardData();
-            document.getElementById('boardSearch').addEventListener('input', filterBountyBoard);
+            fetchBountyData();
+            document.getElementById('searchBar').addEventListener('input', filterBountyBoard);
         });
 
-        async function fetchBountyBoardData() {
-            const gridContainer = document.getElementById('bountyGrid');
+        async function fetchBountyData() {
             try {
-                const response = await fetch(CSV_URL);
-                if (!response.ok) throw new Error('HTTP network connection drop: ' + response.status);
+                const response = await fetch(sheetUrl);
                 const csvText = await response.text();
-                
-                if (!csvText || csvText.trim().length === 0) {
-                    throw new Error('Spreadsheet returned empty workspace data.');
-                }
-
                 const rows = parseCSV(csvText);
-                if (!rows || rows.length <= 1) {
-                    gridContainer.innerHTML = '<li class="status-message">Connection live. Awaiting contract records.</li>';
-                    return;
-                }
                 renderBountyCards(rows);
             } catch (error) {
-                console.error("Sync Error Blocked: ", error);
-                gridContainer.innerHTML = `<li class="status-message" style="color: var(--accent-red);">⚠️ Sourcing database link timeout. Verification failed.</li>`;
+                console.error("Database connection failure:", error);
+                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red);">Failed to retrieve live registry feed. Please refresh the page.</li>';
             }
         }
 
         function parseCSV(text) {
-            let lines = []; let row = []; let inQuotes = false; let currentToken = '';
-            for (let i = 0; i < text.length; i++) {
-                let char = text[i]; let nextChar = text[i+1];
-                if (char === '"') { if (inQuotes && nextChar === '"') { currentToken += '"'; i++; } else { inQuotes = !inQuotes; } }
-                else if (char === ',' && !inQuotes) { row.push(currentToken.trim()); currentToken = ''; }
-                else if ((char === '\r' || char === '\n') && !inQuotes) {
-                    if (char === '\r' && nextChar === '\n') i++;
-                    row.push(currentToken.trim());
-                    if (row.length > 0) lines.push(row);
-                    row = []; currentToken = '';
-                } else { currentToken += char; }
+            const lines = text.split('\n');
+            return lines.map(line => {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+                for (let i = 0; i < line.length; i++) {
+                    let char = line[i];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        result.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                result.push(current.trim());
+                return result;
+            }).filter(row => row.length > 1 && row.some(cell => cell !== ''));
+        }
+
+        function getComponentImage(name, cat) {
+            const clean = (name + ' ' + cat).toLowerCase();
+            if (clean.includes('engine') || clean.includes('motor') || clean.includes('block')) {
+                return 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=400';
             }
-            if (currentToken || row.length > 0) { row.push(currentToken.trim()); lines.push(row); }
-            return lines;
+            if (clean.includes('transmission') || clean.includes('gearbox')) {
+                return 'https://images.unsplash.com/photo-1504221507732-5246c045949b?auto=format&fit=crop&q=80&w=400';
+            }
+            if (clean.includes('axle') || clean.includes('differential') || clean.includes('carrier')) {
+                return 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=400';
+            }
+            if (clean.includes('cab') || clean.includes('hood') || clean.includes('door')) {
+                return 'https://images.unsplash.com/photo-1516515429572-bf32372f2409?auto=format&fit=crop&q=80&w=400';
+            }
+            return 'https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&q=80&w=400';
         }
 
         function renderBountyCards(data) {
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
 
-            const headers = data[0].map(h => h.toLowerCase().trim());
+            if (data.length <= 1) {
+                gridContainer.innerHTML = '<li class="status-message">No active heavy truck contracts found matching registry profiles.</li>';
+                return;
+            }
+
+            const headers = data[0].map(h => h.toLowerCase());
             
-            const idxPartName = headers.findIndex(h => h.includes('part') && !h.includes('email'));
+            const idxPart     = headers.findIndex(h => h.includes('part') || h.includes('component'));
             const idxOem      = headers.findIndex(h => h.includes('oem') || h.includes('casting'));
-            const idxVin      = headers.findIndex(h => h.includes('vin')); 
-            const idxCategory = headers.findIndex(h => h.includes('category') || h.includes('group') || h.includes('component'));
+            const idxVin      = headers.findIndex(h => h.includes('vin'));
+            const idxCategory = headers.findIndex(h => h.includes('category') || h.includes('type'));
             const idxYear     = headers.findIndex(h => h.includes('year'));
-            const idxMake     = headers.findIndex(h => h.includes('make'));
+            const idxMake     = headers.findIndex(h => h.includes('make') || h.includes('brand'));
             const idxModel    = headers.findIndex(h => h.includes('model'));
-            const idxLocation = headers.findIndex(h => h.includes('location') || h.includes('region') || h.includes('city')); 
-            const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('price') || h.includes('target'));
-            const idxStatus   = headers.findIndex(h => h.includes('status') || h.includes('premium') || h.includes('tier'));
+            const idxLocation = headers.findIndex(h => h.includes('region') || h.includes('location'));
+            const idxBudget   = headers.findIndex(h => h.includes('budget') || h.includes('target'));
+            const idxStatus   = headers.findIndex(h => h.includes('status'));
 
-            // Isolate data rows (skipping the header)
-            let dataRows = data.slice(1);
-            
-            // 1. CHRONOLOGICAL REVERSE: Google Forms drops new posts at the very bottom row.
-            // This forces the newest row entries to be processed first.
-            dataRows.reverse();
+            const rowsToRender = data.slice(1);
 
-            // 2. PREMIUM SORT TIER: Keep Boosted contracts pinned above standard entries.
-            dataRows.sort((a, b) => {
-                const statusA = idxStatus !== -1 ? (a[idxStatus] || '').toLowerCase() : '';
-                const statusB = idxStatus !== -1 ? (b[idxStatus] || '').toLowerCase() : '';
-                const isA_Boosted = statusA.includes('boost') || statusA.includes('paid');
-                const isB_Boosted = statusB.includes('boost') || statusB.includes('paid');
-                
-                if (isA_Boosted !== isB_Boosted) {
-                    return isB_Boosted - isA_Boosted; // Push boosted to top tier
-                }
-                return 0; // Maintain the verified chronological reverse order
-            });
+            rowsToRender.forEach(row => {
+                const getCleanVal = (idx) => (row[idx] && row[idx] !== '""') ? row[idx].replace(/^"|"$/g, '') : 'N/A';
 
-            const getComponentImage = (partText, catText) => {
-                const combined = (partText + ' ' + catText).toLowerCase();
-                if (combined.includes('engine') || combined.includes('piston') || combined.includes('block') || combined.includes('motor')) {
-                    return 'https://images.unsplash.com/photo-1530047590133-aa8b1a678195?auto=format&fit=crop&q=80&w=500';
-                }
-                if (combined.includes('axle') || combined.includes('differential') || combined.includes('gear') || combined.includes('transmission')) {
-                    return 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=500';
-                }
-                if (combined.includes('tire') || combined.includes('wheel') || combined.includes('rim') || combined.includes('brake') || combined.includes('hub')) {
-                    return 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=500';
-                }
-                return 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=500';
-            };
-
-            dataRows.forEach(row => {
-                if (row.length === 0 || !row.some(val => val !== '')) return;
-
-                const getCleanVal = (idx) => (idx !== -1 && row[idx] !== undefined) ? row[idx].replace(/[\"\']/g, "").trim() : 'N/A';
-                
-                const partName = idxPartName !== -1 ? getCleanVal(idxPartName) : 'HD Component';
+                const partName = idxPart     !== -1 ? getCleanVal(idxPart)     : 'Unknown Component';
                 const oem      = idxOem      !== -1 ? getCleanVal(idxOem)      : 'N/A';
                 const vin      = idxVin      !== -1 ? getCleanVal(idxVin)      : 'N/A';
-                const category = idxCategory !== -1 ? getCleanVal(idxCategory) : 'N/A';
-                const year     = getCleanVal(idxYear);
-                const make     = getCleanVal(idxMake);
-                const model    = getCleanVal(idxModel);
+                const category = idxCategory !== -1 ? getCleanVal(idxCategory) : 'Heavy Duty General';
+                const year     = idxYear     !== -1 ? getCleanVal(idxYear)     : 'N/A';
+                const make     = idxMake     !== -1 ? getCleanVal(idxMake)     : 'N/A';
+                const model    = idxModel    !== -1 ? getCleanVal(idxModel)    : 'N/A';
                 const location = idxLocation !== -1 ? getCleanVal(idxLocation) : 'N/A';
                 const budget   = idxBudget   !== -1 ? getCleanVal(idxBudget)   : 'Contact Desk';
                 const rawStatus= idxStatus   !== -1 ? getCleanVal(idxStatus).toLowerCase() : '';
@@ -419,30 +346,18 @@
                 const isBoosted = rawStatus.includes('boost') || rawStatus.includes('paid');
                 const cardGraphic = getComponentImage(partName, category);
 
-                // ==========================================================================
-                // AUTOMATED TIER ROUTING ENGINE (LIVE FORM CONNECTORS)
-                // ==========================================================================
                 const combinedText = (partName + ' ' + category).toLowerCase();
-                
-                // Define high-value Tier 1 identifiers
                 const tier1Keywords = ['engine', 'transmission', 'axle', 'differential', 'cab', 'carrier', 'block', 'motor'];
-                
-                // Check if current row contains any Tier 1 keywords
                 const isTier1 = tier1Keywords.some(keyword => combinedText.includes(keyword));
                 
                 let targetFormUrl = "";
-                
-                // Dynamically calculate physical spreadsheet row position (+2 accounts for header and 0-index)
                 const spreadsheetRowNumber = data.indexOf(row) + 1; 
 
                 if (isTier1) {
-                    // TIER 1 PREMIUM FORM CONFIGURATION ($25.00)
                     targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSfNNeAUVU0z4PpPy4gN0KHJ0Z_fZnz494V1aT7JHyLUYx7qoQ/viewform?usp=pp_url&entry.773631869=${spreadsheetRowNumber}`;
                 } else {
-                    // TIER 2 STANDARD FORM CONFIGURATION ($10.00)
                     targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLScN_cxQE-osbL3Af7N3eRfeMUe_PAqhlxtAs14AWMnkYZRhJA/viewform?usp=pp_url&entry.689808697=${spreadsheetRowNumber}`;
                 }
-                // ==========================================================================
 
                 let html = `
                     <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()}">
@@ -459,7 +374,7 @@
                             <div class="data-item"><span class="label">OEM / Casting Number</span><span class="value">${oem}</span></div>
                             <div class="data-item"><span class="label">VIN Number</span><span class="value">${vin}</span></div>
                             <div class="data-item"><span class="label">Category</span><span class="value">${category}</span></div>
-                            <div class="data-item"><span class="label">Location</span><span class="value">${location}</span></div>
+                            <div class="data-item"><span class="label">Fulfillment Region</span><span class="value">${location}</span></div>
                             <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
                         </div>
                         
