@@ -254,7 +254,6 @@
     </footer>
 
     <script>
-        // STABLE VERIFIED LIVE FIELD STREAM
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=2042881448&single=true&output=csv';
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -373,10 +372,11 @@
                 let targetFormUrl = "";
                 const spreadsheetRowNumber = data.indexOf(row) + 1; 
 
+                // FIX: Stripped the admin /usp=pp_url parameters to force direct user viewing channels
                 if (isTier1) {
-                    targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSfNNeAUVU0z4PpPy4gN0KHJ0Z_fZnz494V1aT7JHyLUYx7qoQ/viewform?usp=pp_url&entry.773631869=${spreadsheetRowNumber}`;
+                    targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSfNNeAUVU0z4PpPy4gN0KHJ0Z_fZnz494V1aT7JHyLUYx7qoQ/viewform?entry.773631869=${spreadsheetRowNumber}`;
                 } else {
-                    targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLScN_cxQE-osbL3Af7N3eRfeMUe_PAqhlxtAs14AWMnkYZRhJA/viewform?usp=pp_url&entry.689808697=${spreadsheetRowNumber}`;
+                    targetFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLScN_cxQE-osbL3Af7N3eRfeMUe_PAqhlxtAs14AWMnkYZRhJA/viewform?entry.689808697=${spreadsheetRowNumber}`;
                 }
 
                 let html = `
