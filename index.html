@@ -83,7 +83,7 @@
             border-radius: 4px;
             box-shadow: 0 12px 30px rgba(0,0,0,0.5);
         }
-        .ticker-val { font-size: 1.5rem; font-weight: 900; color: #ffffff; margin: 0; }
+        .ticker-val { font-size: 1.3rem; font-weight: 900; color: #ffffff; margin: 0; }
         .ticker-lbl { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
 
         .marketplace-split {
@@ -196,16 +196,16 @@
     <div class="container">
         <div class="market-ticker">
             <div class="ticker-stat">
-                <div class="ticker-val">100% Verified</div>
-                <div class="ticker-lbl">Commercial Buyer Auth</div>
+                <div class="ticker-val">🏠 Global Exchange</div>
+                <div class="ticker-lbl">North America Core Sourcing Network</div>
             </div>
             <div class="ticker-stat">
-                <div class="ticker-val">Fulfillment Regions</div>
-                <div class="ticker-lbl">North America Registry</div>
+                <div class="ticker-val">🇨🇦 Ontario Board</div>
+                <div class="ticker-lbl">Regional Freight Hub Logging Node</div>
             </div>
             <div class="ticker-stat">
-                <div class="ticker-val">Zero Comm.</div>
-                <div class="ticker-lbl">Direct Sourcing Access</div>
+                <div class="ticker-val">📞 Procurement Desk</div>
+                <div class="ticker-lbl">Direct Logistics Routing Access</div>
             </div>
         </div>
 
@@ -254,8 +254,8 @@
     </footer>
 
     <script>
-        // STABLE PUBLIC EMBED URL: Uses the clean published output structure to completely sidestep API permission walls
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTYrAOOtTGO2mCi3sqBNaWAoM8PM8srskGBywloCDjBAgTH9BwzWlhQiWM2KNWy3uzds53j8rCcIsPG/pub?gid=2042881448&single=true&output=csv';
+        // STRICT RAW STREAMING OVERRIDE: Pulls raw text directly to eliminate permission page popups entirely
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1gHqK2gWj9_kY6UjKIsm438Oa6ZgI-kO_6IeT1wWw0zQ/export?format=csv&gid=2042881448';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchBountyData();
@@ -265,12 +265,19 @@
         async function fetchBountyData() {
             try {
                 const response = await fetch(sheetUrl);
+                if (!response.ok) throw new Error('Network error');
                 const csvText = await response.text();
+                
+                // Absolute verification block to confirm we aren't getting standard Google login screens
+                if(csvText.includes('<!DOCTYPE html>') || csvText.includes('login')) {
+                    throw new Error('Google Link Blocked');
+                }
+                
                 const rows = parseCSV(csvText);
                 renderBountyCards(rows);
             } catch (error) {
                 console.error("Database connection failure:", error);
-                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red);">Failed to retrieve live registry feed. Please refresh the page.</li>';
+                document.getElementById('bountyGrid').innerHTML = '<li class="status-message" style="color: var(--accent-red); line-height: 1.6;">⚠️ Google Sheet access blocked.<br><span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">To fix: Open your spreadsheet, click the blue "Share" button in the top right, and switch "General Access" from "Restricted" to "Anyone with the link".</span></li>';
             }
         }
 
