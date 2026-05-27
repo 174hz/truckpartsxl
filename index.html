@@ -254,8 +254,8 @@
     </footer>
 
     <script>
-        // STRICT RAW STREAMING OVERRIDE: Pulls raw text directly to eliminate permission page popups entirely
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1gHqK2gWj9_kY6UjKIsm438Oa6ZgI-kO_6IeT1wWw0zQ/export?format=csv&gid=2042881448';
+        // UNIVERSAL EXPORT INTERFACE: Pulls straight textual values using your targeted master Sheet identifier
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1gHqK2gWj9_kY6UjKIsm438Oa6ZgI-kO_6IeT1wWw0zQ/export?format=csv';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchBountyData();
@@ -268,7 +268,6 @@
                 if (!response.ok) throw new Error('Network error');
                 const csvText = await response.text();
                 
-                // Absolute verification block to confirm we aren't getting standard Google login screens
                 if(csvText.includes('<!DOCTYPE html>') || csvText.includes('login')) {
                     throw new Error('Google Link Blocked');
                 }
