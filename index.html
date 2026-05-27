@@ -23,6 +23,7 @@
             color: var(--text-main); 
             margin: 0; 
             padding: 0; 
+            scroll-behavior: smooth;
         }
         
         .top-bar {
@@ -67,6 +68,7 @@
         .hero-banner h1 span { color: var(--accent-yellow); }
         .hero-banner .subtitle { color: #ffffff; margin: 12px 0 0 0; font-size: 1.3rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
         
+        /* RESTORED AND CLICKABLE NAVIGATION HUB TILES */
         .market-ticker {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -82,6 +84,15 @@
             padding: 20px;
             border-radius: 4px;
             box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            text-decoration: none;
+            display: block;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .ticker-stat:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-yellow);
+            box-shadow: 0 16px 35px rgba(234, 179, 8, 0.15);
         }
         .ticker-val { font-size: 1.3rem; font-weight: 900; color: #ffffff; margin: 0; }
         .ticker-lbl { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
@@ -195,18 +206,18 @@
 
     <div class="container">
         <div class="market-ticker">
-            <div class="ticker-stat">
+            <a href="#global-form-link" class="ticker-stat">
                 <div class="ticker-val">🏠 Global Exchange</div>
                 <div class="ticker-lbl">North America Core Sourcing Network</div>
-            </div>
-            <div class="ticker-stat">
+            </a>
+            <a href="#ontario-form-link" class="ticker-stat">
                 <div class="ticker-val">🇨🇦 Ontario Board</div>
                 <div class="ticker-lbl">Regional Freight Hub Logging Node</div>
-            </div>
-            <div class="ticker-stat">
+            </a>
+            <a href="#board" class="ticker-stat">
                 <div class="ticker-val">📞 Procurement Desk</div>
                 <div class="ticker-lbl">Direct Logistics Routing Access</div>
-            </div>
+            </a>
         </div>
 
         <div id="post" class="marketplace-split">
@@ -216,10 +227,10 @@
                     <p>Need components or cores for heavy-duty frameworks? Broadcast your asset requirement specs straight into our dedicated commercial dismantling pipelines.</p>
                 </div>
                 <div class="buyer-actions">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-boost">
+                    <a id="ontario-form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-boost">
                         🇨🇦 Ontario Board (Golden Horseshoe Region)
                     </a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-free">
+                    <a id="global-form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSd7gq-8oU-Z9_17X_4_y_9K6vD6fJtDq3Z0rX_xW-8-o0v1bA/viewform" target="_blank" class="action-btn btn-buyer-free">
                         🏠 Global Exchange (US Rust Belt & International)
                     </a>
                 </div>
