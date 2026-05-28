@@ -62,7 +62,7 @@
                         url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1600') no-repeat center center;
             background-size: cover;
             border-bottom: 4px solid var(--border-color);
-            padding: 90px 0;
+            padding: 70px 0;
             text-align: center;
         }
         .hero-banner h1 { margin: 0; font-size: 3.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; }
@@ -194,47 +194,100 @@
         }
         .search-bar:focus { border-color: var(--accent-orange); }
 
-        .board-title-area { border-bottom: 2px solid var(--border-color); padding-bottom: 18px; margin-bottom: 35px; display: flex; justify-content: space-between; align-items: center; }
+        .board-title-area { border-bottom: 2px solid var(--border-color); padding-bottom: 18px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .board-title-area h2 { margin: 0; font-size: 1.4rem; color: #ffffff; text-transform: uppercase; font-weight: 900; letter-spacing: 0.04em; }
         .filter-status-tag { font-size: 0.75rem; font-weight: 800; background: #172033; color: var(--accent-amber); padding: 6px 14px; border-radius: 3px; border: 1px solid var(--border-color); text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .bounty-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 30px; }
-        .post-card { 
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 4px; padding: 25px; 
-            display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.2s, border-color 0.2s;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-        }
-        .post-card:hover { transform: translateY(-3px); border-color: var(--text-muted); }
+        /* STREAMLINED ULTRA COMPACT BOUNTY LIST */
+        .bounty-grid { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
         
-        .card-boosted-style { border-color: var(--accent-orange) !important; background: linear-gradient(145deg, #131926, #1b2436); }
-        .live-badge { position: absolute; top: 18px; right: 18px; font-size: 0.65rem; font-weight: 900; padding: 4px 10px; border-radius: 2px; letter-spacing: 0.06em; }
+        .post-card { 
+            background: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            border-radius: 4px; 
+            padding: 14px 20px; 
+            display: grid;
+            grid-template-columns: 80px 1.8fr 2.5fr 1fr 150px;
+            align-items: center;
+            gap: 20px;
+            position: relative; 
+            transition: transform 0.15s, border-color 0.15s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .post-card:hover { transform: translateX(4px); border-color: var(--text-muted); }
+        
+        .card-boosted-style { border-left: 4px solid var(--accent-orange) !important; background: linear-gradient(90deg, #161e2e, #131926); }
+        
+        .live-badge { 
+            font-size: 0.65rem; 
+            font-weight: 900; 
+            padding: 4px 6px; 
+            border-radius: 2px; 
+            letter-spacing: 0.04em; 
+            text-align: center;
+            white-space: nowrap;
+        }
         .badge-standard { background: rgba(148, 163, 184, 0.1); color: var(--text-muted); border: 1px solid var(--border-color); }
         .badge-boosted { background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid var(--accent-orange); }
         
-        .card-img-placeholder { height: 140px; background: #0c101a; border-radius: 2px; margin-bottom: 22px; background-size: cover; background-position: center; border: 1px solid var(--border-color); }
-        .part-title { margin: 0 0 6px 0; font-size: 1.35rem; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: -0.01em; }
-        .vehicle-fitment { font-size: 0.85rem; font-weight: 700; color: var(--accent-amber); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 22px; }
+        .card-meta-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .part-title { margin: 0 0 3px 0; font-size: 1.1rem; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: -0.01em; }
+        .vehicle-fitment { font-size: 0.8rem; font-weight: 700; color: var(--accent-amber); text-transform: uppercase; letter-spacing: 0.02em; }
         
-        .data-grid { display: flex; flex-direction: column; gap: 11px; margin-bottom: 28px; }
-        .data-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding-bottom: 9px; border-bottom: 1px solid #1c263b; }
-        .data-item:last-child { border-bottom: none; }
-        .label { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.03em; }
-        .value { color: #f8fafc; font-weight: 700; text-align: right; }
-        .budget-value { color: var(--accent-green); }
+        /* HORIZONTAL LOGISTICS & SPEC GRID */
+        .data-grid { 
+            display: flex; 
+            flex-wrap: wrap;
+            gap: 15px 25px; 
+        }
+        .data-item { 
+            display: flex; 
+            flex-direction: column;
+            gap: 2px;
+        }
+        .label { color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.05em; }
+        .value { color: #f8fafc; font-weight: 700; font-size: 0.85rem; }
+        .budget-value { color: var(--accent-green); font-weight: 800; }
 
         .claim-btn { 
-            display: block; text-align: center; background: #1c263b; color: #ffffff; text-decoration: none; padding: 15px; 
-            border-radius: 4px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; border: 1px solid var(--border-color); transition: all 0.15s;
+            display: block; 
+            text-align: center; 
+            background: #1c263b; 
+            color: #ffffff; 
+            text-decoration: none; 
+            padding: 10px 14px; 
+            border-radius: 4px; 
+            font-weight: 800; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+            border: 1px solid var(--border-color); 
+            transition: all 0.15s;
+            white-space: nowrap;
         }
-        .claim-btn:hover { background: var(--accent-orange); color: #000000; border-color: var(--accent-orange); box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3); }
+        .claim-btn:hover { background: var(--accent-orange); color: #000000; border-color: var(--accent-orange); box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3); }
         
         .hidden-bounty { display: none !important; }
-        .status-message { grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted); font-weight: 700; background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .status-message { text-align: center; padding: 50px; color: var(--text-muted); font-weight: 700; background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
         
         footer { background: #06080d; padding: 50px 0; border-top: 2px solid var(--border-color); margin-top: 90px; text-align: center; font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
         .footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 25px; }
         .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
         .footer-links a:hover { color: var(--accent-orange); }
+
+        /* Responsive stack for mobile views */
+        @media (max-width: 900px) {
+            .post-card {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 15px;
+            }
+            .live-badge { width: fit-content; }
+        }
     </style>
 </head>
 <body>
@@ -392,23 +445,6 @@
             }).filter(row => row.length > 1 && row.some(cell => cell !== ''));
         }
 
-        function getComponentImage(name, cat) {
-            const clean = (name + ' ' + cat).toLowerCase();
-            if (clean.includes('engine') || clean.includes('motor') || clean.includes('block')) {
-                return 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=400';
-            }
-            if (clean.includes('transmission') || clean.includes('gearbox')) {
-                return 'https://images.unsplash.com/photo-1504221507732-5246c045949b?auto=format&fit=crop&q=80&w=400';
-            }
-            if (clean.includes('axle') || clean.includes('differential') || clean.includes('carrier')) {
-                return 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=400';
-            }
-            if (clean.includes('cab') || clean.includes('hood') || clean.includes('door')) {
-                return 'https://images.unsplash.com/photo-1516515429572-bf32372f2409?auto=format&fit=crop&q=80&w=400';
-            }
-            return 'https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&q=80&w=400';
-        }
-
         function renderBountyCards(data) {
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
@@ -445,16 +481,15 @@
                 const partName = getCleanVal(idxPart) === 'N/A' ? 'Unknown Component' : getCleanVal(idxPart);
                 const oem      = getCleanVal(idxOem);
                 const vin      = getCleanVal(idxVin);
-                const category = getCleanVal(idxCategory) === 'N/A' ? 'Heavy Duty General' : getCleanVal(idxCategory);
+                const category = getCleanVal(idxCategory) === 'N/A' ? 'Heavy Duty' : getCleanVal(idxCategory);
                 const year     = getCleanVal(idxYear);
                 const make     = getCleanVal(idxMake);
                 const model    = getCleanVal(idxModel);
                 const location = getCleanVal(idxLocation);
-                const budget   = getCleanVal(idxBudget) === 'N/A' ? 'Contact Desk' : getCleanVal(idxBudget);
+                const budget   = getCleanVal(idxBudget) === 'N/A' ? 'Contact' : getCleanVal(idxBudget);
                 const rawStatus= getCleanVal(idxStatus).toLowerCase();
 
                 const isBoosted = rawStatus.includes('boost') || rawStatus.includes('paid');
-                const cardGraphic = getComponentImage(partName, category);
 
                 const combinedText = (partName + ' ' + category).toLowerCase();
                 const tier1Keywords = ['engine', 'transmission', 'axle', 'differential', 'cab', 'carrier', 'block', 'motor'];
@@ -473,25 +508,29 @@
                     <li class="post-card ${isBoosted ? 'card-boosted-style' : ''}" 
                         data-region="${location.toLowerCase()}"
                         data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()}">
+                        
                         <span class="live-badge ${isBoosted ? 'badge-boosted' : 'badge-standard'}">
-                            ${isBoosted ? '⚡ PRIORITIZED' : '🔒 ACTIVE RECORD'}
+                            ${isBoosted ? '⚡ FAST-TRACK' : '🔒 ACTIVE'}
                         </span>
                         
-                        <div class="card-img-placeholder" style="background-image: url('${cardGraphic}');"></div>
-
-                        <h3 class="part-title">${partName}</h3>
-                        <div class="vehicle-fitment">${year !== 'N/A' ? year : ''} ${make !== 'N/A' ? make : ''} ${model !== 'N/A' ? model : ''}</div>
+                        <div class="card-meta-block">
+                            <h3 class="part-title">${partName}</h3>
+                            <div class="vehicle-fitment">${year !== 'N/A' ? year : ''} ${make !== 'N/A' ? make : ''} ${model !== 'N/A' ? model : ''}</div>
+                        </div>
                         
                         <div class="data-grid">
-                            <div class="data-item"><span class="label">OEM / Casting No</span><span class="value">${oem}</span></div>
-                            <div class="data-item"><span class="label">VIN Variant</span><span class="value">${vin}</span></div>
-                            <div class="data-item"><span class="label">Category Tag</span><span class="value">${category}</span></div>
-                            <div class="data-item"><span class="label">Logistics Destination</span><span class="value">${location}</span></div>
-                            <div class="data-item"><span class="label">Target Budget</span><span class="value budget-value">${budget}</span></div>
+                            <div class="data-item"><span class="label">OEM / Casting</span><span class="value">${oem}</span></div>
+                            <div class="data-item"><span class="label">VIN Suffix</span><span class="value">${vin}</span></div>
+                            <div class="data-item"><span class="label">Category</span><span class="value">${category}</span></div>
+                        </div>
+
+                        <div class="data-grid">
+                            <div class="data-item"><span class="label">Routing</span><span class="value">${location}</span></div>
+                            <div class="data-item"><span class="label">Target</span><span class="value budget-value">${budget}</span></div>
                         </div>
                         
                         <a href="${targetFormUrl}" target="_blank" rel="noopener noreferrer" class="claim-btn">
-                           Unlock Contact Log Details (${isTier1 ? '$25' : '$10'})
+                           Unlock Lead (${isTier1 ? '$25' : '$10'})
                         </a>
                     </li>`;
                 gridContainer.insertAdjacentHTML('beforeend', html);
