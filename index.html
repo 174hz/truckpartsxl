@@ -7,15 +7,15 @@
     <style>
         :root {
             /* Premium High-Trust Industrial Light Palette */
-            --bg-main: #f8fafc;          /* Light, clean background */
-            --bg-card: #ffffff;          /* Pure white for distinct elements */
-            --bg-nav: #0f172a;           /* Deep obsidian steel for commanding authority */
-            --border-color: #cbd5e1;     /* Crisp, clean gridlines */
-            --text-main: #0f172a;        /* High-contrast dark charcoal text */
-            --text-muted: #64748b;       /* Balanced slate gray for subheaders */
-            --accent-orange: #f97316;    /* High-visibility safety orange */
-            --accent-amber: #b45309;     /* Deep warning amber for readable light-theme text */
-            --accent-green: #15803d;     /* Solid industrial green for financial values */
+            --bg-main: #f8fafc;          
+            --bg-card: #ffffff;          
+            --bg-nav: #0f172a;           
+            --border-color: #cbd5e1;     
+            --text-main: #0f172a;        
+            --text-muted: #64748b;       
+            --accent-orange: #f97316;    
+            --accent-amber: #b45309;     
+            --accent-green: #15803d;     
         }
 
         body { 
@@ -205,7 +205,7 @@
             border-radius: 4px; 
             padding: 14px 24px; 
             display: grid;
-            grid-template-columns: 100px 1.8fr 2.5fr 1fr 150px;
+            grid-template-columns: 110px 1.8fr 2.5fr 1fr 150px;
             align-items: center;
             gap: 20px;
             position: relative; 
@@ -214,8 +214,11 @@
         }
         .post-card:hover { transform: translateX(3px); border-color: var(--accent-orange); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         
-        /* FAST TRACK HIGHLIGHTING LIGHT VARIANT */
-        .card-boosted-style { border-left: 5px solid var(--accent-orange) !important; background: #fffaf7; }
+        /* HIGH VISIBILITY BOOSTED ADS STYLE RULE (ORANGE VARIANT) */
+        .card-boosted-style { 
+            border-left: 5px solid #f97316 !important; 
+            background: #fff8f4 !important; 
+        }
         
         .live-badge { 
             font-size: 0.68rem; 
@@ -227,7 +230,7 @@
             white-space: nowrap;
         }
         .badge-standard { background: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border-color); }
-        .badge-boosted { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
+        .badge-boosted { background: #ffedd5; color: #ea580c; border: 1px solid #ffddd2; }
         
         .card-meta-block {
             display: flex;
@@ -237,7 +240,6 @@
         .part-title { margin: 0 0 2px 0; font-size: 1.15rem; font-weight: 900; color: var(--text-main); text-transform: uppercase; letter-spacing: -0.01em; }
         .vehicle-fitment { font-size: 0.82rem; font-weight: 700; color: var(--accent-amber); text-transform: uppercase; letter-spacing: 0.02em; }
         
-        /* EXACT HEADER FIELD MATCHES (EXACT FORM FIELDS PRESERVED) */
         .data-grid { 
             display: flex; 
             flex-wrap: wrap;
@@ -507,7 +509,7 @@
                         data-searchable="${partName.toLowerCase()} ${oem.toLowerCase()} ${vin.toLowerCase()} ${category.toLowerCase()} ${make.toLowerCase()} ${model.toLowerCase()}">
                         
                         <span class="live-badge ${isBoosted ? 'badge-boosted' : 'badge-standard'}">
-                            ${isBoosted ? '⚡ PRIORITIZED' : '🔒 ACTIVE'}
+                            ${isBoosted ? '⚡ FAST-TRACK' : '🔒 ACTIVE'}
                         </span>
                         
                         <div class="card-meta-block">
