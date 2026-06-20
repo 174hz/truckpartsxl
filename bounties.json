@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "timestamp": "INSERT_TIMESTAMP_HERE",
+    "yearMakeModel": "INSERT_MODEL_HERE",
+    "partName": "INSERT_PART_HERE",
+    "oem": "INSERT_OEM_HERE",
+    "specs": "INSERT_SPECS_HERE",
+    "condition": "INSERT_CONDITION_HERE",
+    "region": "INSERT_REGION_HERE",
+    "boosted": "false"
+  }
+]
