@@ -1,5 +1,15 @@
 [
   {
+    "timestamp": "",
+    "yearMakeModel": "",
+    "partName": "",
+    "oem": "",
+    "specs": "dbelnavis@gmail.com",
+    "condition": "",
+    "region": "",
+    "boosted": "false"
+  },
+  {
     "timestamp": "INSERT_TIMESTAMP_HERE",
     "yearMakeModel": "INSERT_MODEL_HERE",
     "partName": "INSERT_PART_HERE",
