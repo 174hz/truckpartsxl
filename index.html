@@ -362,12 +362,13 @@
         </div>
     </footer>
 
-<script>
+    <script>
         let currentRegionFilter = 'all';
         let bountyData = [];
 
         async function loadBounties() {
             try {
+                // FIXED: Appended a timestamp cache-buster string to load the fresh bounties.json file instantly
                 const response = await fetch('./bounties.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error('Data sync unavailable');
                 bountyData = await response.json();
