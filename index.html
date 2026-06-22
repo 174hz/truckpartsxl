@@ -133,305 +133,238 @@
             border-left: 4px solid var(--text-muted);
             padding: 20px;
             border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-            text-decoration: none;
-            display: block;
-            transition: all 0.2s ease;
             cursor: pointer;
-            text-align: left;
+            transition: transform 0.15s, border-color 0.15s;
         }
-        .ticker-stat:hover, .ticker-stat.active-filter {
-            border-left-color: var(--accent-orange);
+        .ticker-stat:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.08);
+            border-color: var(--accent-orange);
         }
-        .ticker-stat h3 { margin: 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
-        .ticker-stat .count { font-size: 1.8rem; font-weight: 900; color: var(--text-main); margin: 4px 0; }
-        .ticker-stat .action-link { font-size: 0.75rem; font-weight: 800; color: var(--accent-orange); text-transform: uppercase; letter-spacing: 0.02em; }
+        .ticker-stat.active-filter {
+            border-left-color: var(--accent-orange);
+            background: #fff7ed;
+        }
 
-        /* EXCHANGE INTERFACE LAYOUT */
-        .exchange-interface {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-bottom: 60px;
+        .board-controls {
+            margin-bottom: 20px;
         }
-        .control-panel {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .search-wrapper { position: relative; margin-bottom: 20px; }
         .search-input {
             width: 100%;
-            padding: 14px 14px 14px 44px;
-            font-size: 0.95rem;
+            padding: 12px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            background: var(--bg-main);
-            color: var(--text-main);
+            font-size: 1rem;
             box-sizing: border-box;
-            transition: border-color 0.15s;
-        }
-        .search-input:focus { outline: none; border-color: var(--accent-orange); background: #ffffff; }
-        .search-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            pointer-events: none;
         }
 
-        .filter-status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 16px;
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
+        .bounty-grid {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
-
-        /* LIVE BOUNTY RECTANGLE CARDS */
-        .bounty-feed-list { list-style: none; padding: 0; margin: 20px 0 0 0; display: flex; flex-direction: column; gap: 16px; }
         .post-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             position: relative;
-            transition: transform 0.15s, box-shadow 0.15s;
         }
-        .post-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        
-        /* PREMIUM SPONSORED HIGHLIGHT */
-        .post-card.premium-boost {
+        .post-card.boosted-card {
             border: 2px solid var(--accent-orange);
-            background: linear-gradient(#ffffff, #fffbf7);
-            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.06);
+            background: #fffefb;
         }
-        
-        .card-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .card-timestamp { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
-        
-        .badge { font-size: 0.7rem; font-weight: 800; padding: 4px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.06em; }
-        .badge-standard { background: #e2e8f0; color: #334155; }
-        .badge-boost { background: var(--accent-orange); color: #ffffff; animation: pulse 2s infinite; }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.85; }
-            100% { opacity: 1; }
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-orange);
+            color: white;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 3px;
         }
-
-        .part-title { margin: 0 0 10px 0; font-size: 1.4rem; font-weight: 900; color: var(--text-main); letter-spacing: -0.01em; text-transform: uppercase; }
-        .asset-line { font-size: 0.95rem; color: var(--text-main); margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed var(--border-color); }
-        .asset-line strong { color: var(--accent-orange); }
-
-        .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px; }
-        .spec-grid div { font-size: 0.85rem; color: var(--text-main); }
-        .spec-grid strong { color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.03em; display: block; margin-bottom: 2px; }
-
-        .region-footer-tag { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 16px; display: flex; align-items: center; gap: 4px; }
-
-        .cta-call-btn {
-            background: var(--bg-nav);
-            color: #ffffff;
-            text-align: center;
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+        .meta-line {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 5px 0;
+        }
+        .specs-box {
+            background: var(--bg-main);
             padding: 12px;
             border-radius: 4px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: background 0.15s;
-            border: 1px solid transparent;
+            font-size: 0.88rem;
+            margin: 15px 0;
+            border-left: 3px solid var(--border-color);
         }
-        .cta-call-btn:hover { background: var(--accent-orange); }
-        .premium-boost .cta-call-btn { background: var(--accent-green); }
-        .premium-boost .cta-call-btn:hover { background: #166534; }
-
-        .status-message { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; border: 1px dashed var(--border-color); border-radius: 4px; background: #ffffff; list-style: none; }
-        .hidden-bounty { display: none !important; }
-
-        footer { background: var(--bg-nav); color: #64748b; padding: 40px 0; font-size: 0.8rem; border-top: 4px solid var(--border-color); text-align: center; font-weight: 600; }
-
-        @media (max-width: 768px) {
-            .hero-banner h1 { font-size: 2.2rem; }
-            .nav-container { flex-direction: column; gap: 15px; text-align: center; }
+        .region-footer-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+            margin-top: auto;
+        }
+        .cta-call-btn {
+            display: block;
+            text-align: center;
+            background: var(--bg-nav);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            margin-top: 15px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: background 0.15s;
+        }
+        .cta-call-btn:hover {
+            background: var(--accent-orange);
+        }
+        .hidden-bounty {
+            display: none !important;
+        }
+        .status-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">🚨 HEAVY DUTY PROCUREMENTS: SALVAGE YARDS CONNECT DIRECTLY WITH FREIGHT OPERATORS</div>
+    <div class="top-bar">⚙️ High-Volume Parts Sourcing & Logistics Pipeline ⚙️</div>
 
     <nav>
         <div class="container nav-container">
             <div class="nav-logo">TruckParts<span>XL</span></div>
             <div class="nav-links">
                 <a href="#board">Bounty Board</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform" target="_blank" style="color:var(--accent-orange);">Post a Bounty</a>
+                <a href="contact.html">Submit Request</a>
             </div>
         </div>
     </nav>
 
-    <div class="hero-banner">
+    <section class="hero-banner">
         <div class="container">
-            <h1>Active <span>Bounty Board</span></h1>
-            <div class="subtitle">High-Velocity Fleet Procurement Exchange</div>
+            <h1>Commercial <span>Procurement</span> Engine</h1>
+            <p class="subtitle">Direct-to-Route Industrial Heavy Duty Exchange</p>
         </div>
-    </div>
+    </section>
 
-    <div class="container">
+    <main class="container">
+        
         <section class="how-it-works">
-            <h3 class="section-title">The Logistics Blueprint</h3>
+            <h3 class="section-title">Pipeline Architecture</h3>
             <div class="steps-grid">
                 <div class="step-block">
                     <div class="step-num">01</div>
-                    <h4>Post Open Contract</h4>
-                    <p>Fleet operators drop down precision specs, truck asset VIN profiles, and specific component demands instantly into the data exchange matrix.</p>
+                    <h4>Log Procurement Request</h4>
+                    <p>Submit precise mechanical specs, OEM target data, and localized regional freight routing instructions.</p>
                 </div>
                 <div class="step-block">
                     <div class="step-num">02</div>
-                    <h4>Global Yard Routing</h4>
-                    <p>Verified regional salvage yards and heavy-duty suppliers screen open board requirements against current active line inventory parameters.</p>
+                    <h4>Global Routing Injection</h4>
+                    <p>System transforms structured variables straight onto our live ledger file system seamlessly.</p>
                 </div>
                 <div class="step-block">
                     <div class="step-num">03</div>
-                    <h4>Direct Frictionless Execution</h4>
-                    <p>Suppliers bypass middle-man margins, executing direct phone patch voice confirmations with asset owners to clear logistics and shipping corridors.</p>
+                    <h4>Direct Fulfilment</h4>
+                    <p>Verified regional distributors review parameters and initiate direct contact protocols securely.</p>
                 </div>
             </div>
         </section>
 
-        <section class="market-ticker">
-            <div class="ticker-stat active-filter" id="filter-all" onclick="setRegionFilter('all')">
-                <h3>Global Pipeline</h3>
-                <div class="count">ALL</div>
-                <div class="action-link">View Entire Feed →</div>
-            </div>
-            <div class="ticker-stat" id="filter-ontario" onclick="setRegionFilter('ontario')">
-                <h3>Canada Trans-Corridor</h3>
-                <div class="count">ON</div>
-                <div class="action-link">Filter Ontario Core →</div>
-            </div>
-            <div class="ticker-stat" id="filter-global" onclick="setRegionFilter('global')">
-                <h3>US & Cross-Border</h3>
-                <div class="count">INTL</div>
-                <div class="action-link">Filter International →</div>
-            </div>
-        </section>
-
-        <div class="exchange-interface" id="board">
-            <div class="control-panel">
-                <h3 class="section-title" style="margin-bottom:15px;">Live Exchange Search</h3>
-                <div class="search-wrapper">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchBar" class="search-input" placeholder="Search by model or part component (e.g. Cascadia, Differential, DD15, Cummins)..." onkeyup="applyCombinedFilters()">
+        <section id="board">
+            <h3 class="section-title" id="filterStatusLabel">Showing: All Open Contracts</h3>
+            
+            <div class="market-ticker">
+                <div id="filter-all" class="ticker-stat active-filter" onclick="setRegionFilter('all')">
+                    <strong>🔄 Universal Exchange Feed</strong>
+                    <div style="font-size: 0.85rem; margin-top:5px; color: var(--text-muted);">Aggregated global contract flow</div>
                 </div>
-
-                <div class="filter-status-bar">
-                    <span id="filterStatusLabel">Showing: All Open Contracts</span>
-                    <span style="color:var(--accent-orange);">● LIVE EXCHANGE FEED</span>
+                <div id="filter-ontario" class="ticker-stat" onclick="setRegionFilter('ontario')">
+                    <strong>📍 Canada Regional Feed</strong>
+                    <div style="font-size: 0.85rem; margin-top:5px; color: var(--text-muted);">Ontario 400-Series Freight Hubs</div>
                 </div>
+                <div id="filter-global" class="ticker-stat" onclick="setRegionFilter('global')">
+                    <strong>🌐 Global Corridor</strong>
+                    <div style="font-size: 0.85rem; margin-top:5px; color: var(--text-muted);">US Cross-Border Logistics Run</div>
+                </div>
+            </div>
 
-                <ul class="bounty-feed-list" id="bountyGrid">
-                    <li class="status-message">Connecting to commercial asset pipeline...</li>
+            <div class="board-controls">
+                <input type="text" id="searchBar" class="search-input" onkeyup="applyCombinedFilters()" placeholder="Filter live stream by keyword (e.g. Cummins, Axle, Peterbilt, D4600)...">
+            </div>
+
+            <ul id="bountyGrid" class="bounty-grid">
                 </ul>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 TruckPartsXL Commercial Networks. Enterprise Fleet Procurement Protocols Active. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-<script>
+    <script>
         let currentRegionFilter = 'all';
-        let bountyData = [];
 
         async function loadBounties() {
             try {
-                const response = await fetch('./bounties.json?v=' + new Date().getTime());
-                if (!response.ok) throw new Error('Data sync unavailable');
-                bountyData = await response.json();
-                renderBounties(bountyData);
+                // ADDED CACHE-BUSTER HERE: timestamp dynamic argument forces raw server updates instantly
+                const response = await fetch('bounties.json?t=' + new Date().getTime());
+                if (!response.ok) throw new Error('Network error fetching platform records');
+                const data = await response.json();
+                renderBounties(data);
             } catch (error) {
-                console.error('Error loading bounty board:', error);
-                document.getElementById('bountyGrid').innerHTML = 
-                    `<li class="status-message">Unable to parse active contracts. Please reload or contact technical support.</li>`;
+                console.error('Core Pipeline Failure:', error);
+                document.getElementById('bountyGrid').innerHTML = `
+                    <li class="status-message">Unable to query live data framework. Please clear browser storage metrics and refresh.</li>
+                `;
             }
         }
 
-        function renderBounties(data) {
+        function renderBounties(bounties) {
             const gridContainer = document.getElementById('bountyGrid');
-            gridContainer.innerHTML = ''; 
+            gridContainer.innerHTML = '';
 
-            if (!data || data.length === 0) {
-                gridContainer.innerHTML = `<li class="status-message">No active heavy duty contracts listed on the exchange board today.</li>`;
+            if(!bounties || bounties.length === 0) {
+                gridContainer.innerHTML = '<li class="status-message">No components cataloged in the open asset pool.</li>';
                 return;
             }
 
-            // Sort so boosted/premium entries bubble to the absolute top
-            data.sort((a, b) => {
-                const aBoost = String(a.boosted || '').toLowerCase() === 'yes' || String(a.boosted || '').toLowerCase() === 'true';
-                const bBoost = String(b.boosted || '').toLowerCase() === 'yes' || String(b.boosted || '').toLowerCase() === 'true';
-                return bBoost - aBoost;
-            });
+            bounties.forEach(item => {
+                const isBoosted = item.boosted === 'true' || item.boosted === true;
+                const region = (item.region || 'Global/Unassigned').toLowerCase();
+                const title = item.yearMakeModel || 'Unknown Machinery Unit';
+                const part = item.partName || 'Component Record';
+                const oem = item.oem ? `OEM: ${item.oem}` : 'OEM Specs Custom/Unavailable';
+                const condition = item.condition || 'As-Is Condition Pool';
+                const specs = item.specs || 'No specific metadata extensions detailed.';
+                const phone = item.phone || '';
 
-            data.forEach(item => {
-                // Safeguard data keys against spaces or case variations from Zapier mapping
-                const rawBoost = item.boosted || item.Boosted || '';
-                const isBoosted = String(rawBoost).toLowerCase() === 'yes' || String(rawBoost).toLowerCase() === 'true';
-                
-                const partName = item.partName || item.PartName || 'Unknown Component';
-                const yearMakeModel = item.yearMakeModel || item.YearMakeModel || 'Asset Profile Pending';
-                const phone = item.phone || item.Phone || '';
-                const region = item.region || item.Region || 'Unspecified Corridor';
-                const condition = item.condition || item.Condition || 'Any';
-                const budget = item.budget || item.Budget || '';
-                const oem = item.oem || item.OEM || '';
-                const specs = item.specs || item.Specs || '';
-                const timestamp = item.timestamp || item.Timestamp || 'RECENT';
-
-                const searchString = `${yearMakeModel} ${partName} ${specs} ${oem}`.toLowerCase();
-                const regionClean = region.toLowerCase();
+                const searchPayload = `${title} ${part} ${oem} ${specs} ${region}`.toLowerCase();
 
                 const html = `
-                    <li class="post-card ${isBoosted ? 'premium-boost' : ''}" 
-                        data-region="${regionClean}" 
-                        data-searchable="${searchString}">
-                        <div class="card-header-row">
-                            <span class="card-timestamp">${timestamp}</span>
-                            <span class="badge ${isBoosted ? 'badge-boost' : 'badge-standard'}">
-                                ${isBoosted ? '⚡ URGENT BOOST' : 'STANDARD CONTRACT'}
-                            </span>
-                        </div>
-                        <h3 class="part-title">${partName}</h3>
-                        <div class="asset-line">🎯 Asset Class: <strong>${yearMakeModel}</strong></div>
-                        <div class="spec-grid">
-                            ${oem ? `<div><strong>OEM/Casting #:</strong> ${oem}</div>` : ''}
-                            ${specs ? `<div><strong>Specs:</strong> ${specs}</div>` : ''}
-                            <div><strong>Required Condition:</strong> ${condition}</div>
-                            ${budget ? `<div><strong>Target Budget:</strong> <span style="color:var(--accent-amber); font-weight:700;">$${budget}</span></div>` : ''}
-                        </div>
-                        <div class="region-footer-tag">📍 Corridor: ${region}</div>
+                    <li class="post-card ${isBoosted ? 'boosted-card' : ''}" data-region="${region}" data-searchable="${searchPayload}">
+                        ${isBoosted ? '<div class="badge">🚀 URGENT SUPPLY CONTEXT</div>' : ''}
+                        <h4 class="card-title">${title}</h4>
+                        <div class="meta-line">📦 <strong>Part Needed:</strong> ${part}</div>
+                        <div class="meta-line">🏷️ <strong>Ref:</strong> ${oem}</div>
+                        <div class="meta-line">🔧 <strong>Condition Target:</strong> ${condition}</div>
+                        <div class="specs-box">${specs}</div>
+                        <div class="region-footer-tag">📍 Corridor: ${item.region || 'Global'}</div>
                         ${phone ? `<a href="tel:${phone}" class="cta-call-btn">📞 CALL CONTRACT OWNER (${phone})</a>` : ''}
                     </li>
                 `;
