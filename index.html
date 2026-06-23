@@ -290,7 +290,8 @@
             <div class="nav-logo">TruckParts<span>XL</span></div>
             <div class="nav-links">
                 <a href="#board">Open Contracts</a>
-                <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" style="color: var(--accent-orange);">Post a Bounty</a>
+                <!-- LIVE LINK REPLACED BELOW -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header" target="_blank" style="color: var(--accent-orange);">Post a Bounty</a>
             </div>
         </div>
     </nav>
@@ -379,7 +380,6 @@
                     return res.json();
                 })
                 .then(files => {
-                    // Filter down explicitly to our dynamic JSON files
                     const jsonFiles = files.filter(f => f.name.endsWith('.json'));
                     
                     if(jsonFiles.length === 0) {
@@ -392,7 +392,6 @@
                     
                     Promise.all(fetchPromises)
                         .then(results => {
-                            // Sort chronologically: newer posts hit the board first
                             allBounties = results.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                             renderCards(allBounties);
                             updateMetricCounters(allBounties);
@@ -429,10 +428,7 @@
                 const budget = part.budget || 'Open Quote';
                 const isPremium = part.boosted === 'true' || part.boosted === true;
 
-                // Unique submission index marker for matching manual payloads back to base desk
                 const lookupId = part.timestamp ? new Date(part.timestamp).getTime() : index;
-
-                // Create a scannable string block for clean matching logic
                 const searchableStr = `${title} ${ymm} ${vin} ${oem} ${specs}`.toLowerCase();
 
                 const html = `
@@ -485,7 +481,6 @@
         }
 
         function triggerContactUnlock(id, title) {
-            // Direct Manual Lock routing configuration for Salvage operators
             const targetEmail = "dbelnavis@gmail.com";
             const mailSubject = encodeURIComponent(`Unlock Request: Buyer Info for ${title} (Ref ID: ${id})`);
             const mailBody = encodeURIComponent(`Hello,\n\nI am a verified parts coordinator/salvage operator requesting to unlock the direct phone and email contact details for the buyer looking for the following component asset:\n\nAsset Title: ${title}\nReference Identifier: ${id}\n\nPlease verify routing protocols and release the contact row details.\n\nThank you.`);
