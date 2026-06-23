@@ -290,7 +290,6 @@
             <div class="nav-logo">TruckParts<span>XL</span></div>
             <div class="nav-links">
                 <a href="#board">Open Contracts</a>
-                <!-- LIVE LINK REPLACED BELOW -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header" target="_blank" style="color: var(--accent-orange);">Post a Bounty</a>
             </div>
         </div>
@@ -372,14 +371,22 @@
 
         function loadBounties() {
             const gridContainer = document.getElementById('bountyGrid');
-            const url = `https://api.github.com/repos/${REPO}/contents/queue`;
+            const cacheBuster = new Date().getTime();
+            const url = `https://api.github.com/repos/${REPO}/contents/queue?t=${cacheBuster}`;
 
             fetch(url)
                 .then(res => {
+                    if (res.status === 403) {
+                        throw new Error("GitHub API Rate Limit Exceeded. Open in an Incognito window or test on another device.");
+                    }
                     if (!res.ok) throw new Error("Pipeline connection empty or repository unavailable");
                     return res.json();
                 })
                 .then(files => {
+                    if (!Array.isArray(files)) {
+                        throw new Error("Invalid response architecture from backend feed.");
+                    }
+
                     const jsonFiles = files.filter(f => f.name.endsWith('.json'));
                     
                     if(jsonFiles.length === 0) {
@@ -388,7 +395,12 @@
                         return;
                     }
 
-                    let fetchPromises = jsonFiles.map(file => fetch(file.download_url).then(r => r.json()));
+                    let fetchPromises = jsonFiles.map(file => 
+                        fetch(`${file.download_url}?t=${cacheBuster}`).then(r => {
+                            if (!r.ok) throw new Error("Failed file sync download");
+                            return r.json();
+                        })
+                    );
                     
                     Promise.all(fetchPromises)
                         .then(results => {
@@ -401,7 +413,8 @@
                         });
                 })
                 .catch(err => {
-                    gridContainer.innerHTML = `<li class="status-message">Active Board Stream Offline. Verify repository connectivity parameters.</li>`;
+                    console.error("Pipeline Error:", err);
+                    gridContainer.innerHTML = `<li class="status-message" style="border-color: red; color: red;">⚠️ Website Feed Error: ${err.message}</li>`;
                 });
         }
 
