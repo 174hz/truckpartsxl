@@ -1,42 +1,13 @@
 [
   {
-    "timestamp": "",
-    "yearMakeModel": "",
-    "partName": "",
-    "oem": "",
-    "specs": "dbelnavis@gmail.com",
-    "condition": "",
-    "region": "",
-    "boosted": "false"
-  },
-  {
-    "timestamp": "",
-    "yearMakeModel": "",
-    "partName": "",
-    "oem": "",
-    "specs": "dbelnavis@gmail.com",
-    "condition": "",
-    "region": "",
-    "boosted": "false"
-  },
-  {
-    "timestamp": "",
-    "yearMakeModel": "",
-    "partName": "",
-    "oem": "",
-    "specs": "dbelnavis@gmail.com",
-    "condition": "",
-    "region": "",
-    "boosted": "false"
-  },
-  {
-    "timestamp": "INSERT_TIMESTAMP_HERE",
-    "yearMakeModel": "INSERT_MODEL_HERE",
-    "partName": "INSERT_PART_HERE",
-    "oem": "INSERT_OEM_HERE",
-    "specs": "INSERT_SPECS_HERE",
-    "condition": "INSERT_CONDITION_HERE",
-    "region": "INSERT_REGION_HERE",
+    "timestamp": "Jun 22, 11:25 PM",
+    "yearMakeModel": "Select your Year / Make / Model column",
+    "partName": "Select your Part Name / Component column",
+    "oem": "Select your OEM / Casting No column",
+    "specs": "Select your Specs / Details / Phone Number column",
+    "condition": "Select your Condition Required column",
+    "region": "Select your Location / Shipping Region column",
+    "vin": "Select your Truck VIN (Optional) column",
     "boosted": "false"
   }
 ]
