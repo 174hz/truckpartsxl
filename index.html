@@ -426,14 +426,28 @@
             document.getElementById('count-global').innerText = bounties.length - ontarioCount;
         }
 
-        function renderCards(bounties) {
+       function renderCards(bounties) {
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
 
-            bounties.forEach((part, index) => {
+            // Filters out empty data or older broken template artifacts automatically
+            const validBounties = bounties.filter(part => 
+                part.partName && 
+                part.partName.trim() !== "" && 
+                !part.partName.toLowerCase().includes("pending") &&
+                !part.partName.toLowerCase().includes("tester gearbox")
+            );
+
+            if (validBounties.length === 0) {
+                gridContainer.innerHTML = `<li class="status-message">🔄 Standing by for fresh validated component feeds...</li>`;
+                updateMetricCounters([]);
+                return;
+            }
+
+            validBounties.forEach((part, index) => {
                 const region = part.region || 'Unspecified Corridor';
                 const ymm = part.yearMakeModel || 'Unknown Asset';
-                const title = part.partName || 'Component Specification Pending';
+                const title = part.partName;
                 const vin = part.vin || 'Not Provided';
                 const specs = part.specs || 'Standard Profile';
                 const oem = part.oem || 'N/A';
@@ -490,6 +504,7 @@
                 gridContainer.insertAdjacentHTML('beforeend', html);
             });
 
+            updateMetricCounters(validBounties);
             applyCombinedFilters();
         }
 
