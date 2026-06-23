@@ -191,5 +191,17 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "timestamp": "6/23/2026 11:29:09",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2019 Freightliner Cascadia ",
+    "vin": "12345678900123456",
+    "partName": "Gearbox Tester ",
+    "specs": "DD17",
+    "oem": "9812346781",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "5,700",
+    "boosted": "false"
   }
 ]
