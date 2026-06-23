@@ -1,0 +1,80 @@
+name: Auto-Merge New Parts Feed
+
+on:
+  push:
+    paths:
+      - 'queue/new-part-*.json'
+
+jobs:
+  merge-and-cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Process and Merge Parts
+        run: |
+          node -e '
+          const fs = require("fs");
+          const path = require("path");
+
+          const databasePath = "./bounties.json";
+          const queueDir = "./queue";
+
+          // 1. Read existing database or initialize an empty array
+          let database = [];
+          if (fs.existsSync(databasePath)) {
+            try {
+              database = JSON.parse(fs.readFileSync(databasePath, "utf8"));
+              if (!Array.isArray(database)) database = [];
+            } catch (e) {
+              console.log("Database was empty or malformed. Resetting to empty array.");
+              database = [];
+            }
+          }
+
+          // 2. Scan queue folder for new part files
+          if (!fs.existsSync(queueDir)) {
+            console.log("No queue folder found.");
+            process.exit(0);
+          }
+
+          const files = fs.readdirSync(queueDir).filter(f => f.startsWith("new-part-") && f.endsWith(".json"));
+          if (files.length === 0) {
+            console.log("No new parts to merge.");
+            process.exit(0);
+          }
+
+          // 3. Parse and push each new item into our main list
+          files.forEach(file => {
+            const filePath = path.join(queueDir, file);
+            try {
+              const fileData = JSON.parse(fs.readFileSync(filePath, "utf8"));
+              database.push(fileData);
+              console.log(`Successfully parsed: ${file}`);
+              
+              // Delete the temporary queue file right after reading it
+              fs.unlinkSync(filePath);
+            } catch (err) {
+              console.error(`Error reading file ${file}:`, err);
+            }
+          });
+
+          // 4. Save the updated database back to bounties.json
+          fs.writeFileSync(databasePath, JSON.stringify(database, null, 2), "utf8");
+          console.log("Database successfully updated.");
+          '
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automated Feed: Merged new parts and cleared queue [skip ci]"
+          file_pattern: 'bounties.json queue/new-part-*.json'
