@@ -89,5 +89,15 @@
     "condition": "09876543211234567",
     "region": "tester Gearbox ",
     "boosted": "false"
+  },
+  {
+    "timestamp": "6/22/2026 19:30:36",
+    "yearMakeModel": "diggler05@yahoo.com ",
+    "partName": "555-234-0987",
+    "oem": "Global Exchange (US Rust Belt & International)",
+    "specs": "2024 FREIGHTLINER CASCADIA ",
+    "condition": "09876543211234567",
+    "region": "tester Gearbox ",
+    "boosted": "false"
   }
 ]
