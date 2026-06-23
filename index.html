@@ -226,6 +226,20 @@
         .spec-label { color: var(--text-muted); font-weight: 600; width: 40%; text-transform: uppercase; font-size: 0.75rem; }
         .spec-val { color: var(--text-main); font-weight: 700; }
 
+        .card-footer-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .footer-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
         .region-footer-tag {
             font-size: 0.8rem;
             font-weight: 700;
@@ -235,7 +249,27 @@
             border-radius: 4px;
             display: inline-block;
             text-transform: uppercase;
-            margin-bottom: 12px;
+        }
+
+        .stripe-boost-link {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border: 1px dashed var(--accent-orange);
+            border-radius: 4px;
+            transition: all 0.15s ease;
+        }
+        .stripe-boost-link:hover {
+            background: var(--accent-orange);
+            color: #ffffff;
+            border-style: solid;
         }
         
         .cta-unlock-btn {
@@ -389,8 +423,12 @@
                         return;
                     }
 
-                    // Sort newest submissions directly to the top of the timeline
-                    allBounties.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                    // STRICT CHRONOLOGICAL SORTING: Forces the absolute newest submissions to the top
+                    allBounties.sort((a, b) => {
+                        const dateA = a.timestamp || a['Timestamp'] ? new Date(a.timestamp || a['Timestamp']) : new Date(0);
+                        const dateB = b.timestamp || b['Timestamp'] ? new Date(b.timestamp || b['Timestamp']) : new Date(0);
+                        return dateB - dateA;
+                    });
                     
                     renderCards(allBounties);
                     updateMetricCounters(allBounties);
@@ -418,8 +456,7 @@
             }
 
             bounties.forEach((part, index) => {
-                // FAIL-SAFE DATA INTERPOLATION APPLIED HERE:
-                // Maps fields gracefully whether the background engine spits out camelCase keys or raw spreadsheet headers
+                // FAIL-SAFE DATA INTERPOLATION
                 const title = part.partName || part['Part Name'] || part['Part Name / Component'] || 'Unknown Component';
                 const ymm = part.yearMakeModel || part['Year/Make/Model'] || part['Year / Make / Model'] || 'Unknown Asset';
                 const vin = part.vin || part['VIN'] || part['VIN Identifier'] || 'Not Provided';
@@ -432,6 +469,9 @@
 
                 const lookupId = part.timestamp ? new Date(part.timestamp).getTime() : index;
                 const searchableStr = `${title} ${ymm} ${vin} ${oem} ${specs}`.toLowerCase();
+
+                // Dynamic Stripe Payment portal instantiation with custom line reference tracking
+                const stripeUrl = `https://buy.stripe.com/5kA7v60qA01WbE4cMM?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent(title)}`;
 
                 const html = `
                     <li class="post-card ${isPremium ? 'premium-boost' : ''}" 
@@ -468,8 +508,11 @@
                             </table>
                         </div>
 
-                        <div>
-                            <div class="region-footer-tag">📍 Corridor: ${region}</div>
+                        <div class="card-footer-controls">
+                            <div class="footer-meta-row">
+                                <div class="region-footer-tag">📍 Corridor: ${region}</div>
+                                ${!isPremium ? `<a href="${stripeUrl}" target="_blank" class="stripe-boost-link">⚡ Boost Listing</a>` : ''}
+                            </div>
                             <button class="cta-unlock-btn" onclick="triggerContactUnlock('${lookupId}', '${title}')">
                                 🔓 UNLOCK BUYER CONTACT INFO
                             </button>
