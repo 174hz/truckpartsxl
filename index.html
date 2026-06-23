@@ -372,65 +372,58 @@
         function loadBounties() {
             const gridContainer = document.getElementById('bountyGrid');
             const cacheBuster = new Date().getTime();
-            const url = `https://api.github.com/repos/${REPO}/contents/queue?t=${cacheBuster}`;
+            
+            // Query the compiled production json database directly
+            const url = `https://raw.githubusercontent.com/${REPO}/main/bounties.json?t=${cacheBuster}`;
 
             fetch(url)
                 .then(res => {
-                    if (res.status === 403) {
-                        throw new Error("GitHub API Rate Limit Exceeded. Open in an Incognito window or test on another device.");
-                    }
-                    if (!res.ok) throw new Error("Pipeline connection empty or repository unavailable");
+                    if (!res.ok) throw new Error("Database sync file is currently building or empty.");
                     return res.json();
                 })
-                .then(files => {
-                    if (!Array.isArray(files)) {
-                        throw new Error("Invalid response architecture from backend feed.");
-                    }
-
-                    const jsonFiles = files.filter(f => f.name.endsWith('.json'));
+                .then(data => {
+                    // Safe handling for both flat arrays and objects with root properties
+                    allBounties = Array.isArray(data) ? data : (data.bounties || []);
                     
-                    if(jsonFiles.length === 0) {
+                    if (allBounties.length === 0) {
                         gridContainer.innerHTML = `<li class="status-message">No active heavy-duty contracts registered on the feed.</li>`;
                         updateMetricCounters([]);
                         return;
                     }
 
-                    let fetchPromises = jsonFiles.map(file => 
-                        fetch(`${file.download_url}?t=${cacheBuster}`).then(r => {
-                            if (!r.ok) throw new Error("Failed file sync download");
-                            return r.json();
-                        })
-                    );
+                    // Sort newest submissions directly to the top of the timeline
+                    allBounties.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                     
-                    Promise.all(fetchPromises)
-                        .then(results => {
-                            allBounties = results.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                            renderCards(allBounties);
-                            updateMetricCounters(allBounties);
-                        })
-                        .catch(err => {
-                            gridContainer.innerHTML = `<li class="status-message">Error processing component streams: ${err.message}</li>`;
-                        });
+                    renderCards(allBounties);
+                    updateMetricCounters(allBounties);
                 })
                 .catch(err => {
-                    console.error("Pipeline Error:", err);
-                    gridContainer.innerHTML = `<li class="status-message" style="border-color: red; color: red;">⚠️ Website Feed Error: ${err.message}</li>`;
+                    console.error("Pipeline Sync Error:", err);
+                    gridContainer.innerHTML = `<li class="status-message" style="border-color: red; color: red;">⚠️ Database Connection Error: ${err.message}</li>`;
                 });
         }
 
         function updateMetricCounters(bounties) {
-            document.getElementById('count-all').innerText = bounties.length;
+            // Filters data to make sure metric headers are accurate to actual readable cards
+            const readableBounties = bounties.filter(part => 
+                part.partName && 
+                part.partName.trim() !== "" && 
+                !part.partName.toLowerCase().includes("pending") &&
+                !part.partName.toLowerCase().includes("tester gearbox")
+            );
+
+            document.getElementById('count-all').innerText = readableBounties.length;
             
-            let ontarioCount = bounties.filter(b => isCanadianRegion((b.region || '').toLowerCase())).length;
+            let ontarioCount = readableBounties.filter(b => isCanadianRegion((b.region || '').toLowerCase())).length;
             document.getElementById('count-ontario').innerText = ontarioCount;
-            document.getElementById('count-global').innerText = bounties.length - ontarioCount;
+            document.getElementById('count-global').innerText = readableBounties.length - ontarioCount;
         }
 
-       function renderCards(bounties) {
+        function renderCards(bounties) {
             const gridContainer = document.getElementById('bountyGrid');
             gridContainer.innerHTML = '';
 
-            // Filters out empty data or older broken template artifacts automatically
+            // Clean data checks to strip out empty placeholders or developer relics automatically
             const validBounties = bounties.filter(part => 
                 part.partName && 
                 part.partName.trim() !== "" && 
@@ -440,7 +433,6 @@
 
             if (validBounties.length === 0) {
                 gridContainer.innerHTML = `<li class="status-message">🔄 Standing by for fresh validated component feeds...</li>`;
-                updateMetricCounters([]);
                 return;
             }
 
@@ -504,7 +496,6 @@
                 gridContainer.insertAdjacentHTML('beforeend', html);
             });
 
-            updateMetricCounters(validBounties);
             applyCombinedFilters();
         }
 
@@ -566,7 +557,7 @@
             });
 
             const existingMsg = document.getElementById('emptyFilterMessage');
-            if (visibleCount === 0) {
+            if (visibleCount === 0 && cards.length > 0) {
                 if (!existingMsg) {
                     document.getElementById('bountyGrid').insertAdjacentHTML('beforeend', 
                         `<li id="emptyFilterMessage" class="status-message">No active heavy duty contracts match your regional or input text parameters.</li>`
