@@ -213,5 +213,29 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "timestamp": "6/23/2026 12:37:59",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2025 Freightliner Cascadia ",
+    "vin": "12345670654321789",
+    "partName": "Tester Gearbox ",
+    "specs": "DD100 ",
+    "oem": "345601238541",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "7,200",
+    "boosted": "false"
+  },
+  {
+    "timestamp": "6/23/2026 12:37:59",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2025 Freightliner Cascadia ",
+    "vin": "12345670654321789",
+    "partName": "Tester Gearbox ",
+    "specs": "DD100 ",
+    "oem": "345601238541",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "7,200",
+    "boosted": "false"
   }
 ]
