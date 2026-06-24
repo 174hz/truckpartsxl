@@ -70,54 +70,83 @@
         .hero-banner h1 span { color: var(--accent-orange); }
         .hero-banner .subtitle { color: #94a3b8; margin: 12px 0 0 0; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
         
-        .how-it-works {
-            margin: 40px 0;
+        /* HOW IT WORKS SECTION STYLE */
+        .how-it-works-section {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 30px;
+            padding: 40px 30px;
+            margin: 40px 0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         .section-title {
             text-transform: uppercase;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 900;
             letter-spacing: 0.05em;
             color: var(--text-main);
             margin-top: 0;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             border-left: 4px solid var(--accent-orange);
             padding-left: 12px;
         }
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0 0 35px 0;
+            line-height: 1.5;
         }
-        .step-block {
+        .split-flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+        .flow-column {
             background: var(--bg-main);
             border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 4px;
+            border-radius: 6px;
+            padding: 25px;
         }
-        .step-num {
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: var(--accent-orange);
-            margin-bottom: 6px;
+        .flow-column.buyers { border-top: 4px solid var(--accent-amber); }
+        .flow-column.sellers { border-top: 4px solid var(--accent-orange); }
+        
+        .flow-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
         }
-        .step-block h4 {
-            margin: 0 0 8px 0;
-            text-transform: uppercase;
-            font-size: 0.95rem;
-            letter-spacing: 0.02em;
-            color: var(--text-main);
-        }
-        .step-block p {
+        .flow-icon { font-size: 1.3rem; }
+        .flow-header h4 {
             margin: 0;
-            font-size: 0.88rem;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            font-weight: 850;
+            letter-spacing: 0.02em;
+        }
+        .flow-intro {
+            font-size: 0.9rem;
             color: var(--text-muted);
             line-height: 1.5;
+            margin: 0 0 20px 0;
+        }
+        .steps-list {
+            padding-left: 18px;
+            margin: 0;
+        }
+        .steps-list li {
+            font-size: 0.88rem;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .steps-list li strong {
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            letter-spacing: 0.02em;
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 2px;
         }
 
         .market-ticker {
@@ -311,8 +340,10 @@
             font-size: 0.85rem;
             border-top: 4px solid var(--accent-orange);
         }
-        .footer-grid { display: flex; justify-content: space-between; align-items: center; }
+        .footer-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-copy { font-weight: 600; }
+        .footer-links a { color: #94a3b8; text-decoration: none; margin-left: 15px; font-weight: 700; }
+        .footer-links a:hover { color: #ffffff; }
     </style>
 </head>
 <body>
@@ -338,23 +369,35 @@
 
     <main class="container" id="board">
         
-        <section class="how-it-works">
+        <section class="how-it-works-section">
             <h3 class="section-title">Operational Architecture</h3>
-            <div class="steps-grid">
-                <div class="step-block">
-                    <div class="step-num">01</div>
-                    <h4>Post Procurement Request</h4>
-                    <p>Logistics operators drop critical component dependencies and target budget parameters directly into the exchange.</p>
+            <p class="section-subtitle">We connect commercial truck part buyers directly with elite salvage yards and heavy-duty breakers nationwide. Zero added markups.</p>
+            
+            <div class="split-flow-grid">
+                <div class="flow-column buyers">
+                    <div class="flow-header">
+                        <span class="flow-icon">📦</span>
+                        <h4>For Parts Buyers</h4>
+                    </div>
+                    <p class="flow-intro">Skip the hours spent cold-calling yards. Source your heavy-duty parts instantly.</p>
+                    <ol class="steps-list">
+                        <li><strong>1. Submit Request:</strong> Fill out our quick form with your truck specifications, required component details, and delivery zip code.</li>
+                        <li><strong>2. Broadcast System:</strong> Your request is instantly broadcasted to verified commercial salvage networks and Tier-1 part brokers.</li>
+                        <li><strong>3. Direct Fulfillment:</strong> Available yards contact you directly by phone or email with clean condition data and freight quotes.</li>
+                    </ol>
                 </div>
-                <div class="step-block">
-                    <div class="step-num">02</div>
-                    <h4>Automated Validation</h4>
-                    <p>Systems run real-time structure isolation checks on VIN arrays, schema assets, and regional freight corridors.</p>
-                </div>
-                <div class="step-block">
-                    <div class="step-num">03</div>
-                    <h4>Salvage Access</h4>
-                    <p>Verified yard owners and tier-1 component suppliers unlock secure private routing tags to complete order fulfillment.</p>
+
+                <div class="flow-column sellers">
+                    <div class="flow-header">
+                        <span class="flow-icon">⚙️</span>
+                        <h4>For Salvage Yards</h4>
+                    </div>
+                    <p class="flow-intro">Stop chasing cold phone leads. Get real-time access to high-intent commercial buyers.</p>
+                    <ol class="steps-list">
+                        <li><strong>1. Monitor Live Board:</strong> Review our open procurement feed completely for free to audit active parts requirements.</li>
+                        <li><strong>2. Map Your Inventory:</strong> Match incoming VIN patterns, engine specs, and casting numbers against your open yard stock.</li>
+                        <li><strong>3. Unlock &amp; Transact:</strong> Process a secure micro-payment via Stripe to instantly unlock the buyer's phone number and close the sale.</li>
+                    </ol>
                 </div>
             </div>
         </section>
@@ -393,7 +436,11 @@
     <footer>
         <div class="container footer-grid">
             <div class="footer-copy">&copy; 2026 TruckPartsXL. Commercial Salvage Ecosystem. All Rights Reserved.</div>
-            <div>High-Trust B2B Infrastructure</div>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
@@ -427,7 +474,7 @@
                         return;
                     }
 
-                    // STRICT CHRONOLOGICAL SORTING: Forces absolute newest submissions to top
+                    // STRICT CHRONOLOGICAL SORTING
                     allBounties.sort((a, b) => {
                         const dateA = a.timestamp || a['Timestamp'] ? new Date(a.timestamp || a['Timestamp']) : new Date(0);
                         const dateB = b.timestamp || b['Timestamp'] ? new Date(b.timestamp || b['Timestamp']) : new Date(0);
@@ -460,7 +507,6 @@
             }
 
             bounties.forEach((part, index) => {
-                // FAIL-SAFE DATA INTERPOLATION
                 const title = part.partName || part['Part Name'] || part['Part Name / Component'] || 'Unknown Component';
                 const ymm = part.yearMakeModel || part['Year/Make/Model'] || part['Year / Make / Model'] || 'Unknown Asset';
                 const vin = part.vin || part['VIN'] || part['VIN Identifier'] || 'Not Provided';
@@ -474,7 +520,6 @@
                 const lookupId = part.timestamp ? new Date(part.timestamp).getTime() : index;
                 const searchableStr = `${title} ${ymm} ${vin} ${oem} ${specs}`.toLowerCase();
 
-                // DYNAMIC STRIPE ROUTING MAPPED DIRECTLY TO GLOBAL PARAMETER
                 const boostPaymentUrl = `${STRIPE_TEST_LINK}?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Boost Listing - ' + title)}`;
                 const unlockPaymentUrl = `${STRIPE_TEST_LINK}?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Unlock Lead - ' + title)}`;
 
