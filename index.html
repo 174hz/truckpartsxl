@@ -6,23 +6,23 @@
     <title>TruckPartsXL | Commercial Sourcing Hub</title>
     <style>
         :root {
-            /* Premium High-Trust Industrial Light Palette */
-            --bg-main: #f8fafc;          
-            --bg-card: #ffffff;          
-            --bg-nav: #0f172a;           
-            --border-color: #cbd5e1;     
-            --text-main: #0f172a;        
-            --text-muted: #64748b;       
-            --accent-orange: #f97316;    
-            --accent-amber: #b45309;     
-            --accent-green: #15803d;     
-            --premium-glow: rgba(249, 115, 22, 0.15);
+            /* Heavy-Duty Red, White, and Blue Palette */
+            --bg-main: #0f172a;          /* Deep industrial dark blue/slate */
+            --bg-card: #1e293b;          /* Charcoal blue card backgrounds */
+            --bg-nav: #0b0f19;           /* Midnight blue header/footer background */
+            --border-color: #334155;     /* Medium slate dividers */
+            --text-main: #f8fafc;        /* Off-white primary text */
+            --text-muted: #94a3b8;       /* Cool gray secondary text */
+            --accent-red: #dc2626;       /* High-visibility operational red */
+            --accent-blue: #2563eb;      /* Deep premium commercial blue */
+            --accent-green: #16a34a;     /* Transaction secure green */
+            --premium-glow: rgba(220, 38, 38, 0.15);
         }
 
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            /* Subtle geometric/industrial texture overlay mixed with the light palette */
-            background: linear-gradient(rgba(248, 250, 252, 0.96), rgba(248, 250, 252, 0.96)),
+            /* Striking industrial steel texture overlaid on a dark, balanced backdrop */
+            background: linear-gradient(rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.98)),
                         url('https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&q=80&w=1000') repeat;
             background-attachment: fixed;
             color: var(--text-main); 
@@ -32,7 +32,7 @@
         }
         
         .top-bar {
-            background: var(--accent-orange);
+            background: var(--accent-red);
             color: #ffffff;
             text-align: center;
             padding: 10px;
@@ -47,7 +47,7 @@
         nav { 
             background: var(--bg-nav); 
             padding: 20px 0; 
-            border-bottom: 3px solid var(--accent-orange); 
+            border-bottom: 3px solid var(--accent-red); 
         }
         .nav-container {
             display: flex; 
@@ -55,26 +55,26 @@
             align-items: center;
         }
         .nav-logo { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase; color: #ffffff;}
-        .nav-logo span { color: var(--accent-orange); }
+        .nav-logo span { color: var(--accent-red); }
         .nav-links { display: flex; gap: 30px; }
         nav a { color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.15s; }
-        nav a:hover { color: var(--accent-orange); }
+        nav a:hover { color: var(--accent-red); }
 
         .hero-banner {
             position: relative;
-            /* Premium direct commercial logistics backdrop with text-legibility gradient overlay */
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), 
+            /* Direct commercial semi truck transportation photography with crisp visibility overlay */
+            background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(15, 23, 42, 0.92)), 
                         url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1600') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
-            padding: 80px 0;
+            padding: 110px 0;
             text-align: center;
             color: #ffffff;
-            border-bottom: 4px solid var(--accent-orange);
+            border-bottom: 4px solid var(--accent-blue);
         }
-        .hero-banner h1 { margin: 0; font-size: 3.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; }
-        .hero-banner h1 span { color: var(--accent-orange); }
-        .hero-banner .subtitle { color: #94a3b8; margin: 12px 0 0 0; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+        .hero-banner h1 { margin: 0; font-size: 3.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .hero-banner h1 span { color: var(--accent-red); }
+        .hero-banner .subtitle { color: #cbd5e1; margin: 12px 0 0 0; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
         
         .how-it-works-section {
             background: var(--bg-card);
@@ -82,17 +82,17 @@
             border-radius: 6px;
             padding: 40px 30px;
             margin: 40px 0;
-            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
         .section-title {
             text-transform: uppercase;
             font-size: 1.2rem;
             font-weight: 900;
             letter-spacing: 0.05em;
-            color: var(--text-main);
+            color: #ffffff;
             margin-top: 0;
             margin-bottom: 15px;
-            border-left: 4px solid var(--accent-orange);
+            border-left: 4px solid var(--accent-blue);
             padding-left: 12px;
         }
         .section-subtitle {
@@ -112,8 +112,8 @@
             border-radius: 6px;
             padding: 25px;
         }
-        .flow-column.buyers { border-top: 4px solid var(--accent-amber); }
-        .flow-column.sellers { border-top: 4px solid var(--accent-orange); }
+        .flow-column.buyers { border-top: 4px solid var(--accent-blue); }
+        .flow-column.sellers { border-top: 4px solid var(--accent-red); }
         
         .flow-header {
             display: flex;
@@ -128,6 +128,7 @@
             font-size: 1.1rem;
             font-weight: 850;
             letter-spacing: 0.02em;
+            color: #ffffff;
         }
         .flow-intro {
             font-size: 0.9rem;
@@ -149,7 +150,7 @@
             text-transform: uppercase;
             font-size: 0.82rem;
             letter-spacing: 0.02em;
-            color: var(--text-main);
+            color: #ffffff;
             display: block;
             margin-bottom: 2px;
         }
@@ -170,12 +171,11 @@
             transition: all 0.2s ease;
         }
         .ticker-stat:hover, .ticker-stat.active-filter {
-            border-left-color: var(--accent-orange);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            background: #ffffff;
+            border-left-color: var(--accent-red);
+            background: #243147;
         }
         .ticker-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700; }
-        .ticker-value { font-size: 1.8rem; font-weight: 900; color: var(--text-main); margin-top: 4px; }
+        .ticker-value { font-size: 1.8rem; font-weight: 900; color: #ffffff; margin-top: 4px; }
 
         .search-filter-container {
             background: var(--bg-card);
@@ -183,7 +183,6 @@
             padding: 20px;
             border-radius: 6px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
         }
         .search-wrapper { position: relative; }
         .search-input {
@@ -194,9 +193,9 @@
             border-radius: 4px;
             box-sizing: border-box;
             background: var(--bg-main);
-            color: var(--text-main);
+            color: #ffffff;
         }
-        .search-input:focus { outline: 2px solid var(--accent-orange); background: #ffffff; }
+        .search-input:focus { outline: 2px solid var(--accent-blue); background: var(--bg-main); }
 
         .board-header-row {
             display: flex;
@@ -219,28 +218,37 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 24px;
+            overflow: hidden; /* Clips image corners inside card */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .post-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        /* Dedicated Photographic Visual Anchor for Individual Component Bounties */
+        .card-visual-header {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(rgba(30, 41, 59, 0.2), rgba(30, 41, 59, 0.9)),
+                        url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600') no-repeat center center;
+            background-size: cover;
         }
 
         .post-card.premium-boost {
-            border: 2px solid var(--accent-orange);
+            border: 2px solid var(--accent-red);
             background: linear-gradient(180deg, var(--premium-glow) 0%, var(--bg-card) 100%);
         }
         .premium-badge {
             position: absolute;
-            top: -12px;
+            top: 12px;
             right: 15px;
-            background: var(--accent-orange);
+            background: var(--accent-red);
             color: #ffffff;
             font-size: 0.7rem;
             font-weight: 900;
@@ -248,18 +256,19 @@
             border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            z-index: 10;
         }
 
-        .card-top { margin-bottom: 16px; }
-        .part-title { font-size: 1.3rem; font-weight: 800; margin: 0 0 6px 0; text-transform: uppercase; color: var(--text-main); }
-        .ymm-tag { font-size: 0.9rem; font-weight: 700; color: var(--accent-amber); text-transform: uppercase; margin-bottom: 12px; }
+        .card-body-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .part-title { font-size: 1.3rem; font-weight: 800; margin: 0 0 6px 0; text-transform: uppercase; color: #ffffff; }
+        .ymm-tag { font-size: 0.9rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; margin-bottom: 12px; }
         
         .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.85rem; }
-        .spec-table tr { border-bottom: 1px solid #f1f5f9; }
+        .spec-table tr { border-bottom: 1px solid #334155; }
         .spec-table tr:last-child { border-bottom: none; }
         .spec-table td { padding: 6px 0; }
         .spec-label { color: var(--text-muted); font-weight: 600; width: 40%; text-transform: uppercase; font-size: 0.75rem; }
-        .spec-val { color: var(--text-main); font-weight: 700; }
+        .spec-val { color: #ffffff; font-weight: 700; }
 
         .card-footer-controls {
             display: flex;
@@ -278,8 +287,8 @@
         .region-footer-tag {
             font-size: 0.8rem;
             font-weight: 700;
-            color: var(--text-muted);
-            background: #e2e8f0;
+            color: #ffffff;
+            background: #475569;
             padding: 6px 10px;
             border-radius: 4px;
             display: inline-block;
@@ -289,7 +298,7 @@
         .stripe-boost-link {
             font-size: 0.75rem;
             font-weight: 800;
-            color: var(--accent-orange);
+            color: #ef4444;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.02em;
@@ -297,12 +306,12 @@
             align-items: center;
             gap: 4px;
             padding: 4px 8px;
-            border: 1px dashed var(--accent-orange);
+            border: 1px dashed #ef4444;
             border-radius: 4px;
             transition: all 0.15s ease;
         }
         .stripe-boost-link:hover {
-            background: var(--accent-orange);
+            background: var(--accent-red);
             color: #ffffff;
             border-style: solid;
         }
@@ -310,7 +319,7 @@
         .cta-unlock-btn {
             display: block;
             text-align: center;
-            background: var(--bg-nav);
+            background: var(--accent-blue);
             color: #ffffff;
             text-decoration: none;
             padding: 12px;
@@ -344,7 +353,7 @@
             padding: 40px 0;
             margin-top: 60px;
             font-size: 0.85rem;
-            border-top: 4px solid var(--accent-orange);
+            border-top: 4px solid var(--accent-red);
         }
         .footer-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-copy { font-weight: 600; }
@@ -361,7 +370,7 @@
             <div class="nav-logo">TruckParts<span>XL</span></div>
             <div class="nav-links">
                 <a href="#board">Open Contracts</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header" target="_blank" style="color: var(--accent-orange);">Post a Bounty</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header" target="_blank" style="color: var(--accent-red);">Post a Bounty</a>
             </div>
         </div>
     </nav>
@@ -375,11 +384,15 @@
 
     <main class="container" id="board">
         
+        <!-- ========================================== -->
+        <!-- HOW IT WORKS OPERATIONAL ARCHITECTURE     -->
+        <!-- ========================================== -->
         <section class="how-it-works-section">
             <h3 class="section-title">Operational Architecture</h3>
             <p class="section-subtitle">We connect commercial truck part buyers directly with elite salvage yards and heavy-duty breakers nationwide. Zero added markups.</p>
             
             <div class="split-flow-grid">
+                <!-- For Parts Buyers -->
                 <div class="flow-column buyers">
                     <div class="flow-header">
                         <span class="flow-icon">📦</span>
@@ -393,6 +406,7 @@
                     </ol>
                 </div>
 
+                <!-- For Salvage Yards -->
                 <div class="flow-column sellers">
                     <div class="flow-header">
                         <span class="flow-icon">⚙️</span>
@@ -536,42 +550,47 @@
                         
                         ${isPremium ? `<div class="premium-badge">🔥 PREMIUM BOOST</div>` : ''}
                         
-                        <div class="card-top">
-                            <h3 class="part-title">${title}</h3>
-                            <div class="ymm-tag">${ymm}</div>
-                            
-                            <table class="spec-table">
-                                <tr>
-                                    <td class="spec-label">VIN Identifier</td>
-                                    <td class="spec-val">${vin}</td>
-                                </tr>
-                                <tr>
-                                    <td class="spec-label">OEM / Casting</td>
-                                    <td class="spec-val">${oem}</td>
-                                </tr>
-                                <tr>
-                                    <td class="spec-label">Engine / Specs</td>
-                                    <td class="spec-val">${specs}</td>
-                                </tr>
-                                <tr>
-                                    <td class="spec-label">Condition</td>
-                                    <td class="spec-val">${condition}</td>
-                                </tr>
-                                <tr>
-                                    <td class="spec-label">Target Budget</td>
-                                    <td class="spec-val" style="color: var(--accent-green);">${budget}</td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <div class="card-footer-controls">
-                            <div class="footer-meta-row">
-                                <div class="region-footer-tag">📍 Corridor: ${region}</div>
-                                ${!isPremium ? `<a href="${boostPaymentUrl}" target="_blank" class="stripe-boost-link">⚡ Boost Listing</a>` : ''}
+                        <!-- Embedded Visual Salvage/Logistics Card Image component -->
+                        <div class="card-visual-header"></div>
+                        
+                        <div class="card-body-content">
+                            <div class="card-top">
+                                <h3 class="part-title">${title}</h3>
+                                <div class="ymm-tag">${ymm}</div>
+                                
+                                <table class="spec-table">
+                                    <tr>
+                                        <td class="spec-label">VIN Identifier</td>
+                                        <td class="spec-val">${vin}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="spec-label">OEM / Casting</td>
+                                        <td class="spec-val">${oem}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="spec-label">Engine / Specs</td>
+                                        <td class="spec-val">${specs}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="spec-label">Condition</td>
+                                        <td class="spec-val">${condition}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="spec-label">Target Budget</td>
+                                        <td class="spec-val" style="color: var(--accent-green);">${budget}</td>
+                                    </tr>
+                                </table>
                             </div>
-                            <button class="cta-unlock-btn" onclick="window.open('${unlockPaymentUrl}', '_blank')">
-                                🔓 UNLOCK BUYER CONTACT INFO
-                            </button>
+
+                            <div class="card-footer-controls">
+                                <div class="footer-meta-row">
+                                    <div class="region-footer-tag">📍 Corridor: ${region}</div>
+                                    ${!isPremium ? `<a href="${boostPaymentUrl}" target="_blank" class="stripe-boost-link">⚡ Boost</a>` : ''}
+                                </div>
+                                <button class="cta-unlock-btn" onclick="window.open('${unlockPaymentUrl}', '_blank')">
+                                    🔓 UNLOCK BUYER CONTACT INFO
+                                </button>
+                            </div>
                         </div>
                     </li>
                 `;
