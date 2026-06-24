@@ -473,8 +473,8 @@
                 // DYNAMIC STRIPE PAYMENT PORTAL CONFIGURATION
                 const boostPaymentUrl = `https://buy.stripe.com/5kA7v60qA01WbE4cMM?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Boost Listing - ' + title)}`;
                 
-                // UNLOCK PAYMENT LINK: Points to your lead unlock payment portal, passing along the exact unique tracking reference
-                const unlockPaymentUrl = `https://buy.stripe.com/5kA7v60qA01WbE4cMM?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Unlock Lead - ' + title)}`;
+                // INTEGRATED NEW TEST PAYMENT LINK WITH PASSED METADATA ATTRIBUTES
+                const unlockPaymentUrl = `https://buy.stripe.com/test_7sYfYZb8Cfmu8hq8u3a7C0g?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Unlock Lead - ' + title)}`;
 
                 const html = `
                     <li class="post-card ${isPremium ? 'premium-boost' : ''}" 
