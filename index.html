@@ -21,9 +21,10 @@
 
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            /* Striking industrial steel texture overlaid on a dark, balanced backdrop */
-            background: linear-gradient(rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.98)),
-                        url('https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&q=80&w=1000') repeat;
+            /* Texturized industrial background using a live aerial grid view of a heavy truck wrecking lot */
+            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98)),
+                        url('https://activetruckparts.com/wp-content/uploads/2023/02/active-truck-parts-hero-image3.png') repeat;
+            background-size: 500px auto;
             background-attachment: fixed;
             color: var(--text-main); 
             margin: 0; 
@@ -62,9 +63,9 @@
 
         .hero-banner {
             position: relative;
-            /* Direct commercial semi truck transportation photography with crisp visibility overlay */
-            background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(15, 23, 42, 0.92)), 
-                        url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1600') no-repeat center center;
+            /* Header visual showcasing an actual heavy duty salvage yard layout corridor instead of an open road */
+            background: linear-gradient(rgba(11, 15, 25, 0.85), rgba(15, 23, 42, 0.93)), 
+                        url('https://activetruckparts.com/wp-content/uploads/2023/02/active-truck-parts-hero-image3.png') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
             padding: 110px 0;
@@ -218,7 +219,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            overflow: hidden; /* Clips image corners inside card */
+            overflow: hidden; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -231,13 +232,13 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.25);
         }
 
-        /* Dedicated Photographic Visual Anchor for Individual Component Bounties */
+        /* Card Image Headers setup to fallback to specific truck part assets */
         .card-visual-header {
             width: 100%;
-            height: 140px;
-            background: linear-gradient(rgba(30, 41, 59, 0.2), rgba(30, 41, 59, 0.9)),
-                        url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600') no-repeat center center;
+            height: 150px;
             background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .post-card.premium-boost {
@@ -384,15 +385,11 @@
 
     <main class="container" id="board">
         
-        <!-- ========================================== -->
-        <!-- HOW IT WORKS OPERATIONAL ARCHITECTURE     -->
-        <!-- ========================================== -->
         <section class="how-it-works-section">
             <h3 class="section-title">Operational Architecture</h3>
             <p class="section-subtitle">We connect commercial truck part buyers directly with elite salvage yards and heavy-duty breakers nationwide. Zero added markups.</p>
             
             <div class="split-flow-grid">
-                <!-- For Parts Buyers -->
                 <div class="flow-column buyers">
                     <div class="flow-header">
                         <span class="flow-icon">📦</span>
@@ -406,7 +403,6 @@
                     </ol>
                 </div>
 
-                <!-- For Salvage Yards -->
                 <div class="flow-column sellers">
                     <div class="flow-header">
                         <span class="flow-icon">⚙️</span>
@@ -465,11 +461,15 @@
     </footer>
 
     <script>
-        // CONFIGURATION PARAMETERS
         const REPO = "174hz/truckpartsxl";
-        
-        // CENTRALIZED STRIPE SANDBOX ASSIGNMENT
         const STRIPE_TEST_LINK = "https://buy.stripe.com/test_7sYfYZb8Cfmu8hq8u3a7C0g";
+
+        // Asset array map matching keywords to explicit commercial core/salvage imagery
+        const INDUSTRY_VISUALS = [
+            "https://holttruckcenters.com/wp-content/uploads/semi-truck-engine-parts-diagram.png", // Engine Block/Tear down
+            "https://www.truckcountry.com/efs/wp/domains/www.truckcountry.com/wp-content/uploads/2022/10/IMG_9505-1024x683.jpg", // Heavy collision cab/frame
+            "https://i.ebayimg.com/00/s/MTA2NlgxNjAw/z/KYEAAOSwDRRlYCdk/$_57.JPG?set_id=880000500F" // Body/Chrome component array
+        ];
 
         let currentRegionFilter = 'all';
         let allBounties = [];
@@ -477,7 +477,6 @@
         function loadBounties() {
             const gridContainer = document.getElementById('bountyGrid');
             const cacheBuster = new Date().getTime();
-            
             const url = `https://raw.githubusercontent.com/${REPO}/main/bounties.json?t=${cacheBuster}`;
 
             fetch(url)
@@ -494,7 +493,6 @@
                         return;
                     }
 
-                    // STRICT CHRONOLOGICAL SORTING
                     allBounties.sort((a, b) => {
                         const dateA = a.timestamp || a['Timestamp'] ? new Date(a.timestamp || a['Timestamp']) : new Date(0);
                         const dateB = b.timestamp || b['Timestamp'] ? new Date(b.timestamp || b['Timestamp']) : new Date(0);
@@ -540,6 +538,17 @@
                 const lookupId = part.timestamp ? new Date(part.timestamp).getTime() : index;
                 const searchableStr = `${title} ${ymm} ${vin} ${oem} ${specs}`.toLowerCase();
 
+                // Select index-specific photo matching typical heavy part categories deterministically
+                let chosenPhoto = INDUSTRY_VISUALS[0];
+                const cleanTitle = title.toLowerCase();
+                if (cleanTitle.includes('hood') || cleanTitle.includes('bumper') || cleanTitle.includes('door') || cleanTitle.includes('cab')) {
+                    chosenPhoto = INDUSTRY_VISUALS[2];
+                } else if (cleanTitle.includes('axle') || cleanTitle.includes('differential') || cleanTitle.includes('transmission') || cleanTitle.includes('frame')) {
+                    chosenPhoto = INDUSTRY_VISUALS[1];
+                } else {
+                    chosenPhoto = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
+                }
+
                 const boostPaymentUrl = `${STRIPE_TEST_LINK}?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Boost Listing - ' + title)}`;
                 const unlockPaymentUrl = `${STRIPE_TEST_LINK}?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Unlock Lead - ' + title)}`;
 
@@ -550,8 +559,8 @@
                         
                         ${isPremium ? `<div class="premium-badge">🔥 PREMIUM BOOST</div>` : ''}
                         
-                        <!-- Embedded Visual Salvage/Logistics Card Image component -->
-                        <div class="card-visual-header"></div>
+                        <!-- Dynamically linked industry core image component -->
+                        <div class="card-visual-header" style="background-image: linear-gradient(rgba(30, 41, 59, 0.1), rgba(30, 41, 59, 0.85)), url('${chosenPhoto}');"></div>
                         
                         <div class="card-body-content">
                             <div class="card-top">
