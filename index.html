@@ -400,6 +400,10 @@
     <script>
         // CONFIGURATION PARAMETERS
         const REPO = "174hz/truckpartsxl";
+        
+        // CENTRALIZED STRIPE SANDBOX ASSIGNMENT
+        const STRIPE_TEST_LINK = "https://buy.stripe.com/test_7sYfYZb8Cfmu8hq8u3a7C0g";
+
         let currentRegionFilter = 'all';
         let allBounties = [];
 
@@ -470,11 +474,9 @@
                 const lookupId = part.timestamp ? new Date(part.timestamp).getTime() : index;
                 const searchableStr = `${title} ${ymm} ${vin} ${oem} ${specs}`.toLowerCase();
 
-                // DYNAMIC STRIPE PAYMENT PORTAL CONFIGURATION
-                const boostPaymentUrl = `https://buy.stripe.com/5kA7v60qA01WbE4cMM?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Boost Listing - ' + title)}`;
-                
-                // INTEGRATED NEW TEST PAYMENT LINK WITH PASSED METADATA ATTRIBUTES
-                const unlockPaymentUrl = `https://buy.stripe.com/test_7sYfYZb8Cfmu8hq8u3a7C0g?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Unlock Lead - ' + title)}`;
+                // DYNAMIC STRIPE ROUTING MAPPED DIRECTLY TO GLOBAL PARAMETER
+                const boostPaymentUrl = `${STRIPE_TEST_LINK}?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Boost Listing - ' + title)}`;
+                const unlockPaymentUrl = `${STRIPE_TEST_LINK}?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Unlock Lead - ' + title)}`;
 
                 const html = `
                     <li class="post-card ${isPremium ? 'premium-boost' : ''}" 
