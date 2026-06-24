@@ -369,5 +369,17 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "timestamp": "6/23/2026 21:49:11",
+    "region": "Ontario (Golden Horseshoe Region)",
+    "yearMakeModel": "2022 FREIGHTLINER CASCADIA ",
+    "vin": "12345678901234557",
+    "partName": "Turbocharger",
+    "specs": "Eaton Fuller 13 speed ",
+    "oem": "1569014763212",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "6,700",
+    "boosted": "false"
   }
 ]
