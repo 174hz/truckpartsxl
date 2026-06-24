@@ -335,5 +335,29 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "timestamp": "6/23/2026 18:48:34",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2018 Feightliner Cascadia ",
+    "vin": "12345678901234567",
+    "partName": "Turbocharger",
+    "specs": "Eaton Fuller 13-speed ",
+    "oem": "1890456782",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "14,800",
+    "boosted": "false"
+  },
+  {
+    "timestamp": "6/23/2026 18:48:34",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2018 Feightliner Cascadia ",
+    "vin": "12345678901234567",
+    "partName": "Turbocharger",
+    "specs": "Eaton Fuller 13-speed ",
+    "oem": "1890456782",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "14,800",
+    "boosted": "false"
   }
 ]
