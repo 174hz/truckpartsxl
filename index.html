@@ -9,7 +9,7 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* Strict horizontal row architecture from pia 101.jpg */
+        /* Clean row list alignment */
         .ledger-list {
             list-style: none;
             padding: 0;
@@ -22,7 +22,7 @@
         }
 
         .ledger-row {
-            background: #1e293b; /* Slate finish from pia 101.jpg */
+            background: #1e293b;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 6px;
             display: flex;
@@ -34,7 +34,6 @@
             transition: border-color 0.15s ease;
         }
 
-        /* Left-side premium indicator strip */
         .ledger-row.priority-boost {
             border-left: 4px solid #ef4444;
         }
@@ -53,7 +52,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* Desktop alignment adjustments */
+        /* Desktop view architecture from pia 199.jpg */
         @media (min-width: 992px) {
             .ledger-row {
                 flex-direction: row;
@@ -69,7 +68,7 @@
             }
         }
 
-        /* Left Section: Thumbnails */
+        /* Left side thumb */
         .row-thumb {
             width: 75px;
             height: 65px;
@@ -80,7 +79,7 @@
             flex-shrink: 0;
         }
 
-        /* Asset Identifiers */
+        /* Identity Block */
         .row-identity {
             width: 100%;
             max-width: 200px;
@@ -94,6 +93,9 @@
             text-transform: uppercase;
             color: #ffffff;
             letter-spacing: -0.01em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .ymm-tag {
@@ -102,14 +104,18 @@
             color: #60a5fa;
             text-transform: uppercase;
             margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* Middle Section: Structural Data Grid */
+        /* Protected grid tracking columns */
         .row-specs-data {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             flex-grow: 1;
+            min-width: 0; /* Prevents overflow blowout */
         }
 
         @media (min-width: 768px) {
@@ -123,6 +129,7 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
+            min-width: 0;
         }
 
         .data-label {
@@ -137,14 +144,16 @@
             color: #ffffff;
             font-size: 0.85rem;
             font-weight: 700;
-            word-break: break-word;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .budget-highlight {
             color: #fca5a5;
         }
 
-        /* Right Section: Clean, Streamlined Action Container */
+        /* Right panel layouts */
         .row-actions-panel {
             display: flex;
             flex-direction: column;
@@ -171,6 +180,9 @@
             border-radius: 3px;
             text-transform: uppercase;
             white-space: nowrap;
+            max-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .utility-btn.boost-trigger {
@@ -186,7 +198,7 @@
         }
 
         .cta-unlock-btn {
-            background: #2563eb; /* Royal blue panel button */
+            background: #2563eb;
             color: #ffffff;
             border: none;
             padding: 10px 12px;
@@ -319,6 +331,21 @@
         let currentRegionFilter = 'all';
         let allBounties = [];
 
+        // Dynamic key helper to pull clean data and ignore structural instructions
+        function extractCleanValue(rowObj, priorityKeys, fallbackDefault = "Not Disclosed") {
+            for (let key of priorityKeys) {
+                if (rowObj[key] !== undefined && rowObj[key] !== null) {
+                    let valStr = String(rowObj[key]).trim();
+                    // Catch explicit Google form setup columns instructions
+                    if (valStr.toLowerCase().includes("select your") || valStr.toLowerCase().includes("column")) {
+                        continue;
+                    }
+                    if (valStr !== "") return valStr;
+                }
+            }
+            return fallbackDefault;
+        }
+
         async function loadBounties() {
             const gridContainer = document.getElementById('bountyGrid');
             const url = `https://raw.githubusercontent.com/${REPO}/main/bounties.json?t=${new Date().getTime()}`;
@@ -339,22 +366,36 @@
                 let globalCount = 0;
 
                 allBounties.forEach((bounty, index) => {
-                    const regionText = (bounty.region || '').toLowerCase();
+                    // Filter out rows containing header instructions instead of actual dataset rows
+                    const testString = JSON.stringify(bounty).toLowerCase();
+                    if (testString.includes("select your location") || testString.includes("shipping region column")) {
+                        return; 
+                    }
+
+                    // Strict multi-property check to stop data from leaking into incorrect columns
+                    const partName = extractCleanValue(bounty, ["part_name", "Part Name", "What part do you need?"], "Component Asset");
+                    const makeModel = extractCleanValue(bounty, ["year_make_model", "Year Make Model", "Truck Details"], "Heavy Duty Spec");
+                    const vinNum = extractCleanValue(bounty, ["vin", "VIN", "Select your Truck VIN (Optional)"], "Not Disclosed");
+                    const castingNum = extractCleanValue(bounty, ["oem_casting", "OEM Casting", "Casting Number"], "Not Disclosed");
+                    const engineSpec = extractCleanValue(bounty, ["engine", "Engine", "Engine Configuration"], "Standard Profile");
+                    
+                    // Specific guard to prevent rogue numeric chains/phone fields leaking into 'condition'
+                    let rawCondition = extractCleanValue(bounty, ["condition", "Condition", "Select your Condition Required"], "Core Grade / Mixed");
+                    if (/^\d{8,}/.test(rawCondition.replace(/[\s-]/g, ''))) {
+                        rawCondition = "Core Grade / Mixed"; // Wipe numeric strings accidentally mapped here
+                    }
+                    const partCondition = rawCondition;
+
+                    const budgetTarget = extractCleanValue(bounty, ["target_budget", "Budget", "Target Budget"], "Quote Direct");
+                    const regionTag = extractCleanValue(bounty, ["region", "Region", "Location"], "Global Dispatch");
+
+                    const regionText = regionTag.toLowerCase();
                     const isCanada = isCanadianRegion(regionText);
                     
                     if (isCanada) ontarioCount++;
                     else globalCount++;
 
                     const uniqueCardId = bounty.id || `bounty-${index}`;
-                    const partName = bounty.part_name || 'Component Asset';
-                    const makeModel = bounty.year_make_model || 'Heavy Duty Spec';
-                    const vinNum = bounty.vin || 'Not Disclosed';
-                    const castingNum = bounty.oem_casting || 'Not Disclosed';
-                    const engineSpec = bounty.engine || 'Standard Profile';
-                    const partCondition = bounty.condition || 'Core Grade / Mixed';
-                    const budgetTarget = bounty.target_budget || 'Quote Direct';
-                    const regionTag = bounty.region || 'Global Dispatch';
-
                     const cleanSearchStr = `${partName} ${makeModel} ${vinNum} ${castingNum} ${engineSpec} ${regionTag}`.toLowerCase();
                     const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
 
@@ -392,7 +433,7 @@
                     gridContainer.insertAdjacentHTML('beforeend', html);
                 });
 
-                document.getElementById('count-all').innerText = allBounties.length;
+                document.getElementById('count-all').innerText = ontarioCount + globalCount;
                 document.getElementById('count-ontario').innerText = ontarioCount;
                 document.getElementById('count-global').innerText = globalCount;
 
