@@ -9,78 +9,87 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* Restoring the stable grid from pia 90.jpg */
-        .bounty-grid {
+        /* Strict horizontal row architecture from pia 101.jpg */
+        .ledger-list {
             list-style: none;
             padding: 0;
-            margin: 24px 0;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
+            margin: 24px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            max-width: 1200px;
         }
 
-        @media (min-width: 768px) {
-            .bounty-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .bounty-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .post-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+        .ledger-row {
+            background: #1e293b; /* Slate finish from pia 101.jpg */
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 6px;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            padding: 16px;
+            gap: 16px;
+            transition: border-color 0.15s ease;
         }
 
-        .post-card.premium-boost {
-            border: 1px solid var(--accent-red);
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.15);
+        /* Left-side premium indicator strip */
+        .ledger-row.priority-boost {
+            border-left: 4px solid #ef4444;
         }
 
-        .premium-badge {
+        .priority-tag {
             position: absolute;
-            top: 12px;
+            bottom: 12px;
             left: 12px;
-            background: var(--accent-red);
+            background: #ef4444;
             color: #ffffff;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 900;
-            padding: 4px 8px;
+            padding: 2px 6px;
             border-radius: 3px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            z-index: 2;
         }
 
-        .card-visual-header {
-            width: 100%;
-            height: 160px;
+        /* Desktop alignment adjustments */
+        @media (min-width: 992px) {
+            .ledger-row {
+                flex-direction: row;
+                align-items: center;
+                padding: 14px 20px;
+                gap: 24px;
+            }
+
+            .priority-tag {
+                top: auto;
+                bottom: 6px;
+                left: 16px;
+            }
+        }
+
+        /* Left Section: Thumbnails */
+        .row-thumb {
+            width: 75px;
+            height: 65px;
             background-size: cover;
             background-position: center;
-            border-bottom: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: #0f172a;
+            flex-shrink: 0;
         }
 
-        .card-body-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            flex-grow: 1;
+        /* Asset Identifiers */
+        .row-identity {
+            width: 100%;
+            max-width: 200px;
+            flex-shrink: 0;
         }
 
         .part-title {
-            font-size: 1.3rem;
-            font-weight: 900;
+            font-size: 1.05rem;
+            font-weight: 800;
             margin: 0;
             text-transform: uppercase;
             color: #ffffff;
@@ -88,123 +97,114 @@
         }
 
         .ymm-tag {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: #60a5fa;
             text-transform: uppercase;
-            margin: 4px 0 16px 0;
+            margin-top: 2px;
         }
 
-        .spec-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+        /* Middle Section: Structural Data Grid */
+        .row-specs-data {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            flex-grow: 1;
         }
 
-        .spec-table tr {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        @media (min-width: 768px) {
+            .row-specs-data {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 16px;
+            }
         }
 
-        .spec-table tr:last-child {
-            border-bottom: none;
+        .data-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        .spec-label {
-            padding: 8px 0;
-            color: var(--text-muted);
-            font-size: 0.75rem;
+        .data-label {
+            color: #94a3b8;
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            width: 40%;
+            letter-spacing: 0.03em;
         }
 
-        .spec-val {
-            padding: 8px 0;
+        .data-val {
             color: #ffffff;
             font-size: 0.85rem;
             font-weight: 700;
-            text-align: right;
+            word-break: break-word;
         }
 
-        .card-footer-controls {
+        .budget-highlight {
+            color: #fca5a5;
+        }
+
+        /* Right Section: Clean, Streamlined Action Container */
+        .row-actions-panel {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: auto;
+            gap: 10px;
+            width: 100%;
+            max-width: 220px;
+            flex-shrink: 0;
+            margin-left: auto;
         }
 
-        .footer-meta-row {
+        .meta-badges-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 8px;
+            justify-content: flex-end;
+            gap: 6px;
         }
 
-        .region-footer-tag {
-            font-size: 0.7rem;
+        .dispatch-badge {
+            font-size: 0.65rem;
             font-weight: 700;
-            color: #ffffff;
-            background: #273549;
-            padding: 6px 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            max-width: 60%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .share-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 5px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.12s ease;
-        }
-
-        .share-btn:hover {
-            color: #ffffff;
-            border-color: var(--text-muted);
-        }
-
-        .stripe-boost-link {
-            font-size: 0.65rem;
-            font-weight: 800;
-            color: #ef4444;
-            text-decoration: none;
-            text-transform: uppercase;
+            color: #cbd5e1;
+            background: #334155;
             padding: 4px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .utility-btn.boost-trigger {
+            background: transparent;
             border: 1px dashed #ef4444;
-            border-radius: 4px;
+            color: #f87171;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 6px;
+            border-radius: 3px;
+            cursor: pointer;
         }
 
         .cta-unlock-btn {
-            background: transparent;
+            background: #2563eb; /* Royal blue panel button */
             color: #ffffff;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 12px;
+            border: none;
+            padding: 10px 12px;
             font-size: 0.75rem;
             font-weight: 800;
             border-radius: 4px;
             text-transform: uppercase;
             width: 100%;
             cursor: pointer;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            transition: background 0.15s;
+            gap: 4px;
         }
 
         .cta-unlock-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: #ffffff;
+            background: #1d4ed8;
         }
     </style>
 </head>
@@ -289,7 +289,7 @@
             <div class="feed-status" id="filterStatusLabel">Showing: All Open Contracts</div>
         </div>
 
-        <ul class="bounty-grid" id="bountyGrid">
+        <ul class="ledger-list" id="bountyGrid">
             <li id="initialLoadingMessage" class="status-message">Connecting to GitHub file pipeline, standing by...</li>
         </ul>
 
@@ -330,7 +330,7 @@
                 allBounties = Array.isArray(data) ? data : (data.bounties || []);
                 
                 if (allBounties.length === 0) {
-                    gridContainer.innerHTML = `<li class="status-message">No active heavy duty contracts match your regional parameters.</li>`;
+                    gridContainer.innerHTML = `<li class="status-message">No active requirements available on the board.</li>`;
                     return;
                 }
 
@@ -351,43 +351,42 @@
                     const vinNum = bounty.vin || 'Not Disclosed';
                     const castingNum = bounty.oem_casting || 'Not Disclosed';
                     const engineSpec = bounty.engine || 'Standard Profile';
-                    const partCondition = bounty.condition || 'Core Grade';
+                    const partCondition = bounty.condition || 'Core Grade / Mixed';
                     const budgetTarget = bounty.target_budget || 'Quote Direct';
                     const regionTag = bounty.region || 'Global Dispatch';
 
                     const cleanSearchStr = `${partName} ${makeModel} ${vinNum} ${castingNum} ${engineSpec} ${regionTag}`.toLowerCase();
                     const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
 
-                    const isPremium = index % 4 === 0; 
-                    const cardClasses = isPremium ? 'post-card premium-boost' : 'post-card';
-                    const badgeMarkup = isPremium ? `<div class="premium-badge">🚨 Priority</div>` : '';
+                    const isPremium = index % 3 === 0; 
+                    const rowClasses = isPremium ? 'ledger-row priority-boost' : 'ledger-row';
+                    const badgeMarkup = isPremium ? `<div class="priority-tag">⚡ Priority</div>` : '';
 
                     const html = `
-                        <li class="${cardClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
-                            ${badgeMarkup}
-                            <div class="card-visual-header" style="background-image: url('${cardVisual}');"></div>
-                            <div class="card-body-content">
-                                <div>
-                                    <h3 class="part-title">${partName}</h3>
-                                    <div class="ymm-tag">${makeModel}</div>
-                                    
-                                    <table class="spec-table">
-                                        <tr><td class="spec-label">VIN Identifier</td><td class="spec-val">${vinNum}</td></tr>
-                                        <tr><td class="spec-label">OEM / Casting</td><td class="spec-val">${castingNum}</td></tr>
-                                        <tr><td class="spec-label">Engine / Specs</td><td class="spec-val">${engineSpec}</td></tr>
-                                        <tr><td class="spec-label">Condition</td><td class="spec-val">${partCondition}</td></tr>
-                                        <tr><td class="spec-label">Target Budget</td><td class="spec-val">${budgetTarget}</td></tr>
-                                    </table>
-                                </div>
-
-                                <div class="card-footer-controls">
-                                    <div class="footer-meta-row">
-                                        <span class="region-footer-tag">📍 ${regionTag}</span>
-                                        <button class="share-btn" onclick="copyShareLink('${uniqueCardId}')">🔗 Copy Link</button>
-                                    </div>
-                                    <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Buyer Contact Info</button>
-                                </div>
+                        <li class="${rowClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
+                            <div class="row-thumb" style="background-image: url('${cardVisual}');"></div>
+                            
+                            <div class="row-identity">
+                                <h3 class="part-title">${partName}</h3>
+                                <div class="ymm-tag">${makeModel}</div>
                             </div>
+                            
+                            <div class="row-specs-data">
+                                <div class="data-cell"><span class="data-label">VIN:</span><span class="data-val">${vinNum}</span></div>
+                                <div class="data-cell"><span class="data-label">Casting:</span><span class="data-val">${castingNum}</span></div>
+                                <div class="data-cell"><span class="data-label">Engine:</span><span class="data-val">${engineSpec}</span></div>
+                                <div class="data-cell"><span class="data-label">Condition:</span><span class="data-val">${partCondition}</span></div>
+                                <div class="data-cell"><span class="data-label">Budget:</span><span class="data-val budget-highlight">${budgetTarget}</span></div>
+                            </div>
+
+                            <div class="row-actions-panel">
+                                <div class="meta-badges-row">
+                                    <span class="dispatch-badge">📍 ${regionTag}</span>
+                                    <button class="utility-btn boost-trigger">⚡ Boost</button>
+                                </div>
+                                <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Buyer Info</button>
+                            </div>
+                            ${badgeMarkup}
                         </li>
                     `;
                     gridContainer.insertAdjacentHTML('beforeend', html);
@@ -400,7 +399,7 @@
                 applyCombinedFilters();
             } catch (err) {
                 console.error("Fetch fault:", err);
-                gridContainer.innerHTML = `<li class="status-message">Warning: Component data feeds are locked or currently compiling updates.</li>`;
+                gridContainer.innerHTML = `<li class="status-message">Warning: Component data feeds are locked or compiling updates.</li>`;
             }
         }
 
@@ -424,12 +423,12 @@
 
         function applyCombinedFilters() {
             const searchQuery = document.getElementById('searchBar').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('#bountyGrid .post-card');
+            const rows = document.querySelectorAll('#bountyGrid .ledger-row');
             let visibleCount = 0;
 
-            cards.forEach(card => {
-                const cardRegion = card.getAttribute('data-region') || '';
-                const cardSearch = card.getAttribute('data-searchable') || '';
+            rows.forEach(row => {
+                const cardRegion = row.getAttribute('data-region') || '';
+                const cardSearch = row.getAttribute('data-searchable') || '';
 
                 let matchesRegion = false;
                 const isCanada = isCanadianRegion(cardRegion);
@@ -445,15 +444,15 @@
                 let matchesSearch = cardSearch.includes(searchQuery);
 
                 if (matchesRegion && matchesSearch) {
-                    card.classList.remove('hidden-bounty');
+                    row.classList.remove('hidden-bounty');
                     visibleCount++;
                 } else {
-                    card.classList.add('hidden-bounty');
+                    row.classList.add('hidden-bounty');
                 }
             });
 
             const existingMsg = document.getElementById('emptyFilterMessage');
-            if (visibleCount === 0 && cards.length > 0) {
+            if (visibleCount === 0 && rows.length > 0) {
                 if (!existingMsg) {
                     document.getElementById('bountyGrid').insertAdjacentHTML('beforeend', 
                         `<li id="emptyFilterMessage" class="status-message">No active heavy duty contracts match your parameters.</li>`
@@ -462,15 +461,6 @@
             } else if (existingMsg) {
                 existingMsg.remove();
             }
-        }
-
-        function copyShareLink(cardId) {
-            const shareUrl = window.location.origin + window.location.pathname + '#' + cardId;
-            navigator.clipboard.writeText(shareUrl).then(() => {
-                const btn = document.querySelector(`#${cardId} .share-btn`);
-                btn.innerHTML = '✅ Copied!';
-                setTimeout(() => { btn.innerHTML = '🔗 Copy Link'; }, 2000);
-            });
         }
 
         window.addEventListener('DOMContentLoaded', loadBounties);
