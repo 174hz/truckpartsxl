@@ -9,19 +9,29 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* Direct structural fixes for layout collapses seen in pia 100.jpg */
-        .ledger-list {
+        /* Restoring the stable grid from pia 90.jpg */
+        .bounty-grid {
             list-style: none;
             padding: 0;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            width: 100%;
-            max-width: 1100px;
+            margin: 24px 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
         }
 
-        .ledger-item {
+        @media (min-width: 768px) {
+            .bounty-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .bounty-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .post-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 6px;
@@ -29,120 +39,172 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            padding: 12px;
-            gap: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .ledger-visual-col {
+        .post-card.premium-boost {
+            border: 1px solid var(--accent-red);
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.15);
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent-red);
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 2;
+        }
+
+        .card-visual-header {
             width: 100%;
-            height: 120px;
+            height: 160px;
             background-size: cover;
             background-position: center;
-            border-radius: 4px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .ledger-info-block {
+        .card-body-content {
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            justify-content: space-between;
             flex-grow: 1;
         }
 
-        .part-title { font-size: 1.15rem; font-weight: 800; margin: 0; text-transform: uppercase; color: #ffffff; }
-        .ymm-tag { font-size: 0.85rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; margin-top: 2px; }
-
-        .ledger-specs-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
-            background: rgba(15, 23, 42, 0.4);
-            padding: 12px;
-            border-radius: 4px;
+        .part-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: -0.01em;
         }
 
-        .spec-cell { display: flex; justify-content: space-between; font-size: 0.85rem; }
-        .cell-label { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
-        .cell-value { color: var(--text-main); font-weight: 700; }
-        .budget-highlight { color: #fca5a5; }
+        .ymm-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #60a5fa;
+            text-transform: uppercase;
+            margin: 4px 0 16px 0;
+        }
 
-        .ledger-action-block {
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .spec-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .spec-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            padding: 8px 0;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 40%;
+        }
+
+        .spec-val {
+            padding: 8px 0;
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .card-footer-controls {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            justify-content: center;
+            margin-top: auto;
         }
 
-        .action-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-        .region-footer-tag { font-size: 0.75rem; font-weight: 700; color: #ffffff; background: #475569; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+        .footer-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .region-footer-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: #273549;
+            padding: 6px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            max-width: 60%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
         .share-btn {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 800;
+            text-transform: uppercase;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.12s ease;
+        }
+
+        .share-btn:hover {
+            color: #ffffff;
+            border-color: var(--text-muted);
+        }
+
+        .stripe-boost-link {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: #ef4444;
+            text-decoration: none;
             text-transform: uppercase;
             padding: 4px 8px;
+            border: 1px dashed #ef4444;
             border-radius: 4px;
-            cursor: pointer;
         }
-        .share-btn.copied { color: var(--accent-green) !important; border-color: var(--accent-green) !important; }
 
         .cta-unlock-btn {
-            background: var(--accent-blue);
+            background: transparent;
             color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.2);
             padding: 12px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 800;
             border-radius: 4px;
             text-transform: uppercase;
-            border: none;
             width: 100%;
             cursor: pointer;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background 0.15s;
         }
 
-        /* Desktop Optimization Override: Re-aligns elements from vertical strips into clean, horizontal sheets */
-        @media (min-width: 900px) {
-            .ledger-item {
-                display: grid;
-                grid-template-columns: 80px 1fr 240px;
-                align-items: center;
-                padding: 12px 20px;
-            }
-
-            .ledger-visual-col {
-                width: 80px;
-                height: 65px;
-            }
-
-            .ledger-info-block {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0 24px;
-                gap: 24px;
-            }
-
-            .ledger-main-meta { width: 25%; flex-shrink: 0; }
-            .ledger-specs-grid {
-                grid-template-columns: repeat(5, 1fr);
-                flex-grow: 1;
-                background: transparent;
-                padding: 0;
-                gap: 16px;
-            }
-
-            .spec-cell { flex-direction: column; gap: 4px; }
-            .cell-value { text-align: left; }
-
-            .ledger-action-block {
-                padding-left: 20px;
-                border-left: 1px solid var(--border-color);
-                gap: 10px;
-            }
-            .cta-unlock-btn { padding: 10px; font-size: 0.75rem; }
+        .cta-unlock-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #ffffff;
         }
     </style>
 </head>
@@ -227,7 +289,7 @@
             <div class="feed-status" id="filterStatusLabel">Showing: All Open Contracts</div>
         </div>
 
-        <ul class="ledger-list" id="bountyGrid">
+        <ul class="bounty-grid" id="bountyGrid">
             <li id="initialLoadingMessage" class="status-message">Connecting to GitHub file pipeline, standing by...</li>
         </ul>
 
@@ -263,12 +325,12 @@
 
             try {
                 const res = await fetch(url);
-                if (!res.ok) throw new Error("Database sync down");
+                if (!res.ok) throw new Error("Sync failure");
                 const data = await res.json();
                 allBounties = Array.isArray(data) ? data : (data.bounties || []);
                 
                 if (allBounties.length === 0) {
-                    gridContainer.innerHTML = `<li class="status-message">No active heavy-duty requirements listed on the digital payload.</li>`;
+                    gridContainer.innerHTML = `<li class="status-message">No active heavy duty contracts match your regional parameters.</li>`;
                     return;
                 }
 
@@ -286,9 +348,9 @@
                     const uniqueCardId = bounty.id || `bounty-${index}`;
                     const partName = bounty.part_name || 'Component Asset';
                     const makeModel = bounty.year_make_model || 'Heavy Duty Spec';
-                    const vinNum = bounty.vin || 'N/A';
-                    const castingNum = bounty.oem_casting || 'N/A';
-                    const engineSpec = bounty.engine || 'N/A';
+                    const vinNum = bounty.vin || 'Not Disclosed';
+                    const castingNum = bounty.oem_casting || 'Not Disclosed';
+                    const engineSpec = bounty.engine || 'Standard Profile';
                     const partCondition = bounty.condition || 'Core Grade';
                     const budgetTarget = bounty.target_budget || 'Quote Direct';
                     const regionTag = bounty.region || 'Global Dispatch';
@@ -296,31 +358,35 @@
                     const cleanSearchStr = `${partName} ${makeModel} ${vinNum} ${castingNum} ${engineSpec} ${regionTag}`.toLowerCase();
                     const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
 
+                    const isPremium = index % 4 === 0; 
+                    const cardClasses = isPremium ? 'post-card premium-boost' : 'post-card';
+                    const badgeMarkup = isPremium ? `<div class="premium-badge">🚨 Priority</div>` : '';
+
                     const html = `
-                        <li class="ledger-item" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
-                            <div class="ledger-visual-col" style="background-image: url('${cardVisual}');"></div>
-                            
-                            <div class="ledger-info-block">
-                                <div class="ledger-main-meta">
+                        <li class="${cardClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
+                            ${badgeMarkup}
+                            <div class="card-visual-header" style="background-image: url('${cardVisual}');"></div>
+                            <div class="card-body-content">
+                                <div>
                                     <h3 class="part-title">${partName}</h3>
                                     <div class="ymm-tag">${makeModel}</div>
+                                    
+                                    <table class="spec-table">
+                                        <tr><td class="spec-label">VIN Identifier</td><td class="spec-val">${vinNum}</td></tr>
+                                        <tr><td class="spec-label">OEM / Casting</td><td class="spec-val">${castingNum}</td></tr>
+                                        <tr><td class="spec-label">Engine / Specs</td><td class="spec-val">${engineSpec}</td></tr>
+                                        <tr><td class="spec-label">Condition</td><td class="spec-val">${partCondition}</td></tr>
+                                        <tr><td class="spec-label">Target Budget</td><td class="spec-val">${budgetTarget}</td></tr>
+                                    </table>
                                 </div>
-                                
-                                <div class="ledger-specs-grid">
-                                    <div class="spec-cell"><span class="cell-label">VIN</span><span class="cell-value">${vinNum}</span></div>
-                                    <div class="spec-cell"><span class="cell-label">Casting</span><span class="cell-value">${castingNum}</span></div>
-                                    <div class="spec-cell"><span class="cell-label">Engine</span><span class="cell-value">${engineSpec}</span></div>
-                                    <div class="spec-cell"><span class="cell-label">Condition</span><span class="cell-value">${partCondition}</span></div>
-                                    <div class="spec-cell"><span class="cell-label">Budget</span><span class="cell-value budget-highlight">${budgetTarget}</span></div>
-                                </div>
-                            </div>
 
-                            <div class="ledger-action-block">
-                                <div class="action-meta-row">
-                                    <span class="region-footer-tag">📍 ${regionTag}</span>
-                                    <button class="share-btn" onclick="copyShareLink('${uniqueCardId}')">🔗 Copy</button>
+                                <div class="card-footer-controls">
+                                    <div class="footer-meta-row">
+                                        <span class="region-footer-tag">📍 ${regionTag}</span>
+                                        <button class="share-btn" onclick="copyShareLink('${uniqueCardId}')">🔗 Copy Link</button>
+                                    </div>
+                                    <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Buyer Contact Info</button>
                                 </div>
-                                <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Contacts</button>
                             </div>
                         </li>
                     `;
@@ -333,7 +399,7 @@
 
                 applyCombinedFilters();
             } catch (err) {
-                console.error("Database error:", err);
+                console.error("Fetch fault:", err);
                 gridContainer.innerHTML = `<li class="status-message">Warning: Component data feeds are locked or currently compiling updates.</li>`;
             }
         }
@@ -358,7 +424,7 @@
 
         function applyCombinedFilters() {
             const searchQuery = document.getElementById('searchBar').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('#bountyGrid .ledger-item');
+            const cards = document.querySelectorAll('#bountyGrid .post-card');
             let visibleCount = 0;
 
             cards.forEach(card => {
@@ -402,8 +468,8 @@
             const shareUrl = window.location.origin + window.location.pathname + '#' + cardId;
             navigator.clipboard.writeText(shareUrl).then(() => {
                 const btn = document.querySelector(`#${cardId} .share-btn`);
-                btn.innerHTML = '✅ Copied';
-                setTimeout(() => { btn.innerHTML = '🔗 Copy'; }, 2000);
+                btn.innerHTML = '✅ Copied!';
+                setTimeout(() => { btn.innerHTML = '🔗 Copy Link'; }, 2000);
             });
         }
 
