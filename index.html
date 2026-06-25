@@ -9,7 +9,6 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* Premium row alignment from your working horizontal layouts */
         .ledger-list {
             list-style: none;
             padding: 0;
@@ -52,7 +51,6 @@
             letter-spacing: 0.05em;
         }
 
-        /* Desktop split framework matching your optimal live view specs */
         @media (min-width: 992px) {
             .ledger-row {
                 flex-direction: row;
@@ -107,7 +105,6 @@
             text-overflow: ellipsis;
         }
 
-        /* Dynamic horizontal grid wrapper */
         .row-specs-data {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -328,21 +325,34 @@
         let currentRegionFilter = 'all';
         let allBounties = [];
 
-        // DEFENSIVE CODES: Deep structural key scanner to catch raw spreadsheet data output patterns
+        // STRICT REDACTION FILTER: Blocks contact credentials from rendering
+        function containsContactData(str) {
+            const cleanStr = str.replace(/[\s-()]/g, '');
+            // Check for raw numeric digit patterns resembling phone strings (7 to 15 numbers)
+            if (/^\d{7,15}$/.test(cleanStr)) return true;
+            // Catch alpha-numeric email formats
+            if (str.includes('@') && str.includes('.')) return true;
+            return false;
+        }
+
         function matchRobustKey(obj, lookups, fallbackValue) {
             const lowerLookups = lookups.map(v => v.toLowerCase().replace(/[^a-z0-9]/g, ''));
             
             for (let originalKey in obj) {
                 const standardizedKey = originalKey.toLowerCase().replace(/[^a-z0-9]/g, '');
                 
-                // If the key matching standard string or contains important keywords
                 if (lowerLookups.some(lookup => standardizedKey.includes(lookup) || lookup.includes(standardizedKey))) {
                     let val = String(obj[originalKey]).trim();
                     
-                    // Skip systemic Google instruction headers leaking into items
                     if (val.toLowerCase().includes("select your") || val.toLowerCase().includes("column")) {
                         continue;
                     }
+
+                    // Strict validation rule check
+                    if (containsContactData(val)) {
+                        continue; 
+                    }
+
                     if (val !== "" && val !== "undefined" && val !== "null") {
                         return val;
                     }
@@ -371,25 +381,17 @@
                 let globalCount = 0;
 
                 allBounties.forEach((bounty, index) => {
-                    // Filter out rows containing header instructions instead of actual dataset rows
                     const stringifiedRow = JSON.stringify(bounty).toLowerCase();
                     if (stringifiedRow.includes("select your location") || stringifiedRow.includes("shipping region column")) {
                         return; 
                     }
 
-                    // Strict alignment mapping across incoming Zapier streams
                     const partName = matchRobustKey(bounty, ["partname", "part_name", "need", "component"], "Component Asset");
                     const makeModel = matchRobustKey(bounty, ["yearmakemodel", "year_make_model", "truck", "details"], "Heavy Duty Spec");
                     const vinNum = matchRobustKey(bounty, ["vin", "identifier"], "Not Disclosed");
                     const castingNum = matchRobustKey(bounty, ["casting", "oem"], "Not Disclosed");
                     const engineSpec = matchRobustKey(bounty, ["engine", "config", "motor"], "Standard Profile");
-                    
-                    // Catch numbers leaking into condition fields
-                    let cleanCondition = matchRobustKey(bounty, ["condition", "status"], "Core Grade / Mixed");
-                    if (/^\d+$/.test(cleanCondition.replace(/[\s-()]/g, ''))) {
-                        cleanCondition = "Core Grade / Mixed";
-                    }
-
+                    const cleanCondition = matchRobustKey(bounty, ["condition", "status"], "Core Grade / Mixed");
                     const budgetTarget = matchRobustKey(bounty, ["budget", "target", "price"], "Quote Direct");
                     const regionTag = matchRobustKey(bounty, ["region", "location", "dispatch"], "Global Dispatch");
 
