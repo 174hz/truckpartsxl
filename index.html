@@ -9,7 +9,7 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* Clean row list alignment */
+        /* Premium row alignment from your working horizontal layouts */
         .ledger-list {
             list-style: none;
             padding: 0;
@@ -52,7 +52,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* Desktop view architecture from pia 199.jpg */
+        /* Desktop split framework matching your optimal live view specs */
         @media (min-width: 992px) {
             .ledger-row {
                 flex-direction: row;
@@ -68,7 +68,6 @@
             }
         }
 
-        /* Left side thumb */
         .row-thumb {
             width: 75px;
             height: 65px;
@@ -79,10 +78,9 @@
             flex-shrink: 0;
         }
 
-        /* Identity Block */
         .row-identity {
             width: 100%;
-            max-width: 200px;
+            max-width: 220px;
             flex-shrink: 0;
         }
 
@@ -109,13 +107,13 @@
             text-overflow: ellipsis;
         }
 
-        /* Protected grid tracking columns */
+        /* Dynamic horizontal grid wrapper */
         .row-specs-data {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             flex-grow: 1;
-            min-width: 0; /* Prevents overflow blowout */
+            min-width: 0;
         }
 
         @media (min-width: 768px) {
@@ -153,7 +151,6 @@
             color: #fca5a5;
         }
 
-        /* Right panel layouts */
         .row-actions-panel {
             display: flex;
             flex-direction: column;
@@ -331,19 +328,27 @@
         let currentRegionFilter = 'all';
         let allBounties = [];
 
-        // Dynamic key helper to pull clean data and ignore structural instructions
-        function extractCleanValue(rowObj, priorityKeys, fallbackDefault = "Not Disclosed") {
-            for (let key of priorityKeys) {
-                if (rowObj[key] !== undefined && rowObj[key] !== null) {
-                    let valStr = String(rowObj[key]).trim();
-                    // Catch explicit Google form setup columns instructions
-                    if (valStr.toLowerCase().includes("select your") || valStr.toLowerCase().includes("column")) {
+        // DEFENSIVE CODES: Deep structural key scanner to catch raw spreadsheet data output patterns
+        function matchRobustKey(obj, lookups, fallbackValue) {
+            const lowerLookups = lookups.map(v => v.toLowerCase().replace(/[^a-z0-9]/g, ''));
+            
+            for (let originalKey in obj) {
+                const standardizedKey = originalKey.toLowerCase().replace(/[^a-z0-9]/g, '');
+                
+                // If the key matching standard string or contains important keywords
+                if (lowerLookups.some(lookup => standardizedKey.includes(lookup) || lookup.includes(standardizedKey))) {
+                    let val = String(obj[originalKey]).trim();
+                    
+                    // Skip systemic Google instruction headers leaking into items
+                    if (val.toLowerCase().includes("select your") || val.toLowerCase().includes("column")) {
                         continue;
                     }
-                    if (valStr !== "") return valStr;
+                    if (val !== "" && val !== "undefined" && val !== "null") {
+                        return val;
+                    }
                 }
             }
-            return fallbackDefault;
+            return fallbackValue;
         }
 
         async function loadBounties() {
@@ -367,27 +372,26 @@
 
                 allBounties.forEach((bounty, index) => {
                     // Filter out rows containing header instructions instead of actual dataset rows
-                    const testString = JSON.stringify(bounty).toLowerCase();
-                    if (testString.includes("select your location") || testString.includes("shipping region column")) {
+                    const stringifiedRow = JSON.stringify(bounty).toLowerCase();
+                    if (stringifiedRow.includes("select your location") || stringifiedRow.includes("shipping region column")) {
                         return; 
                     }
 
-                    // Strict multi-property check to stop data from leaking into incorrect columns
-                    const partName = extractCleanValue(bounty, ["part_name", "Part Name", "What part do you need?"], "Component Asset");
-                    const makeModel = extractCleanValue(bounty, ["year_make_model", "Year Make Model", "Truck Details"], "Heavy Duty Spec");
-                    const vinNum = extractCleanValue(bounty, ["vin", "VIN", "Select your Truck VIN (Optional)"], "Not Disclosed");
-                    const castingNum = extractCleanValue(bounty, ["oem_casting", "OEM Casting", "Casting Number"], "Not Disclosed");
-                    const engineSpec = extractCleanValue(bounty, ["engine", "Engine", "Engine Configuration"], "Standard Profile");
+                    // Strict alignment mapping across incoming Zapier streams
+                    const partName = matchRobustKey(bounty, ["partname", "part_name", "need", "component"], "Component Asset");
+                    const makeModel = matchRobustKey(bounty, ["yearmakemodel", "year_make_model", "truck", "details"], "Heavy Duty Spec");
+                    const vinNum = matchRobustKey(bounty, ["vin", "identifier"], "Not Disclosed");
+                    const castingNum = matchRobustKey(bounty, ["casting", "oem"], "Not Disclosed");
+                    const engineSpec = matchRobustKey(bounty, ["engine", "config", "motor"], "Standard Profile");
                     
-                    // Specific guard to prevent rogue numeric chains/phone fields leaking into 'condition'
-                    let rawCondition = extractCleanValue(bounty, ["condition", "Condition", "Select your Condition Required"], "Core Grade / Mixed");
-                    if (/^\d{8,}/.test(rawCondition.replace(/[\s-]/g, ''))) {
-                        rawCondition = "Core Grade / Mixed"; // Wipe numeric strings accidentally mapped here
+                    // Catch numbers leaking into condition fields
+                    let cleanCondition = matchRobustKey(bounty, ["condition", "status"], "Core Grade / Mixed");
+                    if (/^\d+$/.test(cleanCondition.replace(/[\s-()]/g, ''))) {
+                        cleanCondition = "Core Grade / Mixed";
                     }
-                    const partCondition = rawCondition;
 
-                    const budgetTarget = extractCleanValue(bounty, ["target_budget", "Budget", "Target Budget"], "Quote Direct");
-                    const regionTag = extractCleanValue(bounty, ["region", "Region", "Location"], "Global Dispatch");
+                    const budgetTarget = matchRobustKey(bounty, ["budget", "target", "price"], "Quote Direct");
+                    const regionTag = matchRobustKey(bounty, ["region", "location", "dispatch"], "Global Dispatch");
 
                     const regionText = regionTag.toLowerCase();
                     const isCanada = isCanadianRegion(regionText);
@@ -416,7 +420,7 @@
                                 <div class="data-cell"><span class="data-label">VIN:</span><span class="data-val">${vinNum}</span></div>
                                 <div class="data-cell"><span class="data-label">Casting:</span><span class="data-val">${castingNum}</span></div>
                                 <div class="data-cell"><span class="data-label">Engine:</span><span class="data-val">${engineSpec}</span></div>
-                                <div class="data-cell"><span class="data-label">Condition:</span><span class="data-val">${partCondition}</span></div>
+                                <div class="data-cell"><span class="data-label">Condition:</span><span class="data-val">${cleanCondition}</span></div>
                                 <div class="data-cell"><span class="data-label">Budget:</span><span class="data-val budget-highlight">${budgetTarget}</span></div>
                             </div>
 
