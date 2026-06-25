@@ -7,7 +7,6 @@
 
     <link rel="stylesheet" href="theme.css">
     <style>
-        /* Hidden layout utility to safely toggling visual cards without disrupting UI blocks */
         .hidden-bounty { display: none !important; }
     </style>
 </head>
@@ -92,7 +91,7 @@
             <div class="feed-status" id="filterStatusLabel">Showing: All Open Contracts</div>
         </div>
 
-        <ul class="bounty-grid" id="bountyGrid">
+        <ul class="ledger-list" id="bountyGrid">
             <li id="initialLoadingMessage" class="status-message">Connecting to GitHub file pipeline, standing by...</li>
         </ul>
 
@@ -167,35 +166,36 @@
                         const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
 
                         const isPremium = index % 4 === 0; 
-                        const cardClasses = isPremium ? 'post-card premium-boost' : 'post-card';
-                        const badgeMarkup = isPremium ? `<div class="premium-badge">⚡ Priority Contract</div>` : '';
+                        const itemClasses = isPremium ? 'ledger-item premium-boost' : 'ledger-item';
+                        const badgeMarkup = isPremium ? `<div class="premium-badge">⚡ Priority</div>` : '';
 
                         const html = `
-                            <li class="${cardClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
+                            <li class="${itemClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
                                 ${badgeMarkup}
-                                <div class="card-visual-header" style="background-image: url('${cardVisual}');"></div>
-                                <div class="card-body-content">
-                                    <div>
+                                <div class="ledger-visual-col" style="background-image: url('${cardVisual}');"></div>
+                                
+                                <div class="ledger-info-block">
+                                    <div class="ledger-main-meta">
                                         <h3 class="part-title">${partName}</h3>
                                         <div class="ymm-tag">${makeModel}</div>
-                                        
-                                        <table class="spec-table">
-                                            <tr><td class="spec-label">VIN Identifier</td><td class="spec-val">${vinNum}</td></tr>
-                                            <tr><td class="spec-label">OEM / Casting</td><td class="spec-val">${castingNum}</td></tr>
-                                            <tr><td class="spec-label">Engine / Specs</td><td class="spec-val">${engineSpec}</td></tr>
-                                            <tr><td class="spec-label">Condition</td><td class="spec-val">${partCondition}</td></tr>
-                                            <tr><td class="spec-label">Target Budget</td><td class="spec-val">${budgetTarget}</td></tr>
-                                        </table>
                                     </div>
+                                    
+                                    <div class="ledger-specs-grid">
+                                        <div class="spec-cell"><span class="cell-label">VIN:</span><span class="cell-value">${vinNum}</span></div>
+                                        <div class="spec-cell"><span class="cell-label">Casting:</span><span class="cell-value">${castingNum}</span></div>
+                                        <div class="spec-cell"><span class="cell-label">Engine:</span><span class="cell-value">${engineSpec}</span></div>
+                                        <div class="spec-cell"><span class="cell-label">Condition:</span><span class="cell-value">${partCondition}</span></div>
+                                        <div class="spec-cell"><span class="cell-label">Budget:</span><span class="cell-value budget-highlight">${budgetTarget}</span></div>
+                                    </div>
+                                </div>
 
-                                    <div class="card-footer-controls">
-                                        <div class="footer-meta-row">
-                                            <span class="region-footer-tag">📍 ${regionTag}</span>
-                                            <button class="share-btn" onclick="copyShareLink('${uniqueCardId}')">🔗 Copy Link</button>
-                                            <a href="${STRIPE_TEST_LINK}" target="_blank" class="stripe-boost-link">⚡ Boost</a>
-                                        </div>
-                                        <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Buyer Contact Info</button>
+                                <div class="ledger-action-block">
+                                    <div class="action-meta-row">
+                                        <span class="region-footer-tag">📍 ${regionTag}</span>
+                                        <button class="share-btn" onclick="copyShareLink('${uniqueCardId}')">🔗 Copy Link</button>
+                                        <a href="${STRIPE_TEST_LINK}" target="_blank" class="stripe-boost-link">⚡ Boost</a>
                                     </div>
+                                    <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Contacts</button>
                                 </div>
                             </li>
                         `;
@@ -208,7 +208,6 @@
 
                     applyCombinedFilters();
                     
-                    // Automatically scroll smoothly to a card if a specific hash exists in the browser URL bar upon load
                     if (window.location.hash) {
                         const targetCard = document.querySelector(window.location.hash);
                         if (targetCard) {
@@ -249,7 +248,7 @@
 
         function applyCombinedFilters() {
             const searchQuery = document.getElementById('searchBar').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('#bountyGrid .post-card');
+            const cards = document.querySelectorAll('#bountyGrid .ledger-item');
             let visibleCount = 0;
 
             cards.forEach(card => {
