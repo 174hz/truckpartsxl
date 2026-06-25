@@ -6,6 +6,10 @@
     <title>TruckPartsXL | Commercial Sourcing Hub</title>
 
     <link rel="stylesheet" href="theme.css">
+    <style>
+        /* Hidden layout utility to safely toggling visual cards without disrupting UI blocks */
+        .hidden-bounty { display: none !important; }
+    </style>
 </head>
 <body>
 
@@ -132,123 +136,94 @@
                     allBounties = Array.isArray(data) ? data : (data.bounties || []);
                     
                     if (allBounties.length === 0) {
-                        gridContainer.innerHTML = `<li class="status-message">No active heavy-duty contracts registered on the feed.</li>`;
-                        updateMetricCounters([]);
+                        gridContainer.innerHTML = `<li class="status-message">No open procurement assets listed on the digital payload at this moment.</li>`;
                         return;
                     }
 
-                    allBounties.sort((a, b) => {
-                        const dateA = a.timestamp || a['Timestamp'] ? new Date(a.timestamp || a['Timestamp']) : new Date(0);
-                        const dateB = b.timestamp || b['Timestamp'] ? new Date(b.timestamp || b['Timestamp']) : new Date(0);
-                        return dateB - dateA;
-                    });
+                    gridContainer.innerHTML = '';
                     
-                    renderCards(allBounties);
-                    updateMetricCounters(allBounties);
+                    let ontarioCount = 0;
+                    let globalCount = 0;
+
+                    allBounties.forEach((bounty, index) => {
+                        const regionText = (bounty.region || '').toLowerCase();
+                        const isCanada = isCanadianRegion(regionText);
+                        
+                        if (isCanada) ontarioCount++;
+                        else globalCount++;
+
+                        const uniqueCardId = bounty.id || `bounty-${index}`;
+
+                        const partName = bounty.part_name || 'Component Asset';
+                        const makeModel = bounty.year_make_model || 'Heavy Duty Spec';
+                        const vinNum = bounty.vin || 'Pending Asset Tag';
+                        const castingNum = bounty.oem_casting || 'Not Disclosed';
+                        const engineSpec = bounty.engine || 'Standard Diesel Profile';
+                        const partCondition = bounty.condition || 'Core Grade / Mixed';
+                        const budgetTarget = bounty.target_budget || 'Quote Direct';
+                        const regionTag = bounty.region || 'Global Dispatch';
+
+                        const cleanSearchStr = `${partName} ${makeModel} ${vinNum} ${castingNum} ${engineSpec} ${regionTag}`.toLowerCase();
+                        const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
+
+                        const isPremium = index % 4 === 0; 
+                        const cardClasses = isPremium ? 'post-card premium-boost' : 'post-card';
+                        const badgeMarkup = isPremium ? `<div class="premium-badge">⚡ Priority Contract</div>` : '';
+
+                        const html = `
+                            <li class="${cardClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
+                                ${badgeMarkup}
+                                <div class="card-visual-header" style="background-image: url('${cardVisual}');"></div>
+                                <div class="card-body-content">
+                                    <div>
+                                        <h3 class="part-title">${partName}</h3>
+                                        <div class="ymm-tag">${makeModel}</div>
+                                        
+                                        <table class="spec-table">
+                                            <tr><td class="spec-label">VIN Identifier</td><td class="spec-val">${vinNum}</td></tr>
+                                            <tr><td class="spec-label">OEM / Casting</td><td class="spec-val">${castingNum}</td></tr>
+                                            <tr><td class="spec-label">Engine / Specs</td><td class="spec-val">${engineSpec}</td></tr>
+                                            <tr><td class="spec-label">Condition</td><td class="spec-val">${partCondition}</td></tr>
+                                            <tr><td class="spec-label">Target Budget</td><td class="spec-val">${budgetTarget}</td></tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="card-footer-controls">
+                                        <div class="footer-meta-row">
+                                            <span class="region-footer-tag">📍 ${regionTag}</span>
+                                            <button class="share-btn" onclick="copyShareLink('${uniqueCardId}')">🔗 Copy Link</button>
+                                            <a href="${STRIPE_TEST_LINK}" target="_blank" class="stripe-boost-link">⚡ Boost</a>
+                                        </div>
+                                        <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Buyer Contact Info</button>
+                                    </div>
+                                </div>
+                            </li>
+                        `;
+                        gridContainer.insertAdjacentHTML('beforeend', html);
+                    });
+
+                    document.getElementById('count-all').innerText = allBounties.length;
+                    document.getElementById('count-ontario').innerText = ontarioCount;
+                    document.getElementById('count-global').innerText = globalCount;
+
+                    applyCombinedFilters();
+                    
+                    // Automatically scroll smoothly to a card if a specific hash exists in the browser URL bar upon load
+                    if (window.location.hash) {
+                        const targetCard = document.querySelector(window.location.hash);
+                        if (targetCard) {
+                            setTimeout(() => {
+                                targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                targetCard.style.outline = '3px solid var(--accent-blue)';
+                                setTimeout(() => targetCard.style.outline = 'none', 3000);
+                            }, 500);
+                        }
+                    }
                 })
                 .catch(err => {
-                    console.error("Pipeline Sync Error:", err);
-                    gridContainer.innerHTML = `<li class="status-message" style="border-color: red; color: red;">⚠️ Database Connection Error: ${err.message}</li>`;
+                    console.error("Database connection fault:", err);
+                    gridContainer.innerHTML = `<li class="status-message">Warning: Component data feeds are locked or currently compiling updates.</li>`;
                 });
-        }
-
-        function updateMetricCounters(bounties) {
-            document.getElementById('count-all').innerText = bounties.length;
-            let ontarioCount = bounties.filter(b => isCanadianRegion((b.region || b['Region'] || '').toLowerCase())).length;
-            document.getElementById('count-ontario').innerText = ontarioCount;
-            document.getElementById('count-global').innerText = bounties.length - ontarioCount;
-        }
-
-        function renderCards(bounties) {
-            const gridContainer = document.getElementById('bountyGrid');
-            gridContainer.innerHTML = '';
-
-            if (bounties.length === 0) {
-                gridContainer.innerHTML = `<li class="status-message">🔄 Standing by for fresh validated component feeds...</li>`;
-                return;
-            }
-
-            bounties.forEach((part, index) => {
-                const title = part.partName || part['Part Name'] || part['Part Name / Component'] || 'Unknown Component';
-                const ymm = part.yearMakeModel || part['Year/Make/Model'] || part['Year / Make / Model'] || 'Unknown Asset';
-                const vin = part.vin || part['VIN'] || part['VIN Identifier'] || 'Not Provided';
-                const oem = part.oem || part['OEM #'] || part['OEM / Casting'] || 'N/A';
-                const specs = part.specs || part['Specs'] || part['Engine / Specs'] || 'Standard Profile';
-                const region = part.region || part['Region'] || 'Unspecified Corridor';
-                const budget = part.budget || part['Budget'] || part['Target Budget'] || 'Open Quote';
-                const condition = part.condition || part['Condition'] || 'Any Condition';
-                const isPremium = part.boosted === 'true' || part.boosted === true;
-
-                const lookupId = part.timestamp ? new Date(part.timestamp).getTime() : index;
-                const searchableStr = `${title} ${ymm} ${vin} ${oem} ${specs}`.toLowerCase();
-
-                let chosenPhoto = INDUSTRY_VISUALS[0];
-                const cleanTitle = title.toLowerCase();
-                if (cleanTitle.includes('hood') || cleanTitle.includes('bumper') || cleanTitle.includes('door') || cleanTitle.includes('cab')) {
-                    chosenPhoto = INDUSTRY_VISUALS[2];
-                } else if (cleanTitle.includes('axle') || cleanTitle.includes('differential') || cleanTitle.includes('transmission') || cleanTitle.includes('frame')) {
-                    chosenPhoto = INDUSTRY_VISUALS[1];
-                } else {
-                    chosenPhoto = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
-                }
-
-                const boostPaymentUrl = `${STRIPE_TEST_LINK}?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Boost Listing - ' + title)}`;
-                const unlockPaymentUrl = `${STRIPE_TEST_LINK}?client_reference_id=${encodeURIComponent(lookupId)}&item_name=${encodeURIComponent('Unlock Lead - ' + title)}`;
-
-                const html = `
-                    <li class="post-card ${isPremium ? 'premium-boost' : ''}" 
-                        data-region="${region.toLowerCase()}" 
-                        data-searchable="${searchableStr}">
-                        
-                        ${isPremium ? `<div class="premium-badge">🔥 PREMIUM BOOST</div>` : ''}
-                        
-                        <div class="card-visual-header" style="background-image: linear-gradient(rgba(30, 41, 59, 0.1), rgba(30, 41, 59, 0.85)), url('${chosenPhoto}');"></div>
-                        
-                        <div class="card-body-content">
-                            <div class="card-top">
-                                <h3 class="part-title">${title}</h3>
-                                <div class="ymm-tag">${ymm}</div>
-                                
-                                <table class="spec-table">
-                                    <tr>
-                                        <td class="spec-label">VIN Identifier</td>
-                                        <td class="spec-val">${vin}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="spec-label">OEM / Casting</td>
-                                        <td class="spec-val">${oem}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="spec-label">Engine / Specs</td>
-                                        <td class="spec-val">${specs}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="spec-label">Condition</td>
-                                        <td class="spec-val">${condition}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="spec-label">Target Budget</td>
-                                        <td class="spec-val" style="color: var(--accent-green);">${budget}</td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <div class="card-footer-controls">
-                                <div class="footer-meta-row">
-                                    <div class="region-footer-tag">📍 Corridor: ${region}</div>
-                                    ${!isPremium ? `<a href="${boostPaymentUrl}" target="_blank" class="stripe-boost-link">⚡ Boost</a>` : ''}
-                                </div>
-                                <button class="cta-unlock-btn" onclick="window.open('${unlockPaymentUrl}', '_blank')">
-                                    🔓 UNLOCK BUYER CONTACT INFO
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-                `;
-                gridContainer.insertAdjacentHTML('beforeend', html);
-            });
-
-            applyCombinedFilters();
         }
 
         function setRegionFilter(regionType) {
@@ -264,7 +239,6 @@
 
             applyCombinedFilters();
             
-            // Adjust scroll adjustment offset gently for mobile viewports
             const scrollOffset = document.getElementById('board').offsetTop - 20;
             window.scrollTo({ top: scrollOffset, behavior: 'smooth' });
         }
@@ -313,6 +287,25 @@
             } else if (existingMsg) {
                 existingMsg.remove();
             }
+        }
+
+        function copyShareLink(cardId) {
+            const shareUrl = window.location.origin + window.location.pathname + '#' + cardId;
+            
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                const btn = document.querySelector(`#${cardId} .share-btn`);
+                const originalText = btn.innerHTML;
+                
+                btn.innerHTML = '✅ Copied!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy listing path: ', err);
+            });
         }
 
         window.addEventListener('DOMContentLoaded', loadBounties);
