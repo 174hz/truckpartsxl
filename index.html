@@ -9,28 +9,34 @@
     <style>
         .hidden-bounty { display: none !important; }
         
+        /* Polished UI layout from pia 115.jpg */
         .ledger-list {
             list-style: none;
             padding: 0;
             margin: 24px auto;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1260px;
         }
 
         .ledger-row {
-            background: #1e293b;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
-            padding: 16px;
+            padding: 18px;
             gap: 16px;
-            transition: border-color 0.15s ease;
+            transition: all 0.2s ease;
+        }
+
+        .ledger-row:hover {
+            border-color: #3b82f6;
+            background: #1f2937;
         }
 
         .ledger-row.priority-boost {
@@ -43,68 +49,63 @@
             left: 12px;
             background: #ef4444;
             color: #ffffff;
-            font-size: 0.6rem;
-            font-weight: 900;
+            font-size: 0.65rem;
+            font-weight: 800;
             padding: 2px 6px;
-            border-radius: 3px;
+            border-radius: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         @media (min-width: 992px) {
             .ledger-row {
                 flex-direction: row;
                 align-items: center;
-                padding: 14px 20px;
+                padding: 16px 24px;
                 gap: 24px;
             }
 
             .priority-tag {
                 top: auto;
-                bottom: 6px;
+                bottom: 8px;
                 left: 16px;
             }
         }
 
         .row-thumb {
-            width: 75px;
-            height: 65px;
+            width: 80px;
+            height: 70px;
             background-size: cover;
             background-position: center;
-            border-radius: 4px;
-            background-color: #0f172a;
+            border-radius: 6px;
+            background-color: #030712;
             flex-shrink: 0;
+            border: 1px solid #374151;
         }
 
         .row-identity {
             width: 100%;
-            max-width: 220px;
+            max-width: 240px;
             flex-shrink: 0;
         }
 
         .part-title {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 800;
             margin: 0;
             text-transform: uppercase;
             color: #ffffff;
             letter-spacing: -0.01em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .ymm-tag {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #60a5fa;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #3b82f6;
             text-transform: uppercase;
-            margin-top: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            margin-top: 4px;
         }
 
+        /* Clean, non-overlapping grid layout */
         .row-specs-data {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -116,42 +117,43 @@
         @media (min-width: 768px) {
             .row-specs-data {
                 grid-template-columns: repeat(5, 1fr);
-                gap: 16px;
+                gap: 20px;
             }
         }
 
         .data-cell {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 4px;
             min-width: 0;
         }
 
         .data-label {
-            color: #94a3b8;
-            font-size: 0.65rem;
+            color: #9ca3af;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.05em;
         }
 
         .data-val {
-            color: #ffffff;
-            font-size: 0.85rem;
-            font-weight: 700;
-            white-space: nowrap;
+            color: #f3f4f6;
+            font-size: 0.9rem;
+            font-weight: 600;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .budget-highlight {
-            color: #fca5a5;
+            color: #f87171;
+            font-weight: 800;
         }
 
         .row-actions-panel {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
             max-width: 220px;
             flex-shrink: 0;
@@ -162,21 +164,18 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 6px;
+            gap: 8px;
         }
 
         .dispatch-badge {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            color: #cbd5e1;
-            background: #334155;
+            color: #f3f4f6;
+            background: #1f2937;
             padding: 4px 8px;
-            border-radius: 3px;
+            border-radius: 4px;
             text-transform: uppercase;
-            white-space: nowrap;
-            max-width: 140px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            border: 1px solid #374151;
         }
 
         .utility-btn.boost-trigger {
@@ -186,8 +185,8 @@
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            padding: 3px 6px;
-            border-radius: 3px;
+            padding: 3px 8px;
+            border-radius: 4px;
             cursor: pointer;
         }
 
@@ -195,18 +194,19 @@
             background: #2563eb;
             color: #ffffff;
             border: none;
-            padding: 10px 12px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            border-radius: 4px;
+            padding: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 6px;
             text-transform: uppercase;
             width: 100%;
             cursor: pointer;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.02em;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .cta-unlock-btn:hover {
@@ -251,7 +251,6 @@
                     <ol class="steps-list">
                         <li><strong>1. Submit Request:</strong> Fill out our quick form with your truck specifications, required component details, and delivery zip code.</li>
                         <li><strong>2. Broadcast System:</strong> Your request is instantly broadcasted to verified commercial salvage networks and Tier-1 part brokers.</li>
-                        <li><strong>3. Direct Fulfillment:</strong> Available yards contact you directly by phone or email with clean condition data and freight quotes.</li>
                     </ol>
                 </div>
 
@@ -263,8 +262,7 @@
                     <p class="flow-intro">Stop chasing cold phone leads. Get real-time access to high-intent commercial buyers.</p>
                     <ol class="steps-list">
                         <li><strong>1. Monitor Live Board:</strong> Review our open procurement feed completely for free to audit active parts requirements.</li>
-                        <li><strong>2. Map Your Inventory:</strong> Match incoming VIN patterns, engine specs, and casting numbers against your open yard stock.</li>
-                        <li><strong>3. Unlock &amp; Transact:</strong> Process a secure micro-payment via Stripe to instantly unlock the buyer's phone number and close the sale.</li>
+                        <li><strong>2. Unlock &amp; Transact:</strong> Process a secure micro-payment via Stripe to instantly unlock the buyer's phone number and close the sale.</li>
                     </ol>
                 </div>
             </div>
@@ -325,40 +323,26 @@
         let currentRegionFilter = 'all';
         let allBounties = [];
 
-        // STRICT REDACTION FILTER: Blocks contact credentials from rendering
-        function containsContactData(str) {
-            const cleanStr = str.replace(/[\s-()]/g, '');
-            // Check for raw numeric digit patterns resembling phone strings (7 to 15 numbers)
-            if (/^\d{7,15}$/.test(cleanStr)) return true;
-            // Catch alpha-numeric email formats
-            if (str.includes('@') && str.includes('.')) return true;
-            return false;
-        }
+        // STRICT FILTERING: Prevent structural data leaking into the wrong columns
+        function getCleanValue(obj, keys, fallback, exactType = '') {
+            for (let key of keys) {
+                if (obj[key] !== undefined && obj[key] !== null) {
+                    let val = String(obj[key]).trim();
+                    if (val === "" || val.toLowerCase() === "undefined" || val.toLowerCase() === "null") continue;
 
-        function matchRobustKey(obj, lookups, fallbackValue) {
-            const lowerLookups = lookups.map(v => v.toLowerCase().replace(/[^a-z0-9]/g, ''));
-            
-            for (let originalKey in obj) {
-                const standardizedKey = originalKey.toLowerCase().replace(/[^a-z0-9]/g, '');
-                
-                if (lowerLookups.some(lookup => standardizedKey.includes(lookup) || lookup.includes(standardizedKey))) {
-                    let val = String(obj[originalKey]).trim();
-                    
-                    if (val.toLowerCase().includes("select your") || val.toLowerCase().includes("column")) {
-                        continue;
+                    // Skip instructional rows or generic template headers
+                    if (val.toLowerCase().includes("select") || val.toLowerCase().includes("column")) continue;
+
+                    // Strict validation rule check for VIN
+                    if (exactType === 'vin') {
+                        // If it's short or purely looks like a 7-10 digit telephone line sequence, reject it
+                        if (/^\d{7,11}$/.test(val.replace(/[\s-()]/g, ''))) continue;
                     }
 
-                    // Strict validation rule check
-                    if (containsContactData(val)) {
-                        continue; 
-                    }
-
-                    if (val !== "" && val !== "undefined" && val !== "null") {
-                        return val;
-                    }
+                    return val;
                 }
             }
-            return fallbackValue;
+            return fallback;
         }
 
         async function loadBounties() {
@@ -381,19 +365,21 @@
                 let globalCount = 0;
 
                 allBounties.forEach((bounty, index) => {
+                    // Filter out rows containing clear test system markers or instruction keys
                     const stringifiedRow = JSON.stringify(bounty).toLowerCase();
-                    if (stringifiedRow.includes("select your location") || stringifiedRow.includes("shipping region column")) {
+                    if (stringifiedRow.includes("select your location") || stringifiedRow.includes("tester")) {
                         return; 
                     }
 
-                    const partName = matchRobustKey(bounty, ["partname", "part_name", "need", "component"], "Component Asset");
-                    const makeModel = matchRobustKey(bounty, ["yearmakemodel", "year_make_model", "truck", "details"], "Heavy Duty Spec");
-                    const vinNum = matchRobustKey(bounty, ["vin", "identifier"], "Not Disclosed");
-                    const castingNum = matchRobustKey(bounty, ["casting", "oem"], "Not Disclosed");
-                    const engineSpec = matchRobustKey(bounty, ["engine", "config", "motor"], "Standard Profile");
-                    const cleanCondition = matchRobustKey(bounty, ["condition", "status"], "Core Grade / Mixed");
-                    const budgetTarget = matchRobustKey(bounty, ["budget", "target", "price"], "Quote Direct");
-                    const regionTag = matchRobustKey(bounty, ["region", "location", "dispatch"], "Global Dispatch");
+                    // Strict Column Mapping Map matching raw webhook inputs
+                    const partName = getCleanValue(bounty, ["part_name", "partname", "Part Name", "component", "Component"], "Component Asset");
+                    const makeModel = getCleanValue(bounty, ["year_make_model", "yearmakemodel", "Year/Make/Model", "truck"], "Heavy Duty Spec");
+                    const vinNum = getCleanValue(bounty, ["vin", "VIN", "vin_number"], "Not Disclosed", 'vin');
+                    const castingNum = getCleanValue(bounty, ["casting", "casting_number", "Casting"], "Not Disclosed");
+                    const engineSpec = getCleanValue(bounty, ["engine", "engine_spec", "Engine"], "Standard Profile");
+                    const cleanCondition = getCleanValue(bounty, ["condition", "Condition"], "Core Grade / Mixed");
+                    const budgetTarget = getCleanValue(bounty, ["budget", "Budget", "target_price"], "Quote Direct");
+                    const regionTag = getCleanValue(bounty, ["region", "location", "Region"], "Global Dispatch");
 
                     const regionText = regionTag.toLowerCase();
                     const isCanada = isCanadianRegion(regionText);
