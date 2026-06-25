@@ -8,6 +8,142 @@
     <link rel="stylesheet" href="theme.css">
     <style>
         .hidden-bounty { display: none !important; }
+        
+        /* Direct structural fixes for layout collapses seen in pia 100.jpg */
+        .ledger-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .ledger-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 12px;
+            gap: 16px;
+        }
+
+        .ledger-visual-col {
+            width: 100%;
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+        }
+
+        .ledger-info-block {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        .part-title { font-size: 1.15rem; font-weight: 800; margin: 0; text-transform: uppercase; color: #ffffff; }
+        .ymm-tag { font-size: 0.85rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; margin-top: 2px; }
+
+        .ledger-specs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        .spec-cell { display: flex; justify-content: space-between; font-size: 0.85rem; }
+        .cell-label { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
+        .cell-value { color: var(--text-main); font-weight: 700; }
+        .budget-highlight { color: #fca5a5; }
+
+        .ledger-action-block {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .action-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .region-footer-tag { font-size: 0.75rem; font-weight: 700; color: #ffffff; background: #475569; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+
+        .share-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .share-btn.copied { color: var(--accent-green) !important; border-color: var(--accent-green) !important; }
+
+        .cta-unlock-btn {
+            background: var(--accent-blue);
+            color: #ffffff;
+            padding: 12px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            border-radius: 4px;
+            text-transform: uppercase;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            letter-spacing: 0.03em;
+        }
+
+        /* Desktop Optimization Override: Re-aligns elements from vertical strips into clean, horizontal sheets */
+        @media (min-width: 900px) {
+            .ledger-item {
+                display: grid;
+                grid-template-columns: 80px 1fr 240px;
+                align-items: center;
+                padding: 12px 20px;
+            }
+
+            .ledger-visual-col {
+                width: 80px;
+                height: 65px;
+            }
+
+            .ledger-info-block {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 24px;
+                gap: 24px;
+            }
+
+            .ledger-main-meta { width: 25%; flex-shrink: 0; }
+            .ledger-specs-grid {
+                grid-template-columns: repeat(5, 1fr);
+                flex-grow: 1;
+                background: transparent;
+                padding: 0;
+                gap: 16px;
+            }
+
+            .spec-cell { flex-direction: column; gap: 4px; }
+            .cell-value { text-align: left; }
+
+            .ledger-action-block {
+                padding-left: 20px;
+                border-left: 1px solid var(--border-color);
+                gap: 10px;
+            }
+            .cta-unlock-btn { padding: 10px; font-size: 0.75rem; }
+        }
     </style>
 </head>
 <body>
@@ -121,108 +257,85 @@
         let currentRegionFilter = 'all';
         let allBounties = [];
 
-        function loadBounties() {
+        async function loadBounties() {
             const gridContainer = document.getElementById('bountyGrid');
-            const cacheBuster = new Date().getTime();
-            const url = `https://raw.githubusercontent.com/${REPO}/main/bounties.json?t=${cacheBuster}`;
+            const url = `https://raw.githubusercontent.com/${REPO}/main/bounties.json?t=${new Date().getTime()}`;
 
-            fetch(url)
-                .then(res => {
-                    if (!res.ok) throw new Error("Database sync file is currently building or empty.");
-                    return res.json();
-                })
-                .then(data => {
-                    allBounties = Array.isArray(data) ? data : (data.bounties || []);
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("Database sync down");
+                const data = await res.json();
+                allBounties = Array.isArray(data) ? data : (data.bounties || []);
+                
+                if (allBounties.length === 0) {
+                    gridContainer.innerHTML = `<li class="status-message">No active heavy-duty requirements listed on the digital payload.</li>`;
+                    return;
+                }
+
+                gridContainer.innerHTML = '';
+                let ontarioCount = 0;
+                let globalCount = 0;
+
+                allBounties.forEach((bounty, index) => {
+                    const regionText = (bounty.region || '').toLowerCase();
+                    const isCanada = isCanadianRegion(regionText);
                     
-                    if (allBounties.length === 0) {
-                        gridContainer.innerHTML = `<li class="status-message">No open procurement assets listed on the digital payload at this moment.</li>`;
-                        return;
-                    }
+                    if (isCanada) ontarioCount++;
+                    else globalCount++;
 
-                    gridContainer.innerHTML = '';
-                    
-                    let ontarioCount = 0;
-                    let globalCount = 0;
+                    const uniqueCardId = bounty.id || `bounty-${index}`;
+                    const partName = bounty.part_name || 'Component Asset';
+                    const makeModel = bounty.year_make_model || 'Heavy Duty Spec';
+                    const vinNum = bounty.vin || 'N/A';
+                    const castingNum = bounty.oem_casting || 'N/A';
+                    const engineSpec = bounty.engine || 'N/A';
+                    const partCondition = bounty.condition || 'Core Grade';
+                    const budgetTarget = bounty.target_budget || 'Quote Direct';
+                    const regionTag = bounty.region || 'Global Dispatch';
 
-                    allBounties.forEach((bounty, index) => {
-                        const regionText = (bounty.region || '').toLowerCase();
-                        const isCanada = isCanadianRegion(regionText);
-                        
-                        if (isCanada) ontarioCount++;
-                        else globalCount++;
+                    const cleanSearchStr = `${partName} ${makeModel} ${vinNum} ${castingNum} ${engineSpec} ${regionTag}`.toLowerCase();
+                    const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
 
-                        const uniqueCardId = bounty.id || `bounty-${index}`;
-
-                        const partName = bounty.part_name || 'Component Asset';
-                        const makeModel = bounty.year_make_model || 'Heavy Duty Spec';
-                        const vinNum = bounty.vin || 'Pending Asset Tag';
-                        const castingNum = bounty.oem_casting || 'Not Disclosed';
-                        const engineSpec = bounty.engine || 'Standard Diesel Profile';
-                        const partCondition = bounty.condition || 'Core Grade / Mixed';
-                        const budgetTarget = bounty.target_budget || 'Quote Direct';
-                        const regionTag = bounty.region || 'Global Dispatch';
-
-                        const cleanSearchStr = `${partName} ${makeModel} ${vinNum} ${castingNum} ${engineSpec} ${regionTag}`.toLowerCase();
-                        const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
-
-                        const isPremium = index % 4 === 0; 
-                        const itemClasses = isPremium ? 'ledger-item premium-boost' : 'ledger-item';
-                        const badgeMarkup = isPremium ? `<div class="premium-badge">⚡ Priority</div>` : '';
-
-                        const html = `
-                            <li class="${itemClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
-                                ${badgeMarkup}
-                                <div class="ledger-visual-col" style="background-image: url('${cardVisual}');"></div>
+                    const html = `
+                        <li class="ledger-item" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
+                            <div class="ledger-visual-col" style="background-image: url('${cardVisual}');"></div>
+                            
+                            <div class="ledger-info-block">
+                                <div class="ledger-main-meta">
+                                    <h3 class="part-title">${partName}</h3>
+                                    <div class="ymm-tag">${makeModel}</div>
+                                </div>
                                 
-                                <div class="ledger-info-block">
-                                    <div class="ledger-main-meta">
-                                        <h3 class="part-title">${partName}</h3>
-                                        <div class="ymm-tag">${makeModel}</div>
-                                    </div>
-                                    
-                                    <div class="ledger-specs-grid">
-                                        <div class="spec-cell"><span class="cell-label">VIN:</span><span class="cell-value">${vinNum}</span></div>
-                                        <div class="spec-cell"><span class="cell-label">Casting:</span><span class="cell-value">${castingNum}</span></div>
-                                        <div class="spec-cell"><span class="cell-label">Engine:</span><span class="cell-value">${engineSpec}</span></div>
-                                        <div class="spec-cell"><span class="cell-label">Condition:</span><span class="cell-value">${partCondition}</span></div>
-                                        <div class="spec-cell"><span class="cell-label">Budget:</span><span class="cell-value budget-highlight">${budgetTarget}</span></div>
-                                    </div>
+                                <div class="ledger-specs-grid">
+                                    <div class="spec-cell"><span class="cell-label">VIN</span><span class="cell-value">${vinNum}</span></div>
+                                    <div class="spec-cell"><span class="cell-label">Casting</span><span class="cell-value">${castingNum}</span></div>
+                                    <div class="spec-cell"><span class="cell-label">Engine</span><span class="cell-value">${engineSpec}</span></div>
+                                    <div class="spec-cell"><span class="cell-label">Condition</span><span class="cell-value">${partCondition}</span></div>
+                                    <div class="spec-cell"><span class="cell-label">Budget</span><span class="cell-value budget-highlight">${budgetTarget}</span></div>
                                 </div>
+                            </div>
 
-                                <div class="ledger-action-block">
-                                    <div class="action-meta-row">
-                                        <span class="region-footer-tag">📍 ${regionTag}</span>
-                                        <button class="share-btn" onclick="copyShareLink('${uniqueCardId}')">🔗 Copy Link</button>
-                                        <a href="${STRIPE_TEST_LINK}" target="_blank" class="stripe-boost-link">⚡ Boost</a>
-                                    </div>
-                                    <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Contacts</button>
+                            <div class="ledger-action-block">
+                                <div class="action-meta-row">
+                                    <span class="region-footer-tag">📍 ${regionTag}</span>
+                                    <button class="share-btn" onclick="copyShareLink('${uniqueCardId}')">🔗 Copy</button>
                                 </div>
-                            </li>
-                        `;
-                        gridContainer.insertAdjacentHTML('beforeend', html);
-                    });
-
-                    document.getElementById('count-all').innerText = allBounties.length;
-                    document.getElementById('count-ontario').innerText = ontarioCount;
-                    document.getElementById('count-global').innerText = globalCount;
-
-                    applyCombinedFilters();
-                    
-                    if (window.location.hash) {
-                        const targetCard = document.querySelector(window.location.hash);
-                        if (targetCard) {
-                            setTimeout(() => {
-                                targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                targetCard.style.outline = '3px solid var(--accent-blue)';
-                                setTimeout(() => targetCard.style.outline = 'none', 3000);
-                            }, 500);
-                        }
-                    }
-                })
-                .catch(err => {
-                    console.error("Database connection fault:", err);
-                    gridContainer.innerHTML = `<li class="status-message">Warning: Component data feeds are locked or currently compiling updates.</li>`;
+                                <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Contacts</button>
+                            </div>
+                        </li>
+                    `;
+                    gridContainer.insertAdjacentHTML('beforeend', html);
                 });
+
+                document.getElementById('count-all').innerText = allBounties.length;
+                document.getElementById('count-ontario').innerText = ontarioCount;
+                document.getElementById('count-global').innerText = globalCount;
+
+                applyCombinedFilters();
+            } catch (err) {
+                console.error("Database error:", err);
+                gridContainer.innerHTML = `<li class="status-message">Warning: Component data feeds are locked or currently compiling updates.</li>`;
+            }
         }
 
         function setRegionFilter(regionType) {
@@ -237,13 +350,10 @@
             document.getElementById('filterStatusLabel').innerText = labels[regionType];
 
             applyCombinedFilters();
-            
-            const scrollOffset = document.getElementById('board').offsetTop - 20;
-            window.scrollTo({ top: scrollOffset, behavior: 'smooth' });
         }
 
         function isCanadianRegion(regionText) {
-            return regionText.includes('ontario') || regionText.includes('horseshoe') || regionText.includes('canada') || regionText.includes('golden') || regionText.includes('peterborough') || regionText.includes('millbrook');
+            return regionText.includes('ontario') || regionText.includes('horseshoe') || regionText.includes('canada') || regionText.includes('peterborough') || regionText.includes('millbrook');
         }
 
         function applyCombinedFilters() {
@@ -263,7 +373,7 @@
                 } else if (currentRegionFilter === 'ontario') {
                     matchesRegion = isCanada;
                 } else if (currentRegionFilter === 'global') {
-                    matchesRegion = !isCanada || cardRegion.includes('us') || cardRegion.includes('rust') || cardRegion.includes('belt');
+                    matchesRegion = !isCanada;
                 }
 
                 let matchesSearch = cardSearch.includes(searchQuery);
@@ -280,7 +390,7 @@
             if (visibleCount === 0 && cards.length > 0) {
                 if (!existingMsg) {
                     document.getElementById('bountyGrid').insertAdjacentHTML('beforeend', 
-                        `<li id="emptyFilterMessage" class="status-message">No active heavy duty contracts match your regional or input text parameters.</li>`
+                        `<li id="emptyFilterMessage" class="status-message">No active heavy duty contracts match your parameters.</li>`
                     );
                 }
             } else if (existingMsg) {
@@ -290,20 +400,10 @@
 
         function copyShareLink(cardId) {
             const shareUrl = window.location.origin + window.location.pathname + '#' + cardId;
-            
             navigator.clipboard.writeText(shareUrl).then(() => {
                 const btn = document.querySelector(`#${cardId} .share-btn`);
-                const originalText = btn.innerHTML;
-                
-                btn.innerHTML = '✅ Copied!';
-                btn.classList.add('copied');
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy listing path: ', err);
+                btn.innerHTML = '✅ Copied';
+                setTimeout(() => { btn.innerHTML = '🔗 Copy'; }, 2000);
             });
         }
 
