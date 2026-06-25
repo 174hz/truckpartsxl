@@ -9,12 +9,11 @@
     --accent-red: #dc2626;       /* High-visibility operational red */
     --accent-blue: #2563eb;      /* Deep premium commercial blue */
     --accent-green: #16a34a;     /* Transaction secure green */
-    --premium-glow: rgba(220, 38, 38, 0.15);
+    --premium-glow: rgba(220, 38, 38, 0.08);
 }
 
 body { 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-    /* Texturized industrial background using a live aerial grid view of a heavy truck wrecking lot */
     background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98)),
                 url('https://activetruckparts.com/wp-content/uploads/2023/02/active-truck-parts-hero-image3.png') repeat;
     background-size: 500px auto;
@@ -60,7 +59,6 @@ nav a:hover { color: var(--accent-red); }
 
 .hero-banner {
     position: relative;
-    /* Header visual showcasing an actual heavy duty salvage yard layout corridor instead of an open road */
     background: linear-gradient(rgba(11, 15, 25, 0.85), rgba(15, 23, 42, 0.93)), 
                 url('https://activetruckparts.com/wp-content/uploads/2023/02/active-truck-parts-hero-image3.png') no-repeat center center;
     background-size: cover;
@@ -191,7 +189,7 @@ nav a:hover { color: var(--accent-red); }
     border-radius: 4px;
     box-sizing: border-box;
     background: var(--bg-main);
-    color: #ffffff !important; /* Forced text to clean white for visibility */
+    color: #ffffff !important; 
 }
 .search-input:focus { outline: 2px solid var(--accent-blue); background: var(--bg-main); }
 
@@ -203,106 +201,173 @@ nav a:hover { color: var(--accent-red); }
 }
 .feed-status { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
 
-.bounty-grid {
+/* ========================================================= */
+/* DENSE COMPONENT LEDGER VIEW (REPLACES OLD GRID STYLE)       */
+/* ========================================================= */
+.ledger-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-.post-card {
+.ledger-item {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    overflow: hidden; 
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     position: relative;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.card-visual-header {
+.ledger-item.premium-boost {
+    border-left: 4px solid var(--accent-red);
+    background: linear-gradient(90deg, var(--premium-glow) 0%, var(--bg-card) 200px);
+}
+
+.premium-badge {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: var(--accent-red);
+    color: #ffffff;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 3px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 5;
+}
+
+.ledger-visual-col {
     width: 100%;
-    height: 140px;
+    height: 120px;
     background-size: cover;
     background-position: center;
     border-bottom: 1px solid var(--border-color);
 }
 
-.post-card.premium-boost {
-    border: 2px solid var(--accent-red);
-    background: linear-gradient(180deg, var(--premium-glow) 0%, var(--bg-card) 100%);
-}
-.premium-badge {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    background: var(--accent-red);
-    color: #ffffff;
-    font-size: 0.65rem;
-    font-weight: 900;
-    padding: 4px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    z-index: 10;
-}
-
-.card-body-content { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.part-title { font-size: 1.15rem; font-weight: 800; margin: 0 0 4px 0; text-transform: uppercase; color: #ffffff; line-height: 1.2; }
-.ymm-tag { font-size: 0.85rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; margin-bottom: 12px; }
-
-.spec-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.8rem; }
-.spec-table tr { border-bottom: 1px solid #334155; }
-.spec-table tr:last-child { border-bottom: none; }
-.spec-table td { padding: 8px 0; vertical-align: top; }
-.spec-label { color: var(--text-muted); font-weight: 600; width: 40%; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.02em; padding-right: 8px; }
-.spec-val { color: var(--text-main) !important; font-weight: 700; word-break: break-word; } /* Forced to text-main variable to fix blackout issues on data values */
-
-.card-footer-controls {
+.ledger-info-block {
+    padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-top: auto;
+    flex-grow: 1;
 }
 
-.footer-meta-row {
+.part-title { 
+    font-size: 1.1rem; 
+    font-weight: 800; 
+    margin: 0 0 2px 0; 
+    text-transform: uppercase; 
+    color: #ffffff; 
+}
+.ymm-tag { 
+    font-size: 0.8rem; 
+    font-weight: 700; 
+    color: #60a5fa; 
+    text-transform: uppercase; 
+}
+
+.ledger-specs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.4);
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.spec-cell {
     display: flex;
     justify-content: space-between;
+    font-size: 0.8rem;
+    line-height: 1.3;
+}
+
+.cell-label {
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+}
+
+.cell-value {
+    color: var(--text-main) !important;
+    font-weight: 700;
+    text-align: right;
+}
+
+.budget-highlight {
+    color: #fca5a5 !important;
+}
+
+.ledger-action-block {
+    padding: 16px;
+    background: rgba(11, 15, 25, 0.4);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+}
+
+.action-meta-row {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .region-footer-tag {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: #ffffff;
     background: #475569;
-    padding: 6px 10px;
+    padding: 5px 8px;
     border-radius: 4px;
     text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+.share-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+}
+.share-btn:hover {
+    color: #ffffff;
+    border-color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
+}
+.share-btn.copied {
+    color: var(--accent-green) !important;
+    border-color: var(--accent-green) !important;
 }
 
 .stripe-boost-link {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 800;
     color: #ef4444;
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
+    padding: 4px 6px;
     border: 1px dashed #ef4444;
     border-radius: 4px;
-    white-space: nowrap;
 }
 
 .cta-unlock-btn {
@@ -311,20 +376,18 @@ nav a:hover { color: var(--accent-red); }
     background: var(--accent-blue);
     color: #ffffff;
     text-decoration: none;
-    padding: 14px;
-    font-size: 0.8rem;
+    padding: 12px;
+    font-size: 0.75rem;
     font-weight: 800;
     border-radius: 4px;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     border: none;
     width: 100%;
     cursor: pointer;
-    -webkit-appearance: none;
 }
 
 .status-message {
-    grid-column: 1 / -1;
     text-align: center;
     padding: 32px 16px;
     color: var(--text-muted);
@@ -356,19 +419,93 @@ footer {
     .market-ticker { grid-template-columns: repeat(3, 1fr); gap: 16px; }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
     .hero-banner { padding: 110px 0; }
     .hero-banner h1 { font-size: 3.2rem; }
     .hero-banner .subtitle { font-size: 1.15rem; }
     .split-flow-grid { grid-template-columns: repeat(2, 1fr); gap: 35px; }
-    .bounty-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .footer-grid { flex-direction: row; justify-content: space-between; text-align: left; }
     .footer-links { gap: 0; }
     .footer-links a { margin-left: 20px; }
     .how-it-works-section { padding: 40px 30px; }
     .section-title { font-size: 1.2rem; }
-}
 
-@media (min-width: 992px) {
-    .bounty-grid { grid-template-columns: repeat(3, 1fr); }
+    /* Transforming listings into a high-density tabular row ledger */
+    .ledger-item {
+        flex-direction: row;
+        align-items: center;
+        padding: 6px 12px;
+        min-height: 80px;
+    }
+    
+    .ledger-item.premium-boost {
+        border-left: 5px solid var(--accent-red);
+    }
+
+    .premium-badge {
+        top: auto;
+        bottom: 4px;
+        right: auto;
+        left: 12px;
+    }
+
+    .ledger-visual-col {
+        width: 65px;
+        height: 55px;
+        border-radius: 4px;
+        border-bottom: none;
+        flex-shrink: 0;
+    }
+
+    .ledger-info-block {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-grow: 1;
+        padding: 0 24px;
+        gap: 20px;
+    }
+
+    .ledger-main-meta {
+        width: 25%;
+        flex-shrink: 0;
+    }
+    .part-title { font-size: 1rem; }
+    .ymm-tag { font-size: 0.75rem; }
+
+    .ledger-specs-grid {
+        grid-template-columns: repeat(5, 1fr);
+        flex-grow: 1;
+        background: transparent;
+        border: none;
+        padding: 0;
+        gap: 16px;
+    }
+
+    .spec-cell {
+        flex-direction: column;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    .cell-value {
+        text-align: left;
+        font-size: 0.85rem;
+    }
+
+    .ledger-action-block {
+        width: 260px;
+        flex-shrink: 0;
+        padding: 0 0 0 16px;
+        border-top: none;
+        border-left: 1px solid var(--border-color);
+        background: transparent;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .cta-unlock-btn {
+        padding: 8px 12px;
+        font-size: 0.7rem;
+    }
 }
