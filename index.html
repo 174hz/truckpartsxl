@@ -321,27 +321,23 @@
         let currentRegionFilter = 'all';
         let allBounties = [];
 
-        // Dynamic key extraction engine to bypass Zapier key formatting variance
+        // BALANCED PARSER: Cleans contact loops while keeping raw descriptions intact
         function parseProperty(obj, searchKeywords, fallback) {
-            // Normalize keywords for comparison
             const targets = searchKeywords.map(k => k.toLowerCase().replace(/[^a-z0-9]/g, ''));
             
             for (let key in obj) {
                 if (!obj.hasOwnProperty(key)) continue;
                 const normalizedKey = key.toLowerCase().replace(/[^a-z0-9]/g, '');
                 
-                // If any keyword matches or is contained inside the incoming property key
                 if (targets.some(target => normalizedKey.includes(target) || target.includes(normalizedKey))) {
                     let val = String(obj[key]).trim();
                     if (!val || val.toLowerCase() === "undefined" || val.toLowerCase() === "null") continue;
                     
-                    // Filter structural template rows/instructions
-                    if (val.toLowerCase().includes("select your") || val.toLowerCase().includes("column")) continue;
+                    if (val.toLowerCase().includes("select your") || val.toLowerCase().includes("shipping region")) continue;
 
-                    // Redaction protection rule: If string looks strictly like an email or a standalone phone sequence, block it
-                    const strippedNum = val.replace(/[\s-()]/g, '');
-                    if (/^\d{7,15}$/.test(strippedNum)) continue;
+                    // Redaction focus: blocks text containing clear email signatures or exact, format-isolated 10-digit phone entries
                     if (val.includes('@') && val.includes('.')) continue;
+                    if (/^\d{10}$/.test(val.replace(/[\s-()]/g, ''))) continue; 
 
                     return val;
                 }
@@ -370,12 +366,10 @@
 
                 allBounties.forEach((bounty, index) => {
                     const stringifiedRow = JSON.stringify(bounty).toLowerCase();
-                    // Clean structural instructions
                     if (stringifiedRow.includes("select your location") || stringifiedRow.includes("shipping region")) {
                         return; 
                     }
 
-                    // Flexible keyword lookup matrices to map live keys smoothly
                     const partName = parseProperty(bounty, ["partname", "part", "component", "need"], "Component Asset");
                     const makeModel = parseProperty(bounty, ["yearmakemodel", "truck", "model", "vehicle"], "Heavy Duty Spec");
                     const vinNum = parseProperty(bounty, ["vin", "identifier", "serial"], "Not Disclosed");
@@ -454,6 +448,7 @@
             applyCombinedFilters();
         }
 
+        // Expanded matcher to group your regional submissions correctly
         function isCanadianRegion(regionText) {
             return regionText.includes('ontario') || regionText.includes('horseshoe') || regionText.includes('canada') || regionText.includes('peterborough') || regionText.includes('millbrook');
         }
