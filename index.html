@@ -9,14 +9,14 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* Ultra-Clean High Density Card Feed Layout */
+        /* High-Density Spreadsheet Row Layout Container */
         .ledger-list {
             list-style: none;
             padding: 0;
             margin: 24px auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
             width: 100%;
             max-width: 1260px;
         }
@@ -24,13 +24,13 @@
         .ledger-row {
             background: #0f172a;
             border: 1px solid #1e293b;
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
             position: relative;
-            padding: 16px 20px;
-            gap: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            padding: 12px 16px;
+            gap: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             transition: border-color 0.1s ease, background-color 0.1s ease;
         }
 
@@ -39,35 +39,35 @@
             background: #141f35;
         }
 
-        /* Priority Highlight Border */
+        /* Priority Distinction Border */
         .ledger-row.priority-boost {
-            border-left: 5px solid #ef4444;
+            border-left: 4px solid #ef4444;
         }
 
         @media (min-width: 1024px) {
             .ledger-row {
                 flex-direction: row;
                 align-items: center;
-                gap: 24px;
+                gap: 16px;
             }
         }
 
-        /* Identity Block */
+        /* Identity Block: Hard-anchored width */
         .row-identity-wrapper {
             display: flex;
             align-items: center;
-            gap: 14px;
-            min-width: 260px;
-            max-width: 280px;
+            gap: 12px;
+            width: 100%;
+            max-width: 240px;
             flex-shrink: 0;
         }
 
         .row-thumb {
-            width: 52px;
-            height: 52px;
+            width: 44px;
+            height: 44px;
             background-size: cover;
             background-position: center;
-            border-radius: 6px;
+            border-radius: 4px;
             background-color: #020617;
             flex-shrink: 0;
             border: 1px solid #334155;
@@ -76,84 +76,113 @@
         .row-identity {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
+            min-width: 0;
         }
 
         .part-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 800;
             margin: 0;
             text-transform: uppercase;
             color: #ffffff;
             line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .ymm-tag {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: #3b82f6;
             text-transform: uppercase;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        /* Compact Non-Restricted Data Layout */
+        /* Strict Table Columns Layout Engine */
         .row-specs-data {
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 16px 24px;
+            flex-direction: column;
+            gap: 8px;
             flex-grow: 1;
             width: 100%;
+            min-width: 0;
         }
 
-        /* Pure Horizontal Text Flow — No Squishing Boxes */
-        .data-text-item {
+        @media (min-width: 1024px) {
+            .row-specs-data {
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+            }
+        }
+
+        /* Proportional Column Weights ensuring perfect alignment card-to-card */
+        .data-column-item {
             display: flex;
             flex-direction: column;
             gap: 2px;
-            min-width: 120px;
+            min-width: 0;
+            width: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            .data-column-item.col-vin       { flex: 0 0 16%; }
+            .data-column-item.col-casting   { flex: 0 0 26%; }
+            .data-column-item.col-engine    { flex: 0 0 24%; }
+            .data-column-item.col-condition { flex: 0 0 18%; }
+            .data-column-item.col-budget    { flex: 0 0 16%; }
         }
 
         .data-label {
             color: #64748b;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.03em;
+            white-space: nowrap;
         }
 
         .data-val {
             color: #f8fafc;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             line-height: 1.3;
-            white-space: normal;
-            word-break: break-word;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .budget-highlight {
             color: #f87171 !important;
         }
 
-        /* Compact Action Row Panels */
+        /* Aligned Action Control Tower */
         .row-actions-panel {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 12px;
             width: 100%;
             flex-shrink: 0;
+            border-top: 1px solid #1e293b;
+            padding-top: 10px;
         }
 
         @media (min-width: 1024px) {
             .row-actions-panel {
-                flex-direction: column;
-                align-items: flex-end;
-                justify-content: center;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
                 width: auto;
-                min-width: 180px;
+                max-width: 320px;
+                border-top: none;
+                padding-top: 0;
                 margin-left: auto;
-                gap: 8px;
+                gap: 16px;
             }
         }
 
@@ -161,10 +190,11 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-shrink: 0;
         }
 
         .dispatch-badge {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 700;
             color: #f1f5f9;
             background: #1e293b;
@@ -178,25 +208,27 @@
         .priority-tag {
             background: #ef4444;
             color: #ffffff;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             font-weight: 800;
             padding: 4px 8px;
             border-radius: 4px;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .cta-unlock-btn {
             background: #2563eb;
             color: #ffffff;
             border: none;
-            padding: 8px 16px;
-            font-size: 0.8rem;
+            padding: 8px 14px;
+            font-size: 0.78rem;
             font-weight: 800;
             border-radius: 4px;
             text-transform: uppercase;
             cursor: pointer;
             white-space: nowrap;
             transition: background 0.1s ease;
+            flex-shrink: 0;
         }
 
         .cta-unlock-btn:hover {
@@ -283,7 +315,7 @@
             <div class="feed-status" id="filterStatusLabel">Showing: All Open Contracts</div>
         </div>
 
-        <!-- High-Density Clean Card Grid Container -->
+        <!-- Aligned Column Table Cards Layout Container -->
         <ul class="ledger-list" id="bountyGrid">
             <li id="initialLoadingMessage" class="status-message">Connecting to GitHub file pipeline, standing by...</li>
         </ul>
@@ -384,36 +416,36 @@
                     const rowClasses = isPremium ? 'ledger-row priority-boost' : 'ledger-row';
                     const premiumLabel = isPremium ? `<span class="priority-tag">⚡ Priority</span>` : '';
 
-                    // Beautifully clean plain-text flow layout
+                    // Strict tabular columns mapping 
                     const html = `
                         <li class="${rowClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
                             
                             <div class="row-identity-wrapper">
                                 <div class="row-thumb" style="background-image: url('${cardVisual}');"></div>
                                 <div class="row-identity">
-                                    <h3 class="part-title">${partName}</h3>
-                                    <div class="ymm-tag">${makeModel}</div>
+                                    <h3 class="part-title" title="${partName}">${partName}</h3>
+                                    <div class="ymm-tag" title="${makeModel}">${makeModel}</div>
                                 </div>
                             </div>
                             
                             <div class="row-specs-data">
-                                <div class="data-text-item">
+                                <div class="data-column-item col-vin">
                                     <span class="data-label">VIN Number</span>
                                     <span class="data-val">${vinNum}</span>
                                 </div>
-                                <div class="data-text-item">
+                                <div class="data-column-item col-casting">
                                     <span class="data-label">OEM Casting</span>
                                     <span class="data-val">${castingNum}</span>
                                 </div>
-                                <div class="data-text-item">
+                                <div class="data-column-item col-engine">
                                     <span class="data-label">Engine Spec</span>
                                     <span class="data-val">${engineSpec}</span>
                                 </div>
-                                <div class="data-text-item">
+                                <div class="data-column-item col-condition">
                                     <span class="data-label">Condition</span>
                                     <span class="data-val">${cleanCondition}</span>
                                 </div>
-                                <div class="data-text-item">
+                                <div class="data-column-item col-budget">
                                     <span class="data-label">Target Budget</span>
                                     <span class="data-val budget-highlight">${budgetTarget}</span>
                                 </div>
