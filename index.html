@@ -9,14 +9,14 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* High-Visibility Clean Card Architecture */
+        /* Ultra-Clean High Density Card Feed Layout */
         .ledger-list {
             list-style: none;
             padding: 0;
             margin: 24px auto;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 12px;
             width: 100%;
             max-width: 1260px;
         }
@@ -24,49 +24,50 @@
         .ledger-row {
             background: #0f172a;
             border: 1px solid #1e293b;
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             position: relative;
-            padding: 24px;
-            gap: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            transition: border-color 0.15s ease, background-color 0.15s ease;
+            padding: 16px 20px;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.1s ease, background-color 0.1s ease;
         }
 
         .ledger-row:hover {
             border-color: #2563eb;
-            background: #1e293b;
+            background: #141f35;
         }
 
-        /* Priority Highlights */
+        /* Priority Highlight Border */
         .ledger-row.priority-boost {
-            border-left: 6px solid #ef4444;
+            border-left: 5px solid #ef4444;
         }
 
         @media (min-width: 1024px) {
             .ledger-row {
                 flex-direction: row;
                 align-items: center;
+                gap: 24px;
             }
         }
 
-        /* Identity Block: Thumbnail and Titles */
+        /* Identity Block */
         .row-identity-wrapper {
             display: flex;
             align-items: center;
-            gap: 16px;
-            min-width: 280px;
-            max-width: 320px;
+            gap: 14px;
+            min-width: 260px;
+            max-width: 280px;
             flex-shrink: 0;
         }
 
         .row-thumb {
-            width: 72px;
-            height: 72px;
+            width: 52px;
+            height: 52px;
             background-size: cover;
             background-position: center;
-            border-radius: 8px;
+            border-radius: 6px;
             background-color: #020617;
             flex-shrink: 0;
             border: 1px solid #334155;
@@ -75,104 +76,99 @@
         .row-identity {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 2px;
         }
 
         .part-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 800;
             margin: 0;
             text-transform: uppercase;
             color: #ffffff;
-            letter-spacing: -0.01em;
             line-height: 1.2;
         }
 
         .ymm-tag {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: #3b82f6;
             text-transform: uppercase;
         }
 
-        /* Flexible Specifications Data Area */
+        /* Compact Non-Restricted Data Layout */
         .row-specs-data {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 16px 24px;
             flex-grow: 1;
             width: 100%;
         }
 
-        /* Stacked Block Elements - Never forces text to squeeze sideways */
-        .data-block-cell {
+        /* Pure Horizontal Text Flow — No Squishing Boxes */
+        .data-text-item {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            background: #1e293b;
-            border: 1px solid #334155;
-            padding: 12px 14px;
-            border-radius: 8px;
-            min-width: 0; /* Prevents long text from bursting grid tracks */
-        }
-
-        .ledger-row:hover .data-block-cell {
-            background: #0f172a;
+            gap: 2px;
+            min-width: 120px;
         }
 
         .data-label {
-            color: #94a3b8;
+            color: #64748b;
             font-size: 0.7rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
         }
 
         .data-val {
             color: #f8fafc;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            line-height: 1.4;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+            line-height: 1.3;
             white-space: normal;
+            word-break: break-word;
         }
 
         .budget-highlight {
             color: #f87171 !important;
-            font-weight: 900;
         }
 
-        /* Actions Column Alignment */
+        /* Compact Action Row Panels */
         .row-actions-panel {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
             width: 100%;
-            max-width: 220px;
             flex-shrink: 0;
-            margin-left: auto;
+        }
+
+        @media (min-width: 1024px) {
+            .row-actions-panel {
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: center;
+                width: auto;
+                min-width: 180px;
+                margin-left: auto;
+                gap: 8px;
+            }
         }
 
         .meta-badges-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            justify-content: flex-start;
-        }
-
-        @media (min-width: 1024px) {
-            .meta-badges-row {
-                justify-content: flex-end;
-            }
+            gap: 6px;
         }
 
         .dispatch-badge {
             font-size: 0.7rem;
             font-weight: 700;
             color: #f1f5f9;
-            background: #020617;
-            padding: 6px 10px;
+            background: #1e293b;
+            padding: 4px 8px;
             border-radius: 4px;
             text-transform: uppercase;
             border: 1px solid #334155;
@@ -184,25 +180,22 @@
             color: #ffffff;
             font-size: 0.65rem;
             font-weight: 800;
-            padding: 6px 10px;
+            padding: 4px 8px;
             border-radius: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.02em;
         }
 
         .cta-unlock-btn {
             background: #2563eb;
             color: #ffffff;
             border: none;
-            padding: 12px 18px;
-            font-size: 0.85rem;
+            padding: 8px 16px;
+            font-size: 0.8rem;
             font-weight: 800;
-            border-radius: 6px;
+            border-radius: 4px;
             text-transform: uppercase;
-            width: 100%;
             cursor: pointer;
-            letter-spacing: 0.02em;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
             transition: background 0.1s ease;
         }
 
@@ -290,7 +283,7 @@
             <div class="feed-status" id="filterStatusLabel">Showing: All Open Contracts</div>
         </div>
 
-        <!-- Premium Stacked Field Cards Layout Container -->
+        <!-- High-Density Clean Card Grid Container -->
         <ul class="ledger-list" id="bountyGrid">
             <li id="initialLoadingMessage" class="status-message">Connecting to GitHub file pipeline, standing by...</li>
         </ul>
@@ -391,7 +384,7 @@
                     const rowClasses = isPremium ? 'ledger-row priority-boost' : 'ledger-row';
                     const premiumLabel = isPremium ? `<span class="priority-tag">⚡ Priority</span>` : '';
 
-                    // Data blocks configured explicitly with stacked text elements
+                    // Beautifully clean plain-text flow layout
                     const html = `
                         <li class="${rowClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
                             
@@ -404,23 +397,23 @@
                             </div>
                             
                             <div class="row-specs-data">
-                                <div class="data-block-cell">
+                                <div class="data-text-item">
                                     <span class="data-label">VIN Number</span>
                                     <span class="data-val">${vinNum}</span>
                                 </div>
-                                <div class="data-block-cell">
+                                <div class="data-text-item">
                                     <span class="data-label">OEM Casting</span>
                                     <span class="data-val">${castingNum}</span>
                                 </div>
-                                <div class="data-block-cell">
+                                <div class="data-text-item">
                                     <span class="data-label">Engine Spec</span>
                                     <span class="data-val">${engineSpec}</span>
                                 </div>
-                                <div class="data-block-cell">
+                                <div class="data-text-item">
                                     <span class="data-label">Condition</span>
                                     <span class="data-val">${cleanCondition}</span>
                                 </div>
-                                <div class="data-block-cell">
+                                <div class="data-text-item">
                                     <span class="data-label">Target Budget</span>
                                     <span class="data-val budget-highlight">${budgetTarget}</span>
                                 </div>
