@@ -26,7 +26,7 @@
             border-collapse: collapse;
             text-align: left;
             font-size: 0.9rem;
-            min-width: 1000px; /* Forces stable layout on small screens with scroll */
+            min-width: 1100px; /* Forces stable column spacing without smashing fields */
         }
 
         .matrix-table th {
@@ -55,10 +55,6 @@
             background: #111322;
             border-left: 4px solid #ef4444;
         }
-        
-        .matrix-row.priority-boost td:first-child {
-            position: relative;
-        }
 
         .matrix-table td {
             padding: 14px 16px;
@@ -72,7 +68,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            min-width: 250px;
+            min-width: 260px;
         }
 
         .matrix-thumb {
@@ -102,11 +98,12 @@
             margin-top: 2px;
         }
 
-        /* Data values wrap instead of using truncation dots */
+        /* Data values wrap naturally instead of truncating or breaking words layout-wise */
         .matrix-val {
             font-weight: 600;
             word-break: break-word;
             white-space: normal;
+            display: block;
         }
 
         .label-badge {
@@ -351,4 +348,124 @@
                     const makeModel = parseProperty(bounty, ["yearmakemodel", "truck", "model", "vehicle"], "Heavy Duty Spec");
                     const vinNum = parseProperty(bounty, ["vin", "identifier", "serial"], "Not Disclosed");
                     const castingNum = parseProperty(bounty, ["casting", "oem", "number"], "Not Disclosed");
-                    const engineSpec = parseProperty(bounty,
+                    const engineSpec = parseProperty(bounty, ["engine", "motor", "spec"], "Standard Profile");
+                    const cleanCondition = parseProperty(bounty, ["condition", "status", "state"], "Core Grade / Mixed");
+                    const budgetTarget = parseProperty(bounty, ["budget", "target", "price", "cost"], "Quote Direct");
+                    const regionTag = parseProperty(bounty, ["region", "location", "dispatch", "prov"], "Global Dispatch");
+
+                    const regionText = regionTag.toLowerCase();
+                    const isCanada = isCanadianRegion(regionText);
+                    
+                    if (isCanada) ontarioCount++;
+                    else globalCount++;
+
+                    const uniqueCardId = bounty.id || `bounty-${index}`;
+                    const cleanSearchStr = `${partName} ${makeModel} ${vinNum} ${castingNum} ${engineSpec} ${regionTag}`.toLowerCase();
+                    const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
+
+                    const isPremium = index % 3 === 0; 
+                    const rowClasses = isPremium ? 'matrix-row priority-boost' : 'matrix-row';
+                    const premiumLabel = isPremium ? `<div><span class="label-badge badge-premium">⚡ Priority</span></div>` : '';
+
+                    const html = `
+                        <tr class="${rowClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
+                            <td>
+                                <div class="asset-cell">
+                                    <div class="matrix-thumb" style="background-image: url('${cardVisual}');"></div>
+                                    <div>
+                                        <div class="asset-title">${partName}</div>
+                                        <div class="asset-sub">${makeModel}</div>
+                                        ${premiumLabel}
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="matrix-val">${vinNum}</span></td>
+                            <td><span class="matrix-val">${castingNum}</span></td>
+                            <td><span class="matrix-val">${engineSpec}</span></td>
+                            <td><span class="matrix-val">${cleanCondition}</span></td>
+                            <td><span class="matrix-val budget-tag">${budgetTarget}</span></td>
+                            <td><span class="region-pill">📍 ${regionTag}</span></td>
+                            <td class="actions-cell">
+                                <button class="matrix-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Contacts</button>
+                            </td>
+                        </tr>
+                    `;
+                    gridContainer.insertAdjacentHTML('beforeend', html);
+                });
+
+                document.getElementById('count-all').innerText = ontarioCount + globalCount;
+                document.getElementById('count-ontario').innerText = ontarioCount;
+                document.getElementById('count-global').innerText = globalCount;
+
+                applyCombinedFilters();
+            } catch (err) {
+                console.error("Fetch fault:", err);
+                gridContainer.innerHTML = `<tr><td colspan="8" class="status-message" style="text-align:center;">Warning: Component data feeds are locked or compiling updates.</td></tr>`;
+            }
+        }
+
+        function setRegionFilter(regionType) {
+            currentRegionFilter = regionType;
+            document.querySelectorAll('.ticker-stat').forEach(el => el.classList.remove('active-filter'));
+            
+            if(regionType === 'global') document.getElementById('filter-global').classList.add('active-filter');
+            if(regionType === 'ontario') document.getElementById('filter-ontario').classList.add('active-filter');
+            if(regionType === 'all') document.getElementById('filter-all').classList.add('active-filter');
+
+            const labels = { 'all': 'Showing: All Open Contracts', 'ontario': 'Showing: Canada Regional Feed', 'global': 'Showing: Global Exchange' };
+            document.getElementById('filterStatusLabel').innerText = labels[regionType];
+
+            applyCombinedFilters();
+        }
+
+        function isCanadianRegion(regionText) {
+            return regionText.includes('ontario') || regionText.includes('horseshoe') || regionText.includes('canada') || regionText.includes('peterborough') || regionText.includes('millbrook');
+        }
+
+        function applyCombinedFilters() {
+            const searchQuery = document.getElementById('searchBar').value.toLowerCase().trim();
+            // FIXED TARGETING: Querying table rows instead of the old class elements
+            const rows = document.querySelectorAll('#bountyGrid .matrix-row');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const cardRegion = row.getAttribute('data-region') || '';
+                const cardSearch = row.getAttribute('data-searchable') || '';
+
+                let matchesRegion = false;
+                const isCanada = isCanadianRegion(cardRegion);
+
+                if (currentRegionFilter === 'all') {
+                    matchesRegion = true;
+                } else if (currentRegionFilter === 'ontario') {
+                    matchesRegion = isCanada;
+                } else if (currentRegionFilter === 'global') {
+                    matchesRegion = !isCanada;
+                }
+
+                let matchesSearch = cardSearch.includes(searchQuery);
+
+                if (matchesRegion && matchesSearch) {
+                    row.classList.remove('hidden-bounty');
+                    visibleCount++;
+                } else {
+                    row.classList.add('hidden-bounty');
+                }
+            });
+
+            const existingMsg = document.getElementById('emptyFilterMessage');
+            if (visibleCount === 0 && rows.length > 0) {
+                if (!existingMsg) {
+                    document.getElementById('bountyGrid').insertAdjacentHTML('beforeend', 
+                        `<tr id="emptyFilterMessage"><td colspan="8" class="status-message" style="text-align:center; padding: 24px;">No active heavy duty contracts match your parameters.</td></tr>`
+                    );
+                }
+            } else if (existingMsg) {
+                existingMsg.remove();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadBounties);
+    </script>
+</body>
+</html>
