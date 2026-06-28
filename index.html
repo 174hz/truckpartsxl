@@ -9,161 +9,207 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* High-Density Logistics Matrix Table Layout */
-        .matrix-board-container {
+        /* Premium Logistics Card Feed Layout */
+        .ledger-list {
+            list-style: none;
+            padding: 0;
+            margin: 24px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
             width: 100%;
             max-width: 1260px;
-            margin: 24px auto;
-            overflow-x: auto;
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         }
 
-        .matrix-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.9rem;
-            min-width: 1100px; /* Forces stable column spacing without smashing fields */
+        .ledger-row {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 20px;
+            gap: 16px;
+            transition: border-color 0.15s ease, background-color 0.15s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
         }
 
-        .matrix-table th {
-            background: #1f2937;
-            color: #9ca3af;
-            font-size: 0.75rem;
+        .ledger-row:hover {
+            border-color: #2563eb;
+            background: #1e293b;
+        }
+
+        /* Priority Distinction Border */
+        .ledger-row.priority-boost {
+            border-left: 5px solid #ef4444;
+        }
+
+        @media (min-width: 992px) {
+            .ledger-row {
+                flex-direction: row;
+                align-items: center;
+                padding: 20px 24px;
+                gap: 24px;
+            }
+        }
+
+        /* Identity Block */
+        .row-identity-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 280px;
+            max-width: 320px;
+        }
+
+        .row-thumb {
+            width: 64px;
+            height: 64px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 6px;
+            background-color: #020617;
+            flex-shrink: 0;
+            border: 1px solid #334155;
+        }
+
+        .row-identity {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .part-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 0;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .ymm-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #3b82f6;
+            text-transform: uppercase;
+        }
+
+        /* Rigid Specifications Matrix Grid */
+        .row-specs-data {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px 16px;
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        @media (min-width: 768px) {
+            .row-specs-data {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .row-specs-data {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .data-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .data-label {
+            color: #94a3b8;
+            font-size: 0.7rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            padding: 14px 16px;
-            border-bottom: 2px solid #374151;
         }
 
-        .matrix-row {
-            border-bottom: 1px solid #1f2937;
-            transition: background 0.15s ease;
-            background: #0b0f19;
-        }
-
-        .matrix-row:hover {
-            background: #172554 !important; /* Rich deep blue highlight on hover */
-        }
-
-        /* Priority Highlight Styling */
-        .matrix-row.priority-boost {
-            background: #111322;
-            border-left: 4px solid #ef4444;
-        }
-
-        .matrix-table td {
-            padding: 14px 16px;
-            vertical-align: middle;
-            color: #f3f4f6;
-            line-height: 1.4;
-        }
-
-        /* Thumb and Asset Columns */
-        .asset-cell {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 260px;
-        }
-
-        .matrix-thumb {
-            width: 54px;
-            height: 54px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 4px;
-            background-color: #030712;
-            flex-shrink: 0;
-            border: 1px solid #374151;
-        }
-
-        .asset-title {
-            font-size: 0.95rem;
-            font-weight: 800;
-            color: #ffffff;
-            text-transform: uppercase;
-            margin: 0;
-        }
-
-        .asset-sub {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #3b82f6;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
-
-        /* Data values wrap naturally instead of truncating or breaking words layout-wise */
-        .matrix-val {
+        .data-val {
+            color: #f8fafc;
+            font-size: 0.9rem;
             font-weight: 600;
             word-break: break-word;
             white-space: normal;
-            display: block;
+            line-height: 1.3;
         }
 
-        .label-badge {
-            display: inline-block;
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 2px 6px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-
-        .badge-premium {
-            background: #ef4444;
-            color: #ffffff;
-        }
-
-        .budget-tag {
+        .budget-highlight {
             color: #f87171;
             font-weight: 800;
-            font-size: 0.95rem;
         }
 
-        .region-pill {
-            display: inline-flex;
+        /* Action Panel Section */
+        .row-actions-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 200px;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        .meta-badges-row {
+            display: flex;
             align-items: center;
-            font-size: 0.75rem;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        @media (min-width: 992px) {
+            .meta-badges-row {
+                justify-content: flex-end;
+            }
+        }
+
+        .dispatch-badge {
+            font-size: 0.7rem;
             font-weight: 700;
-            color: #f3f4f6;
-            background: #1f2937;
-            padding: 4px 10px;
-            border-radius: 20px;
+            color: #f1f5f9;
+            background: #1e293b;
+            padding: 4px 8px;
+            border-radius: 4px;
             text-transform: uppercase;
-            border: 1px solid #374151;
+            border: 1px solid #334155;
             white-space: nowrap;
         }
 
-        /* Action Panel Elements */
-        .actions-cell {
-            text-align: right;
-            min-width: 160px;
+        .priority-tag {
+            background: #ef4444;
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
         }
 
-        .matrix-unlock-btn {
+        .cta-unlock-btn {
             background: #2563eb;
             color: #ffffff;
             border: none;
-            padding: 8px 14px;
-            font-size: 0.75rem;
+            padding: 10px 16px;
+            font-size: 0.8rem;
             font-weight: 700;
-            border-radius: 4px;
+            border-radius: 6px;
             text-transform: uppercase;
-            cursor: pointer;
             width: 100%;
+            cursor: pointer;
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
             transition: background 0.1s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            white-space: nowrap;
         }
 
-        .matrix-unlock-btn:hover {
+        .cta-unlock-btn:hover {
             background: #1d4ed8;
         }
     </style>
@@ -247,29 +293,9 @@
             <div class="feed-status" id="filterStatusLabel">Showing: All Open Contracts</div>
         </div>
 
-        <div class="matrix-board-container">
-            <table class="matrix-table">
-                <thead>
-                    <tr>
-                        <th>Requested Component / Spec</th>
-                        <th>VIN Identification</th>
-                        <th>OEM Casting #</th>
-                        <th>Engine Profile</th>
-                        <th>Condition Need</th>
-                        <th>Target Budget</th>
-                        <th>Routing Hub</th>
-                        <th style="text-align: right;">Procurement Link</th>
-                    </tr>
-                </thead>
-                <tbody id="bountyGrid">
-                    <tr>
-                        <td colspan="8" id="initialLoadingMessage" class="status-message" style="text-align: center; padding: 32px;">
-                            Connecting to GitHub file pipeline, standing by...
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <ul class="ledger-list" id="bountyGrid">
+            <li id="initialLoadingMessage" class="status-message">Connecting to GitHub file pipeline, standing by...</li>
+        </ul>
 
     </main>
 
@@ -330,7 +356,7 @@
                 allBounties = Array.isArray(data) ? data : (data.bounties || []);
                 
                 if (allBounties.length === 0) {
-                    gridContainer.innerHTML = `<tr><td colspan="8" class="status-message" style="text-align:center;">No active requirements available on the board.</td></tr>`;
+                    gridContainer.innerHTML = `<li class="status-message">No active requirements available on the board.</li>`;
                     return;
                 }
 
@@ -364,31 +390,36 @@
                     const cardVisual = INDUSTRY_VISUALS[index % INDUSTRY_VISUALS.length];
 
                     const isPremium = index % 3 === 0; 
-                    const rowClasses = isPremium ? 'matrix-row priority-boost' : 'matrix-row';
-                    const premiumLabel = isPremium ? `<div><span class="label-badge badge-premium">⚡ Priority</span></div>` : '';
+                    const rowClasses = isPremium ? 'ledger-row priority-boost' : 'ledger-row';
+                    const premiumLabel = isPremium ? `<span class="priority-tag">⚡ Priority</span>` : '';
 
                     const html = `
-                        <tr class="${rowClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
-                            <td>
-                                <div class="asset-cell">
-                                    <div class="matrix-thumb" style="background-image: url('${cardVisual}');"></div>
-                                    <div>
-                                        <div class="asset-title">${partName}</div>
-                                        <div class="asset-sub">${makeModel}</div>
-                                        ${premiumLabel}
-                                    </div>
+                        <li class="${rowClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
+                            
+                            <div class="row-identity-wrapper">
+                                <div class="row-thumb" style="background-image: url('${cardVisual}');"></div>
+                                <div class="row-identity">
+                                    <h3 class="part-title">${partName}</h3>
+                                    <div class="ymm-tag">${makeModel}</div>
                                 </div>
-                            </td>
-                            <td><span class="matrix-val">${vinNum}</span></td>
-                            <td><span class="matrix-val">${castingNum}</span></td>
-                            <td><span class="matrix-val">${engineSpec}</span></td>
-                            <td><span class="matrix-val">${cleanCondition}</span></td>
-                            <td><span class="matrix-val budget-tag">${budgetTarget}</span></td>
-                            <td><span class="region-pill">📍 ${regionTag}</span></td>
-                            <td class="actions-cell">
-                                <button class="matrix-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Contacts</button>
-                            </td>
-                        </tr>
+                            </div>
+                            
+                            <div class="row-specs-data">
+                                <div class="data-cell"><span class="data-label">VIN Number</span><span class="data-val">${vinNum}</span></div>
+                                <div class="data-cell"><span class="data-label">OEM Casting</span><span class="data-val">${castingNum}</span></div>
+                                <div class="data-cell"><span class="data-label">Engine Profile</span><span class="data-val">${engineSpec}</span></div>
+                                <div class="data-cell"><span class="data-label">Condition Need</span><span class="data-val">${cleanCondition}</span></div>
+                                <div class="data-cell"><span class="data-label">Target Budget</span><span class="data-val budget-highlight">${budgetTarget}</span></div>
+                            </div>
+
+                            <div class="row-actions-panel">
+                                <div class="meta-badges-row">
+                                    ${premiumLabel}
+                                    <span class="dispatch-badge">📍 ${regionTag}</span>
+                                </div>
+                                <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Contacts</button>
+                            </div>
+                        </li>
                     `;
                     gridContainer.insertAdjacentHTML('beforeend', html);
                 });
@@ -400,7 +431,7 @@
                 applyCombinedFilters();
             } catch (err) {
                 console.error("Fetch fault:", err);
-                gridContainer.innerHTML = `<tr><td colspan="8" class="status-message" style="text-align:center;">Warning: Component data feeds are locked or compiling updates.</td></tr>`;
+                gridContainer.innerHTML = `<li class="status-message">Warning: Component data feeds are locked or compiling updates.</li>`;
             }
         }
 
@@ -424,8 +455,7 @@
 
         function applyCombinedFilters() {
             const searchQuery = document.getElementById('searchBar').value.toLowerCase().trim();
-            // FIXED TARGETING: Querying table rows instead of the old class elements
-            const rows = document.querySelectorAll('#bountyGrid .matrix-row');
+            const rows = document.querySelectorAll('#bountyGrid .ledger-row');
             let visibleCount = 0;
 
             rows.forEach(row => {
@@ -457,7 +487,7 @@
             if (visibleCount === 0 && rows.length > 0) {
                 if (!existingMsg) {
                     document.getElementById('bountyGrid').insertAdjacentHTML('beforeend', 
-                        `<tr id="emptyFilterMessage"><td colspan="8" class="status-message" style="text-align:center; padding: 24px;">No active heavy duty contracts match your parameters.</td></tr>`
+                        `<li id="emptyFilterMessage" class="status-message">No active heavy duty contracts match your parameters.</li>`
                     );
                 }
             } else if (existingMsg) {
