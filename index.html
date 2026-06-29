@@ -9,7 +9,7 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* High-Density Spreadsheet Row Layout Container */
+        /* Rigid Tabular Card Architecture */
         .ledger-list {
             list-style: none;
             padding: 0;
@@ -25,13 +25,12 @@
             background: #0f172a;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
             padding: 12px 16px;
-            gap: 12px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             transition: border-color 0.1s ease, background-color 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .ledger-row:hover {
@@ -39,32 +38,31 @@
             background: #141f35;
         }
 
-        /* Priority Distinction Border */
         .ledger-row.priority-boost {
             border-left: 4px solid #ef4444;
         }
 
+        /* Desktop Column Locks: Explicit 1-Row Track Grid */
         @media (min-width: 1024px) {
             .ledger-row {
-                flex-direction: row;
+                display: grid;
+                grid-template-columns: 200px 130px 180px 150px 130px 100px 1fr;
                 align-items: center;
                 gap: 16px;
             }
         }
 
-        /* Identity Block: Hard-anchored width */
+        /* Identity Block Component */
         .row-identity-wrapper {
             display: flex;
             align-items: center;
             gap: 12px;
-            width: 100%;
-            max-width: 240px;
-            flex-shrink: 0;
+            min-width: 0;
         }
 
         .row-thumb {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             background-size: cover;
             background-position: center;
             border-radius: 4px;
@@ -81,7 +79,7 @@
         }
 
         .part-title {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 800;
             margin: 0;
             text-transform: uppercase;
@@ -102,39 +100,12 @@
             white-space: nowrap;
         }
 
-        /* Strict Table Columns Layout Engine */
-        .row-specs-data {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex-grow: 1;
-            width: 100%;
-            min-width: 0;
-        }
-
-        @media (min-width: 1024px) {
-            .row-specs-data {
-                flex-direction: row;
-                align-items: center;
-                gap: 12px;
-            }
-        }
-
-        /* Proportional Column Weights ensuring perfect alignment card-to-card */
+        /* Strict Content Cells: Forces single-line execution with ellipsis */
         .data-column-item {
             display: flex;
             flex-direction: column;
             gap: 2px;
             min-width: 0;
-            width: 100%;
-        }
-
-        @media (min-width: 1024px) {
-            .data-column-item.col-vin       { flex: 0 0 16%; }
-            .data-column-item.col-casting   { flex: 0 0 26%; }
-            .data-column-item.col-engine    { flex: 0 0 24%; }
-            .data-column-item.col-condition { flex: 0 0 18%; }
-            .data-column-item.col-budget    { flex: 0 0 16%; }
         }
 
         .data-label {
@@ -151,38 +122,32 @@
             font-size: 0.85rem;
             font-weight: 700;
             line-height: 1.3;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .budget-highlight {
             color: #f87171 !important;
         }
 
-        /* Aligned Action Control Tower */
+        /* Fixed End-Cap Action Controls Grid Alignment */
         .row-actions-panel {
             display: flex;
-            flex-direction: row;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            width: 100%;
-            flex-shrink: 0;
             border-top: 1px solid #1e293b;
             padding-top: 10px;
         }
 
         @media (min-width: 1024px) {
             .row-actions-panel {
-                flex-direction: row;
-                align-items: center;
-                justify-content: flex-end;
-                width: auto;
-                max-width: 320px;
                 border-top: none;
                 padding-top: 0;
+                justify-content: flex-end;
+                gap: 12px;
                 margin-left: auto;
-                gap: 16px;
             }
         }
 
@@ -315,7 +280,7 @@
             <div class="feed-status" id="filterStatusLabel">Showing: All Open Contracts</div>
         </div>
 
-        <!-- Aligned Column Table Cards Layout Container -->
+        <!-- Aligned Grid Table Display Pipeline -->
         <ul class="ledger-list" id="bountyGrid">
             <li id="initialLoadingMessage" class="status-message">Connecting to GitHub file pipeline, standing by...</li>
         </ul>
@@ -416,7 +381,7 @@
                     const rowClasses = isPremium ? 'ledger-row priority-boost' : 'ledger-row';
                     const premiumLabel = isPremium ? `<span class="priority-tag">⚡ Priority</span>` : '';
 
-                    // Strict tabular columns mapping 
+                    // Strict inline 1-track data structures mapped dynamically
                     const html = `
                         <li class="${rowClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
                             
@@ -428,27 +393,25 @@
                                 </div>
                             </div>
                             
-                            <div class="row-specs-data">
-                                <div class="data-column-item col-vin">
-                                    <span class="data-label">VIN Number</span>
-                                    <span class="data-val">${vinNum}</span>
-                                </div>
-                                <div class="data-column-item col-casting">
-                                    <span class="data-label">OEM Casting</span>
-                                    <span class="data-val">${castingNum}</span>
-                                </div>
-                                <div class="data-column-item col-engine">
-                                    <span class="data-label">Engine Spec</span>
-                                    <span class="data-val">${engineSpec}</span>
-                                </div>
-                                <div class="data-column-item col-condition">
-                                    <span class="data-label">Condition</span>
-                                    <span class="data-val">${cleanCondition}</span>
-                                </div>
-                                <div class="data-column-item col-budget">
-                                    <span class="data-label">Target Budget</span>
-                                    <span class="data-val budget-highlight">${budgetTarget}</span>
-                                </div>
+                            <div class="data-column-item">
+                                <span class="data-label">VIN Number</span>
+                                <span class="data-val" title="${vinNum}">${vinNum}</span>
+                            </div>
+                            <div class="data-column-item">
+                                <span class="data-label">OEM Casting</span>
+                                <span class="data-val" title="${castingNum}">${castingNum}</span>
+                            </div>
+                            <div class="data-column-item">
+                                <span class="data-label">Engine Spec</span>
+                                <span class="data-val" title="${engineSpec}">${engineSpec}</span>
+                            </div>
+                            <div class="data-column-item">
+                                <span class="data-label">Condition</span>
+                                <span class="data-val" title="${cleanCondition}">${cleanCondition}</span>
+                            </div>
+                            <div class="data-column-item">
+                                <span class="data-label">Target Budget</span>
+                                <span class="data-val budget-highlight" title="${budgetTarget}">${budgetTarget}</span>
                             </div>
 
                             <div class="row-actions-panel">
