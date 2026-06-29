@@ -447,5 +447,17 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "timestamp": "6/29/2026 14:15:36",
+    "region": "Ontario (Golden Horseshoe Region)",
+    "yearMakeModel": "2024 Kenworth T680",
+    "vin": "12345678901276543",
+    "partName": "Steering Gear Box ",
+    "specs": "Cummins X23 ",
+    "oem": "123498765408",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "8,500",
+    "boosted": "false"
   }
 ]
