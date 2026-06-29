@@ -974,6 +974,8 @@
                     const s = JSON.stringify(b).toLowerCase();
                     return !s.includes('select your location') && !s.includes('shipping region');
                 });
+                // Newest entries first
+                allContracts.reverse();
 
                 if (allContracts.length === 0) {
                     grid.innerHTML = `<div class="status-card">No active contracts on the board right now.</div>`;
