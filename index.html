@@ -474,6 +474,7 @@
             align-items: center;
         }
 
+        /* Tablet: hide action col from main flow, move to bottom */
         @media (max-width: 900px) {
             .card-body {
                 grid-template-columns: 1fr;
@@ -621,6 +622,91 @@
             text-align: right;
         }
 
+        /* ─── MOBILE OVERRIDES (≤600px) ─────────────────────────────── */
+        @media (max-width: 600px) {
+            .container { padding: 0 14px; }
+
+            /* Nav */
+            .nav-links a:not(.nav-cta) { display: none; }
+            .nav-cta { font-size: 11px !important; padding: 6px 12px; }
+
+            /* Hero */
+            .hero { padding: 36px 0 30px; }
+            .hero h1 { font-size: 24px; }
+            .hero-sub { font-size: 13px; }
+
+            /* How section */
+            .how-section { padding: 32px 0 28px; }
+            .how-card { padding: 20px 16px; }
+
+            /* Stats bar — stack vertically on very small screens */
+            .stats-bar { grid-template-columns: 1fr 1fr 1fr; }
+            .stat-cell { padding: 14px 10px; }
+            .stat-label { font-size: 8px; letter-spacing: 0.06em; }
+            .stat-value { font-size: 18px; }
+
+            /* Search */
+            .search-inner { flex-direction: column; align-items: stretch; gap: 8px; }
+            .board-status { text-align: right; font-size: 9px; }
+
+            /* Cards */
+            .contract-card { border-radius: var(--r-sm); }
+            .card-body { padding: 14px 12px; gap: 10px; }
+
+            /* Part identity */
+            .part-name { font-size: 13px; }
+            .part-vehicle { font-size: 11px; }
+
+            /* Spec grid: 2-col on mobile */
+            .spec-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px 14px;
+            }
+            .spec-label { font-size: 8px; }
+            .spec-value { font-size: 11px; }
+            .spec-value.is-vin { font-size: 10px; letter-spacing: 0.02em; }
+
+            /* Action: full-width button, left-aligned */
+            .card-actions {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                border-top: 1px solid var(--border);
+                padding-top: 10px;
+                margin-top: 2px;
+            }
+            .unlock-btn {
+                flex: 1;
+                justify-content: center;
+                padding: 11px 16px;
+                font-size: 12px;
+            }
+            .btn-subtext { text-align: left; white-space: nowrap; }
+
+            /* Tags */
+            .part-tags { gap: 4px; }
+            .tag { font-size: 8px; padding: 2px 6px; }
+
+            /* Footer */
+            .footer-inner { flex-direction: column; gap: 10px; }
+            .footer-copy { font-size: 10px; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+
+        /* Narrow tablet / large phone (601-900px) */
+        @media (min-width: 601px) and (max-width: 900px) {
+            .spec-grid { grid-template-columns: repeat(3, 1fr); gap: 10px 16px; }
+            .card-actions {
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 12px;
+                border-top: 1px solid var(--border);
+                padding-top: 10px;
+            }
+            .unlock-btn { padding: 10px 18px; }
+        }
+
         /* ─── EMPTY / STATUS ─────────────────────────────────────────── */
         .status-card {
             background: var(--panel);
@@ -686,13 +772,16 @@
 
         .footer-links a:hover { color: var(--body); }
 
+        .tb-short { display: none; }
+        @media (max-width: 480px) { .tb-full { display: none; } .tb-short { display: inline; } }
+
         /* ─── HIDDEN ─────────────────────────────────────────────────── */
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">⬤&nbsp; Live Feed — Real-Time B2B Commercial Parts Exchange — North America</div>
+    <div class="top-bar"><span class="tb-full">⬤&nbsp; Live Feed — Real-Time B2B Commercial Parts Exchange — North America</span><span class="tb-short">⬤&nbsp; Live B2B Parts Feed</span></div>
 
     <nav>
         <div class="container nav-container">
