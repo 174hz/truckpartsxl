@@ -9,28 +9,28 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* Rigid Tabular Card Architecture */
+        /* Tabular Container List Architecture */
         .ledger-list {
             list-style: none;
             padding: 0;
             margin: 24px auto;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
-            max-width: 1260px;
+            max-width: 1340px;
         }
 
         .ledger-row {
             background: #0f172a;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 12px 16px;
+            padding: 14px 20px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             transition: border-color 0.1s ease, background-color 0.1s ease;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .ledger-row:hover {
@@ -42,12 +42,12 @@
             border-left: 4px solid #ef4444;
         }
 
-        /* Desktop Column Locks: Explicit 1-Row Track Grid */
+        /* Fluid Proportional Desktop Alignment System */
         @media (min-width: 1024px) {
             .ledger-row {
-                display: grid;
-                grid-template-columns: 200px 130px 180px 150px 130px 100px 1fr;
+                flex-direction: row;
                 align-items: center;
+                justify-content: space-between;
                 gap: 16px;
             }
         }
@@ -56,13 +56,14 @@
         .row-identity-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px;
-            min-width: 0;
+            gap: 14px;
+            min-width: 240px;
+            flex: 1.5;
         }
 
         .row-thumb {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background-size: cover;
             background-position: center;
             border-radius: 4px;
@@ -74,7 +75,7 @@
         .row-identity {
             display: flex;
             flex-direction: column;
-            gap: 1px;
+            gap: 2px;
             min-width: 0;
         }
 
@@ -100,12 +101,13 @@
             white-space: nowrap;
         }
 
-        /* Strict Content Cells: Forces single-line execution with ellipsis */
+        /* Flexible Content Columns: Prevents Text-Splitting and Grid Layout Snapping */
         .data-column-item {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 3px;
             min-width: 0;
+            flex: 1;
         }
 
         .data-label {
@@ -113,7 +115,7 @@
             font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.04em;
             white-space: nowrap;
         }
 
@@ -131,14 +133,14 @@
             color: #f87171 !important;
         }
 
-        /* Fixed End-Cap Action Controls Grid Alignment */
+        /* End-Cap Control Dock Alignment */
         .row-actions-panel {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 14px;
             border-top: 1px solid #1e293b;
-            padding-top: 10px;
+            padding-top: 12px;
         }
 
         @media (min-width: 1024px) {
@@ -146,8 +148,8 @@
                 border-top: none;
                 padding-top: 0;
                 justify-content: flex-end;
-                gap: 12px;
-                margin-left: auto;
+                flex: 1.8;
+                flex-shrink: 0;
             }
         }
 
@@ -163,7 +165,7 @@
             font-weight: 700;
             color: #f1f5f9;
             background: #1e293b;
-            padding: 4px 8px;
+            padding: 5px 10px;
             border-radius: 4px;
             text-transform: uppercase;
             border: 1px solid #334155;
@@ -175,7 +177,7 @@
             color: #ffffff;
             font-size: 0.62rem;
             font-weight: 800;
-            padding: 4px 8px;
+            padding: 5px 8px;
             border-radius: 4px;
             text-transform: uppercase;
             white-space: nowrap;
@@ -185,7 +187,7 @@
             background: #2563eb;
             color: #ffffff;
             border: none;
-            padding: 8px 14px;
+            padding: 9px 16px;
             font-size: 0.78rem;
             font-weight: 800;
             border-radius: 4px;
@@ -280,7 +282,6 @@
             <div class="feed-status" id="filterStatusLabel">Showing: All Open Contracts</div>
         </div>
 
-        <!-- Aligned Grid Table Display Pipeline -->
         <ul class="ledger-list" id="bountyGrid">
             <li id="initialLoadingMessage" class="status-message">Connecting to GitHub file pipeline, standing by...</li>
         </ul>
@@ -321,9 +322,7 @@
                 if (targets.some(target => normalizedKey.includes(target) || target.includes(normalizedKey))) {
                     let val = String(obj[key]).trim();
                     if (!val || val.toLowerCase() === "undefined" || val.toLowerCase() === "null") continue;
-                    
                     if (val.toLowerCase().includes("select your") || val.toLowerCase().includes("shipping region")) continue;
-
                     if (val.includes('@') && val.includes('.')) continue;
                     if (/^\d{10}$/.test(val.replace(/[\s-()]/g, ''))) continue; 
 
@@ -381,7 +380,6 @@
                     const rowClasses = isPremium ? 'ledger-row priority-boost' : 'ledger-row';
                     const premiumLabel = isPremium ? `<span class="priority-tag">⚡ Priority</span>` : '';
 
-                    // Strict inline 1-track data structures mapped dynamically
                     const html = `
                         <li class="${rowClasses}" id="${uniqueCardId}" data-region="${regionText}" data-searchable="${cleanSearchStr}">
                             
