@@ -9,28 +9,29 @@
     <style>
         .hidden-bounty { display: none !important; }
         
-        /* Tabular Container List Architecture */
+        /* Clean List Container */
         .ledger-list {
             list-style: none;
             padding: 0;
             margin: 24px auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
             max-width: 1340px;
         }
 
+        /* Base Card - Stacked on Mobile */
         .ledger-row {
             background: #0f172a;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 14px 20px;
+            padding: 14px 16px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            transition: border-color 0.1s ease, background-color 0.1s ease;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
+            box-sizing: border-box;
         }
 
         .ledger-row:hover {
@@ -42,28 +43,32 @@
             border-left: 4px solid #ef4444;
         }
 
-        /* Fluid Proportional Desktop Alignment System */
+        /* Rigid Horizontal Table Grid for Desktop Screens */
         @media (min-width: 1024px) {
             .ledger-row {
                 flex-direction: row;
                 align-items: center;
-                justify-content: space-between;
-                gap: 16px;
+                justify-content: flex-start;
+                gap: 12px;
             }
         }
 
-        /* Identity Block Component */
+        /* Column 1: Component Asset Name & Truck Model (Width: 20%) */
         .row-identity-wrapper {
             display: flex;
             align-items: center;
-            gap: 14px;
-            min-width: 240px;
-            flex: 1.5;
+            gap: 12px;
+            min-width: 0;
+        }
+        @media (min-width: 1024px) {
+            .row-identity-wrapper {
+                flex: 0 0 20%;
+            }
         }
 
         .row-thumb {
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             background-size: cover;
             background-position: center;
             border-radius: 4px;
@@ -80,7 +85,7 @@
         }
 
         .part-title {
-            font-size: 0.95rem;
+            font-size: 0.90rem;
             font-weight: 800;
             margin: 0;
             text-transform: uppercase;
@@ -92,7 +97,7 @@
         }
 
         .ymm-tag {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             color: #3b82f6;
             text-transform: uppercase;
@@ -101,13 +106,17 @@
             white-space: nowrap;
         }
 
-        /* Flexible Content Columns: Prevents Text-Splitting and Grid Layout Snapping */
+        /* Columns 2-6: Standardized Data Grid Blocks (Width: 11% each) */
         .data-column-item {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
             min-width: 0;
-            flex: 1;
+        }
+        @media (min-width: 1024px) {
+            .data-column-item {
+                flex: 0 0 11%;
+            }
         }
 
         .data-label {
@@ -115,13 +124,13 @@
             font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.03em;
             white-space: nowrap;
         }
 
         .data-val {
             color: #f8fafc;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
             line-height: 1.3;
             overflow: hidden;
@@ -133,14 +142,14 @@
             color: #f87171 !important;
         }
 
-        /* End-Cap Control Dock Alignment */
+        /* Column 7: Action & Controls Dock (Remaining Width: 25%) */
         .row-actions-panel {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 14px;
+            gap: 12px;
             border-top: 1px solid #1e293b;
-            padding-top: 12px;
+            padding-top: 10px;
         }
 
         @media (min-width: 1024px) {
@@ -148,8 +157,8 @@
                 border-top: none;
                 padding-top: 0;
                 justify-content: flex-end;
-                flex: 1.8;
-                flex-shrink: 0;
+                flex: 0 0 25%;
+                margin-left: auto;
             }
         }
 
@@ -158,6 +167,7 @@
             align-items: center;
             gap: 6px;
             flex-shrink: 0;
+            min-width: 0;
         }
 
         .dispatch-badge {
@@ -165,11 +175,14 @@
             font-weight: 700;
             color: #f1f5f9;
             background: #1e293b;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 4px;
             text-transform: uppercase;
             border: 1px solid #334155;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 140px;
         }
 
         .priority-tag {
@@ -177,18 +190,19 @@
             color: #ffffff;
             font-size: 0.62rem;
             font-weight: 800;
-            padding: 5px 8px;
+            padding: 4px 6px;
             border-radius: 4px;
             text-transform: uppercase;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .cta-unlock-btn {
             background: #2563eb;
             color: #ffffff;
             border: none;
-            padding: 9px 16px;
-            font-size: 0.78rem;
+            padding: 8px 14px;
+            font-size: 0.75rem;
             font-weight: 800;
             border-radius: 4px;
             text-transform: uppercase;
@@ -415,7 +429,7 @@
                             <div class="row-actions-panel">
                                 <div class="meta-badges-row">
                                     ${premiumLabel}
-                                    <span class="dispatch-badge">📍 ${regionTag}</span>
+                                    <span class="dispatch-badge" title="${regionTag}">📍 ${regionTag}</span>
                                 </div>
                                 <button class="cta-unlock-btn" onclick="window.open('${STRIPE_TEST_LINK}', '_blank')">🔒 Unlock Contacts</button>
                             </div>
