@@ -6,49 +6,47 @@
     <title>TruckPartsXL | Commercial Sourcing Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ─── TOKENS ─────────────────────────────────────────────────── */
+        /* ─── TOKENS — Patriotic Palette ─────────────────────────────── */
         :root {
-            --ink:       #0A0F1E;
-            --surface:   #0D1424;
-            --panel:     #111827;
-            --rail:      #1C2B3A;
-            --border:    #1E2D3D;
-            --muted:     #2A3F52;
-            --subtext:   #4B6478;
-            --label:     #607D8B;
-            --body:      #94A8B8;
-            --soft:      #B8C8D4;
-            --bright:    #E2EBF0;
-            --white:     #F4F8FB;
+            --navy:       #0B1F3A;
+            --navy-mid:   #112444;
+            --navy-light: #1A3358;
+            --navy-rim:   #1E3C6E;
+            --steel:      #2A4A72;
+            --muted:      #3A5A82;
+            --subtext:    #5B7A9A;
+            --label:      #7A96B2;
+            --body:       #A8BECE;
+            --soft:       #C8D8E4;
+            --bright:     #E8F0F6;
+            --white:      #F6F9FC;
 
-            --blue:      #1D6EFF;
-            --blue-dim:  #1456CC;
-            --blue-glow: rgba(29,110,255,0.15);
-            --amber:     #F59E0B;
-            --red:       #EF4444;
-            --red-soft:  rgba(239,68,68,0.12);
-            --green:     #10B981;
+            --red:        #C8102E;
+            --red-dim:    #A50D25;
+            --red-glow:   rgba(200,16,46,0.15);
+            --red-soft:   rgba(200,16,46,0.10);
 
-            --ff-body:  'Inter', system-ui, sans-serif;
-            --ff-mono:  'IBM Plex Mono', monospace;
+            --blue:       #1B4FD8;
+            --blue-dim:   #1540B0;
+            --blue-glow:  rgba(27,79,216,0.15);
 
-            --r-sm: 4px;
-            --r-md: 8px;
-            --r-lg: 12px;
+            --gold:       #C9A84C;
+            --gold-soft:  rgba(201,168,76,0.15);
 
-            --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.25);
-            --shadow-hover: 0 2px 8px rgba(0,0,0,0.5), 0 8px 32px rgba(29,110,255,0.12);
+            --ff-body: 'Inter', system-ui, sans-serif;
+            --ff-mono: 'IBM Plex Mono', monospace;
+            --r-sm: 3px;
+            --r-md: 6px;
+            --r-lg: 10px;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { scroll-behavior: smooth; }
 
         body {
-            background: var(--ink);
+            background: var(--navy);
             color: var(--bright);
             font-family: var(--ff-body);
             font-size: 14px;
@@ -57,11 +55,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
 
         /* ─── TOPBAR ─────────────────────────────────────────────────── */
         .top-bar {
@@ -70,16 +64,17 @@
             font-family: var(--ff-mono);
             font-size: 10px;
             font-weight: 600;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.14em;
             text-align: center;
-            padding: 6px 16px;
+            padding: 7px 16px;
             text-transform: uppercase;
         }
+        .tb-short { display: none; }
 
         /* ─── NAV ────────────────────────────────────────────────────── */
         nav {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
+            background: var(--navy-mid);
+            border-bottom: 2px solid var(--red);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -89,31 +84,44 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 60px;
+            height: 62px;
         }
 
         .nav-logo {
             font-family: var(--ff-mono);
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 700;
             color: var(--white);
             letter-spacing: -0.02em;
-        }
-
-        .nav-logo span { color: var(--blue); }
-
-        .nav-links {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 10px;
         }
+
+        .nav-logo-flag {
+            display: flex;
+            flex-direction: column;
+            width: 24px;
+            height: 16px;
+            border-radius: 2px;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .flag-stripe { flex: 1; }
+        .flag-stripe.r { background: var(--red); }
+        .flag-stripe.w { background: #fff; }
+
+        .nav-logo span { color: var(--red); }
+
+        .nav-links { display: flex; align-items: center; gap: 24px; }
 
         .nav-links a {
             color: var(--body);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
-            letter-spacing: 0.01em;
             transition: color 0.15s;
         }
 
@@ -125,76 +133,103 @@
             padding: 7px 16px;
             border-radius: var(--r-sm);
             font-weight: 700 !important;
-            font-size: 12px !important;
-            letter-spacing: 0.04em;
+            font-size: 11px !important;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
         }
-
-        .nav-cta:hover { background: #c53030 !important; }
+        .nav-cta:hover { background: var(--red-dim) !important; }
 
         /* ─── HERO ───────────────────────────────────────────────────── */
         .hero {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 56px 0 48px;
+            background: var(--navy-mid);
+            border-bottom: 1px solid var(--navy-rim);
+            padding: 0;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        /* Stars field */
+        .hero-stars {
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(ellipse 60% 50% at 15% 50%, rgba(29,110,255,0.06) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 60% at 85% 30%, rgba(239,68,68,0.04) 0%, transparent 70%);
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: var(--op, 0.6); transform: scale(1); }
+        }
+
+        /* Red stripe accents */
+        .hero-stripes {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 180px;
+            display: flex;
+            flex-direction: column;
+            opacity: 0.12;
             pointer-events: none;
         }
 
-        /* Faint ruled-line texture — the signature element */
-        .hero::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 31px,
-                rgba(255,255,255,0.018) 31px,
-                rgba(255,255,255,0.018) 32px
-            );
-            pointer-events: none;
-        }
+        .hero-stripe { flex: 1; }
+        .hero-stripe:nth-child(odd) { background: var(--red); }
+        .hero-stripe:nth-child(even) { background: transparent; }
 
-        .hero-inner {
+        .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 32px;
+            align-items: center;
+            padding: 52px 0 44px;
+        }
+
+        .hero-left {}
+
+        .hero-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .badge-250 {
+            background: var(--gold-soft);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: var(--r-sm);
+            white-space: nowrap;
         }
 
         .hero-eyebrow {
             font-family: var(--ff-mono);
             font-size: 10px;
             font-weight: 600;
-            color: var(--blue);
-            letter-spacing: 0.16em;
+            color: var(--subtext);
+            letter-spacing: 0.14em;
             text-transform: uppercase;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-eyebrow::before {
-            content: '';
-            display: block;
-            width: 24px;
-            height: 1px;
-            background: var(--blue);
-            opacity: 0.6;
         }
 
         .hero h1 {
-            font-size: clamp(28px, 4vw, 44px);
+            font-size: clamp(26px, 3.5vw, 42px);
             font-weight: 800;
             color: var(--white);
             line-height: 1.15;
@@ -202,67 +237,131 @@
             margin-bottom: 14px;
         }
 
-        .hero h1 em {
-            font-style: normal;
+        .hero h1 .accent-red { color: var(--red); }
+        .hero h1 .accent-outline {
             color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.35);
+            -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
         }
 
         .hero-sub {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--body);
-            max-width: 520px;
-            line-height: 1.7;
+            max-width: 480px;
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 24px;
+        }
+
+        .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+
+        .hero-stat-val {
+            font-family: var(--ff-mono);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .hero-stat-lbl {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--subtext);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* American flag SVG panel */
+        .hero-flag-panel {
+            position: relative;
+            width: 200px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .flag-svg-wrap {
+            width: 180px;
+            border-radius: var(--r-md);
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.15);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+        }
+
+        .flag-svg-wrap svg { display: block; width: 100%; height: auto; }
+
+        .flag-caption {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
         }
 
         /* ─── HOW IT WORKS ───────────────────────────────────────────── */
         .how-section {
-            padding: 52px 0 44px;
-            border-bottom: 1px solid var(--border);
+            background: var(--navy);
+            border-bottom: 1px solid var(--navy-rim);
+            padding: 44px 0 36px;
         }
 
         .section-label {
             font-family: var(--ff-mono);
-            font-size: 10px;
-            font-weight: 600;
+            font-size: 9px;
+            font-weight: 700;
             color: var(--subtext);
-            letter-spacing: 0.14em;
+            letter-spacing: 0.16em;
             text-transform: uppercase;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--navy-rim);
         }
 
         .how-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 12px;
         }
 
-        @media (max-width: 720px) { .how-grid { grid-template-columns: 1fr; } }
-
         .how-card {
-            background: var(--panel);
-            border: 1px solid var(--border);
+            background: var(--navy-mid);
+            border: 1px solid var(--navy-rim);
             border-radius: var(--r-lg);
-            padding: 28px;
+            padding: 24px;
         }
 
         .how-card-head {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .how-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--rail);
-            border: 1px solid var(--muted);
+            width: 32px;
+            height: 32px;
+            background: var(--navy-light);
+            border: 1px solid var(--steel);
             border-radius: var(--r-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 14px;
             flex-shrink: 0;
         }
 
@@ -270,38 +369,32 @@
             font-size: 13px;
             font-weight: 700;
             color: var(--white);
-            letter-spacing: 0.01em;
         }
 
         .how-card p {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--body);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             line-height: 1.65;
         }
 
-        .how-steps {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .how-steps { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 
         .how-steps li {
             display: flex;
-            gap: 12px;
-            font-size: 13px;
+            gap: 10px;
+            font-size: 12px;
             color: var(--soft);
             line-height: 1.55;
         }
 
         .step-num {
             font-family: var(--ff-mono);
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
-            color: var(--blue);
-            background: var(--blue-glow);
-            border: 1px solid rgba(29,110,255,0.2);
+            color: var(--red);
+            background: var(--red-soft);
+            border: 1px solid rgba(200,16,46,0.2);
             border-radius: var(--r-sm);
             padding: 2px 6px;
             flex-shrink: 0;
@@ -309,35 +402,33 @@
             margin-top: 2px;
         }
 
-        /* ─── STATS BAR ──────────────────────────────────────────────── */
+        /* ─── STATS / FILTER BAR ─────────────────────────────────────── */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            border-bottom: 1px solid var(--border);
+            background: var(--navy-mid);
+            border-bottom: 1px solid var(--navy-rim);
         }
 
         .stat-cell {
-            padding: 20px 24px;
-            border-right: 1px solid var(--border);
+            padding: 18px 24px;
+            border-right: 1px solid var(--navy-rim);
             cursor: pointer;
             transition: background 0.15s;
             position: relative;
         }
 
         .stat-cell:last-child { border-right: none; }
-
         .stat-cell:hover { background: rgba(255,255,255,0.02); }
 
-        .stat-cell.active {
-            background: var(--blue-glow);
-        }
+        .stat-cell.active { background: var(--red-soft); }
 
         .stat-cell.active::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0; right: 0;
             height: 2px;
-            background: var(--blue);
+            background: var(--red);
         }
 
         .stat-label {
@@ -359,56 +450,49 @@
             line-height: 1;
         }
 
-        .stat-cell.active .stat-label { color: var(--blue); }
-        .stat-cell.active .stat-value { color: var(--white); }
+        .stat-cell.active .stat-label { color: var(--red); }
 
         /* ─── SEARCH ─────────────────────────────────────────────────── */
         .search-bar-wrap {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-            background: var(--surface);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--navy-rim);
+            background: var(--navy-mid);
+            position: sticky;
+            top: 62px;
+            z-index: 90;
         }
 
-        .search-inner {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .search-inner { display: flex; align-items: center; gap: 12px; }
 
-        .search-field {
-            flex: 1;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: var(--r-md);
-            padding: 10px 16px 10px 40px;
-            color: var(--bright);
-            font-family: var(--ff-body);
-            font-size: 13px;
-            outline: none;
-            transition: border-color 0.15s, box-shadow 0.15s;
-            position: relative;
-        }
-
-        .search-wrap {
-            position: relative;
-            flex: 1;
-        }
+        .search-wrap { position: relative; flex: 1; }
 
         .search-wrap::before {
             content: '⌕';
             position: absolute;
-            left: 14px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--subtext);
             font-size: 15px;
             pointer-events: none;
-            z-index: 1;
+        }
+
+        .search-field {
+            width: 100%;
+            background: var(--navy-light);
+            border: 1px solid var(--navy-rim);
+            border-radius: var(--r-md);
+            padding: 9px 14px 9px 36px;
+            color: var(--bright);
+            font-family: var(--ff-body);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
         }
 
         .search-field:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 3px var(--blue-glow);
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px var(--red-glow);
         }
 
         .search-field::placeholder { color: var(--subtext); }
@@ -418,132 +502,101 @@
             font-size: 10px;
             font-weight: 600;
             color: var(--subtext);
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             white-space: nowrap;
         }
 
         /* ─── BOARD ──────────────────────────────────────────────────── */
-        .board-wrap {
-            padding: 20px 0 48px;
-        }
+        .board-wrap { padding: 16px 0 56px; }
 
-        .contract-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
+        .contract-grid { display: flex; flex-direction: column; gap: 2px; }
 
-        /* ─── CONTRACT CARD ──────────────────────────────────────────── */
+        /* ─── CONTRACT ROW ───────────────────────────────────────────── */
         .contract-card {
-            background: var(--panel);
-            border: 1px solid var(--border);
+            background: var(--navy-mid);
+            border: 1px solid var(--navy-rim);
             border-radius: var(--r-md);
-            padding: 0;
             overflow: hidden;
             display: grid;
-            grid-template-columns: 4px 1fr;
+            grid-template-columns: 3px 1fr;
             transition: box-shadow 0.18s, border-color 0.18s, transform 0.12s;
-            cursor: default;
         }
 
         .contract-card:hover {
-            border-color: rgba(29,110,255,0.35);
-            box-shadow: var(--shadow-hover);
+            border-color: rgba(200,16,46,0.4);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,16,46,0.1);
             transform: translateY(-1px);
         }
 
-        .contract-card.is-priority {
-            grid-template-columns: 4px 1fr;
-        }
+        .card-accent { background: var(--navy-rim); }
+        .contract-card.is-priority .card-accent { background: var(--red); }
 
-        .card-accent {
-            background: var(--border);
-            flex-shrink: 0;
-        }
-
-        .contract-card.is-priority .card-accent {
-            background: var(--red);
-        }
-
+        /* 4-col desktop layout: part | specs | budget+region | action */
         .card-body {
-            padding: 16px 20px;
+            padding: 13px 18px;
             display: grid;
-            grid-template-columns: minmax(0,1.8fr) minmax(0,3fr) minmax(0,1fr);
+            grid-template-columns: minmax(180px,1.6fr) minmax(0,2.4fr) minmax(120px,1fr) minmax(140px,auto);
             gap: 16px;
             align-items: center;
         }
 
-        /* Tablet: hide action col from main flow, move to bottom */
-        @media (max-width: 900px) {
-            .card-body {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-        }
-
         /* — Part identity — */
-        .part-id { display: flex; flex-direction: column; gap: 4px; }
+        .part-id { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 
         .part-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: var(--white);
             line-height: 1.3;
-            letter-spacing: -0.01em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .part-vehicle {
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--blue);
             font-family: var(--ff-mono);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--blue);
             letter-spacing: 0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .part-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 4px;
-        }
+        .part-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
 
         .tag {
             font-family: var(--ff-mono);
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            padding: 3px 7px;
-            border-radius: var(--r-sm);
+            padding: 2px 6px;
+            border-radius: 2px;
             border: 1px solid;
             white-space: nowrap;
         }
 
-        .tag-region {
-            color: var(--body);
-            border-color: var(--muted);
-            background: rgba(255,255,255,0.03);
-        }
-
         .tag-priority {
             color: var(--red);
-            border-color: rgba(239,68,68,0.3);
+            border-color: rgba(200,16,46,0.35);
             background: var(--red-soft);
         }
 
         /* — Spec grid — */
         .spec-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 12px 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px 14px;
         }
 
-        .spec-item { display: flex; flex-direction: column; gap: 2px; }
+        .spec-item { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 
         .spec-label {
             font-family: var(--ff-mono);
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -551,28 +604,56 @@
         }
 
         .spec-value {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--soft);
-            line-height: 1.4;
-            word-break: break-word;
+            line-height: 1.35;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .spec-value.is-vin {
             font-family: var(--ff-mono);
-            font-size: 11px;
+            font-size: 10px;
             color: var(--body);
-            letter-spacing: 0.04em;
+            letter-spacing: 0.03em;
         }
 
-        .spec-value.is-budget {
-            color: var(--amber);
+        .spec-value.is-na { color: var(--muted); font-style: italic; }
+
+        /* — Budget + region column — */
+        .budget-col { display: flex; flex-direction: column; gap: 5px; }
+
+        .budget-val {
+            font-family: var(--ff-mono);
+            font-size: 14px;
             font-weight: 700;
+            color: var(--gold);
+            letter-spacing: -0.01em;
         }
 
-        .spec-value.is-na {
+        .budget-na {
+            font-family: var(--ff-mono);
+            font-size: 11px;
             color: var(--muted);
             font-style: italic;
+        }
+
+        .region-pill {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--body);
+            background: var(--navy-light);
+            border: 1px solid var(--steel);
+            border-radius: 2px;
+            padding: 3px 7px;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
 
         /* — Action column — */
@@ -580,137 +661,46 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 10px;
+            gap: 6px;
         }
 
         .unlock-btn {
-            background: var(--blue);
+            background: var(--red);
             color: #fff;
             border: none;
             border-radius: var(--r-md);
-            padding: 10px 20px;
+            padding: 9px 16px;
             font-family: var(--ff-body);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
             cursor: pointer;
             white-space: nowrap;
             transition: background 0.15s, transform 0.1s;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
+            width: 100%;
+            justify-content: center;
         }
 
-        .unlock-btn:hover {
-            background: var(--blue-dim);
-            transform: translateY(-1px);
-        }
-
+        .unlock-btn:hover { background: var(--red-dim); transform: translateY(-1px); }
         .unlock-btn:active { transform: translateY(0); }
-
-        .lock-icon {
-            font-size: 11px;
-            opacity: 0.85;
-        }
 
         .btn-subtext {
             font-family: var(--ff-mono);
-            font-size: 9px;
+            font-size: 8px;
             color: var(--subtext);
             letter-spacing: 0.06em;
-            text-align: right;
+            text-align: center;
+            width: 100%;
         }
 
-        /* ─── MOBILE OVERRIDES (≤600px) ─────────────────────────────── */
-        @media (max-width: 600px) {
-            .container { padding: 0 14px; }
-
-            /* Nav */
-            .nav-links a:not(.nav-cta) { display: none; }
-            .nav-cta { font-size: 11px !important; padding: 6px 12px; }
-
-            /* Hero */
-            .hero { padding: 36px 0 30px; }
-            .hero h1 { font-size: 24px; }
-            .hero-sub { font-size: 13px; }
-
-            /* How section */
-            .how-section { padding: 32px 0 28px; }
-            .how-card { padding: 20px 16px; }
-
-            /* Stats bar — stack vertically on very small screens */
-            .stats-bar { grid-template-columns: 1fr 1fr 1fr; }
-            .stat-cell { padding: 14px 10px; }
-            .stat-label { font-size: 8px; letter-spacing: 0.06em; }
-            .stat-value { font-size: 18px; }
-
-            /* Search */
-            .search-inner { flex-direction: column; align-items: stretch; gap: 8px; }
-            .board-status { text-align: right; font-size: 9px; }
-
-            /* Cards */
-            .contract-card { border-radius: var(--r-sm); }
-            .card-body { padding: 14px 12px; gap: 10px; }
-
-            /* Part identity */
-            .part-name { font-size: 13px; }
-            .part-vehicle { font-size: 11px; }
-
-            /* Spec grid: 2-col on mobile */
-            .spec-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px 14px;
-            }
-            .spec-label { font-size: 8px; }
-            .spec-value { font-size: 11px; }
-            .spec-value.is-vin { font-size: 10px; letter-spacing: 0.02em; }
-
-            /* Action: full-width button, left-aligned */
-            .card-actions {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-                border-top: 1px solid var(--border);
-                padding-top: 10px;
-                margin-top: 2px;
-            }
-            .unlock-btn {
-                flex: 1;
-                justify-content: center;
-                padding: 11px 16px;
-                font-size: 12px;
-            }
-            .btn-subtext { text-align: left; white-space: nowrap; }
-
-            /* Tags */
-            .part-tags { gap: 4px; }
-            .tag { font-size: 8px; padding: 2px 6px; }
-
-            /* Footer */
-            .footer-inner { flex-direction: column; gap: 10px; }
-            .footer-copy { font-size: 10px; text-align: center; }
-            .footer-links { justify-content: center; }
-        }
-
-        /* Narrow tablet / large phone (601-900px) */
-        @media (min-width: 601px) and (max-width: 900px) {
-            .spec-grid { grid-template-columns: repeat(3, 1fr); gap: 10px 16px; }
-            .card-actions {
-                flex-direction: row;
-                align-items: center;
-                justify-content: flex-end;
-                gap: 12px;
-                border-top: 1px solid var(--border);
-                padding-top: 10px;
-            }
-            .unlock-btn { padding: 10px 18px; }
-        }
-
-        /* ─── EMPTY / STATUS ─────────────────────────────────────────── */
+        /* ─── STATUS CARD ────────────────────────────────────────────── */
         .status-card {
-            background: var(--panel);
-            border: 1px solid var(--border);
+            background: var(--navy-mid);
+            border: 1px solid var(--navy-rim);
             border-radius: var(--r-md);
             padding: 40px;
             text-align: center;
@@ -721,11 +711,11 @@
             letter-spacing: 0.05em;
         }
 
-        .status-card .pulse {
+        .pulse {
             display: inline-block;
             width: 6px;
             height: 6px;
-            background: var(--green);
+            background: var(--red);
             border-radius: 50%;
             margin-right: 8px;
             animation: pulse 1.6s ease-in-out infinite;
@@ -733,14 +723,14 @@
 
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.75); }
+            50% { opacity: 0.35; transform: scale(0.7); }
         }
 
         /* ─── FOOTER ─────────────────────────────────────────────────── */
         footer {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            padding: 24px 0;
+            background: var(--navy-mid);
+            border-top: 2px solid var(--red);
+            padding: 28px 0;
         }
 
         .footer-inner {
@@ -751,20 +741,36 @@
             flex-wrap: wrap;
         }
 
-        .footer-copy {
+        .footer-logo {
             font-family: var(--ff-mono);
-            font-size: 11px;
-            color: var(--subtext);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
         }
 
-        .footer-links {
-            display: flex;
-            gap: 20px;
+        .footer-logo span { color: var(--red); }
+
+        .footer-tagline {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            color: var(--subtext);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 3px;
         }
+
+        .footer-copy {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            color: var(--subtext);
+            text-align: center;
+        }
+
+        .footer-links { display: flex; gap: 20px; }
 
         .footer-links a {
             font-family: var(--ff-mono);
-            font-size: 11px;
+            font-size: 10px;
             color: var(--subtext);
             text-decoration: none;
             transition: color 0.15s;
@@ -772,20 +778,89 @@
 
         .footer-links a:hover { color: var(--body); }
 
-        .tb-short { display: none; }
-        @media (max-width: 480px) { .tb-full { display: none; } .tb-short { display: inline; } }
-
-        /* ─── HIDDEN ─────────────────────────────────────────────────── */
         .hidden { display: none !important; }
+
+        /* ─── MOBILE ≤600px ──────────────────────────────────────────── */
+        @media (max-width: 600px) {
+            .container { padding: 0 12px; }
+            .tb-full { display: none; }
+            .tb-short { display: inline; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .hero-flag-panel { display: none; }
+            .hero-content { grid-template-columns: 1fr; padding: 36px 0 28px; }
+            .hero h1 { font-size: 24px; }
+            .hero-stats { gap: 16px; }
+            .how-grid { grid-template-columns: 1fr; }
+            .stats-bar { grid-template-columns: 1fr 1fr 1fr; }
+            .stat-cell { padding: 12px 8px; }
+            .stat-label { font-size: 7px; }
+            .stat-value { font-size: 18px; }
+            .search-bar-wrap { top: 62px; }
+            .search-inner { flex-direction: column; align-items: stretch; gap: 6px; }
+            .board-status { text-align: right; }
+
+            /* Cards go single column */
+            .card-body {
+                grid-template-columns: 1fr;
+                padding: 12px;
+                gap: 10px;
+            }
+            .spec-grid { grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+            .budget-col { flex-direction: row; align-items: center; gap: 10px; }
+            .card-actions {
+                flex-direction: row;
+                align-items: center;
+                border-top: 1px solid var(--navy-rim);
+                padding-top: 10px;
+                gap: 10px;
+            }
+            .unlock-btn { flex: 1; }
+            .btn-subtext { text-align: left; white-space: nowrap; width: auto; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+
+        /* ─── TABLET 601–900px ───────────────────────────────────────── */
+        @media (min-width: 601px) and (max-width: 900px) {
+            .hero-flag-panel { width: 140px; }
+            .flag-svg-wrap { width: 130px; }
+            .card-body {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                padding: 14px 16px;
+            }
+            .spec-grid { grid-template-columns: repeat(3, 1fr); }
+            .card-actions {
+                grid-column: 1 / -1;
+                flex-direction: row;
+                justify-content: flex-end;
+                border-top: 1px solid var(--navy-rim);
+                padding-top: 10px;
+                gap: 12px;
+            }
+            .unlock-btn { width: auto; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="top-bar"><span class="tb-full">⬤&nbsp; Live Feed — Real-Time B2B Commercial Parts Exchange — North America</span><span class="tb-short">⬤&nbsp; Live B2B Parts Feed</span></div>
+    <div class="top-bar">
+        <span class="tb-full">🇺🇸 &nbsp;Celebrating America's 250th &nbsp;·&nbsp; Real-Time B2B Heavy Duty Parts Exchange &nbsp;·&nbsp; North America</span>
+        <span class="tb-short">🇺🇸 Live B2B Parts Feed</span>
+    </div>
 
     <nav>
         <div class="container nav-container">
-            <div class="nav-logo">TruckParts<span>XL</span></div>
+            <div class="nav-logo">
+                <div class="nav-logo-flag">
+                    <div class="flag-stripe r"></div>
+                    <div class="flag-stripe w"></div>
+                    <div class="flag-stripe r"></div>
+                    <div class="flag-stripe w"></div>
+                    <div class="flag-stripe r"></div>
+                </div>
+                TruckParts<span>XL</span>
+            </div>
             <div class="nav-links">
                 <a href="#board">Open Contracts</a>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header"
@@ -794,17 +869,87 @@
         </div>
     </nav>
 
-    <!-- HERO -->
     <header class="hero">
-        <div class="container hero-inner">
-            <div class="hero-eyebrow">Procurement Board</div>
-            <h1>Heavy Duty Components<br><em>&amp; Salvage Exchange</em></h1>
-            <p class="hero-sub">Direct routing between logistics operators and verified salvage yards. No intermediaries, no added markup.</p>
+        <div class="hero-stars" id="heroStars"></div>
+        <div class="hero-stripes">
+            <div class="hero-stripe"></div><div class="hero-stripe"></div>
+            <div class="hero-stripe"></div><div class="hero-stripe"></div>
+            <div class="hero-stripe"></div><div class="hero-stripe"></div>
+            <div class="hero-stripe"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="hero-badge-row">
+                        <span class="badge-250">★ USA 250th Anniversary 1776–2026 ★</span>
+                        <span class="hero-eyebrow">Procurement Board</span>
+                    </div>
+                    <h1>Heavy Duty Parts.<br><span class="accent-red">American</span> <span class="accent-outline">Hustle.</span></h1>
+                    <p class="hero-sub">Direct routing between logistics operators and verified salvage yards across North America. Zero intermediaries. Zero markup. Built for the pros who keep America moving.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-val" id="hero-count-all">—</span>
+                            <span class="hero-stat-lbl">Open Contracts</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-val" id="hero-count-ca">—</span>
+                            <span class="hero-stat-lbl">Canada Feed</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-val" id="hero-count-us">—</span>
+                            <span class="hero-stat-lbl">US Exchange</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-flag-panel">
+                    <!-- American flag SVG -->
+                    <div class="flag-svg-wrap">
+                        <svg viewBox="0 0 190 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- 13 stripes -->
+                            <rect width="190" height="100" fill="#B22234"/>
+                            <rect y="7.69" width="190" height="7.69" fill="#fff"/>
+                            <rect y="15.38" width="190" height="7.69" fill="#B22234"/>
+                            <rect y="23.07" width="190" height="7.69" fill="#fff"/>
+                            <rect y="30.76" width="190" height="7.69" fill="#B22234"/>
+                            <rect y="38.46" width="190" height="7.69" fill="#fff"/>
+                            <rect y="46.15" width="190" height="7.69" fill="#B22234"/>
+                            <rect y="53.84" width="190" height="7.69" fill="#fff"/>
+                            <rect y="61.53" width="190" height="7.69" fill="#B22234"/>
+                            <rect y="69.23" width="190" height="7.69" fill="#fff"/>
+                            <rect y="76.92" width="190" height="7.69" fill="#B22234"/>
+                            <rect y="84.61" width="190" height="7.69" fill="#fff"/>
+                            <!-- Canton (blue field) -->
+                            <rect width="76" height="53.84" fill="#3C3B6E"/>
+                            <!-- Stars — 5 rows of 6, 4 rows of 5 = 50 stars (simplified as small circles) -->
+                            <g fill="#fff">
+                                <!-- Row 1: 6 stars -->
+                                <circle cx="7" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="31" cy="6" r="2.2"/><circle cx="43" cy="6" r="2.2"/><circle cx="55" cy="6" r="2.2"/><circle cx="67" cy="6" r="2.2"/>
+                                <!-- Row 2: 5 stars (offset) -->
+                                <circle cx="13" cy="12" r="2.2"/><circle cx="25" cy="12" r="2.2"/><circle cx="37" cy="12" r="2.2"/><circle cx="49" cy="12" r="2.2"/><circle cx="61" cy="12" r="2.2"/>
+                                <!-- Row 3: 6 stars -->
+                                <circle cx="7" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><circle cx="31" cy="18" r="2.2"/><circle cx="43" cy="18" r="2.2"/><circle cx="55" cy="18" r="2.2"/><circle cx="67" cy="18" r="2.2"/>
+                                <!-- Row 4: 5 stars -->
+                                <circle cx="13" cy="24" r="2.2"/><circle cx="25" cy="24" r="2.2"/><circle cx="37" cy="24" r="2.2"/><circle cx="49" cy="24" r="2.2"/><circle cx="61" cy="24" r="2.2"/>
+                                <!-- Row 5: 6 stars -->
+                                <circle cx="7" cy="30" r="2.2"/><circle cx="19" cy="30" r="2.2"/><circle cx="31" cy="30" r="2.2"/><circle cx="43" cy="30" r="2.2"/><circle cx="55" cy="30" r="2.2"/><circle cx="67" cy="30" r="2.2"/>
+                                <!-- Row 6: 5 stars -->
+                                <circle cx="13" cy="36" r="2.2"/><circle cx="25" cy="36" r="2.2"/><circle cx="37" cy="36" r="2.2"/><circle cx="49" cy="36" r="2.2"/><circle cx="61" cy="36" r="2.2"/>
+                                <!-- Row 7: 6 stars -->
+                                <circle cx="7" cy="42" r="2.2"/><circle cx="19" cy="42" r="2.2"/><circle cx="31" cy="42" r="2.2"/><circle cx="43" cy="42" r="2.2"/><circle cx="55" cy="42" r="2.2"/><circle cx="67" cy="42" r="2.2"/>
+                                <!-- Row 8: 5 stars -->
+                                <circle cx="13" cy="48" r="2.2"/><circle cx="25" cy="48" r="2.2"/><circle cx="37" cy="48" r="2.2"/><circle cx="49" cy="48" r="2.2"/><circle cx="61" cy="48" r="2.2"/>
+                                <!-- Row 9: 6 stars -->
+                                <circle cx="7" cy="54" r="2.2"/><circle cx="19" cy="54" r="2.2"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="flag-caption">★ Est. 1776 · 250 Years Strong ★</div>
+                </div>
+            </div>
         </div>
     </header>
 
     <main>
-
         <!-- HOW IT WORKS -->
         <section class="how-section">
             <div class="container">
@@ -817,14 +962,8 @@
                         </div>
                         <p>Skip the cold-calling. Post your requirement and let verified suppliers come to you.</p>
                         <ol class="how-steps">
-                            <li>
-                                <span class="step-num">01</span>
-                                <span><strong>Submit a request</strong> with your truck specs, component details, and target budget via the bounty form.</span>
-                            </li>
-                            <li>
-                                <span class="step-num">02</span>
-                                <span><strong>Your listing broadcasts</strong> instantly to our verified commercial salvage network and Tier-1 brokers.</span>
-                            </li>
+                            <li><span class="step-num">01</span><span><strong>Submit a request</strong> with your truck specs, component details, and target budget.</span></li>
+                            <li><span class="step-num">02</span><span><strong>Broadcast instantly</strong> to our verified commercial salvage network and Tier-1 brokers.</span></li>
                         </ol>
                     </div>
                     <div class="how-card">
@@ -834,22 +973,16 @@
                         </div>
                         <p>Real-time access to high-intent commercial buyers. No cold leads, no guesswork.</p>
                         <ol class="how-steps">
-                            <li>
-                                <span class="step-num">01</span>
-                                <span><strong>Monitor the live board</strong> — browse all open contracts free, filtered by region and part type.</span>
-                            </li>
-                            <li>
-                                <span class="step-num">02</span>
-                                <span><strong>Unlock buyer contact</strong> via a secure micro-payment through Stripe. Close the deal directly.</span>
-                            </li>
+                            <li><span class="step-num">01</span><span><strong>Monitor the live board</strong> — browse all open contracts free, filtered by region.</span></li>
+                            <li><span class="step-num">02</span><span><strong>Unlock buyer contact</strong> via a secure micro-payment through Stripe. Close the deal.</span></li>
                         </ol>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- STATS BAR -->
-        <div class="stats-bar" id="statsBar">
+        <!-- STATS / FILTER BAR -->
+        <div class="stats-bar">
             <div class="stat-cell active" id="filter-all" onclick="setFilter('all')">
                 <div class="stat-label">Total Active</div>
                 <div class="stat-value" id="count-all">—</div>
@@ -859,7 +992,7 @@
                 <div class="stat-value" id="count-ontario">—</div>
             </div>
             <div class="stat-cell" id="filter-global" onclick="setFilter('global')">
-                <div class="stat-label">Global Exchange</div>
+                <div class="stat-label">US / Global</div>
                 <div class="stat-value" id="count-global">—</div>
             </div>
         </div>
@@ -869,13 +1002,9 @@
             <div class="container">
                 <div class="search-inner">
                     <div class="search-wrap">
-                        <input
-                            type="text"
-                            id="searchBar"
-                            class="search-field"
-                            placeholder="Search by part name, VIN, engine series, OEM casting…"
-                            oninput="applyFilters()"
-                        >
+                        <input type="text" id="searchBar" class="search-field"
+                            placeholder="Search part name, VIN, engine series, OEM casting…"
+                            oninput="applyFilters()">
                     </div>
                     <span class="board-status" id="boardStatus">Loading…</span>
                 </div>
@@ -886,18 +1015,19 @@
         <section class="board-wrap">
             <div class="container">
                 <div class="contract-grid" id="contractGrid">
-                    <div class="status-card">
-                        <span class="pulse"></span>Connecting to procurement feed…
-                    </div>
+                    <div class="status-card"><span class="pulse"></span>Connecting to procurement feed…</div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer>
         <div class="container">
             <div class="footer-inner">
+                <div>
+                    <div class="footer-logo">TruckParts<span>XL</span></div>
+                    <div class="footer-tagline">Keeping America's Fleet on the Road Since Day One</div>
+                </div>
                 <div class="footer-copy">© 2026 TruckPartsXL. Commercial Salvage Ecosystem. All Rights Reserved.</div>
                 <div class="footer-links">
                     <a href="about.html">About</a>
@@ -910,10 +1040,29 @@
 
     <script>
         const REPO = "174hz/truckpartsxl";
-        const STRIPE_LINK = "https://buy.stripe.com/test_7sYfYZb8Cfmu8hq8u3a7C0g";
+        const STRIPE_LINK_FALLBACK = "https://buy.stripe.com/test_7sYfYZb8Cfmu8hq8u3a7C0g";
 
         let allContracts = [];
         let activeFilter = 'all';
+
+        /* ─── STARS ────────────────────────────────────────────────── */
+        (function spawnStars() {
+            const container = document.getElementById('heroStars');
+            if (!container) return;
+            for (let i = 0; i < 55; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                const size = Math.random() * 2 + 1;
+                s.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    left:${Math.random()*100}%; top:${Math.random()*100}%;
+                    --op:${0.3 + Math.random()*0.5};
+                    --dur:${2 + Math.random()*4}s;
+                    --delay:${Math.random()*4}s;
+                `;
+                container.appendChild(s);
+            }
+        })();
 
         /* ─── DATA PARSING ─────────────────────────────────────────── */
         function parseField(obj, keys, fallback) {
@@ -948,31 +1097,14 @@
             const region    = parseField(bounty, ['region','location','dispatch','prov'], 'Not Specified');
 
             const isPriority = index % 3 === 0;
-            const regionLabel = isCanada(region) ? '🍁 ' + region : '🌐 ' + region;
-
-            const specItems = [
-                { label: 'VIN',       value: vin,       cls: vin ? 'is-vin' : 'is-na' },
-                { label: 'OEM Cast.', value: casting,   cls: '' },
-                { label: 'Engine',    value: engine,    cls: '' },
-                { label: 'Condition', value: condition, cls: '' },
-                { label: 'Budget',    value: budget,    cls: budget ? 'is-budget' : 'is-na' },
-            ];
-
-            const specsHtml = specItems.map(s => `
-                <div class="spec-item">
-                    <span class="spec-label">${s.label}</span>
-                    <span class="spec-value ${s.cls || ''}">${s.value || '—'}</span>
-                </div>
-            `).join('');
-
+            const regionEmoji = isCanada(region) ? '🍁' : '🇺🇸';
+            const unlockUrl = (bounty.unlockUrl || STRIPE_LINK_FALLBACK).replace(/'/g, "%27");
             const searchStr = `${part} ${vehicle} ${vin} ${casting} ${engine} ${region}`.toLowerCase();
 
             return `
-            <div
-                class="contract-card ${isPriority ? 'is-priority' : ''}"
-                data-region="${region.toLowerCase()}"
-                data-search="${searchStr}"
-            >
+            <div class="contract-card ${isPriority ? 'is-priority' : ''}"
+                 data-region="${region.toLowerCase()}"
+                 data-search="${searchStr}">
                 <div class="card-accent"></div>
                 <div class="card-body">
 
@@ -980,20 +1112,41 @@
                         <span class="part-name">${part}</span>
                         ${vehicle ? `<span class="part-vehicle">${vehicle}</span>` : ''}
                         <div class="part-tags">
-                            <span class="tag tag-region">${regionLabel}</span>
                             ${isPriority ? '<span class="tag tag-priority">⚡ Priority</span>' : ''}
                         </div>
                     </div>
 
                     <div class="spec-grid">
-                        ${specsHtml}
+                        <div class="spec-item">
+                            <span class="spec-label">VIN</span>
+                            <span class="spec-value is-vin">${vin || '—'}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">OEM Cast.</span>
+                            <span class="spec-value">${casting || '—'}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Engine</span>
+                            <span class="spec-value">${engine || '—'}</span>
+                        </div>
+                        <div class="spec-item" style="grid-column:1/-1">
+                            <span class="spec-label">Condition</span>
+                            <span class="spec-value">${condition || '—'}</span>
+                        </div>
+                    </div>
+
+                    <div class="budget-col">
+                        ${budget
+                            ? `<span class="budget-val">${budget}</span>`
+                            : `<span class="budget-na">Quote Direct</span>`}
+                        <span class="region-pill">${regionEmoji} ${region}</span>
                     </div>
 
                     <div class="card-actions">
-                        <button class="unlock-btn" onclick="window.open('${STRIPE_LINK}', '_blank')">
-                            <span class="lock-icon">🔒</span> Unlock Contact
+                        <button class="unlock-btn" onclick="window.open('${unlockUrl}', '_blank')">
+                            🔒 Unlock Contact
                         </button>
-                        <span class="btn-subtext">Secure via Stripe</span>
+                        <span class="btn-subtext">Secure via Stripe · $9.99</span>
                     </div>
 
                 </div>
@@ -1019,30 +1172,19 @@
                 const s = card.dataset.search || '';
                 const regionMatch =
                     activeFilter === 'all' ? true :
-                    activeFilter === 'ontario' ? isCanada(r) :
-                    !isCanada(r);
-                const searchMatch = !q || s.includes(q);
-                const show = regionMatch && searchMatch;
+                    activeFilter === 'ontario' ? isCanada(r) : !isCanada(r);
+                const show = regionMatch && (!q || s.includes(q));
                 card.classList.toggle('hidden', !show);
                 if (show) visible++;
             });
 
             const empty = document.getElementById('emptyMsg');
             if (visible === 0 && cards.length > 0) {
-                if (!empty) {
-                    document.getElementById('contractGrid').insertAdjacentHTML('beforeend',
-                        `<div id="emptyMsg" class="status-card">No contracts match your filter parameters.</div>`
-                    );
-                }
-            } else {
-                if (empty) empty.remove();
-            }
+                if (!empty) document.getElementById('contractGrid').insertAdjacentHTML('beforeend',
+                    `<div id="emptyMsg" class="status-card">No contracts match your filter.</div>`);
+            } else if (empty) empty.remove();
 
-            const labels = {
-                all: `All open contracts`,
-                ontario: `Canada regional feed`,
-                global: `Global exchange`
-            };
+            const labels = { all: 'All open contracts', ontario: 'Canada regional feed', global: 'US / Global exchange' };
             document.getElementById('boardStatus').textContent =
                 `${visible} contract${visible !== 1 ? 's' : ''} — ${labels[activeFilter]}`;
         }
@@ -1051,20 +1193,16 @@
         async function loadBoard() {
             const grid = document.getElementById('contractGrid');
             const url = `https://raw.githubusercontent.com/${REPO}/main/bounties.json?t=${Date.now()}`;
-
             try {
                 const res = await fetch(url);
                 if (!res.ok) throw new Error('Feed unreachable');
                 const data = await res.json();
                 allContracts = Array.isArray(data) ? data : (data.bounties || []);
-
-                // Filter junk rows
                 allContracts = allContracts.filter(b => {
                     const s = JSON.stringify(b).toLowerCase();
                     return !s.includes('select your location') && !s.includes('shipping region');
                 });
-                // Newest entries first
-                allContracts.reverse();
+                allContracts.reverse(); // newest first
 
                 if (allContracts.length === 0) {
                     grid.innerHTML = `<div class="status-card">No active contracts on the board right now.</div>`;
@@ -1073,16 +1211,16 @@
 
                 grid.innerHTML = allContracts.map((b, i) => renderCard(b, i)).join('');
 
-                // Update counts
                 let canada = 0, global = 0;
                 allContracts.forEach(b => {
                     const r = parseField(b, ['region','location','dispatch','prov'], '');
                     isCanada(r) ? canada++ : global++;
                 });
 
-                document.getElementById('count-all').textContent    = canada + global;
-                document.getElementById('count-ontario').textContent = canada;
-                document.getElementById('count-global').textContent  = global;
+                const total = canada + global;
+                ['count-all','hero-count-all'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = total; });
+                ['count-ontario','hero-count-ca'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = canada; });
+                ['count-global','hero-count-us'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = global; });
 
                 applyFilters();
             } catch (err) {
@@ -1093,6 +1231,6 @@
 
         window.addEventListener('DOMContentLoaded', loadBoard);
     </script>
-
 </body>
 </html>
+    
