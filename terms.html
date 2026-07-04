@@ -4,73 +4,860 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service | TruckPartsXL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0c0f17; color: #e2e8f0; margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        nav { background: #141b2d; padding: 15px; border-radius: 6px; margin-bottom: 35px; display: flex; gap: 25px; justify-content: center; border: 2px solid #1f293d; }
-        nav a { color: #facc15; text-decoration: none; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; }
-        header { border-bottom: 3px solid #facc15; padding-bottom: 20px; margin-bottom: 30px; }
-        h1 { color: #ffffff; margin: 0; text-transform: uppercase; font-size: 2.2rem; }
-        h2 { color: #facc15; text-transform: uppercase; font-size: 1.3rem; margin-top: 30px; border-left: 3px solid #facc15; padding-left: 10px; }
-        p, li { color: #94a3b8; font-size: 1rem; }
-        ul { padding-left: 20px; }
-        .legal-notice { background: rgba(250, 204, 21, 0.05); border: 1px dashed #facc15; padding: 20px; border-radius: 4px; margin-bottom: 25px; }
-        .legal-notice p { color: #ffffff; font-weight: 700; margin: 0; }
-        footer { margin-top: 60px; padding-top: 30px; border-top: 2px solid #1f293d; text-align: center; }
-        footer a { color: #64748b; text-decoration: none; margin: 0 10px; font-weight: 600; font-size: 0.85rem; }
+        :root {
+            --navy:       #0B1F3A;
+            --navy-mid:   #112444;
+            --navy-light: #1A3358;
+            --navy-rim:   #1E3C6E;
+            --steel:      #2A4A72;
+            --muted:      #3A5A82;
+            --subtext:    #5B7A9A;
+            --label:      #7A96B2;
+            --body:       #A8BECE;
+            --soft:       #C8D8E4;
+            --bright:     #E8F0F6;
+            --white:      #F6F9FC;
+            --red:        #C8102E;
+            --red-dim:    #A50D25;
+            --red-soft:   rgba(200,16,46,0.10);
+            --blue:       #1B4FD8;
+            --gold:       #C9A84C;
+            --gold-soft:  rgba(201,168,76,0.12);
+            --ff-body: 'Inter', system-ui, sans-serif;
+            --ff-mono: 'IBM Plex Mono', monospace;
+            --r-sm: 3px; --r-md: 6px; --r-lg: 10px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--navy);
+            color: var(--bright);
+            font-family: var(--ff-body);
+            font-size: 15px;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+        .top-bar {
+            background: var(--red);
+            color: #fff;
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-align: center;
+            padding: 7px 16px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            background: var(--navy-mid);
+            border-bottom: 2px solid var(--red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 62px;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .nav-logo {
+            font-family: var(--ff-mono);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo-flag {
+            display: flex;
+            flex-direction: column;
+            width: 24px;
+            height: 16px;
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .flag-stripe { flex: 1; }
+        .flag-stripe.r { background: var(--red); }
+        .flag-stripe.w { background: #fff; }
+        .nav-logo span { color: var(--red); }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+
+        .nav-links a {
+            color: var(--body);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+
+        .nav-cta {
+            background: var(--red);
+            color: #fff !important;
+            padding: 7px 16px;
+            border-radius: var(--r-sm);
+            font-weight: 700 !important;
+            font-size: 11px !important;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .nav-cta:hover { background: var(--red-dim) !important; }
+
+        .page-header {
+            background: var(--navy-mid);
+            border-bottom: 1px solid var(--navy-rim);
+            padding: 48px 0 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 120px;
+            background: repeating-linear-gradient(
+                180deg,
+                var(--red) 0px, var(--red) 10px,
+                transparent 10px, transparent 20px
+            );
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        .page-eyebrow {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--red);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-eyebrow::before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 1px;
+            background: var(--red);
+        }
+
+        .page-header h1 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+        }
+
+        .page-meta {
+            font-family: var(--ff-mono);
+            font-size: 11px;
+            color: var(--subtext);
+            letter-spacing: 0.05em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .page-meta span { display: flex; align-items: center; gap: 6px; }
+        .meta-dot { width: 4px; height: 4px; background: var(--red); border-radius: 50%; }
+
+        .doc-wrap { padding: 48px 0 72px; }
+
+        /* Notice box */
+        .notice-box {
+            background: var(--red-soft);
+            border: 1px solid rgba(200,16,46,0.25);
+            border-left: 3px solid var(--red);
+            border-radius: var(--r-lg);
+            padding: 20px 24px;
+            margin-bottom: 36px;
+        }
+
+        .notice-box .notice-label {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--red);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .notice-box p {
+            font-size: 13px;
+            color: var(--soft);
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--navy-mid);
+            border: 1px solid var(--navy-rim);
+            border-left: 3px solid var(--red);
+            border-radius: var(--r-lg);
+            padding: 24px 28px;
+            margin-bottom: 48px;
+        }
+
+        .toc-title {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--subtext);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .toc ol {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            counter-reset: toc;
+        }
+
+        .toc ol li { counter-increment: toc; }
+
+        .toc ol li a {
+            color: var(--body);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.15s;
+        }
+
+        .toc ol li a::before {
+            content: counter(toc, decimal-leading-zero);
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            color: var(--red);
+            font-weight: 700;
+            min-width: 24px;
+        }
+
+        .toc ol li a:hover { color: var(--white); }
+
+        .doc-section {
+            margin-bottom: 44px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-num {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--red);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .doc-section h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--navy-rim);
+        }
+
+        .doc-section h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--soft);
+            margin: 20px 0 8px;
+        }
+
+        .doc-section p {
+            font-size: 14px;
+            color: var(--body);
+            margin-bottom: 14px;
+            line-height: 1.8;
+        }
+
+        .doc-section ul, .doc-section ol {
+            margin: 10px 0 16px 0;
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .doc-section ul li, .doc-section ol li {
+            font-size: 14px;
+            color: var(--body);
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .doc-section ul li::before {
+            content: '—';
+            color: var(--red);
+            font-family: var(--ff-mono);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .doc-section ol { counter-reset: list; }
+        .doc-section ol li { counter-increment: list; }
+        .doc-section ol li::before {
+            content: counter(list) '.';
+            color: var(--red);
+            font-family: var(--ff-mono);
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+            min-width: 18px;
+            margin-top: 2px;
+        }
+
+        .callout {
+            background: var(--navy-mid);
+            border: 1px solid var(--navy-rim);
+            border-left: 3px solid var(--gold);
+            border-radius: var(--r-md);
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+
+        .callout-label {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .callout p {
+            font-size: 13px !important;
+            color: var(--soft) !important;
+            margin: 0 !important;
+        }
+
+        /* Caps block — for legal disclaimers */
+        .caps-block {
+            background: var(--navy-light);
+            border: 1px solid var(--navy-rim);
+            border-radius: var(--r-md);
+            padding: 18px 20px;
+            margin: 16px 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--soft);
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+        }
+
+        .contact-box {
+            background: var(--navy-mid);
+            border: 1px solid var(--navy-rim);
+            border-radius: var(--r-lg);
+            padding: 24px 28px;
+            margin-top: 20px;
+        }
+
+        .contact-box h3 {
+            font-family: var(--ff-mono);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--subtext);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: var(--body);
+        }
+
+        .contact-item strong {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            min-width: 60px;
+            margin-top: 1px;
+        }
+
+        .contact-item a { color: var(--blue); text-decoration: none; }
+        .contact-item a:hover { text-decoration: underline; }
+
+        .doc-divider {
+            border: none;
+            border-top: 1px solid var(--navy-rim);
+            margin: 40px 0;
+        }
+
+        footer {
+            background: var(--navy-mid);
+            border-top: 2px solid var(--red);
+            padding: 28px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-logo {
+            font-family: var(--ff-mono);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-logo span { color: var(--red); }
+
+        .footer-tagline {
+            font-family: var(--ff-mono);
+            font-size: 9px;
+            color: var(--subtext);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .footer-copy {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            color: var(--subtext);
+        }
+
+        .footer-links { display: flex; gap: 20px; }
+
+        .footer-links a {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            color: var(--subtext);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover { color: var(--body); }
+
+        @media (max-width: 600px) {
+            .container { padding: 0 14px; }
+            .nav-container { padding: 0 14px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .page-header { padding: 32px 0 24px; }
+            .doc-wrap { padding: 32px 0 48px; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav>
-            <a href="index.html">🏠 Home Board</a>
-            <a href="ontario.html">🇨🇦 Ontario Feed</a>
-            <a href="contact.html">📞 Contact Support</a>
-        </nav>
 
-        <header>
-            <h1>Terms of Service & Platform Rules</h1>
-            <p style="color: #64748b; font-weight: bold; margin: 5px 0 0 0; text-transform: uppercase;">Effective Date: May 22, 2026</p>
-        </header>
+    <div class="top-bar">🇺🇸 &nbsp;Celebrating America's 250th &nbsp;·&nbsp; Real-Time B2B Heavy Duty Parts Exchange &nbsp;·&nbsp; North America</div>
 
-        <div class="legal-notice">
-            <p>IMPORTANT NOTICE: TRUCKPARTSXL OPERATES EXCLUSIVELY AS A DECENTRALIZED SOURCING CONNECTOR AND LEAD GENERATION PLATFORM IN THE COMMERCIAL TRUCK PARTS ECONOMY. WE ARE NOT A DEALER, BROKER, SALVAGE OPERATOR, OR MERCHANT OF RECORD. ALL TRANSACTIONS OCCUR DIRECTLY BETWEEN INDEPENDENT BUYERS AND SELLERS.</p>
-        </div>
-
-        <h2>1. Nature of the Service</h2>
-        <p>TruckPartsXL provides an online information exchange and routing dashboard designed to connect commercial fleet operators, repair facilities, and individual vehicle owners (collectively, "Buyers") with independent heavy-duty truck wreckers, salvage yards, and parts distributors (collectively, "Sellers"). By posting a parts request ("Bounty") or submitting an availability match response, you explicitly acknowledge and understand that TruckPartsXL is a processing conduit, not a party to any subsequent purchase, warranty negotiation, or logistical agreement.</p>
-
-        <h2>2. Total Exclusion of Transactional Liability</h2>
-        <p>Because TruckPartsXL is entirely absent from the offline negotiation, payment fulfillment, packaging inspection, and cargo delivery phase, you agree that the platform, its founders, and affiliates bear zero liability for:</p>
-        <ul>
-            <li>The operational condition, safety compliance, or merchantability of any heavy-duty truck component sourced via the platform.</li>
-            <li>The factual accuracy of Vehicle Identification Numbers (VINs), casting codes, or casting stamps provided by Buyers or Sellers.</li>
-            <li>Financial fraud, uncollected invoices, tracking shortfalls, or failure of delivery by independent salvage yard operators.</li>
-            <li>Mechanical failures, commercial downtime costs, accidents, or liability claims arising from the installation of used, reconditioned, or aftermarket parts tracked through this board.</li>
-        </ul>
-
-        <h2>3. Buyer Rules and Sourcing Mandates</h2>
-        <p>When broadcasting a procurement demand on TruckPartsXL, Buyers guarantee that the asset metrics (specifically VIN sequences and OEM specifications) are completely true and exact. Buyers assume full technical risk for matching compatibility. You agree that once an independent network provider establishes contact regarding a request, your contract negotiation is conducted under your own corporate protocols and due diligence.</p>
-
-        <h2>4. Seller Rules and Dismantling/Salvage Guarantees</h2>
-        <p>Sellers utilizing our live procurement dashboard to fulfill components verify that they possess legal title and ownership of the commercial vehicles or standalone component inventory they are offering. Misrepresentation of component condition, tampering with core assets, or structural failures to fulfill verified pricing match quotes will result in permanent exclusion from the TruckPartsXL routing ledger.</p>
-
-        <h2>5. Fees, Sponsorship Boosts, and Stripe Integration</h2>
-        <p>Standard listing submissions are routed without platform fee assessments. TruckPartsXL offers an optional visibility service ("Boosted Listing") for a non-refundable service fee of $9.99 processed via Stripe Checkout. This fee is strictly a priority publishing service to enhance placement optimization within the web interface framework. It provides no guarantee of part availability, match confirmation, or transaction finalization. If a transaction breaks down between third parties, no refunds will be granted by TruckPartsXL.</p>
-
-        <h2>6. Indemnification</h2>
-        <p>You agree to indemnify, defend, and hold harmless TruckPartsXL, its operators, officers, and data maintenance personnel from any and all claims, corporate asset losses, structural damages, operational downtime expenses, legal actions, or regulatory assessments arising directly out of your misuse of data feeds, procurement negotiations, or components obtained via this service engine.</p>
-
-        <footer style="margin-top: 60px; padding-top: 30px; border-top: 2px solid #1f293d; text-align: center;">
-            <div style="margin-bottom: 20px;">
-                <a href="index.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">🏠 Home Board</a>
-                <a href="ontario.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">🇨🇦 Ontario Feed</a>
-                <a href="privacy.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">⚖️ Privacy Policy</a>
-                <a href="terms.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">🛠️ Terms of Service</a>
-                <a href="contact.html" style="color: #94a3b8; text-decoration: none; font-weight: 700; margin: 0 15px; text-transform: uppercase; font-size: 0.85rem;">📞 Contact & Support</a>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="nav-logo-flag">
+                    <div class="flag-stripe r"></div>
+                    <div class="flag-stripe w"></div>
+                    <div class="flag-stripe r"></div>
+                    <div class="flag-stripe w"></div>
+                    <div class="flag-stripe r"></div>
+                </div>
+                TruckParts<span>XL</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#board">Open Contracts</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header"
+                   target="_blank" class="nav-cta">Post a Bounty</a>
             </div>
-            <p style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin: 0;">© 2026 TruckPartsXL. All Rights Reserved.</p>
-        </footer>
-    </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <div class="page-eyebrow">Legal &amp; Compliance</div>
+            <h1>Terms of Service</h1>
+            <div class="page-meta">
+                <span><span class="meta-dot"></span>Effective Date: June 23, 2026</span>
+                <span><span class="meta-dot"></span>Last Reviewed: June 23, 2026</span>
+                <span><span class="meta-dot"></span>Governing Law: Ontario, Canada</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="doc-wrap">
+        <div class="container">
+
+            <div class="notice-box">
+                <div class="notice-label">⚠ Important Notice — Please Read Before Using the Platform</div>
+                <p>TruckPartsXL operates exclusively as a decentralized sourcing connector and lead generation platform in the commercial truck parts economy. We are not a dealer, broker, salvage operator, or merchant of record. All transactions occur directly between independent buyers and sellers. By accessing or using this Platform, you agree to be legally bound by these Terms.</p>
+            </div>
+
+            <div class="toc">
+                <div class="toc-title">Table of Contents</div>
+                <ol>
+                    <li><a href="#t1">Acceptance of Terms</a></li>
+                    <li><a href="#t2">Nature of the Service</a></li>
+                    <li><a href="#t3">Eligibility &amp; Account Requirements</a></li>
+                    <li><a href="#t4">Buyer Rules &amp; Obligations</a></li>
+                    <li><a href="#t5">Seller Rules &amp; Obligations</a></li>
+                    <li><a href="#t6">VIN Data Standards</a></li>
+                    <li><a href="#t7">Fees, Boosts &amp; Stripe Payments</a></li>
+                    <li><a href="#t8">Contact Unlock Service</a></li>
+                    <li><a href="#t9">Prohibited Conduct</a></li>
+                    <li><a href="#t10">Disclaimer of Warranties</a></li>
+                    <li><a href="#t11">Limitation of Liability</a></li>
+                    <li><a href="#t12">Indemnification</a></li>
+                    <li><a href="#t13">Intellectual Property</a></li>
+                    <li><a href="#t14">Termination &amp; Suspension</a></li>
+                    <li><a href="#t15">Governing Law &amp; Dispute Resolution</a></li>
+                    <li><a href="#t16">General Provisions</a></li>
+                    <li><a href="#t17">Contact</a></li>
+                </ol>
+            </div>
+
+            <!-- T1 -->
+            <div class="doc-section" id="t1">
+                <div class="section-num">Section 01</div>
+                <h2>Acceptance of Terms</h2>
+                <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User," "Buyer," or "Seller") and TruckPartsXL ("Platform," "we," "us," or "our") governing your access to and use of the TruckPartsXL platform, including the procurement board, bounty submission system, contact unlock service, and all related features and pages.</p>
+                <p>By accessing the Platform, submitting a procurement request, browsing the open contracts board, or completing a Stripe payment to unlock contact information, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy. If you do not agree, you must immediately cease using the Platform.</p>
+                <p>If you are using the Platform on behalf of a business entity, you represent and warrant that you have the authority to bind that entity to these Terms.</p>
+            </div>
+
+            <!-- T2 -->
+            <div class="doc-section" id="t2">
+                <div class="section-num">Section 02</div>
+                <h2>Nature of the Service</h2>
+                <p>TruckPartsXL provides an online information exchange and routing dashboard designed to connect commercial fleet operators, repair facilities, logistics companies, and vehicle owners (collectively, "Buyers") with independent heavy-duty truck wreckers, salvage yards, and parts distributors (collectively, "Sellers").</p>
+                <div class="callout">
+                    <div class="callout-label">Marketplace Facilitator — Not a Party to Transactions</div>
+                    <p>TruckPartsXL is a marketplace facilitator only. We are not a dealer, broker, salvage operator, or merchant of record. We are not a party to any negotiation, purchase agreement, delivery arrangement, or warranty discussion between Buyers and Sellers. All transactions occur exclusively between independent parties.</p>
+                </div>
+                <p>By posting a parts request ("Bounty") or accessing buyer contact information, you explicitly acknowledge that TruckPartsXL is a processing conduit — not a participant in — any subsequent commercial transaction.</p>
+            </div>
+
+            <!-- T3 -->
+            <div class="doc-section" id="t3">
+                <div class="section-num">Section 03</div>
+                <h2>Eligibility &amp; Account Requirements</h2>
+                <ul>
+                    <li>You must be at least 18 years of age to use the Platform.</li>
+                    <li>You must be acting in a legitimate commercial business capacity.</li>
+                    <li>Your use of the Platform must comply with all applicable federal, provincial, and state laws in your jurisdiction.</li>
+                    <li>You must not be subject to trade sanctions, export restrictions, or any order prohibiting you from engaging in commercial transactions.</li>
+                    <li>You must provide accurate, current, and complete information when submitting procurement requests or making payments.</li>
+                </ul>
+                <p>We reserve the right to verify your business credentials and to refuse service to any person or entity at our sole discretion.</p>
+            </div>
+
+            <!-- T4 -->
+            <div class="doc-section" id="t4">
+                <div class="section-num">Section 04</div>
+                <h2>Buyer Rules &amp; Obligations</h2>
+                <p>When submitting a procurement request ("Bounty") on TruckPartsXL, you agree to the following:</p>
+                <ul>
+                    <li>All submitted information — including VIN sequences, OEM specifications, casting numbers, and component descriptions — must be completely accurate and truthful to the best of your knowledge.</li>
+                    <li>You are submitting a genuine, bona fide commercial procurement request for a component you actually require.</li>
+                    <li>You assume full technical responsibility for verifying the compatibility of any parts sourced through the Platform prior to purchase and installation.</li>
+                    <li>Once a Seller makes contact regarding your request, all negotiations, pricing discussions, payment arrangements, and delivery terms are conducted solely between you and the Seller under your own due diligence and corporate protocols.</li>
+                    <li>You consent to your procurement details (excluding your name, phone, and email) being published on the public-facing board and pushed to a public GitHub repository, as described in our Privacy Policy.</li>
+                    <li>You will not submit false, misleading, or fraudulent procurement requests for the purpose of harvesting seller contact information or otherwise abusing the Platform.</li>
+                </ul>
+            </div>
+
+            <!-- T5 -->
+            <div class="doc-section" id="t5">
+                <div class="section-num">Section 05</div>
+                <h2>Seller Rules &amp; Obligations</h2>
+                <p>Salvage yard operators, parts distributors, and any other Sellers accessing the procurement board agree to the following:</p>
+                <ul>
+                    <li>You possess legal title, lawful ownership, or authorized right to sell any component inventory you offer in response to a procurement request.</li>
+                    <li>You will accurately represent the condition, provenance, fitment compatibility, and specifications of all parts offered.</li>
+                    <li>You will comply with all applicable provincial, state, and federal licensing requirements governing salvage yard operations, parts distribution, and commercial vehicle dismantling in your jurisdiction.</li>
+                    <li>You will maintain accurate records of part provenance for a minimum of 5 years as required by applicable law.</li>
+                    <li>You will not attempt to contact Buyers discovered through the Platform through channels other than those provided by the Contact Unlock service.</li>
+                    <li>Misrepresentation of component condition, tampering with core assets, or failure to honor verified pricing commitments may result in permanent exclusion from the Platform at our sole discretion.</li>
+                    <li>Contact information delivered via the Contact Unlock service may only be used for the purpose of fulfilling the specific procurement request for which it was unlocked. Using buyer contact details for unrelated solicitation is prohibited.</li>
+                </ul>
+            </div>
+
+            <!-- T6 -->
+            <div class="doc-section" id="t6">
+                <div class="section-num">Section 06</div>
+                <h2>VIN Data Standards</h2>
+                <p>Vehicle Identification Numbers (VINs) submitted to TruckPartsXL are used exclusively for the purpose of facilitating accurate component matching. By submitting a VIN, you agree that:</p>
+                <ul>
+                    <li>The VIN belongs to a vehicle you own, operate, are legally authorized to process, or for which you have a legitimate procurement need.</li>
+                    <li>The VIN is not associated with a vehicle that has been reported stolen, is subject to an active insurance fraud investigation, or is otherwise encumbered by a legal hold.</li>
+                    <li>You will not use the Platform to aggregate, harvest, or compile VIN data for any purpose other than legitimate procurement matching.</li>
+                </ul>
+                <div class="callout">
+                    <div class="callout-label">Mandatory Reporting</div>
+                    <p>We reserve the right to cross-reference submitted VINs against theft and recall databases. If a submitted VIN is identified as belonging to a stolen or fraudulently obtained vehicle, we may be legally obligated to report this information to relevant law enforcement authorities.</p>
+                </div>
+            </div>
+
+            <!-- T7 -->
+            <div class="doc-section" id="t7">
+                <div class="section-num">Section 07</div>
+                <h2>Fees, Boosts &amp; Stripe Payments</h2>
+                <h3>7.1 Standard Listings</h3>
+                <p>Submission of a standard procurement request ("Bounty") to the TruckPartsXL board is provided at no charge to the Buyer.</p>
+
+                <h3>7.2 Priority Boost ($9.99)</h3>
+                <p>TruckPartsXL offers an optional visibility upgrade ("Priority Boost") for a non-refundable service fee of <strong>$9.99 USD</strong>, processed via Stripe Checkout. This fee is strictly for priority placement and enhanced visibility within the board interface. It provides:</p>
+                <ul>
+                    <li>Elevated visual placement on the procurement board</li>
+                    <li>A "Priority" badge on the listing</li>
+                </ul>
+                <p>It does <strong>not</strong> provide any guarantee of part availability, seller response, match confirmation, or transaction completion. Priority Boost fees are strictly non-refundable under all circumstances.</p>
+
+                <h3>7.3 Contact Unlock Fee</h3>
+                <p>Sellers may pay a fee via Stripe Checkout to unlock the private contact information (phone and/or email) of a Buyer for a specific listing. See Section 8 for full details.</p>
+
+                <h3>7.4 Payment Processing</h3>
+                <p>All payments are processed by <strong>Stripe, Inc.</strong> TruckPartsXL does not collect, store, or have access to your payment card details. By completing a payment, you also agree to Stripe's Terms of Service at <a href="https://stripe.com/legal" target="_blank" style="color: var(--blue);">stripe.com/legal</a>.</p>
+
+                <h3>7.5 Fee Changes</h3>
+                <p>We reserve the right to modify our fee structure at any time. Changes will be posted on the Platform with reasonable notice. Continued use of paid features after the effective date of a fee change constitutes acceptance.</p>
+            </div>
+
+            <!-- T8 -->
+            <div class="doc-section" id="t8">
+                <div class="section-num">Section 08</div>
+                <h2>Contact Unlock Service</h2>
+                <p>The Contact Unlock service allows verified Sellers to access private Buyer contact information (phone number and email address) for a specific procurement listing by completing a Stripe payment. By using this service, you agree that:</p>
+                <ul>
+                    <li>The contact information delivered is provided for the sole purpose of fulfilling the specific listed procurement request.</li>
+                    <li>You will not use the delivered contact information for any purpose unrelated to that specific transaction, including unsolicited marketing, spam, or re-sale to third parties.</li>
+                    <li>Contact Unlock fees are <strong>non-refundable</strong> once contact information has been delivered, regardless of whether a transaction is completed.</li>
+                    <li>TruckPartsXL is not responsible for the accuracy of contact information provided by Buyers at the time of submission. We relay what was submitted; we do not independently verify contact details.</li>
+                    <li>Contact information is delivered automatically to the email address used at Stripe checkout. You are responsible for providing a valid email address at checkout.</li>
+                </ul>
+                <div class="callout">
+                    <div class="callout-label">Privacy Obligation</div>
+                    <p>Seller access to buyer contact details is subject to applicable privacy laws including PIPEDA (Canada) and CCPA (California). Misuse of unlocked contact information may constitute a violation of these laws and grounds for permanent platform exclusion and legal action.</p>
+                </div>
+            </div>
+
+            <!-- T9 -->
+            <div class="doc-section" id="t9">
+                <div class="section-num">Section 09</div>
+                <h2>Prohibited Conduct</h2>
+                <p>You may not use the Platform to:</p>
+                <ul>
+                    <li>Submit false, misleading, or fraudulent procurement requests or listings</li>
+                    <li>Impersonate another business or person, or misrepresent your commercial credentials</li>
+                    <li>Source stolen vehicle parts or engage in any illegal commerce</li>
+                    <li>Submit VINs associated with stolen vehicles or vehicles under active insurance investigation</li>
+                    <li>Circumvent the Contact Unlock payment system to obtain buyer contact information through other means</li>
+                    <li>Contact parties discovered through the Platform outside of the Contact Unlock service</li>
+                    <li>Scrape, copy, or systematically extract data from the Platform or its public GitHub repository for commercial purposes</li>
+                    <li>Use automated tools, bots, or scripts to submit requests or access the Platform without written authorization</li>
+                    <li>Interfere with or disrupt Platform infrastructure, GitHub pipelines, or security measures</li>
+                    <li>Violate any applicable export control, trade sanction, or anti-money laundering laws</li>
+                    <li>Use unlocked contact information for purposes other than the specific procurement transaction</li>
+                    <li>Engage in any conduct that could expose TruckPartsXL to legal liability or reputational harm</li>
+                </ul>
+                <p>Violations may result in immediate removal from the Platform, permanent exclusion, and/or referral to law enforcement authorities.</p>
+            </div>
+
+            <!-- T10 -->
+            <div class="doc-section" id="t10">
+                <div class="section-num">Section 10</div>
+                <h2>Disclaimer of Warranties</h2>
+                <div class="caps-block">
+                    THE PLATFORM IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, TRUCKPARTSXL EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO: (A) IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT; (B) ANY WARRANTY THAT THE PLATFORM WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS; (C) ANY WARRANTY AS TO THE ACCURACY, COMPLETENESS, OR RELIABILITY OF ANY LISTING DATA, VIN INFORMATION, PRICING, OR COMPONENT SPECIFICATIONS PUBLISHED ON THE PLATFORM; AND (D) ANY WARRANTY THAT ANY PARTICULAR PART, COMPONENT, OR CONTACT WILL RESULT IN A COMPLETED COMMERCIAL TRANSACTION.
+                </div>
+                <p>TruckPartsXL does not verify the accuracy of VIN numbers, casting codes, OEM specifications, or component condition descriptions submitted by Buyers or Sellers. All technical verification is the sole responsibility of the transacting parties.</p>
+            </div>
+
+            <!-- T11 -->
+            <div class="doc-section" id="t11">
+                <div class="section-num">Section 11</div>
+                <h2>Limitation of Liability</h2>
+                <div class="caps-block">
+                    TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, TRUCKPARTSXL AND ITS OPERATORS, OFFICERS, AFFILIATES, AND DATA MAINTENANCE PERSONNEL SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES ARISING OUT OF OR RELATED TO YOUR USE OF THE PLATFORM, INCLUDING BUT NOT LIMITED TO: LOST PROFITS, COMMERCIAL DOWNTIME, FLEET IMMOBILIZATION COSTS, MECHANICAL FAILURES, PROPERTY DAMAGE, PERSONAL INJURY, ACCIDENTS, OR LIABILITY CLAIMS ARISING FROM THE INSTALLATION OR USE OF PARTS SOURCED THROUGH THE PLATFORM; FINANCIAL FRAUD OR UNCOLLECTED INVOICES BETWEEN TRANSACTING PARTIES; INACCURACY OF VIN DATA, CASTING CODES, OR COMPONENT SPECIFICATIONS; OR FAILURE OF DELIVERY BY INDEPENDENT SALVAGE YARD OPERATORS.
+                </div>
+                <p>IN NO EVENT SHALL TRUCKPARTSXL'S TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING OUT OF OR RELATED TO YOUR USE OF THE PLATFORM EXCEED THE GREATER OF: (A) THE TOTAL FEES PAID BY YOU TO TRUCKPARTSXL IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM; OR (B) CAD $500 / USD $500.</p>
+                <p>Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability. In such jurisdictions, the above limitations apply to the fullest extent permitted by law.</p>
+            </div>
+
+            <!-- T12 -->
+            <div class="doc-section" id="t12">
+                <div class="section-num">Section 12</div>
+                <h2>Indemnification</h2>
+                <p>You agree to indemnify, defend, and hold harmless TruckPartsXL, its operators, officers, affiliates, and data maintenance personnel from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable legal fees) arising out of or related to:</p>
+                <ul>
+                    <li>Your use of or access to the Platform</li>
+                    <li>Your violation of these Terms or our Privacy Policy</li>
+                    <li>Your violation of any third-party rights, including intellectual property, privacy, or commercial rights</li>
+                    <li>Any misrepresentation of VIN data, component specifications, or business credentials</li>
+                    <li>Any transaction, negotiation, or commercial dispute between you and another Platform user</li>
+                    <li>Any misuse of contact information obtained through the Contact Unlock service</li>
+                    <li>Any claim by a regulatory authority arising from your activities on or through the Platform</li>
+                </ul>
+            </div>
+
+            <!-- T13 -->
+            <div class="doc-section" id="t13">
+                <div class="section-num">Section 13</div>
+                <h2>Intellectual Property</h2>
+                <h3>13.1 Platform IP</h3>
+                <p>TruckPartsXL and its licensors own all intellectual property rights in the Platform, including software, design, trademarks, logos, and proprietary data compilations. Nothing in these Terms grants you any right to use our trademarks, trade names, or branding without our prior written consent.</p>
+
+                <h3>13.2 User Content</h3>
+                <p>You retain ownership of the procurement data you submit. By submitting a Bounty, you grant TruckPartsXL a non-exclusive, royalty-free, worldwide license to publish, display, and distribute that data on the Platform (including the public GitHub repository) for the purpose of facilitating commercial procurement matching.</p>
+
+                <h3>13.3 No Scraping</h3>
+                <p>Systematic extraction of data from the Platform or its public GitHub repository for commercial data aggregation, resale, or competitive intelligence purposes is strictly prohibited without prior written authorization.</p>
+            </div>
+
+            <!-- T14 -->
+            <div class="doc-section" id="t14">
+                <div class="section-num">Section 14</div>
+                <h2>Termination &amp; Suspension</h2>
+                <p>We reserve the right to remove listings, block access, or permanently exclude any user from the Platform at any time, with or without notice, for any reason including but not limited to:</p>
+                <ul>
+                    <li>Violation of these Terms or our Privacy Policy</li>
+                    <li>Submission of false or fraudulent procurement data</li>
+                    <li>Misuse of the Contact Unlock service</li>
+                    <li>Any conduct that exposes TruckPartsXL to legal liability</li>
+                    <li>Any activity that we determine, in our sole discretion, is harmful to the Platform or its users</li>
+                </ul>
+                <p>Upon termination or exclusion, your right to access and use the Platform ceases immediately. Sections 10, 11, 12, 13, and 15 of these Terms survive termination.</p>
+            </div>
+
+            <!-- T15 -->
+            <div class="doc-section" id="t15">
+                <div class="section-num">Section 15</div>
+                <h2>Governing Law &amp; Dispute Resolution</h2>
+                <h3>15.1 Governing Law</h3>
+                <p>These Terms are governed by and construed in accordance with the laws of the Province of Ontario, Canada, and the applicable federal laws of Canada, without regard to conflict of law principles. Users in the United States acknowledge that applicable U.S. federal and state laws may also apply to their activities.</p>
+
+                <h3>15.2 Dispute Resolution</h3>
+                <p>Any dispute, controversy, or claim arising out of or relating to these Terms, the Platform, or any transaction facilitated through the Platform shall first be submitted to good-faith negotiation between the parties for a period of 30 days. If unresolved, the dispute shall be referred to binding arbitration in Toronto, Ontario, Canada, under the rules of the ADR Institute of Canada, unless the amount in dispute is less than CAD $10,000, in which case either party may elect to pursue resolution in small claims court.</p>
+
+                <h3>15.3 Class Action Waiver</h3>
+                <p>To the fullest extent permitted by applicable law, you waive any right to participate in a class action lawsuit or class-wide arbitration proceeding against TruckPartsXL.</p>
+            </div>
+
+            <!-- T16 -->
+            <div class="doc-section" id="t16">
+                <div class="section-num">Section 16</div>
+                <h2>General Provisions</h2>
+                <ul>
+                    <li><strong>Entire Agreement:</strong> These Terms, together with the Privacy Policy, constitute the entire agreement between you and TruckPartsXL regarding the Platform and supersede all prior understandings.</li>
+                    <li><strong>Severability:</strong> If any provision of these Terms is found to be unenforceable, that provision will be modified to the minimum extent necessary or severed, and the remaining provisions will continue in full force and effect.</li>
+                    <li><strong>No Waiver:</strong> Our failure to enforce any right or provision of these Terms shall not be deemed a waiver of that right or provision.</li>
+                    <li><strong>Assignment:</strong> You may not assign or transfer your rights or obligations under these Terms without our prior written consent. We may assign our rights without restriction.</li>
+                    <li><strong>Notices:</strong> Legal notices to TruckPartsXL must be sent to tpartsxl@gmail.com. We may provide notices to you via the Platform or at the email address associated with your most recent form submission.</li>
+                    <li><strong>Language:</strong> The controlling language of these Terms is English. Any translation is provided for convenience only.</li>
+                    <li><strong>Updates:</strong> We may update these Terms at any time. Material changes will be noted via an updated "Last Reviewed" date. Continued use of the Platform after changes take effect constitutes acceptance.</li>
+                </ul>
+            </div>
+
+            <!-- T17 -->
+            <div class="doc-section" id="t17">
+                <div class="section-num">Section 17</div>
+                <h2>Contact</h2>
+                <p>For questions, legal notices, or concerns regarding these Terms:</p>
+                <div class="contact-box">
+                    <h3>Legal &amp; Compliance</h3>
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        <span><a href="mailto:tpartsxl@gmail.com">tpartsxl@gmail.com</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Platform</strong>
+                        <span><a href="https://truckpartsxl.com">truckpartsxl.com</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Response</strong>
+                        <span>We aim to respond to all legal inquiries within 5 business days.</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="doc-divider">
+            <p style="font-family: var(--ff-mono); font-size: 11px; color: var(--subtext); text-align: center; letter-spacing: 0.06em;">
+                © 2026 TruckPartsXL. Commercial Salvage Ecosystem. All Rights Reserved.<br>
+                <a href="index.html" style="color: var(--subtext); text-decoration: none; margin: 0 10px;">Home</a>
+                <a href="privacy.html" style="color: var(--subtext); text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+                <a href="contact.html" style="color: var(--subtext); text-decoration: none; margin: 0 10px;">Contact</a>
+            </p>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">TruckParts<span>XL</span></div>
+                <div class="footer-tagline">Keeping America's Fleet on the Road Since Day One</div>
+            </div>
+            <div class="footer-copy">© 2026 TruckPartsXL. All Rights Reserved.</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
