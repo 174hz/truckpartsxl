@@ -525,5 +525,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "06664e92-a83c-4904-a8a8-4f1d977c862f",
+    "timestamp": "7/8/2026 14:23:00",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2028 Freightliner Cascadia",
+    "vin": "90876543212345678",
+    "partName": "Test Gear Box X50",
+    "specs": "Eaton Fuller 13-speed",
+    "oem": "1234567890",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "14,600",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
