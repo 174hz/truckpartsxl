@@ -573,5 +573,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "3ca27dfb-f3dd-41fa-9190-c443fb1a029c",
+    "timestamp": "7/8/2026 15:08:05",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2028 Freightliner Cascadia ",
+    "vin": "23456789123456789",
+    "partName": "Gear Box Tester ",
+    "specs": "Eaton Fuller 13-speed ",
+    "oem": "1234567890",
+    "condition": "Used / Take-Off (Budget Friendly)",
+    "budget": "11,800",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
