@@ -491,5 +491,29 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "timestamp": "7/8/2026 12:01:24",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2027 Freightliner Cascadia ",
+    "vin": "12345678901234567",
+    "partName": "Gear Box Teser ",
+    "specs": "Eaton Fuller 13-Speed",
+    "oem": "1234567890",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "16,700",
+    "boosted": "false"
+  },
+  {
+    "timestamp": "7/8/2026 12:01:24",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2027 Freightliner Cascadia ",
+    "vin": "12345678901234567",
+    "partName": "Gear Box Teser ",
+    "specs": "Eaton Fuller 13-Speed",
+    "oem": "1234567890",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "16,700",
+    "boosted": "false"
   }
 ]
