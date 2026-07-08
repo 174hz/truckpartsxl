@@ -549,5 +549,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "40280ebd-d3ad-4213-aef4-c7bf186624c6",
+    "timestamp": "7/8/2026 14:38:40",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2028 Freightliner Cascadia ",
+    "vin": "12345123451234567",
+    "partName": "Gear Box Teser ",
+    "specs": "Detroit DD15",
+    "oem": "123456789012",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "13,500",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
