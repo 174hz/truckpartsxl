@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "a37ceb0b-f9d5-4e4a-93ea-fb2bf1ac6543",
+    "timestamp": "7/9/2026 9:14:04",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2028 Freightliner Cascadia ",
+    "vin": "12345678912345678",
+    "partName": "Turbocharger ",
+    "specs": "Cummins ISX15",
+    "oem": "1234567890",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "21,500",
+    "boosted": "false",
+    "unlockUrl": ""
+  }
+]
