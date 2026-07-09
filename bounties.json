@@ -597,5 +597,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "f30e2862-6b17-4476-9395-e960f4aa2742",
+    "timestamp": "7/8/2026 21:12:27",
+    "region": "Ontario (Golden Horseshoe Region)",
+    "yearMakeModel": "2027 Hino ",
+    "vin": "12345678901234567",
+    "partName": "Gear Box Sample ",
+    "specs": "Eaton Fuller 13-speed",
+    "oem": "1234567890",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "13,600",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
