@@ -6,60 +6,59 @@
     <title>TruckPartsXL | Commercial Sourcing Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ─── TOKENS — Patriotic Palette ─────────────────────────────── */
+        /* ─── TOKENS — Light Patriotic Theme ─── */
         :root {
-            --navy:       #0B1F3A;
-            --navy-mid:   #112444;
-            --navy-light: #1A3358;
-            --navy-rim:   #1E3C6E;
-            --steel:      #2A4A72;
-            --muted:      #3A5A82;
-            --subtext:    #5B7A9A;
-            --label:      #7A96B2;
-            --body:       #A8BECE;
-            --soft:       #C8D8E4;
-            --bright:     #E8F0F6;
-            --white:      #F6F9FC;
+            --bg:         #F2F4F6;
+            --bg-mid:     #EAECEF;
+            --bg-card:    #FFFFFF;
+            --bg-dark:    #0B1F3A;
+            --bg-dark2:   #112444;
+            --border:     #D4D8DE;
+            --border-mid: #C0C6CE;
+            --subtext:    #6B7A8D;
+            --body:       #3D4D5C;
+            --heading:    #1A2633;
+            --white:      #FFFFFF;
 
             --red:        #C8102E;
             --red-dim:    #A50D25;
-            --red-glow:   rgba(200,16,46,0.15);
-            --red-soft:   rgba(200,16,46,0.10);
+            --red-soft:   rgba(200,16,46,0.08);
+            --red-mid:    rgba(200,16,46,0.15);
 
-            --blue:       #8FA8B8;
-            --blue-dim:   #7090A0;
-            --blue-glow:  rgba(74,144,196,0.15);
+            --blue:       #1B3F6E;
+            --blue-mid:   #2455A4;
+            --blue-soft:  rgba(27,63,110,0.08);
 
-            --gold:       #C9A84C;
-            --gold-soft:  rgba(201,168,76,0.15);
+            --gold:       #B8860B;
+            --gold-soft:  rgba(184,134,11,0.10);
+
+            --silver:     #8C9BAA;
 
             --ff-body: 'Inter', system-ui, sans-serif;
             --ff-mono: 'IBM Plex Mono', monospace;
-            --r-sm: 3px;
-            --r-md: 6px;
-            --r-lg: 10px;
+            --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.06);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-
         body {
-            background: var(--navy);
-            color: var(--bright);
+            background: var(--bg);
+            color: var(--body);
             font-family: var(--ff-body);
             font-size: 14px;
             line-height: 1.6;
-            min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
-        .container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
-
-        /* ─── TOPBAR ─────────────────────────────────────────────────── */
+        /* ─── TOPBAR ── */
         .top-bar {
-            background: var(--red);
+            background: var(--blue);
             color: #fff;
             font-family: var(--ff-mono);
             font-size: 10px;
@@ -71,1183 +70,931 @@
         }
         .tb-short { display: none; }
 
-        /* ─── NAV ────────────────────────────────────────────────────── */
+        /* ─── NAV ── */
         nav {
-            background: var(--navy-mid);
-            border-bottom: 2px solid var(--red);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: var(--bg-dark);
+            border-bottom: 3px solid var(--red);
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: var(--shadow-md);
         }
-
         .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 62px;
+            display: flex; align-items: center;
+            justify-content: space-between; height: 64px;
         }
-
         .nav-logo {
-            font-family: var(--ff-mono);
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-family: var(--ff-mono); font-size: 18px; font-weight: 700;
+            color: var(--white); letter-spacing: -0.02em;
+            text-decoration: none; display: flex; align-items: center; gap: 10px;
         }
-
         .nav-logo-flag {
-            display: flex;
-            flex-direction: column;
-            width: 24px;
-            height: 16px;
-            border-radius: 2px;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255,255,255,0.2);
+            display: flex; flex-direction: column;
+            width: 26px; height: 18px; border-radius: 2px;
+            overflow: hidden; border: 1px solid rgba(255,255,255,0.25);
         }
-
         .flag-stripe { flex: 1; }
         .flag-stripe.r { background: var(--red); }
         .flag-stripe.w { background: #fff; }
-
         .nav-logo span { color: var(--red); }
-
-        .nav-links { display: flex; align-items: center; gap: 24px; }
-
+        .nav-links { display: flex; align-items: center; gap: 28px; }
         .nav-links a {
-            color: var(--body);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            transition: color 0.15s;
+            color: rgba(255,255,255,0.75); text-decoration: none;
+            font-size: 13px; font-weight: 500; transition: color 0.15s;
         }
-
-        .nav-links a:hover { color: var(--white); }
-
+        .nav-links a:hover { color: #fff; }
         .nav-cta {
-            background: var(--red);
-            color: #fff !important;
-            padding: 7px 16px;
-            border-radius: var(--r-sm);
-            font-weight: 700 !important;
-            font-size: 11px !important;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
+            background: var(--red); color: #fff !important;
+            padding: 8px 18px; border-radius: var(--r-sm);
+            font-weight: 700 !important; font-size: 12px !important;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            transition: background 0.15s;
         }
         .nav-cta:hover { background: var(--red-dim) !important; }
 
-        /* ─── HERO ───────────────────────────────────────────────────── */
+        /* ─── HERO ── */
         .hero {
-            background: var(--navy-mid);
-            border-bottom: 1px solid var(--navy-rim);
+            background: var(--bg-dark);
+            position: relative; overflow: hidden;
             padding: 0;
-            position: relative;
-            overflow: hidden;
         }
-
-        /* Stars field */
-        .hero-stars {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            opacity: 0;
-            animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: var(--op, 0.6); transform: scale(1); }
-        }
-
-        /* Red stripe accents */
-        .hero-stripes {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 180px;
-            display: flex;
-            flex-direction: column;
-            opacity: 0.12;
-            pointer-events: none;
-        }
-
-        .hero-stripe { flex: 1; }
-        .hero-stripe:nth-child(odd) { background: var(--red); }
-        .hero-stripe:nth-child(even) { background: transparent; }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        .hero-inner {
             display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 32px;
-            align-items: center;
-            padding: 52px 0 44px;
+            grid-template-columns: 1fr 480px;
+            min-height: 380px;
+            position: relative; z-index: 2;
         }
-
-        .hero-left {}
-
-        .hero-badge-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
+        .hero-left {
+            padding: 52px 48px 52px 0;
+            display: flex; flex-direction: column; justify-content: center;
         }
-
-        .badge-250 {
-            background: var(--gold-soft);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            font-family: var(--ff-mono);
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 4px 10px;
-            border-radius: var(--r-sm);
-            white-space: nowrap;
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--gold-soft); border: 1px solid rgba(184,134,11,0.3);
+            color: #D4A017; border-radius: var(--r-sm);
+            font-family: var(--ff-mono); font-size: 9px; font-weight: 700;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            padding: 5px 10px; margin-bottom: 20px; width: fit-content;
         }
-
-        .hero-eyebrow {
-            font-family: var(--ff-mono);
-            font-size: 10px;
-            font-weight: 600;
-            color: var(--subtext);
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-        }
-
         .hero h1 {
-            font-size: clamp(26px, 3.5vw, 42px);
-            font-weight: 800;
-            color: var(--white);
-            line-height: 1.15;
-            letter-spacing: -0.03em;
-            margin-bottom: 14px;
+            font-size: clamp(28px, 3.5vw, 46px);
+            font-weight: 900; color: var(--white);
+            line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px;
         }
-
-        .hero h1 .accent-red { color: var(--red); }
-        .hero h1 .accent-outline {
+        .hero h1 .red { color: var(--red); }
+        .hero h1 .outline {
             color: transparent;
             -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
         }
-
         .hero-sub {
-            font-size: 14px;
-            color: var(--body);
-            max-width: 480px;
-            line-height: 1.75;
-            margin-bottom: 24px;
+            font-size: 15px; color: rgba(255,255,255,0.65);
+            line-height: 1.75; margin-bottom: 28px; max-width: 480px;
         }
-
-        .hero-stats {
-            display: flex;
-            gap: 24px;
+        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn-red {
+            background: var(--red); color: #fff; border: none;
+            border-radius: var(--r-md); padding: 12px 24px;
+            font-family: var(--ff-body); font-size: 13px; font-weight: 700;
+            letter-spacing: 0.04em; text-transform: uppercase;
+            text-decoration: none; cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            display: inline-flex; align-items: center; gap: 6px;
         }
-
-        .hero-stat { display: flex; flex-direction: column; gap: 2px; }
-
-        .hero-stat-val {
-            font-family: var(--ff-mono);
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--white);
+        .btn-red:hover { background: var(--red-dim); transform: translateY(-1px); }
+        .btn-outline {
+            background: transparent; color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: var(--r-md); padding: 12px 24px;
+            font-family: var(--ff-body); font-size: 13px; font-weight: 600;
+            letter-spacing: 0.04em; text-transform: uppercase;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+            transition: border-color 0.15s, color 0.15s;
         }
+        .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
 
-        .hero-stat-lbl {
-            font-family: var(--ff-mono);
-            font-size: 9px;
-            font-weight: 600;
-            color: var(--subtext);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+        /* Hero right — parts photo collage */
+        .hero-right {
+            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #0D1E35 0%, #162840 100%);
         }
-
-        /* American flag SVG panel */
-        .hero-flag-panel {
-            position: relative;
-            width: 200px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .flag-svg-wrap {
-            width: 180px;
-            border-radius: var(--r-md);
-            overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.15);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
-        }
-
-        .flag-svg-wrap svg { display: block; width: 100%; height: auto; }
-
-        .flag-caption {
-            font-family: var(--ff-mono);
-            font-size: 9px;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-align: center;
-        }
-
-        /* ─── HOW IT WORKS ───────────────────────────────────────────── */
-        .how-section {
-            background: var(--navy);
-            border-bottom: 1px solid var(--navy-rim);
-            padding: 44px 0 36px;
-        }
-
-        .section-label {
-            font-family: var(--ff-mono);
-            font-size: 9px;
-            font-weight: 700;
-            color: var(--subtext);
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--navy-rim);
-        }
-
-        .how-grid {
+        .hero-photo-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            grid-template-rows: 1fr 1fr;
+            height: 100%; gap: 3px;
         }
-
-        .how-card {
-            background: var(--navy-mid);
-            border: 1px solid var(--navy-rim);
-            border-radius: var(--r-lg);
-            padding: 24px;
+        .hero-photo {
+            background-size: cover; background-position: center;
+            position: relative; overflow: hidden;
         }
-
-        .how-card-head {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .how-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--navy-light);
-            border: 1px solid var(--steel);
-            border-radius: var(--r-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .how-card h4 {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .how-card p {
-            font-size: 12px;
-            color: var(--body);
-            margin-bottom: 14px;
-            line-height: 1.65;
-        }
-
-        .how-steps { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-
-        .how-steps li {
-            display: flex;
-            gap: 10px;
-            font-size: 12px;
-            color: var(--soft);
-            line-height: 1.55;
-        }
-
-        .step-num {
-            font-family: var(--ff-mono);
-            font-size: 9px;
-            font-weight: 700;
-            color: var(--red);
-            background: var(--red-soft);
-            border: 1px solid rgba(200,16,46,0.2);
-            border-radius: var(--r-sm);
-            padding: 2px 6px;
-            flex-shrink: 0;
-            height: fit-content;
-            margin-top: 2px;
-        }
-
-        /* ─── STATS / FILTER BAR ─────────────────────────────────────── */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            background: var(--navy-mid);
-            border-bottom: 1px solid var(--navy-rim);
-        }
-
-        .stat-cell {
-            padding: 18px 24px;
-            border-right: 1px solid var(--navy-rim);
-            cursor: pointer;
-            transition: background 0.15s;
-            position: relative;
-        }
-
-        .stat-cell:last-child { border-right: none; }
-        .stat-cell:hover { background: rgba(255,255,255,0.02); }
-
-        .stat-cell.active { background: var(--red-soft); }
-
-        .stat-cell.active::after {
+        .hero-photo::after {
             content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 2px;
-            background: var(--red);
+            position: absolute; inset: 0;
+            background: rgba(10,20,40,0.35);
+        }
+        .hero-photo:nth-child(1) {
+            grid-row: 1 / 3;
+            background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80');
+        }
+        .hero-photo:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=300&q=80');
+        }
+        .hero-photo:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=300&q=80');
+        }
+        /* Diagonal red stripe overlay on hero */
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; right: 480px; bottom: 0; width: 60px;
+            background: linear-gradient(90deg, transparent 0%, rgba(200,16,46,0.08) 100%);
+            pointer-events: none; z-index: 1;
         }
 
-        .stat-label {
-            font-family: var(--ff-mono);
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--subtext);
-            margin-bottom: 4px;
-        }
-
-        .stat-value {
-            font-family: var(--ff-mono);
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: -0.03em;
-            line-height: 1;
-        }
-
-        .stat-cell.active .stat-label { color: var(--red); }
-
-        /* ─── SEARCH ─────────────────────────────────────────────────── */
-        .search-bar-wrap {
+        /* ─── TRUST STRIP ── */
+        .trust-strip {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
             padding: 14px 0;
-            border-bottom: 1px solid var(--navy-rim);
-            background: var(--navy-mid);
-            position: sticky;
-            top: 62px;
-            z-index: 90;
+        }
+        .trust-items {
+            display: flex; align-items: center;
+            justify-content: center; gap: 40px; flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 600; color: var(--body);
+        }
+        .trust-icon { font-size: 16px; }
+
+        /* ─── MANUFACTURER LOGOS STRIP ── */
+        .brands-section {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 36px 0;
+        }
+        .brands-label {
+            font-family: var(--ff-mono); font-size: 9px; font-weight: 700;
+            color: var(--subtext); letter-spacing: 0.16em; text-transform: uppercase;
+            text-align: center; margin-bottom: 24px;
+            display: flex; align-items: center; gap: 16px; justify-content: center;
+        }
+        .brands-label::before, .brands-label::after {
+            content: ''; flex: 1; max-width: 120px; height: 1px; background: var(--border);
+        }
+        .brands-grid {
+            display: flex; align-items: center; justify-content: center;
+            flex-wrap: wrap; gap: 8px;
+        }
+        .brand-chip {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 6px;
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: 14px 18px;
+            min-width: 90px; transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .brand-chip:hover {
+            border-color: var(--red); box-shadow: var(--shadow-sm);
+        }
+        .brand-logo-img {
+            height: 28px; width: auto; object-fit: contain;
+            filter: grayscale(100%) contrast(0.7);
+            transition: filter 0.2s;
+        }
+        .brand-chip:hover .brand-logo-img { filter: grayscale(0%) contrast(1); }
+        .brand-name {
+            font-family: var(--ff-mono); font-size: 8px; font-weight: 700;
+            color: var(--subtext); letter-spacing: 0.1em; text-transform: uppercase;
         }
 
+        /* SVG logo placeholders for manufacturers */
+        .brand-svg {
+            height: 28px; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* ─── HOW IT WORKS ── */
+        .how-section {
+            background: var(--bg); padding: 52px 0 44px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-header { text-align: center; margin-bottom: 36px; }
+        .section-eyebrow {
+            font-family: var(--ff-mono); font-size: 9px; font-weight: 700;
+            color: var(--red); letter-spacing: 0.16em; text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .section-header h2 {
+            font-size: clamp(20px, 2.5vw, 28px); font-weight: 800;
+            color: var(--heading); letter-spacing: -0.02em;
+        }
+        .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .how-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r-xl); padding: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+        .how-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .how-icon {
+            width: 40px; height: 40px; background: var(--red-soft);
+            border: 1px solid var(--red-mid); border-radius: var(--r-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
+        }
+        .how-card h4 { font-size: 14px; font-weight: 700; color: var(--heading); }
+        .how-card p { font-size: 13px; color: var(--body); line-height: 1.7; margin-bottom: 16px; }
+        .how-steps { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .how-steps li { display: flex; gap: 10px; font-size: 13px; color: var(--body); line-height: 1.6; }
+        .step-num {
+            font-family: var(--ff-mono); font-size: 9px; font-weight: 700;
+            color: var(--red); background: var(--red-soft);
+            border: 1px solid var(--red-mid); border-radius: var(--r-sm);
+            padding: 2px 6px; flex-shrink: 0; height: fit-content; margin-top: 2px;
+        }
+
+        /* ─── STATS / FILTER BAR ── */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            background: var(--bg-card); border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        .stat-cell {
+            padding: 18px 24px; border-right: 1px solid var(--border);
+            cursor: pointer; transition: background 0.15s; position: relative;
+        }
+        .stat-cell:last-child { border-right: none; }
+        .stat-cell:hover { background: var(--bg); }
+        .stat-cell.active { background: var(--red-soft); }
+        .stat-cell.active::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 3px; background: var(--red);
+        }
+        .stat-label {
+            font-family: var(--ff-mono); font-size: 9px; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--subtext); margin-bottom: 4px;
+        }
+        .stat-value {
+            font-family: var(--ff-mono); font-size: 24px; font-weight: 700;
+            color: var(--heading); letter-spacing: -0.03em; line-height: 1;
+        }
+        .stat-cell.active .stat-label { color: var(--red); }
+        .stat-cell.active .stat-value { color: var(--red); }
+
+        /* ─── SEARCH ── */
+        .search-bar-wrap {
+            padding: 14px 0; border-bottom: 1px solid var(--border);
+            background: var(--bg-card); position: sticky; top: 64px; z-index: 90;
+            box-shadow: var(--shadow-sm);
+        }
         .search-inner { display: flex; align-items: center; gap: 12px; }
-
         .search-wrap { position: relative; flex: 1; }
-
         .search-wrap::before {
-            content: '⌕';
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--subtext);
-            font-size: 15px;
-            pointer-events: none;
+            content: '⌕'; position: absolute; left: 13px; top: 50%;
+            transform: translateY(-50%); color: var(--subtext);
+            font-size: 16px; pointer-events: none;
         }
-
         .search-field {
-            width: 100%;
-            background: var(--navy-light);
-            border: 1px solid var(--navy-rim);
-            border-radius: var(--r-md);
-            padding: 9px 14px 9px 36px;
-            color: var(--bright);
-            font-family: var(--ff-body);
-            font-size: 13px;
-            outline: none;
-            transition: border-color 0.15s, box-shadow 0.15s;
+            width: 100%; background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); padding: 10px 14px 10px 38px;
+            color: var(--heading); font-family: var(--ff-body); font-size: 13px;
+            outline: none; transition: border-color 0.15s, box-shadow 0.15s;
         }
-
         .search-field:focus {
-            border-color: var(--red);
-            box-shadow: 0 0 0 3px var(--red-glow);
+            border-color: var(--red); box-shadow: 0 0 0 3px var(--red-soft);
+            background: var(--white);
         }
-
         .search-field::placeholder { color: var(--subtext); }
-
         .board-status {
-            font-family: var(--ff-mono);
-            font-size: 10px;
-            font-weight: 600;
-            color: var(--subtext);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            white-space: nowrap;
+            font-family: var(--ff-mono); font-size: 10px; font-weight: 600;
+            color: var(--subtext); letter-spacing: 0.08em;
+            text-transform: uppercase; white-space: nowrap;
         }
 
-        /* ─── BOARD ──────────────────────────────────────────────────── */
-        .board-wrap { padding: 16px 0 56px; }
-        .board-wrap .container { max-width: 1000px; }
+        /* ─── BOARD ── */
+        .board-wrap { padding: 20px 0 64px; }
+        .board-wrap .container { max-width: 1060px; }
+        .contract-grid { display: flex; flex-direction: column; gap: 3px; }
 
-        .contract-grid { display: flex; flex-direction: column; gap: 2px; }
-
-        /* ─── CONTRACT ROW ───────────────────────────────────────────── */
+        /* ─── CONTRACT CARD ── */
         .contract-card {
-            background: var(--navy-mid);
-            border: 1px solid var(--navy-rim);
-            border-radius: var(--r-md);
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 3px 1fr;
-            transition: box-shadow 0.18s, border-color 0.18s, transform 0.12s;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+            display: grid; grid-template-columns: 4px 1fr;
+            transition: box-shadow 0.15s, border-color 0.15s, transform 0.1s;
+            box-shadow: var(--shadow-sm);
         }
-
         .contract-card:hover {
-            border-color: rgba(200,16,46,0.4);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,16,46,0.1);
+            border-color: var(--red); box-shadow: var(--shadow-md);
             transform: translateY(-1px);
         }
-
-        .card-accent { background: var(--navy-rim); }
+        .card-accent { background: var(--border-mid); }
         .contract-card.is-priority .card-accent { background: var(--red); }
 
-        /* Hide blank placeholder rows with no real data */
-        .contract-card.is-empty { display: none; }
-
-        /* 4-col desktop layout: part | specs | budget+region | action */
-        .contract-card { max-width: 960px; margin-left: auto; margin-right: auto; }
-
         .card-body {
-            padding: 11px 14px;
+            padding: 14px 18px;
             display: grid;
-            grid-template-columns: 200px 1fr 130px 140px;
-            gap: 10px;
-            align-items: center;
+            grid-template-columns: 210px 1fr 150px 155px;
+            gap: 12px; align-items: center;
         }
 
-        /* — Part identity — */
+        /* Part identity */
         .part-id { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-
         .part-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--white);
-            line-height: 1.3;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 14px; font-weight: 700; color: var(--heading);
+            line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-
         .part-vehicle {
-            font-family: var(--ff-mono);
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--soft);
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-family: var(--ff-mono); font-size: 11px; font-weight: 600;
+            color: var(--blue-mid); letter-spacing: 0.01em;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-
         .part-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
-
         .tag {
-            font-family: var(--ff-mono);
-            font-size: 8px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 2px 6px;
-            border-radius: 2px;
-            border: 1px solid;
-            white-space: nowrap;
+            font-family: var(--ff-mono); font-size: 8px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 2px 6px; border-radius: 3px; border: 1px solid; white-space: nowrap;
         }
+        .tag-priority { color: var(--red); border-color: rgba(200,16,46,0.3); background: var(--red-soft); }
 
-        .tag-priority {
-            color: var(--red);
-            border-color: rgba(200,16,46,0.35);
-            background: var(--red-soft);
-        }
-
-        /* — Spec grid — */
-        .spec-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5px 12px;
-        }
-
+        /* Spec grid */
+        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
         .spec-item { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-
         .spec-label {
-            font-family: var(--ff-mono);
-            font-size: 8px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--subtext);
+            font-family: var(--ff-mono); font-size: 8px; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtext);
         }
-
         .spec-value {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--bright);
-            line-height: 1.25;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 11px; font-weight: 600; color: var(--heading);
+            line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-
         .spec-value.is-vin {
-            font-family: var(--ff-mono);
-            font-size: 10px;
-            color: var(--body);
-            letter-spacing: 0.02em;
+            font-family: var(--ff-mono); font-size: 10px;
+            color: var(--body); letter-spacing: 0.02em;
         }
+        .spec-value.is-na { color: var(--border-mid); font-style: italic; font-weight: 400; }
 
-        .spec-value.is-na { color: var(--muted); font-style: italic; }
-
-        /* — Budget + region column — */
-        .budget-col { display: flex; flex-direction: column; gap: 4px; }
-
+        /* Budget + region */
+        .budget-col { display: flex; flex-direction: column; gap: 5px; }
         .budget-val {
-            font-family: var(--ff-mono);
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: -0.01em;
+            font-family: var(--ff-mono); font-size: 15px; font-weight: 700;
+            color: var(--red); letter-spacing: -0.01em;
         }
-
-        .budget-na {
-            font-family: var(--ff-mono);
-            font-size: 11px;
-            color: var(--muted);
-            font-style: italic;
-        }
-
+        .budget-na { font-family: var(--ff-mono); font-size: 11px; color: var(--subtext); font-style: italic; }
         .region-pill {
-            font-family: var(--ff-mono);
-            font-size: 9px;
-            font-weight: 600;
-            color: var(--body);
-            background: var(--navy-light);
-            border: 1px solid var(--steel);
-            border-radius: 2px;
-            padding: 3px 7px;
-            display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
+            font-family: var(--ff-mono); font-size: 9px; font-weight: 600;
+            color: var(--body); background: var(--bg);
+            border: 1px solid var(--border); border-radius: 3px;
+            padding: 3px 7px; display: inline-block;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
         }
 
-        /* — Action column — */
-        .card-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 6px;
-        }
-
+        /* Action */
+        .card-actions { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
         .unlock-btn {
-            background: var(--red);
-            color: #fff;
-            border: none;
-            border-radius: var(--r-md);
-            padding: 9px 16px;
-            font-family: var(--ff-body);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: background 0.15s, transform 0.1s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            width: 100%;
-            justify-content: center;
+            background: var(--red); color: #fff; border: none;
+            border-radius: var(--r-md); padding: 10px 16px;
+            font-family: var(--ff-body); font-size: 11px; font-weight: 700;
+            letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+            white-space: nowrap; transition: background 0.15s, transform 0.1s;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
         }
-
         .unlock-btn:hover { background: var(--red-dim); transform: translateY(-1px); }
         .unlock-btn:active { transform: translateY(0); }
-
         .btn-subtext {
-            font-family: var(--ff-mono);
-            font-size: 8px;
-            color: var(--subtext);
-            letter-spacing: 0.06em;
-            text-align: center;
-            width: 100%;
+            font-family: var(--ff-mono); font-size: 8px; color: var(--subtext);
+            letter-spacing: 0.06em; text-align: center;
         }
 
-        /* ─── STATUS CARD ────────────────────────────────────────────── */
+        /* Status */
         .status-card {
-            background: var(--navy-mid);
-            border: 1px solid var(--navy-rim);
-            border-radius: var(--r-md);
-            padding: 40px;
-            text-align: center;
-            font-family: var(--ff-mono);
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--subtext);
-            letter-spacing: 0.05em;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: 48px;
+            text-align: center; font-family: var(--ff-mono);
+            font-size: 12px; font-weight: 600; color: var(--subtext);
+            letter-spacing: 0.05em; box-shadow: var(--shadow-sm);
         }
-
         .pulse {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: var(--red);
-            border-radius: 50%;
-            margin-right: 8px;
+            display: inline-block; width: 7px; height: 7px;
+            background: var(--red); border-radius: 50%; margin-right: 8px;
             animation: pulse 1.6s ease-in-out infinite;
         }
+        @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.3; transform:scale(0.7); } }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.35; transform: scale(0.7); }
-        }
-
-        /* ─── FOOTER ─────────────────────────────────────────────────── */
+        /* ─── FOOTER ── */
         footer {
-            background: var(--navy-mid);
-            border-top: 2px solid var(--red);
-            padding: 28px 0;
+            background: var(--bg-dark); border-top: 3px solid var(--red); padding: 32px 0;
         }
-
         .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            flex-wrap: wrap;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 20px; flex-wrap: wrap;
         }
-
-        .footer-logo {
-            font-family: var(--ff-mono);
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
+        .footer-logo { font-family: var(--ff-mono); font-size: 15px; font-weight: 700; color: var(--white); }
         .footer-logo span { color: var(--red); }
-
-        .footer-tagline {
-            font-family: var(--ff-mono);
-            font-size: 9px;
-            color: var(--subtext);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-top: 3px;
-        }
-
-        .footer-copy {
-            font-family: var(--ff-mono);
-            font-size: 10px;
-            color: var(--subtext);
-            text-align: center;
-        }
-
+        .footer-tagline { font-family: var(--ff-mono); font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+        .footer-copy { font-family: var(--ff-mono); font-size: 10px; color: rgba(255,255,255,0.4); }
         .footer-links { display: flex; gap: 20px; }
-
-        .footer-links a {
-            font-family: var(--ff-mono);
-            font-size: 10px;
-            color: var(--subtext);
-            text-decoration: none;
-            transition: color 0.15s;
-        }
-
-        .footer-links a:hover { color: var(--body); }
+        .footer-links a { font-family: var(--ff-mono); font-size: 10px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+        .footer-links a:hover { color: rgba(255,255,255,0.85); }
 
         .hidden { display: none !important; }
 
-        /* ─── MOBILE ≤600px ──────────────────────────────────────────── */
-        @media (max-width: 600px) {
-            .container { padding: 0 12px; }
-            .tb-full { display: none; }
-            .tb-short { display: inline; }
-            .nav-links a:not(.nav-cta) { display: none; }
-            .hero-flag-panel { display: none; }
-            .hero-content { grid-template-columns: 1fr; padding: 36px 0 28px; }
-            .hero h1 { font-size: 24px; }
-            .hero-stats { gap: 16px; }
+        /* ─── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-right { display: none; }
+            .hero-left { padding: 40px 0 32px; }
             .how-grid { grid-template-columns: 1fr; }
+            .card-body { grid-template-columns: 1fr 1fr; padding: 12px 14px; gap: 10px; }
+            .spec-grid { grid-template-columns: 1fr 1fr; }
+            .card-actions { grid-column: 1/-1; flex-direction: row; justify-content: flex-end; border-top: 1px solid var(--border); padding-top: 10px; gap: 10px; }
+            .unlock-btn { width: auto; flex: 1; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 0 14px; }
+            .tb-full { display: none; } .tb-short { display: inline; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .brands-grid { gap: 6px; }
+            .brand-chip { min-width: 75px; padding: 10px 12px; }
             .stats-bar { grid-template-columns: 1fr 1fr 1fr; }
             .stat-cell { padding: 12px 8px; }
             .stat-label { font-size: 7px; }
-            .stat-value { font-size: 18px; }
-            .search-bar-wrap { top: 62px; }
+            .stat-value { font-size: 20px; }
             .search-inner { flex-direction: column; align-items: stretch; gap: 6px; }
             .board-status { text-align: right; }
-
-            /* Cards go single column */
-            .card-body {
-                grid-template-columns: 1fr;
-                padding: 12px;
-                gap: 10px;
-            }
-            .spec-grid { grid-template-columns: 1fr 1fr; gap: 8px 12px; }
-            .budget-col { flex-direction: row; align-items: center; gap: 10px; }
-            .card-actions {
-                flex-direction: row;
-                align-items: center;
-                border-top: 1px solid var(--navy-rim);
-                padding-top: 10px;
-                gap: 10px;
-            }
+            .card-body { grid-template-columns: 1fr; padding: 12px; gap: 8px; }
+            .card-actions { flex-direction: row; border-top: 1px solid var(--border); padding-top: 8px; }
             .unlock-btn { flex: 1; }
-            .btn-subtext { text-align: left; white-space: nowrap; width: auto; }
+            .trust-items { gap: 16px; }
             .footer-inner { flex-direction: column; text-align: center; }
             .footer-links { justify-content: center; }
-        }
-
-        /* ─── TABLET 601–900px ───────────────────────────────────────── */
-        @media (min-width: 601px) and (max-width: 900px) {
-            .hero-flag-panel { width: 140px; }
-            .flag-svg-wrap { width: 130px; }
-            .card-body {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-                padding: 14px 16px;
-            }
-            .spec-grid { grid-template-columns: repeat(3, 1fr); }
-            .card-actions {
-                grid-column: 1 / -1;
-                flex-direction: row;
-                justify-content: flex-end;
-                border-top: 1px solid var(--navy-rim);
-                padding-top: 10px;
-                gap: 12px;
-            }
-            .unlock-btn { width: auto; }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <span class="tb-full">🇺🇸 &nbsp;Celebrating America's 250th &nbsp;·&nbsp; Real-Time B2B Heavy Duty Parts Exchange &nbsp;·&nbsp; North America</span>
-        <span class="tb-short">🇺🇸 Live B2B Parts Feed</span>
+<div class="top-bar">
+    <span class="tb-full">🇺🇸 Celebrating America's 250th · Real-Time B2B Heavy Duty Parts Exchange · North America</span>
+    <span class="tb-short">🇺🇸 Live B2B Parts Feed</span>
+</div>
+
+<nav>
+    <div class="container nav-container">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-flag">
+                <div class="flag-stripe r"></div><div class="flag-stripe w"></div>
+                <div class="flag-stripe r"></div><div class="flag-stripe w"></div>
+                <div class="flag-stripe r"></div>
+            </div>
+            TruckParts<span>XL</span>
+        </a>
+        <div class="nav-links">
+            <a href="#board">Open Contracts</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header"
+               target="_blank" class="nav-cta">Post a Bounty — Free</a>
+        </div>
     </div>
+</nav>
 
-    <nav>
-        <div class="container nav-container">
-            <div class="nav-logo">
-                <div class="nav-logo-flag">
-                    <div class="flag-stripe r"></div>
-                    <div class="flag-stripe w"></div>
-                    <div class="flag-stripe r"></div>
-                    <div class="flag-stripe w"></div>
-                    <div class="flag-stripe r"></div>
+<!-- HERO -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-left">
+                <div class="hero-badge">★ USA 250th Anniversary · 1776–2026 ★</div>
+                <h1>Heavy Duty Parts.<br><span class="red">Direct.</span> <span class="outline">Fast.</span></h1>
+                <p class="hero-sub">Connect directly with verified salvage yards and heavy-duty breakers across North America. Post your parts need free — no brokers, no markup, no waiting.</p>
+                <div class="hero-actions">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header"
+                       target="_blank" class="btn-red">🔍 Post a Bounty — Free</a>
+                    <a href="#board" class="btn-outline">View Open Contracts →</a>
                 </div>
-                TruckParts<span>XL</span>
             </div>
-            <div class="nav-links">
-                <a href="#board">Open Contracts</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header"
-                   target="_blank" class="nav-cta">Post a Bounty</a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-stars" id="heroStars"></div>
-        <div class="hero-stripes">
-            <div class="hero-stripe"></div><div class="hero-stripe"></div>
-            <div class="hero-stripe"></div><div class="hero-stripe"></div>
-            <div class="hero-stripe"></div><div class="hero-stripe"></div>
-            <div class="hero-stripe"></div>
-        </div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-left">
-                    <div class="hero-badge-row">
-                        <span class="badge-250">★ USA 250th Anniversary 1776–2026 ★</span>
-                        <span class="hero-eyebrow">Procurement Board</span>
-                    </div>
-                    <h1>Heavy Duty Parts.<br><span class="accent-red">American</span> <span class="accent-outline">Hustle.</span></h1>
-                    <p class="hero-sub">Direct routing between logistics operators and verified salvage yards across North America. Zero intermediaries. Zero markup. Built for the pros who keep America moving.</p>
-                    <div class="hero-stats">
-                        <div class="hero-stat">
-                            <span class="hero-stat-val" id="hero-count-all">—</span>
-                            <span class="hero-stat-lbl">Open Contracts</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="hero-stat-val" id="hero-count-ca">—</span>
-                            <span class="hero-stat-lbl">Canada Feed</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="hero-stat-val" id="hero-count-us">—</span>
-                            <span class="hero-stat-lbl">US Exchange</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-flag-panel">
-                    <!-- American flag SVG -->
-                    <div class="flag-svg-wrap">
-                        <svg viewBox="0 0 190 100" xmlns="http://www.w3.org/2000/svg">
-                            <!-- 13 stripes -->
-                            <rect width="190" height="100" fill="#B22234"/>
-                            <rect y="7.69" width="190" height="7.69" fill="#fff"/>
-                            <rect y="15.38" width="190" height="7.69" fill="#B22234"/>
-                            <rect y="23.07" width="190" height="7.69" fill="#fff"/>
-                            <rect y="30.76" width="190" height="7.69" fill="#B22234"/>
-                            <rect y="38.46" width="190" height="7.69" fill="#fff"/>
-                            <rect y="46.15" width="190" height="7.69" fill="#B22234"/>
-                            <rect y="53.84" width="190" height="7.69" fill="#fff"/>
-                            <rect y="61.53" width="190" height="7.69" fill="#B22234"/>
-                            <rect y="69.23" width="190" height="7.69" fill="#fff"/>
-                            <rect y="76.92" width="190" height="7.69" fill="#B22234"/>
-                            <rect y="84.61" width="190" height="7.69" fill="#fff"/>
-                            <!-- Canton (blue field) -->
-                            <rect width="76" height="53.84" fill="#3C3B6E"/>
-                            <!-- Stars — 5 rows of 6, 4 rows of 5 = 50 stars (simplified as small circles) -->
-                            <g fill="#fff">
-                                <!-- Row 1: 6 stars -->
-                                <circle cx="7" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="31" cy="6" r="2.2"/><circle cx="43" cy="6" r="2.2"/><circle cx="55" cy="6" r="2.2"/><circle cx="67" cy="6" r="2.2"/>
-                                <!-- Row 2: 5 stars (offset) -->
-                                <circle cx="13" cy="12" r="2.2"/><circle cx="25" cy="12" r="2.2"/><circle cx="37" cy="12" r="2.2"/><circle cx="49" cy="12" r="2.2"/><circle cx="61" cy="12" r="2.2"/>
-                                <!-- Row 3: 6 stars -->
-                                <circle cx="7" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><circle cx="31" cy="18" r="2.2"/><circle cx="43" cy="18" r="2.2"/><circle cx="55" cy="18" r="2.2"/><circle cx="67" cy="18" r="2.2"/>
-                                <!-- Row 4: 5 stars -->
-                                <circle cx="13" cy="24" r="2.2"/><circle cx="25" cy="24" r="2.2"/><circle cx="37" cy="24" r="2.2"/><circle cx="49" cy="24" r="2.2"/><circle cx="61" cy="24" r="2.2"/>
-                                <!-- Row 5: 6 stars -->
-                                <circle cx="7" cy="30" r="2.2"/><circle cx="19" cy="30" r="2.2"/><circle cx="31" cy="30" r="2.2"/><circle cx="43" cy="30" r="2.2"/><circle cx="55" cy="30" r="2.2"/><circle cx="67" cy="30" r="2.2"/>
-                                <!-- Row 6: 5 stars -->
-                                <circle cx="13" cy="36" r="2.2"/><circle cx="25" cy="36" r="2.2"/><circle cx="37" cy="36" r="2.2"/><circle cx="49" cy="36" r="2.2"/><circle cx="61" cy="36" r="2.2"/>
-                                <!-- Row 7: 6 stars -->
-                                <circle cx="7" cy="42" r="2.2"/><circle cx="19" cy="42" r="2.2"/><circle cx="31" cy="42" r="2.2"/><circle cx="43" cy="42" r="2.2"/><circle cx="55" cy="42" r="2.2"/><circle cx="67" cy="42" r="2.2"/>
-                                <!-- Row 8: 5 stars -->
-                                <circle cx="13" cy="48" r="2.2"/><circle cx="25" cy="48" r="2.2"/><circle cx="37" cy="48" r="2.2"/><circle cx="49" cy="48" r="2.2"/><circle cx="61" cy="48" r="2.2"/>
-                                <!-- Row 9: 6 stars -->
-                                <circle cx="7" cy="54" r="2.2"/><circle cx="19" cy="54" r="2.2"/>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="flag-caption">★ Est. 1776 · 250 Years Strong ★</div>
+            <div class="hero-right">
+                <div class="hero-photo-grid">
+                    <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=500&q=80');"></div>
+                    <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=300&q=80');"></div>
+                    <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=300&q=80');"></div>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <main>
-        <!-- HOW IT WORKS -->
-        <section class="how-section">
-            <div class="container">
-                <div class="section-label">How it works</div>
-                <div class="how-grid">
-                    <div class="how-card">
-                        <div class="how-card-head">
-                            <div class="how-icon">📦</div>
-                            <h4>For Parts Buyers</h4>
-                        </div>
-                        <p>Skip the cold-calling. Post your requirement and let verified suppliers come to you.</p>
-                        <ol class="how-steps">
-                            <li><span class="step-num">01</span><span><strong>Submit a request</strong> with your truck specs, component details, and target budget.</span></li>
-                            <li><span class="step-num">02</span><span><strong>Broadcast instantly</strong> to our verified commercial salvage network and Tier-1 brokers.</span></li>
-                        </ol>
-                    </div>
-                    <div class="how-card">
-                        <div class="how-card-head">
-                            <div class="how-icon">⚙️</div>
-                            <h4>For Salvage Yards</h4>
-                        </div>
-                        <p>Real-time access to high-intent commercial buyers. No cold leads, no guesswork.</p>
-                        <ol class="how-steps">
-                            <li><span class="step-num">01</span><span><strong>Monitor the live board</strong> — browse all open contracts free, filtered by region.</span></li>
-                            <li><span class="step-num">02</span><span><strong>Unlock buyer contact</strong> via a secure micro-payment through Stripe. Close the deal.</span></li>
-                        </ol>
-                    </div>
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+    <div class="container">
+        <div class="trust-items">
+            <div class="trust-item"><span class="trust-icon">✅</span> Free for Buyers</div>
+            <div class="trust-item"><span class="trust-icon">🔒</span> Private Contact Info</div>
+            <div class="trust-item"><span class="trust-icon">⚡</span> Live in Minutes</div>
+            <div class="trust-item"><span class="trust-icon">🇺🇸</span> Canada &amp; U.S. Coverage</div>
+            <div class="trust-item"><span class="trust-icon">💳</span> Secure Stripe Payments</div>
+            <div class="trust-item"><span class="trust-icon">🚛</span> Class 6–8 Specialists</div>
+        </div>
+    </div>
+</div>
+
+<!-- MANUFACTURER LOGOS -->
+<section class="brands-section">
+    <div class="container">
+        <div class="brands-label">Our network sources parts from all major manufacturers</div>
+        <div class="brands-grid">
+
+            <!-- Freightliner -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#003087"/>
+                        <text x="40" y="19" font-family="Arial" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">FREIGHTLINER</text>
+                    </svg>
                 </div>
+                <span class="brand-name">Freightliner</span>
             </div>
-        </section>
 
-        <!-- STATS / FILTER BAR -->
-        <div class="stats-bar">
-            <div class="stat-cell active" id="filter-all" onclick="setFilter('all')">
-                <div class="stat-label">Total Active</div>
-                <div class="stat-value" id="count-all">—</div>
+            <!-- Peterbilt -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#C8102E"/>
+                        <text x="40" y="19" font-family="Arial" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">PETERBILT</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Peterbilt</span>
             </div>
-            <div class="stat-cell" id="filter-ontario" onclick="setFilter('ontario')">
-                <div class="stat-label">Canada Regional</div>
-                <div class="stat-value" id="count-ontario">—</div>
+
+            <!-- Kenworth -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#1A1A1A"/>
+                        <text x="40" y="19" font-family="Arial" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">KENWORTH</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Kenworth</span>
             </div>
-            <div class="stat-cell" id="filter-global" onclick="setFilter('global')">
-                <div class="stat-label">US / Global</div>
-                <div class="stat-value" id="count-global">—</div>
+
+            <!-- Mack -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#CC0000"/>
+                        <text x="40" y="20" font-family="Arial" font-size="12" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">MACK</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Mack</span>
+            </div>
+
+            <!-- Volvo -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#003B8E"/>
+                        <text x="40" y="20" font-family="Arial" font-size="11" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">VOLVO</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Volvo</span>
+            </div>
+
+            <!-- International -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#E31837"/>
+                        <text x="40" y="19" font-family="Arial" font-size="7.5" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.3">INTERNATIONAL</text>
+                    </svg>
+                </div>
+                <span class="brand-name">International</span>
+            </div>
+
+            <!-- Western Star -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#2C2C2C"/>
+                        <text x="40" y="14" font-family="Arial" font-size="7" font-weight="900" fill="white" text-anchor="middle">WESTERN</text>
+                        <text x="40" y="23" font-family="Arial" font-size="7" font-weight="900" fill="#C8102E" text-anchor="middle">STAR</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Western Star</span>
+            </div>
+
+            <!-- Cummins -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#E2231A"/>
+                        <text x="40" y="19" font-family="Arial" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">CUMMINS</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Cummins</span>
+            </div>
+
+            <!-- Detroit -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#003087"/>
+                        <text x="40" y="19" font-family="Arial" font-size="9" font-weight="900" fill="white" text-anchor="middle" letter-spacing="0.5">DETROIT</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Detroit</span>
+            </div>
+
+            <!-- Eaton Fuller -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#005B99"/>
+                        <text x="40" y="14" font-family="Arial" font-size="8" font-weight="900" fill="white" text-anchor="middle">EATON</text>
+                        <text x="40" y="23" font-family="Arial" font-size="7" font-weight="700" fill="#7FC4E8" text-anchor="middle">FULLER</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Eaton Fuller</span>
+            </div>
+
+            <!-- Hino -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#CC0000"/>
+                        <text x="40" y="20" font-family="Arial" font-size="11" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">HINO</text>
+                    </svg>
+                </div>
+                <span class="brand-name">Hino</span>
+            </div>
+
+            <!-- Paccar -->
+            <div class="brand-chip">
+                <div class="brand-svg">
+                    <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="28" rx="2" fill="#1B3A6B"/>
+                        <text x="40" y="20" font-family="Arial" font-size="10" font-weight="900" fill="white" text-anchor="middle" letter-spacing="1">PACCAR</text>
+                    </svg>
+                </div>
+                <span class="brand-name">PACCAR</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">How It Works</div>
+            <h2>Direct Connection. Zero Middlemen.</h2>
+        </div>
+        <div class="how-grid">
+            <div class="how-card">
+                <div class="how-card-head">
+                    <div class="how-icon">📦</div>
+                    <h4>For Parts Buyers — 100% Free</h4>
+                </div>
+                <p>Skip the cold-calling. Post your requirement and let verified suppliers come to you — at no cost.</p>
+                <ol class="how-steps">
+                    <li><span class="step-num">01</span><span><strong>Submit a request</strong> with your truck specs, VIN, component details, and target budget.</span></li>
+                    <li><span class="step-num">02</span><span><strong>Goes live instantly</strong> — broadcast to our verified commercial salvage network across Canada and the U.S.</span></li>
+                </ol>
+            </div>
+            <div class="how-card">
+                <div class="how-card-head">
+                    <div class="how-icon">⚙️</div>
+                    <h4>For Salvage Yards &amp; Distributors</h4>
+                </div>
+                <p>Real-time access to high-intent commercial buyers. No cold leads, no subscriptions, no guesswork.</p>
+                <ol class="how-steps">
+                    <li><span class="step-num">01</span><span><strong>Browse free</strong> — monitor all open contracts filtered by region, part type, or manufacturer.</span></li>
+                    <li><span class="step-num">02</span><span><strong>Unlock buyer contact</strong> via a $9.99 Stripe payment when you have a match. Close the deal direct.</span></li>
+                </ol>
             </div>
         </div>
+    </div>
+</section>
 
-        <!-- SEARCH -->
-        <div class="search-bar-wrap" id="board">
-            <div class="container">
-                <div class="search-inner">
-                    <div class="search-wrap">
-                        <input type="text" id="searchBar" class="search-field"
-                            placeholder="Search part name, VIN, engine series, OEM casting…"
-                            oninput="applyFilters()">
+<!-- STATS / FILTER BAR -->
+<div class="stats-bar" id="board">
+    <div class="stat-cell active" id="filter-all" onclick="setFilter('all')">
+        <div class="stat-label">Total Active</div>
+        <div class="stat-value" id="count-all">—</div>
+    </div>
+    <div class="stat-cell" id="filter-ontario" onclick="setFilter('ontario')">
+        <div class="stat-label">Canada Regional</div>
+        <div class="stat-value" id="count-ontario">—</div>
+    </div>
+    <div class="stat-cell" id="filter-global" onclick="setFilter('global')">
+        <div class="stat-label">US / Global</div>
+        <div class="stat-value" id="count-global">—</div>
+    </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar-wrap">
+    <div class="container">
+        <div class="search-inner">
+            <div class="search-wrap">
+                <input type="text" id="searchBar" class="search-field"
+                    placeholder="Search by part name, VIN, engine series, OEM casting number…"
+                    oninput="applyFilters()">
+            </div>
+            <span class="board-status" id="boardStatus">Loading…</span>
+        </div>
+    </div>
+</div>
+
+<!-- BOARD -->
+<section class="board-wrap">
+    <div class="container">
+        <div class="contract-grid" id="contractGrid">
+            <div class="status-card"><span class="pulse"></span>Connecting to procurement feed…</div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">TruckParts<span>XL</span></div>
+                <div class="footer-tagline">Keeping America's Fleet on the Road Since Day One</div>
+            </div>
+            <div class="footer-copy">© 2026 TruckPartsXL. Commercial Salvage Ecosystem. All Rights Reserved.</div>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const REPO = "174hz/truckpartsxl";
+    const STRIPE_LINK_FALLBACK = "https://buy.stripe.com/test_7sYfYZb8Cfmu8hq8u3a7C0g";
+    let allContracts = [];
+    let activeFilter = 'all';
+
+    function getField(obj, key, fallback) {
+        const val = obj[key];
+        if (val === undefined || val === null) return fallback;
+        const str = String(val).trim();
+        if (!str || str.toLowerCase() === 'undefined' || str.toLowerCase() === 'null') return fallback;
+        if (str.includes('@') && str.includes('.')) return fallback;
+        if (str.toLowerCase().startsWith('select your')) return fallback;
+        return str;
+    }
+
+    function isValidEntry(bounty) {
+        const part = bounty.partName || '';
+        const vehicle = bounty.yearMakeModel || '';
+        if (!part && !vehicle) return false;
+        if (part.includes('@') || vehicle.includes('@')) return false;
+        if (part.match(/^\d{3}[\s\-]\d{3}[\s\-]\d{4}$/)) return false;
+        if (part.toLowerCase().startsWith('select your')) return false;
+        return true;
+    }
+
+    function isCanada(region) {
+        return /ontario|horseshoe|canada|peterborough|millbrook/i.test(region);
+    }
+
+    function formatBudget(budget) {
+        if (!budget) return '';
+        const num = Number(String(budget).replace(/[^0-9.]/g, ''));
+        if (isNaN(num) || num === 0) return budget;
+        return '$' + num.toLocaleString();
+    }
+
+    function renderCard(bounty, index) {
+        const part      = getField(bounty, 'partName',      'Component Asset');
+        const vehicle   = getField(bounty, 'yearMakeModel', '');
+        const vin       = getField(bounty, 'vin',           '');
+        const casting   = getField(bounty, 'oem',           '');
+        const engine    = getField(bounty, 'specs',         '');
+        const condition = getField(bounty, 'condition',     '');
+        const budget    = getField(bounty, 'budget',        '');
+        const region    = getField(bounty, 'region',        'Not Specified');
+
+        const isPriority  = bounty.boosted === 'true';
+        const regionEmoji = isCanada(region) ? '🍁' : '🇺🇸';
+        const unlockUrl   = (bounty.unlockUrl || STRIPE_LINK_FALLBACK).replace(/'/g, "%27");
+        const searchStr   = `${part} ${vehicle} ${vin} ${casting} ${engine} ${region}`.toLowerCase();
+
+        return `
+        <div class="contract-card ${isPriority ? 'is-priority' : ''}"
+             data-region="${region.toLowerCase()}"
+             data-search="${searchStr}">
+            <div class="card-accent"></div>
+            <div class="card-body">
+                <div class="part-id">
+                    <span class="part-name">${part}</span>
+                    ${vehicle ? `<span class="part-vehicle">${vehicle}</span>` : ''}
+                    <div class="part-tags">
+                        ${isPriority ? '<span class="tag tag-priority">⚡ Priority</span>' : ''}
                     </div>
-                    <span class="board-status" id="boardStatus">Loading…</span>
+                </div>
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">VIN</span>
+                        <span class="spec-value is-vin">${vin || '<span class=is-na>—</span>'}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">OEM / Casting</span>
+                        <span class="spec-value">${casting || '<span class=is-na>—</span>'}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Specs / Engine</span>
+                        <span class="spec-value">${engine || '<span class=is-na>—</span>'}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Condition Required</span>
+                        <span class="spec-value">${condition || '<span class=is-na>—</span>'}</span>
+                    </div>
+                </div>
+                <div class="budget-col">
+                    ${budget
+                        ? `<span class="budget-val">${formatBudget(budget)}</span>`
+                        : `<span class="budget-na">Quote Direct</span>`}
+                    <span class="region-pill">${regionEmoji} ${region}</span>
+                </div>
+                <div class="card-actions">
+                    <button class="unlock-btn" onclick="window.open('${unlockUrl}', '_blank')">
+                        🔒 Unlock Contact
+                    </button>
+                    <span class="btn-subtext">Secure via Stripe · $9.99</span>
                 </div>
             </div>
-        </div>
+        </div>`;
+    }
 
-        <!-- BOARD -->
-        <section class="board-wrap">
-            <div class="container">
-                <div class="contract-grid" id="contractGrid">
-                    <div class="status-card"><span class="pulse"></span>Connecting to procurement feed…</div>
-                </div>
-            </div>
-        </section>
-    </main>
+    function setFilter(f) {
+        activeFilter = f;
+        ['all','ontario','global'].forEach(id => {
+            document.getElementById('filter-' + id).classList.toggle('active', id === f);
+        });
+        applyFilters();
+    }
 
-    <footer>
-        <div class="container">
-            <div class="footer-inner">
-                <div>
-                    <div class="footer-logo">TruckParts<span>XL</span></div>
-                    <div class="footer-tagline">Keeping America's Fleet on the Road Since Day One</div>
-                </div>
-                <div class="footer-copy">© 2026 TruckPartsXL. Commercial Salvage Ecosystem. All Rights Reserved.</div>
-                <div class="footer-links">
-                    <a href="about.html">About</a>
-                    <a href="privacy.html">Privacy</a>
-                    <a href="terms.html">Terms</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    function applyFilters() {
+        const q = document.getElementById('searchBar').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('#contractGrid .contract-card');
+        let visible = 0;
+        cards.forEach(card => {
+            const r = card.dataset.region || '';
+            const s = card.dataset.search || '';
+            const regionMatch =
+                activeFilter === 'all' ? true :
+                activeFilter === 'ontario' ? isCanada(r) : !isCanada(r);
+            const show = regionMatch && (!q || s.includes(q));
+            card.classList.toggle('hidden', !show);
+            if (show) visible++;
+        });
+        const empty = document.getElementById('emptyMsg');
+        if (visible === 0 && cards.length > 0) {
+            if (!empty) document.getElementById('contractGrid').insertAdjacentHTML('beforeend',
+                `<div id="emptyMsg" class="status-card">No contracts match your filter parameters.</div>`);
+        } else if (empty) empty.remove();
+        const labels = { all: 'All open contracts', ontario: 'Canada regional feed', global: 'US / Global exchange' };
+        document.getElementById('boardStatus').textContent =
+            `${visible} contract${visible !== 1 ? 's' : ''} — ${labels[activeFilter]}`;
+    }
 
-    <script>
-        const REPO = "174hz/truckpartsxl";
-        const STRIPE_LINK_FALLBACK = "https://buy.stripe.com/test_7sYfYZb8Cfmu8hq8u3a7C0g";
+    async function loadBoard() {
+        const grid = document.getElementById('contractGrid');
+        const url = `https://raw.githubusercontent.com/${REPO}/main/bounties.json?t=${Date.now()}`;
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error('Feed unreachable');
+            const data = await res.json();
+            allContracts = Array.isArray(data) ? data : (data.bounties || []);
+            allContracts = allContracts.filter(b => isValidEntry(b));
+            allContracts.reverse();
 
-        let allContracts = [];
-        let activeFilter = 'all';
-
-        /* ─── STARS ────────────────────────────────────────────────── */
-        (function spawnStars() {
-            const container = document.getElementById('heroStars');
-            if (!container) return;
-            for (let i = 0; i < 55; i++) {
-                const s = document.createElement('div');
-                s.className = 'star';
-                const size = Math.random() * 2 + 1;
-                s.style.cssText = `
-                    width:${size}px; height:${size}px;
-                    left:${Math.random()*100}%; top:${Math.random()*100}%;
-                    --op:${0.3 + Math.random()*0.5};
-                    --dur:${2 + Math.random()*4}s;
-                    --delay:${Math.random()*4}s;
-                `;
-                container.appendChild(s);
+            if (allContracts.length === 0) {
+                grid.innerHTML = `<div class="status-card">No active contracts on the board right now. <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header" target="_blank" style="color:var(--red);font-weight:700;">Post the first bounty →</a></div>`;
+                ['count-all','count-ontario','count-global'].forEach(id => document.getElementById(id).textContent = '0');
+                document.getElementById('boardStatus').textContent = '0 contracts';
+                return;
             }
-        })();
 
-        /* ─── DATA PARSING ─────────────────────────────────────────── */
-        // Reads fields directly by their exact key name from the Apps Script JSON
-        function getField(obj, key, fallback) {
-            const val = obj[key];
-            if (val === undefined || val === null) return fallback;
-            const str = String(val).trim();
-            if (!str || str.toLowerCase() === 'undefined' || str.toLowerCase() === 'null') return fallback;
-            // Skip values that are clearly private data that slipped through old pipeline
-            if (str.includes('@') && str.includes('.')) return fallback; // email
-            if (str.toLowerCase().startsWith('select your')) return fallback; // old Zapier placeholder
-            return str;
-        }
+            grid.innerHTML = allContracts.map((b, i) => renderCard(b, i)).join('');
 
-        // Check if a card has real data worth showing
-        function isValidEntry(bounty) {
-            const part = bounty.partName || '';
-            const vehicle = bounty.yearMakeModel || '';
-            const region = bounty.region || '';
-            // Must have at least a part name or vehicle that isn't an email/placeholder
-            if (!part && !vehicle) return false;
-            if (part.includes('@') || vehicle.includes('@')) return false;
-            if (part.match(/^\d{3}[\s\-]\d{3}[\s\-]\d{4}$/)) return false; // phone number
-            if (part.toLowerCase().startsWith('select your')) return false;
-            return true;
-        }
+            let canada = 0, global = 0;
+            allContracts.forEach(b => { isCanada(b.region || '') ? canada++ : global++; });
+            const total = canada + global;
+            document.getElementById('count-all').textContent     = total;
+            document.getElementById('count-ontario').textContent = canada;
+            document.getElementById('count-global').textContent  = global;
 
-        function isCanada(region) {
-            return /ontario|horseshoe|canada|peterborough|millbrook/i.test(region);
-        }
-
-        /* ─── RENDER ───────────────────────────────────────────────── */
-        function renderCard(bounty, index) {
-            // Direct key mapping — matches exactly what onFormSubmit.gs writes
-            const part      = getField(bounty, 'partName',      'Component Asset');
-            const vehicle   = getField(bounty, 'yearMakeModel', '');
-            const vin       = getField(bounty, 'vin',           '');
-            const casting   = getField(bounty, 'oem',           '');
-            const engine    = getField(bounty, 'specs',         '');
-            const condition = getField(bounty, 'condition',     '');
-            const budget    = getField(bounty, 'budget',        '');
-            const region    = getField(bounty, 'region',        'Not Specified');
-
-            const isPriority = index % 3 === 0;
-            const regionEmoji = isCanada(region) ? '🍁' : '🇺🇸';
-            const unlockUrl = (bounty.unlockUrl || STRIPE_LINK_FALLBACK).replace(/'/g, "%27");
-            const searchStr = `${part} ${vehicle} ${vin} ${casting} ${engine} ${region}`.toLowerCase();
-
-            return `
-            <div class="contract-card ${isPriority ? 'is-priority' : ''}"
-                 data-region="${region.toLowerCase()}"
-                 data-search="${searchStr}">
-                <div class="card-accent"></div>
-                <div class="card-body">
-
-                    <div class="part-id">
-                        <span class="part-name">${part}</span>
-                        ${vehicle ? `<span class="part-vehicle">${vehicle}</span>` : ''}
-                        <div class="part-tags">
-                            ${isPriority ? '<span class="tag tag-priority">⚡ Priority</span>' : ''}
-                        </div>
-                    </div>
-
-                    <div class="spec-grid">
-                        <div class="spec-item">
-                            <span class="spec-label">VIN</span>
-                            <span class="spec-value is-vin">${vin || '—'}</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">OEM Cast.</span>
-                            <span class="spec-value">${casting || '—'}</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Specs / Engine</span>
-                            <span class="spec-value">${engine || '—'}</span>
-                        </div>
-                        <div class="spec-item" style="grid-column:1/-1;margin-top:2px;">
-                            <span class="spec-label">Condition Required</span>
-                            <span class="spec-value">${condition || '—'}</span>
-                        </div>
-                    </div>
-
-                    <div class="budget-col">
-                        ${budget
-                            ? `<span class="budget-val">$${Number(budget.toString().replace(/[^0-9.]/g,'')).toLocaleString() || budget}</span>`
-                            : `<span class="budget-na">Quote Direct</span>`}
-                        <span class="region-pill">${regionEmoji} ${region}</span>
-                    </div>
-
-                    <div class="card-actions">
-                        <button class="unlock-btn" onclick="window.open('${unlockUrl}', '_blank')">
-                            🔒 Unlock Contact
-                        </button>
-                        <span class="btn-subtext">Secure via Stripe · $9.99</span>
-                    </div>
-
-                </div>
-            </div>`;
-        }
-
-        /* ─── FILTER ───────────────────────────────────────────────── */
-        function setFilter(f) {
-            activeFilter = f;
-            ['all','ontario','global'].forEach(id => {
-                document.getElementById('filter-' + id).classList.toggle('active', id === f);
-            });
             applyFilters();
+        } catch (err) {
+            console.error(err);
+            grid.innerHTML = `<div class="status-card">Feed temporarily unavailable. Please refresh.</div>`;
         }
+    }
 
-        function applyFilters() {
-            const q = document.getElementById('searchBar').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('#contractGrid .contract-card');
-            let visible = 0;
-
-            cards.forEach(card => {
-                const r = card.dataset.region || '';
-                const s = card.dataset.search || '';
-                const regionMatch =
-                    activeFilter === 'all' ? true :
-                    activeFilter === 'ontario' ? isCanada(r) : !isCanada(r);
-                const show = regionMatch && (!q || s.includes(q));
-                card.classList.toggle('hidden', !show);
-                if (show) visible++;
-            });
-
-            const empty = document.getElementById('emptyMsg');
-            if (visible === 0 && cards.length > 0) {
-                if (!empty) document.getElementById('contractGrid').insertAdjacentHTML('beforeend',
-                    `<div id="emptyMsg" class="status-card">No contracts match your filter.</div>`);
-            } else if (empty) empty.remove();
-
-            const labels = { all: 'All open contracts', ontario: 'Canada regional feed', global: 'US / Global exchange' };
-            document.getElementById('boardStatus').textContent =
-                `${visible} contract${visible !== 1 ? 's' : ''} — ${labels[activeFilter]}`;
-        }
-
-        /* ─── LOAD ─────────────────────────────────────────────────── */
-        async function loadBoard() {
-            const grid = document.getElementById('contractGrid');
-            const url = `https://raw.githubusercontent.com/${REPO}/main/bounties.json?t=${Date.now()}`;
-            try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error('Feed unreachable');
-                const data = await res.json();
-                allContracts = Array.isArray(data) ? data : (data.bounties || []);
-                allContracts = allContracts.filter(b => {
-                    const s = JSON.stringify(b).toLowerCase();
-                    return !s.includes('select your location') && !s.includes('shipping region');
-                });
-                allContracts.reverse(); // newest first
-
-                if (allContracts.length === 0) {
-                    grid.innerHTML = `<div class="status-card">No active contracts on the board right now.</div>`;
-                    return;
-                }
-
-                // Filter out junk/blank entries from old pipeline before rendering
-                const validContracts = allContracts.filter(b => isValidEntry(b));
-                grid.innerHTML = validContracts.map((b, i) => renderCard(b, i)).join('');
-
-                let canada = 0, global = 0;
-                validContracts.forEach(b => {
-                    const r = b.region || '';
-                    isCanada(r) ? canada++ : global++;
-                });
-
-                const total = canada + global;
-                ['count-all','hero-count-all'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = total; });
-                ['count-ontario','hero-count-ca'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = canada; });
-                ['count-global','hero-count-us'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = global; });
-
-                applyFilters();
-            } catch (err) {
-                console.error(err);
-                grid.innerHTML = `<div class="status-card">Feed temporarily unavailable. Retrying…</div>`;
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', loadBoard);
-    </script>
+    window.addEventListener('DOMContentLoaded', loadBoard);
+</script>
 </body>
 </html>
