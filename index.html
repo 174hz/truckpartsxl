@@ -28,8 +28,8 @@
             --red-glow:   rgba(200,16,46,0.15);
             --red-soft:   rgba(200,16,46,0.10);
 
-            --blue:       #7BA7C4;
-            --blue-dim:   #5F8FAD;
+            --blue:       #8FA8B8;
+            --blue-dim:   #7090A0;
             --blue-glow:  rgba(74,144,196,0.15);
 
             --gold:       #C9A84C;
@@ -509,6 +509,7 @@
 
         /* ─── BOARD ──────────────────────────────────────────────────── */
         .board-wrap { padding: 16px 0 56px; }
+        .board-wrap .container { max-width: 1000px; }
 
         .contract-grid { display: flex; flex-direction: column; gap: 2px; }
 
@@ -536,13 +537,13 @@
         .contract-card.is-empty { display: none; }
 
         /* 4-col desktop layout: part | specs | budget+region | action */
-        .contract-card { max-width: 1100px; }
+        .contract-card { max-width: 960px; margin-left: auto; margin-right: auto; }
 
         .card-body {
-            padding: 12px 16px;
+            padding: 11px 14px;
             display: grid;
-            grid-template-columns: 220px 1fr 140px 148px;
-            gap: 12px;
+            grid-template-columns: 200px 1fr 130px 140px;
+            gap: 10px;
             align-items: center;
         }
 
@@ -563,7 +564,7 @@
             font-family: var(--ff-mono);
             font-size: 11px;
             font-weight: 600;
-            color: var(--label);
+            color: var(--soft);
             letter-spacing: 0.02em;
             white-space: nowrap;
             overflow: hidden;
@@ -593,8 +594,8 @@
         /* — Spec grid — */
         .spec-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px 16px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px 12px;
         }
 
         .spec-item { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
@@ -611,8 +612,8 @@
         .spec-value {
             font-size: 11px;
             font-weight: 600;
-            color: var(--soft);
-            line-height: 1.3;
+            color: var(--bright);
+            line-height: 1.25;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1070,20 +1071,29 @@
         })();
 
         /* ─── DATA PARSING ─────────────────────────────────────────── */
-        function parseField(obj, keys, fallback) {
-            const targets = keys.map(k => k.toLowerCase().replace(/[^a-z0-9]/g, ''));
-            for (const key of Object.keys(obj)) {
-                const norm = key.toLowerCase().replace(/[^a-z0-9]/g, '');
-                if (targets.some(t => norm.includes(t) || t.includes(norm))) {
-                    const val = String(obj[key]).trim();
-                    if (!val || ['undefined','null',''].includes(val.toLowerCase())) continue;
-                    if (val.toLowerCase().includes('select your') || val.toLowerCase().includes('shipping region')) continue;
-                    if (val.includes('@') && val.includes('.')) continue;
-                    if (/^\d{10}$/.test(val.replace(/[\s\-()]/g, ''))) continue;
-                    return val;
-                }
-            }
-            return fallback;
+        // Reads fields directly by their exact key name from the Apps Script JSON
+        function getField(obj, key, fallback) {
+            const val = obj[key];
+            if (val === undefined || val === null) return fallback;
+            const str = String(val).trim();
+            if (!str || str.toLowerCase() === 'undefined' || str.toLowerCase() === 'null') return fallback;
+            // Skip values that are clearly private data that slipped through old pipeline
+            if (str.includes('@') && str.includes('.')) return fallback; // email
+            if (str.toLowerCase().startsWith('select your')) return fallback; // old Zapier placeholder
+            return str;
+        }
+
+        // Check if a card has real data worth showing
+        function isValidEntry(bounty) {
+            const part = bounty.partName || '';
+            const vehicle = bounty.yearMakeModel || '';
+            const region = bounty.region || '';
+            // Must have at least a part name or vehicle that isn't an email/placeholder
+            if (!part && !vehicle) return false;
+            if (part.includes('@') || vehicle.includes('@')) return false;
+            if (part.match(/^\d{3}[\s\-]\d{3}[\s\-]\d{4}$/)) return false; // phone number
+            if (part.toLowerCase().startsWith('select your')) return false;
+            return true;
         }
 
         function isCanada(region) {
@@ -1092,25 +1102,23 @@
 
         /* ─── RENDER ───────────────────────────────────────────────── */
         function renderCard(bounty, index) {
-            const part      = parseField(bounty, ['partname','part','component','need'], 'Component Asset');
-            const vehicle   = parseField(bounty, ['yearmakemodel','truck','model','vehicle'], '');
-            const vin       = parseField(bounty, ['vin','identifier','serial'], '');
-            const casting   = parseField(bounty, ['casting','oem','number'], '');
-            const engine    = parseField(bounty, ['engine','motor','spec'], '');
-            const condition = parseField(bounty, ['condition','status','state'], '');
-            const budget    = parseField(bounty, ['budget','target','price','cost'], '');
-            const region    = parseField(bounty, ['region','location','dispatch','prov'], 'Not Specified');
+            // Direct key mapping — matches exactly what onFormSubmit.gs writes
+            const part      = getField(bounty, 'partName',      'Component Asset');
+            const vehicle   = getField(bounty, 'yearMakeModel', '');
+            const vin       = getField(bounty, 'vin',           '');
+            const casting   = getField(bounty, 'oem',           '');
+            const engine    = getField(bounty, 'specs',         '');
+            const condition = getField(bounty, 'condition',     '');
+            const budget    = getField(bounty, 'budget',        '');
+            const region    = getField(bounty, 'region',        'Not Specified');
 
             const isPriority = index % 3 === 0;
             const regionEmoji = isCanada(region) ? '🍁' : '🇺🇸';
             const unlockUrl = (bounty.unlockUrl || STRIPE_LINK_FALLBACK).replace(/'/g, "%27");
             const searchStr = `${part} ${vehicle} ${vin} ${casting} ${engine} ${region}`.toLowerCase();
 
-            // Mark truly blank cards (no part name, no vehicle, no VIN)
-            const isEmpty = part === 'Component Asset' && !vehicle && !vin;
-
             return `
-            <div class="contract-card ${isPriority ? 'is-priority' : ''}${isEmpty ? ' is-empty' : ''}"
+            <div class="contract-card ${isPriority ? 'is-priority' : ''}"
                  data-region="${region.toLowerCase()}"
                  data-search="${searchStr}">
                 <div class="card-accent"></div>
@@ -1134,18 +1142,18 @@
                             <span class="spec-value">${casting || '—'}</span>
                         </div>
                         <div class="spec-item">
-                            <span class="spec-label">Engine</span>
+                            <span class="spec-label">Specs / Engine</span>
                             <span class="spec-value">${engine || '—'}</span>
                         </div>
-                        <div class="spec-item" style="grid-column:1/-1">
-                            <span class="spec-label">Condition</span>
+                        <div class="spec-item" style="grid-column:1/-1;margin-top:2px;">
+                            <span class="spec-label">Condition Required</span>
                             <span class="spec-value">${condition || '—'}</span>
                         </div>
                     </div>
 
                     <div class="budget-col">
                         ${budget
-                            ? `<span class="budget-val">${budget}</span>`
+                            ? `<span class="budget-val">$${Number(budget.toString().replace(/[^0-9.]/g,'')).toLocaleString() || budget}</span>`
                             : `<span class="budget-na">Quote Direct</span>`}
                         <span class="region-pill">${regionEmoji} ${region}</span>
                     </div>
@@ -1217,11 +1225,13 @@
                     return;
                 }
 
-                grid.innerHTML = allContracts.map((b, i) => renderCard(b, i)).join('');
+                // Filter out junk/blank entries from old pipeline before rendering
+                const validContracts = allContracts.filter(b => isValidEntry(b));
+                grid.innerHTML = validContracts.map((b, i) => renderCard(b, i)).join('');
 
                 let canada = 0, global = 0;
-                allContracts.forEach(b => {
-                    const r = parseField(b, ['region','location','dispatch','prov'], '');
+                validContracts.forEach(b => {
+                    const r = b.region || '';
                     isCanada(r) ? canada++ : global++;
                 });
 
