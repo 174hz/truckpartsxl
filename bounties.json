@@ -22,5 +22,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "3efead70-cf18-4581-bac0-71cd45be15a7",
+    "timestamp": "7/14/2026 6:46:45",
+    "region": "Global Exchange (US Rust Belt & International)",
+    "yearMakeModel": "2026 Kenworth T680",
+    "vin": "90876123459876543",
+    "partName": "Turbocharger ",
+    "specs": "DD15",
+    "oem": "765490432167",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "Open to quotes ",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
