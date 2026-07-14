@@ -46,5 +46,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "dcdc351f-5fb3-4b37-9b75-8197b7bb027b",
+    "timestamp": "7/14/2026 8:37:31",
+    "region": "Calgary, AB",
+    "yearMakeModel": "2027 Kenworth T680",
+    "vin": "90126789012389056",
+    "partName": "Steering Gear Box ",
+    "specs": "Eaton Fuller 13 Speed ",
+    "oem": "891456781239",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "Open to quotes ",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
