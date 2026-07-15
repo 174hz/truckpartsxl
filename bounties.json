@@ -54,5 +54,19 @@
     "budget": "13,500",
     "boosted": "false",
     "unlockUrl": ""
+  },
+  {
+    "id": "723f2e91-1c80-4c0a-ac43-f7ab7d14b3fa",
+    "timestamp": "7/15/2026 16:29:49",
+    "region": "Dallas, TX ",
+    "yearMakeModel": "2027 Kenworth T680",
+    "vin": "90126789012345891",
+    "partName": "Turbocharger ",
+    "specs": "Cummins ISX15",
+    "oem": "789125678901",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "18,900",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
