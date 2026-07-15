@@ -94,5 +94,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "61cdfdd8-c241-4f13-9d0b-2be4e89f22d5",
+    "timestamp": "7/15/2026 15:26:01",
+    "region": "Dallas, TX ",
+    "partName": "2025 Kenworth T680",
+    "yearMakeModel": "90765123456798765",
+    "vin": "Turbocharger",
+    "specs": "Cummins ISX15",
+    "oem": "678913567890",
+    "condition": "Any Condition (Whatever gets me rolling!)",
+    "budget": "14,600 or open to quotes",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
