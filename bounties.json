@@ -142,5 +142,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "bc148ca0-e79c-4547-8505-531d32030e48",
+    "timestamp": "7/15/2026 16:12:05",
+    "region": "Calgary, AB",
+    "partName": "2027 Freightliner Cascadia ",
+    "yearMakeModel": "90812356789012678",
+    "vin": "Steering Gear Box",
+    "specs": "Easton Fuller 13-Speed ",
+    "oem": "890156781234",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "19,600",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
