@@ -70,5 +70,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "c08eddfa-436c-4f14-9771-ef6ca9b52bc2",
+    "timestamp": "7/14/2026 20:05:32",
+    "region": "Dallas, TX",
+    "partName": "2026 Kenworth T680",
+    "yearMakeModel": "90765432156789345",
+    "vin": "Steering Gear Box",
+    "specs": "Cummins ISX15",
+    "oem": "456712398409",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "13,500",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
