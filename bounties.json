@@ -118,5 +118,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "5976ff94-7638-4e81-b013-ccf101f38d16",
+    "timestamp": "7/15/2026 15:42:47",
+    "region": "Detroit, MI ",
+    "partName": "2027 Freighliner Cascadia",
+    "yearMakeModel": "890345578901234589",
+    "vin": "Steering Gear Box",
+    "specs": "Eaton Fuller 13-Speed ",
+    "oem": "903458913561",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "17,800",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
