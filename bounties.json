@@ -78,5 +78,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "ecb81be8-9f40-4b4c-bf73-d539daa3dd0c",
+    "timestamp": "7/17/2026 21:18:14",
+    "region": "Memphis, TN",
+    "yearMakeModel": "2026 Kenwood T680",
+    "vin": "18765409126537891",
+    "partName": "Turbocharger ",
+    "specs": "Detroit DD15",
+    "oem": "671914716430",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "16,600",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
