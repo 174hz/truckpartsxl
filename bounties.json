@@ -126,5 +126,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "ad08c398-afda-4d4b-956f-7cda4aa2144f",
+    "timestamp": "7/20/2026 15:32:11",
+    "region": "Calgary AB",
+    "yearMakeModel": "2025 Peterbilt 389",
+    "vin": "98765432109876543",
+    "partName": "Turbocharger",
+    "specs": "Cummins ISX15",
+    "oem": "987654321",
+    "condition": "Used / Take-Off (Budget Friendly)",
+    "budget": "$3,500",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1zgFZW6SA7NGzNibmODp3wVJpzQDBXksE2cNfuj3sbILIoEh3DuioEekw#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
