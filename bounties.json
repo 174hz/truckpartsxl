@@ -102,5 +102,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "73be8d29-7686-41e5-8792-716522d84ca8",
+    "timestamp": "7/19/2026 20:38:07",
+    "region": "Toronto, ON",
+    "yearMakeModel": "2026 Kenworth T680",
+    "vin": "12345678901234567",
+    "partName": "Steering Gear Box",
+    "specs": "Cummins ISX15",
+    "oem": "OEM 123456789",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "8,500",
+    "boosted": "false",
+    "unlockUrl": ""
   }
 ]
