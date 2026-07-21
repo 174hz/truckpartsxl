@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe to the Free Parts Feed | TruckPartsXL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:       #F2F4F6;
+            --bg-card:  #FFFFFF;
+            --bg-dark:  #0B1F3A;
+            --bg-dark2: #112444;
+            --border:   #D4D8DE;
+            --subtext:  #6B7A8D;
+            --body:     #3D4D5C;
+            --heading:  #1A2633;
+            --white:    #FFFFFF;
+            --red:      #C8102E;
+            --red-dim:  #A50D25;
+            --red-soft: rgba(200,16,46,0.08);
+            --red-mid:  rgba(200,16,46,0.15);
+            --blue:     #1B3F6E;
+            --gold:     #B8860B;
+            --gold-soft:rgba(184,134,11,0.10);
+            --ff-body:  'Inter', system-ui, sans-serif;
+            --ff-mono:  'IBM Plex Mono', monospace;
+            --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--body); font-family: var(--ff-body); font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+        /* TOPBAR */
+        .top-bar { background: var(--blue); color: #fff; font-family: var(--ff-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-align: center; padding: 7px 16px; text-transform: uppercase; }
+
+        /* NAV */
+        nav { background: var(--bg-dark); border-bottom: 3px solid var(--red); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-md); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .nav-logo { font-family: var(--ff-mono); font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .nav-logo-flag { display: flex; flex-direction: column; width: 26px; height: 18px; border-radius: 2px; overflow: hidden; border: 1px solid rgba(255,255,255,0.25); }
+        .flag-stripe { flex: 1; }
+        .flag-stripe.r { background: var(--red); }
+        .flag-stripe.w { background: #fff; }
+        .nav-logo span { color: var(--red); }
+        .nav-links { display: flex; align-items: center; gap: 28px; }
+        .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.15s; }
+        .nav-links a:hover { color: #fff; }
+        .nav-cta { background: var(--red); color: #fff !important; padding: 8px 18px; border-radius: var(--r-sm); font-weight: 700 !important; font-size: 12px !important; letter-spacing: 0.05em; text-transform: uppercase; }
+        .nav-cta:hover { background: var(--red-dim) !important; }
+
+        /* PAGE HEADER */
+        .page-header { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 56px 0 44px; position: relative; overflow: hidden; }
+        .page-header::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 120px; background: repeating-linear-gradient(180deg, var(--red) 0px, var(--red) 10px, transparent 10px, transparent 20px); opacity: 0.06; pointer-events: none; }
+        .page-eyebrow { font-family: var(--ff-mono); font-size: 9px; font-weight: 700; color: var(--red); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .page-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--red); }
+        .page-header h1 { font-size: clamp(24px, 3vw, 38px); font-weight: 900; color: var(--white); line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 14px; }
+        .page-header h1 span { color: var(--red); }
+        .page-header p { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 560px; line-height: 1.75; }
+
+        /* MAIN CONTENT */
+        .main-wrap { padding: 48px 0 72px; }
+        .main-grid { display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: start; }
+
+        /* LEFT — benefits */
+        .benefits-col {}
+
+        .benefit-section-label { font-family: var(--ff-mono); font-size: 9px; font-weight: 700; color: var(--subtext); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .benefit-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        .benefit-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+        .benefit-item { display: flex; gap: 16px; align-items: flex-start; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; box-shadow: var(--shadow-sm); }
+        .benefit-icon { width: 40px; height: 40px; background: var(--red-soft); border: 1px solid var(--red-mid); border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .benefit-text h3 { font-size: 14px; font-weight: 700; color: var(--heading); margin-bottom: 4px; }
+        .benefit-text p { font-size: 13px; color: var(--body); line-height: 1.65; }
+
+        /* Sample digest */
+        .sample-digest { background: var(--bg-dark); border-radius: var(--r-xl); overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+        .digest-header { background: var(--red); padding: 12px 20px; display: flex; align-items: center; gap: 10px; }
+        .digest-header-dot { width: 8px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 50%; }
+        .digest-header-text { font-family: var(--ff-mono); font-size: 11px; font-weight: 700; color: white; letter-spacing: 0.06em; }
+        .digest-body { padding: 20px; }
+        .digest-subject { font-family: var(--ff-mono); font-size: 11px; font-weight: 700; color: var(--red); margin-bottom: 4px; letter-spacing: 0.04em; }
+        .digest-from { font-family: var(--ff-mono); font-size: 10px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+        .digest-line { display: flex; gap: 12px; margin-bottom: 6px; }
+        .digest-key { font-family: var(--ff-mono); font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; min-width: 120px; text-transform: uppercase; }
+        .digest-val { font-family: var(--ff-mono); font-size: 11px; color: rgba(255,255,255,0.85); }
+        .digest-val.highlight { color: var(--red); font-weight: 700; }
+        .digest-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 14px 0; }
+        .digest-cta { font-family: var(--ff-mono); font-size: 11px; color: rgba(255,255,255,0.6); }
+        .digest-cta strong { color: white; }
+
+        /* RIGHT — sign up form */
+        .signup-col { position: sticky; top: 88px; }
+
+        .signup-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-md); }
+        .signup-card-header { background: var(--bg-dark); padding: 24px 28px; border-bottom: 3px solid var(--red); }
+        .signup-card-header h2 { font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 4px; letter-spacing: -0.01em; }
+        .signup-card-header p { font-size: 12px; color: rgba(255,255,255,0.55); }
+        .signup-card-body { padding: 28px; }
+
+        .form-group { margin-bottom: 18px; }
+        .form-label { display: block; font-size: 12px; font-weight: 700; color: var(--heading); margin-bottom: 6px; }
+        .form-label .req { color: var(--red); margin-left: 2px; }
+        .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md); padding: 11px 14px; color: var(--heading); font-family: var(--ff-body); font-size: 13px; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+        .form-input:focus { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-soft); background: var(--white); }
+        .form-input::placeholder { color: var(--subtext); }
+        select.form-input { cursor: pointer; }
+
+        .form-submit { width: 100%; background: var(--red); color: #fff; border: none; border-radius: var(--r-md); padding: 14px; font-family: var(--ff-body); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: background 0.15s, transform 0.1s; margin-top: 8px; }
+        .form-submit:hover { background: var(--red-dim); transform: translateY(-1px); }
+        .form-submit:active { transform: translateY(0); }
+
+        .form-disclaimer { font-size: 11px; color: var(--subtext); text-align: center; margin-top: 14px; line-height: 1.6; }
+
+        /* Success state */
+        .success-state { display: none; text-align: center; padding: 40px 28px; }
+        .success-icon { font-size: 48px; margin-bottom: 16px; }
+        .success-title { font-size: 20px; font-weight: 800; color: var(--heading); margin-bottom: 8px; }
+        .success-text { font-size: 13px; color: var(--body); line-height: 1.7; }
+
+        /* Pricing box */
+        .pricing-box { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px 20px; margin-top: 20px; display: flex; align-items: center; gap: 14px; }
+        .pricing-free { font-family: var(--ff-mono); font-size: 28px; font-weight: 700; color: var(--red); line-height: 1; }
+        .pricing-detail { }
+        .pricing-title { font-size: 13px; font-weight: 700; color: var(--heading); margin-bottom: 2px; }
+        .pricing-sub { font-size: 11px; color: var(--subtext); }
+
+        /* FAQ */
+        .faq-section { margin-top: 36px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-q { font-size: 13px; font-weight: 700; color: var(--heading); margin-bottom: 6px; }
+        .faq-a { font-size: 12px; color: var(--body); line-height: 1.65; }
+
+        /* FOOTER */
+        footer { background: var(--bg-dark); border-top: 3px solid var(--red); padding: 32px 0; }
+        .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+        .footer-logo { font-family: var(--ff-mono); font-size: 15px; font-weight: 700; color: var(--white); }
+        .footer-logo span { color: var(--red); }
+        .footer-tagline { font-family: var(--ff-mono); font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+        .footer-copy { font-family: var(--ff-mono); font-size: 10px; color: rgba(255,255,255,0.4); }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { font-family: var(--ff-mono); font-size: 10px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+        .footer-links a:hover { color: rgba(255,255,255,0.85); }
+
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .signup-col { position: static; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 0 14px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .page-header { padding: 36px 0 28px; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">🇺🇸 Celebrating America's 250th · Real-Time B2B Heavy Duty Parts Exchange · North America</div>
+
+<nav>
+    <div class="container nav-container">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-flag">
+                <div class="flag-stripe r"></div><div class="flag-stripe w"></div>
+                <div class="flag-stripe r"></div><div class="flag-stripe w"></div>
+                <div class="flag-stripe r"></div>
+            </div>
+            TruckParts<span>XL</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html#board">Open Contracts</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header"
+               target="_blank" class="nav-cta">Post a Bounty — Free</a>
+        </div>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-eyebrow">For Salvage Yards & Distributors</div>
+        <h1>Get the Free<br><span>Parts Demand Feed</span></h1>
+        <p>Receive instant email alerts every time a new heavy-duty part request comes in. Full specs, no contact info. Pay $9.99 only when you find a match worth calling.</p>
+    </div>
+</header>
+
+<main class="main-wrap">
+    <div class="container">
+        <div class="main-grid">
+
+            <!-- LEFT: Benefits + sample -->
+            <div class="benefits-col">
+
+                <div class="benefit-section-label">What you get — free</div>
+
+                <div class="benefit-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⚡</div>
+                        <div class="benefit-text">
+                            <h3>Instant Email Alerts</h3>
+                            <p>The moment a buyer posts a part request, you receive a full email with part name, vehicle specs, VIN, OEM casting number, condition, budget, and region. No delay, no aggregation — real time.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🎯</div>
+                        <div class="benefit-text">
+                            <h3>High-Intent Buyer Demand</h3>
+                            <p>Every request on TruckPartsXL is from a real buyer actively sourcing a specific part. These aren't tire-kickers — they have a truck down or a fleet to maintain and a budget to spend.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🔒</div>
+                        <div class="benefit-text">
+                            <h3>Pay Only When You Match</h3>
+                            <p>The feed is completely free. When you find a request that matches your inventory, pay a one-time $9.99 to unlock the buyer's direct phone and email. No subscription. No monthly fee. Ever.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🚛</div>
+                        <div class="benefit-text">
+                            <h3>Class 6–8 Specialists Only</h3>
+                            <p>TruckPartsXL focuses exclusively on commercial heavy-duty vehicles — Freightliner, Peterbilt, Kenworth, Mack, Volvo, International, Western Star, Hino, and all major engine brands including Cummins, Detroit, and PACCAR.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing -->
+                <div class="pricing-box">
+                    <div class="pricing-free">$0</div>
+                    <div class="pricing-detail">
+                        <div class="pricing-title">Free to subscribe. Free to browse.</div>
+                        <div class="pricing-sub">Pay $9.99 only when you unlock a buyer contact. No subscription. No commitment.</div>
+                    </div>
+                </div>
+
+                <!-- Sample digest email -->
+                <div class="benefit-section-label" style="margin-top:36px;">What the feed email looks like</div>
+                <div class="sample-digest">
+                    <div class="digest-header">
+                        <div class="digest-header-dot"></div>
+                        <div class="digest-header-dot"></div>
+                        <div class="digest-header-dot"></div>
+                        <div class="digest-header-text">TruckPartsXL Parts Feed — Sample Email</div>
+                    </div>
+                    <div class="digest-body">
+                        <div class="digest-subject">🔴 New Part Request — Steering Gear Box | Dallas, TX | TruckPartsXL</div>
+                        <div class="digest-from">From: TruckPartsXL Parts Feed &lt;noreply@truckpartsxl.com&gt;</div>
+                        <div class="digest-line"><span class="digest-key">Part Required</span><span class="digest-val highlight">Steering Gear Box</span></div>
+                        <div class="digest-line"><span class="digest-key">Vehicle</span><span class="digest-val">2026 Kenworth T680</span></div>
+                        <div class="digest-line"><span class="digest-key">VIN</span><span class="digest-val">1XKAD49X2PJ123456</span></div>
+                        <div class="digest-line"><span class="digest-key">Engine / Specs</span><span class="digest-val">Cummins ISX15</span></div>
+                        <div class="digest-line"><span class="digest-key">OEM / Casting</span><span class="digest-val">456712398409</span></div>
+                        <div class="digest-line"><span class="digest-key">Condition</span><span class="digest-val">Brand New OEM / Aftermarket</span></div>
+                        <div class="digest-line"><span class="digest-key">Budget</span><span class="digest-val highlight">$13,500</span></div>
+                        <div class="digest-line"><span class="digest-key">Region</span><span class="digest-val">Dallas, TX</span></div>
+                        <hr class="digest-divider">
+                        <div class="digest-cta">Think you can fill this? <strong>Unlock buyer contact for $9.99</strong> at truckpartsxl.com</div>
+                    </div>
+                </div>
+
+                <!-- FAQ -->
+                <div class="faq-section">
+                    <div class="benefit-section-label" style="margin-top:36px;">Common questions</div>
+                    <div class="faq-item">
+                        <div class="faq-q">How many requests will I receive?</div>
+                        <div class="faq-a">Volume grows as our buyer network expands. Early subscribers get first look at every request — the sooner you join, the more you see.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q">What parts categories are covered?</div>
+                        <div class="faq-a">All Class 6-8 heavy-duty commercial vehicle components — engines, transmissions, differentials, turbochargers, steering, axles, cab assemblies, electrical, and more.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q">Can I filter by region or part type?</div>
+                        <div class="faq-a">Not yet in the email feed — you receive all requests. You can browse and filter by region on the live board at any time. Regional filtering in the feed is on our roadmap.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q">How do I unsubscribe?</div>
+                        <div class="faq-a">Reply to any feed email with the word REMOVE and we'll take you off the list within 24 hours. No questions asked.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q">Is my email shared with buyers?</div>
+                        <div class="faq-a">Never. Your email is used only to send you the feed. Buyers never see your contact information unless you unlock their listing and reach out to them directly.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: Sign-up form -->
+            <div class="signup-col">
+                <div class="signup-card">
+                    <div class="signup-card-header">
+                        <h2>Join the Free Feed</h2>
+                        <p>Start receiving live part requests instantly. No credit card required.</p>
+                    </div>
+                    <div class="signup-card-body" id="formWrap">
+                        <form id="subscribeForm" onsubmit="handleSubmit(event)">
+
+                            <div class="form-group">
+                                <label class="form-label" for="companyName">Company Name <span class="req">*</span></label>
+                                <input type="text" id="companyName" class="form-input" placeholder="e.g. Big Country Truck Parts" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="contactName">Your Name <span class="req">*</span></label>
+                                <input type="text" id="contactName" class="form-input" placeholder="First and last name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email Address <span class="req">*</span></label>
+                                <input type="email" id="email" class="form-input" placeholder="parts@yourcompany.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="For follow-up if needed">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="region">Primary Region <span class="req">*</span></label>
+                                <select id="region" class="form-input" required>
+                                    <option value="">Select your region...</option>
+                                    <optgroup label="Canada">
+                                        <option>Ontario</option>
+                                        <option>Quebec</option>
+                                        <option>British Columbia</option>
+                                        <option>Alberta</option>
+                                        <option>Manitoba</option>
+                                        <option>Saskatchewan</option>
+                                        <option>Atlantic Canada</option>
+                                        <option>All of Canada</option>
+                                    </optgroup>
+                                    <optgroup label="United States">
+                                        <option>US Northeast</option>
+                                        <option>US Southeast</option>
+                                        <option>US Midwest</option>
+                                        <option>US South / Texas</option>
+                                        <option>US West</option>
+                                        <option>US Northwest</option>
+                                        <option>All of United States</option>
+                                    </optgroup>
+                                    <option>Canada & US (All Regions)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="bizType">Business Type <span class="req">*</span></label>
+                                <select id="bizType" class="form-input" required>
+                                    <option value="">Select your business type...</option>
+                                    <option>Salvage Yard / Auto Wrecker</option>
+                                    <option>Heavy Duty Parts Distributor</option>
+                                    <option>Truck Parts Retailer</option>
+                                    <option>Remanufacturer</option>
+                                    <option>Fleet Parts Manager</option>
+                                    <option>Independent Parts Broker</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="form-submit" id="submitBtn">
+                                Join the Free Feed →
+                            </button>
+
+                            <p class="form-disclaimer">
+                                By subscribing you agree to receive email notifications for new part requests on TruckPartsXL. You can unsubscribe at any time by replying REMOVE to any email. We never share your information.
+                            </p>
+                        </form>
+                    </div>
+
+                    <!-- Success state (hidden until form submitted) -->
+                    <div class="success-state" id="successState">
+                        <div class="success-icon">✅</div>
+                        <div class="success-title">You're on the feed!</div>
+                        <div class="success-text">
+                            Welcome to TruckPartsXL. You'll receive an email notification the next time a new part request comes in.<br><br>
+                            In the meantime, browse all current open contracts on the live board.
+                        </div>
+                        <br>
+                        <a href="index.html#board" style="display:inline-block;margin-top:8px;background:var(--red);color:#fff;padding:12px 24px;border-radius:var(--r-md);font-weight:700;font-size:13px;text-decoration:none;text-transform:uppercase;letter-spacing:0.04em;">Browse Open Contracts →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">TruckParts<span>XL</span></div>
+                <div class="footer-tagline">Keeping America's Fleet on the Road Since Day One</div>
+            </div>
+            <div class="footer-copy">© 2026 TruckPartsXL. All Rights Reserved.</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        var btn = document.getElementById('submitBtn');
+        btn.textContent = 'Submitting...';
+        btn.disabled = true;
+
+        var data = {
+            companyName:  document.getElementById('companyName').value,
+            contactName:  document.getElementById('contactName').value,
+            email:        document.getElementById('email').value,
+            phone:        document.getElementById('phone').value,
+            region:       document.getElementById('region').value,
+            bizType:      document.getElementById('bizType').value,
+            timestamp:    new Date().toISOString()
+        };
+
+        // Submit to Google Form
+        // REPLACE THE URL BELOW WITH YOUR SUBSCRIBER GOOGLE FORM URL
+        var FORM_URL = 'YOUR_GOOGLE_FORM_URL_HERE';
+
+        // Build the form submission URL
+        // Map each field to the Google Form entry IDs
+        // You'll get these entry IDs from your Google Form
+        var params = new URLSearchParams({
+            'entry.COMPANY_NAME_ID':  data.companyName,
+            'entry.CONTACT_NAME_ID':  data.contactName,
+            'entry.EMAIL_ID':         data.email,
+            'entry.PHONE_ID':         data.phone,
+            'entry.REGION_ID':        data.region,
+            'entry.BIZ_TYPE_ID':      data.bizType,
+        });
+
+        // Submit via hidden iframe to avoid redirect
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.name = 'hidden_iframe';
+        document.body.appendChild(iframe);
+
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = FORM_URL.replace('/viewform', '/formResponse');
+        form.target = 'hidden_iframe';
+
+        Object.keys(data).forEach(function(key) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
+        });
+
+        document.body.appendChild(form);
+
+        // Show success after short delay
+        setTimeout(function() {
+            document.getElementById('formWrap').style.display = 'none';
+            document.getElementById('successState').style.display = 'block';
+        }, 1200);
+
+        form.submit();
+    }
+</script>
+
+</body>
+</html>
