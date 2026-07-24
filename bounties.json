@@ -190,5 +190,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "7854c946-80aa-4387-b631-31c6e5149346",
+    "timestamp": "7/24/2026 11:50:16",
+    "region": "Philadelphia PA",
+    "yearMakeModel": "2022 Mack Anthem",
+    "vin": "1M1AN4GY2NM123456",
+    "partName": "Front Steer Axle Assembly",
+    "specs": "Meritor MFS-12-143A",
+    "oem": "A3211W3578",
+    "condition": "Used / Take-Off (Budget Friendly)",
+    "budget": "$3,800",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1GuPq9LC1Z7msLYcYSivSmAjnF5pRPm9yVcfulTSivzCbbd2v4MvSmCai#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
