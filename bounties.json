@@ -94,5 +94,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "e53a0fd6-1e8a-430d-8054-166cd2a2d648",
+    "timestamp": "7/24/2026 11:18:53",
+    "region": "Dallas, TX ",
+    "yearMakeModel": "2018 Mack Anthem",
+    "vin": "1M1AN4GY1KM123456",
+    "partName": "Meritor Rear Differential",
+    "specs": "Meritor RS-23-160 40K",
+    "oem": "3892R1333",
+    "condition": "Used / Take-Off (Budget Friendly)",
+    "budget": "$3,200",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1MSot1OT6MJzitZNzY86YY4DEqpryHuPPocP0GBtnjNY541ydUQpz0X3C#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
