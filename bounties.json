@@ -118,5 +118,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "8ff5f190-ada8-4960-aa76-e7310c307652",
+    "timestamp": "7/24/2026 11:28:12",
+    "region": "Calgary AB",
+    "yearMakeModel": "2020 Kenworth T880",
+    "vin": "1NKZXPEX0LJ123456",
+    "partName": "Turbocharger",
+    "specs": "Cummins ISX15 Holset HE400VG",
+    "oem": "4043979",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "$2,400",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1jEGb8HC4W181zVJ9eA5hTDMwar9FDnfnt9H3Uzmg9G4Zhmt6ntetzJ72#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
