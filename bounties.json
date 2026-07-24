@@ -70,5 +70,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "7dd4f529-eaa7-4dca-af37-0d8b031c38ff",
+    "timestamp": "7/24/2026 10:58:44",
+    "region": "Chicago IL",
+    "yearMakeModel": "2020 Freightliner Cascadia",
+    "vin": "3AKJHHDR1LSLF8901",
+    "partName": "Detroit DD15 Engine",
+    "specs": "Detroit DD15 — 505HP Series 60",
+    "oem": "A4720104498",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "$22,000",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1QPeMwBCpwX2eOgxJLTBlUnUwgXrLgSICycKLMgJfZ5FMoXDnO5bS8gx6#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
