@@ -166,5 +166,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "7459c549-5934-4a63-b337-17c3917a2f06",
+    "timestamp": "7/24/2026 11:38:56",
+    "region": "Detroit, MI",
+    "yearMakeModel": "2019 International LT",
+    "vin": "3HSDZAPR5KN123456",
+    "partName": "Allison 4500 Automatic Transmission",
+    "specs": "Allison 4500 RDS",
+    "oem": "29540887",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "$8,900",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1llbQUZLSHjQkSuSh9rS2Nbwkuj8oedA8IGvWI44toPdhCCZg3ldzZKU7#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
