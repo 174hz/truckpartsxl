@@ -8,5 +8,19 @@
     "condition": "3AKJHHDR5KSKF7234",
     "region": "Cummins ISX15 Complete Engine",
     "boosted": "false"
+  },
+  {
+    "id": "e6504a35-2fe0-4054-9e1f-7bcf04f213a0",
+    "timestamp": "7/24/2026 10:15:56",
+    "region": "Houston TX",
+    "yearMakeModel": "2019 Freightliner Cascadia ",
+    "vin": "3AKJHHDR5KSKF7234",
+    "partName": "Cummins ISX15 Complete Engine",
+    "specs": "Cummins ISX15 — 450HP",
+    "oem": "4952979",
+    "condition": "Remanufactured / Rebuilt (With Warranty)",
+    "budget": "18,500",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1901FMAZjL8GHzO27acvXavZ9hSRgYCz4OueM02ma71NJUgBu2NHksALW#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
