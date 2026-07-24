@@ -46,5 +46,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "5b849d5d-1a8e-454a-8b4e-3c7d1df336a3",
+    "timestamp": "7/24/2026 10:49:43",
+    "region": "Atlanta GA",
+    "yearMakeModel": "2022 Peterbilt 389",
+    "vin": "1XPFD49X2ND123789",
+    "partName": "Steering Gear Box",
+    "specs": "",
+    "oem": "Q25-6048",
+    "condition": "Brand New OEM / Aftermarket",
+    "budget": "$2,800",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a12Nb5MLXnRHmNkXCuzcJ8aBJuZqft8yPAkpZyqGz6U94ksTuFAfxwawzP#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
