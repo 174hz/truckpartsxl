@@ -1,27 +1,12 @@
 [
   {
-    "id": "d7fa2933-9640-415a-97eb-78cb205196be",
-    "timestamp": "",
-    "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2018 Freightliner Cascadia",
-    "vin": "12345678901234567",
-    "partName": "Test Gearbox ",
-    "specs": "Eaton Fuller 13-Speed",
-    "oem": "12345678901234567",
-    "condition": "Any Condition (Whatever gets me rolling!)",
-    "budget": "1500",
-    "boosted": "false",
-    "unlockUrl": "",
-    "seeded": "true"
-  },
-  {
-    "id": "d1a23dfe-6f8f-4e21-b341-12b94a844272",
+    "id": "78bc24b6-2a1d-46ca-96b3-fc9d3183aaf1",
     "timestamp": "Wed Jun 17 2026 14:28:15 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
     "yearMakeModel": "2018 Freightliner Cascadia",
     "vin": "12345678909876543",
     "partName": "Test Gearbox",
-    "specs": " Meritor 40k",
+    "specs": "Meritor 40k",
     "oem": "",
     "condition": "Any Condition (Whatever gets me rolling!)",
     "budget": "1200",
@@ -30,12 +15,12 @@
     "seeded": "true"
   },
   {
-    "id": "fd16e314-5ff2-4ca5-94f1-92dd824a1e35",
+    "id": "4bd2eee7-5ebd-44b0-93f7-e5fee3ee2f01",
     "timestamp": "Thu Jun 18 2026 13:18:05 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2018 Freughtliner Cascadia ",
+    "yearMakeModel": "2018 Freughtliner Cascadia",
     "vin": "12345678901234567",
-    "partName": "Test Gearbox ",
+    "partName": "Test Gearbox",
     "specs": "",
     "oem": "12345678901234567",
     "condition": "Any Condition (Whatever gets me rolling!)",
@@ -45,13 +30,13 @@
     "seeded": "true"
   },
   {
-    "id": "6ca96383-f44a-4adc-99d2-c2bfee811a8d",
+    "id": "bb74d21c-9364-4e38-a143-466d6a95cb43",
     "timestamp": "Sat Jun 20 2026 20:41:12 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2017 Freightliner Cascade ",
+    "yearMakeModel": "2017 Freightliner Cascade",
     "vin": "12345678890012345",
-    "partName": "Tester Engine ",
-    "specs": "Eaton 13 Speed ",
+    "partName": "Tester Engine",
+    "specs": "Eaton 13 Speed",
     "oem": "12345678",
     "condition": "Any Condition (Whatever gets me rolling!)",
     "budget": "15000",
@@ -60,13 +45,13 @@
     "seeded": "true"
   },
   {
-    "id": "69a9071f-de06-4713-91fa-44125693ec99",
+    "id": "9d3a9238-11ce-433c-b094-b7d90c002625",
     "timestamp": "Mon Jun 22 2026 12:45:23 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
     "yearMakeModel": "2023 FREIGHTLINER CASCADE",
     "vin": "12345678909876543",
-    "partName": "Test Gearbox ",
-    "specs": "DD12 ",
+    "partName": "Test Gearbox",
+    "specs": "DD12",
     "oem": "19875432219764",
     "condition": "Any Condition (Whatever gets me rolling!)",
     "budget": "2700",
@@ -75,13 +60,13 @@
     "seeded": "true"
   },
   {
-    "id": "ac8786f3-20f2-438f-8e1d-309c36b89975",
+    "id": "dd279620-c9a3-4cc9-a4a3-c0f8d24db75d",
     "timestamp": "Mon Jun 22 2026 13:14:18 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2023 FREIGHTLINER Cascadia ",
+    "yearMakeModel": "2023 FREIGHTLINER Cascadia",
     "vin": "11229087654321987",
-    "partName": "Tester Gearbox ",
-    "specs": "Cummins X12 ",
+    "partName": "Tester Gearbox",
+    "specs": "Cummins X12",
     "oem": "198512890458",
     "condition": "Any Condition (Whatever gets me rolling!)",
     "budget": "6500",
@@ -90,13 +75,13 @@
     "seeded": "true"
   },
   {
-    "id": "8c48265a-df53-4c36-a587-c7022e7c3f39",
+    "id": "aaf6d64c-a7c1-4033-bee5-e4f6160a3bb4",
     "timestamp": "Mon Jun 22 2026 13:50:11 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2022 FREIGHTLINER CASCADIA ",
+    "yearMakeModel": "2022 FREIGHTLINER CASCADIA",
     "vin": "123456789098765",
-    "partName": "Tester Gearbox ",
-    "specs": "Eaton Fuller X12 ",
+    "partName": "Tester Gearbox",
+    "specs": "Eaton Fuller X12",
     "oem": "1234567890123",
     "condition": "Brand New OEM / Aftermarket",
     "budget": "2400",
@@ -105,12 +90,12 @@
     "seeded": "true"
   },
   {
-    "id": "d5e9d930-e69d-4fb5-a549-9b8baf5064c3",
+    "id": "77119849-e4f1-4831-9595-65a282d07848",
     "timestamp": "Mon Jun 22 2026 14:15:33 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2025 FREIGHTLINER CASCADIA ",
+    "yearMakeModel": "2025 FREIGHTLINER CASCADIA",
     "vin": "12345678909876543",
-    "partName": "Tester Gearbox ",
+    "partName": "Tester Gearbox",
     "specs": "DD15",
     "oem": "123456780987",
     "condition": "Used / Take-Off (Budget Friendly)",
@@ -120,12 +105,12 @@
     "seeded": "true"
   },
   {
-    "id": "c306d96a-28a4-433b-b233-4f0c4315b488",
+    "id": "1920d8f0-d9c3-4105-bcc7-2e058ea2be0c",
     "timestamp": "Mon Jun 22 2026 14:22:07 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2023 FREIGHTLINER CASCADIA ",
+    "yearMakeModel": "2023 FREIGHTLINER CASCADIA",
     "vin": "12345678909876543",
-    "partName": "Test Gearbox ",
+    "partName": "Test Gearbox",
     "specs": "DD15",
     "oem": "123456780123",
     "condition": "Any Condition (Whatever gets me rolling!)",
@@ -135,10 +120,10 @@
     "seeded": "true"
   },
   {
-    "id": "c6886673-6c73-438c-bf9f-e160d0edd0a8",
+    "id": "38cafc2d-6aa0-46e0-a5a4-729cf42e0a28",
     "timestamp": "Mon Jun 22 2026 16:15:07 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2024 Freightliner Cascadia ",
+    "yearMakeModel": "2024 Freightliner Cascadia",
     "vin": "12345678909876543",
     "partName": "Tester Gearbox",
     "specs": "DD15",
@@ -150,13 +135,13 @@
     "seeded": "true"
   },
   {
-    "id": "c41bdad4-f609-4014-8a0d-2e3c4adf98f5",
+    "id": "b3d8d40e-d587-4da4-84ae-320da65af4b9",
     "timestamp": "Mon Jun 22 2026 22:30:35 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2024 FREIGHTLINER CASCADIA ",
+    "yearMakeModel": "2024 FREIGHTLINER CASCADIA",
     "vin": "09876543211234567",
-    "partName": "tester Gearbox ",
-    "specs": "Cummins ISX15 ",
+    "partName": "tester Gearbox",
+    "specs": "Cummins ISX15",
     "oem": "8712390123",
     "condition": "Brand New OEM / Aftermarket",
     "budget": "6700",
@@ -165,13 +150,13 @@
     "seeded": "true"
   },
   {
-    "id": "277a3999-0438-44cd-9383-17872756f65e",
+    "id": "c388122d-96f6-4e0f-bd96-a151bbed8a04",
     "timestamp": "Tue Jun 23 2026 00:53:00 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2022 FREIGHTLINER CASCADIA ",
+    "yearMakeModel": "2022 FREIGHTLINER CASCADIA",
     "vin": "12345678901234557",
-    "partName": "Test Gearbox ",
-    "specs": "DD15 ",
+    "partName": "Test Gearbox",
+    "specs": "DD15",
     "oem": "123456712",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
     "budget": "",
@@ -180,10 +165,10 @@
     "seeded": "true"
   },
   {
-    "id": "9d8b96ae-36a9-4658-8916-f57ea2917cef",
+    "id": "4dd0307c-9930-4d07-ac02-a8c79fe6e6e9",
     "timestamp": "Tue Jun 23 2026 12:28:13 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2025 Freightliner Cascadia ",
+    "yearMakeModel": "2025 Freightliner Cascadia",
     "vin": "12345678912345678",
     "partName": "Tester Gearbox",
     "specs": "Cummins DD15",
@@ -195,12 +180,12 @@
     "seeded": "true"
   },
   {
-    "id": "001acab9-d39a-48f9-af64-e7961fd6329a",
+    "id": "869f5ecd-1f84-4b70-81e6-3f26f6507e35",
     "timestamp": "Tue Jun 23 2026 13:11:03 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2024 Freightliner Cascadia ",
+    "yearMakeModel": "2024 Freightliner Cascadia",
     "vin": "12345612345678123",
-    "partName": "Tester Gearbox ",
+    "partName": "Tester Gearbox",
     "specs": "DD15",
     "oem": "123456789012",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
@@ -210,12 +195,12 @@
     "seeded": "true"
   },
   {
-    "id": "6be14295-0612-4fd9-8899-fa06c26fce9d",
+    "id": "a4210894-93fb-4c08-be47-fee7811e1649",
     "timestamp": "Tue Jun 23 2026 13:20:55 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2023 Freightliner Cascadia ",
+    "yearMakeModel": "2023 Freightliner Cascadia",
     "vin": "12345678901234567",
-    "partName": "Tester Gearbox ",
+    "partName": "Tester Gearbox",
     "specs": "DD17",
     "oem": "1986543218",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
@@ -225,10 +210,10 @@
     "seeded": "true"
   },
   {
-    "id": "c8fb8010-5412-41c8-9526-156094600186",
+    "id": "caa000b3-66fd-401d-8ea0-d3e56704c1d8",
     "timestamp": "Tue Jun 23 2026 13:27:42 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2022 Freightliner Cascadia ",
+    "yearMakeModel": "2022 Freightliner Cascadia",
     "vin": "12345612345670123",
     "partName": "Tester Gearbox",
     "specs": "DD17",
@@ -240,10 +225,10 @@
     "seeded": "true"
   },
   {
-    "id": "52be0992-7fb1-4280-b6d1-e8600fbb43ae",
+    "id": "3d2ae431-8121-4dbd-a0f4-30320ac77e80",
     "timestamp": "Tue Jun 23 2026 14:04:42 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2025 Feightliner Cascadia ",
+    "yearMakeModel": "2025 Feightliner Cascadia",
     "vin": "12345678909876543",
     "partName": "Tester Gearbox",
     "specs": "DD15",
@@ -255,12 +240,12 @@
     "seeded": "true"
   },
   {
-    "id": "f92bf51e-c34e-470e-91c9-2d564360f7e6",
+    "id": "0966ece9-89ff-485c-85f0-f48494265e06",
     "timestamp": "Tue Jun 23 2026 14:29:09 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2019 Freightliner Cascadia ",
+    "yearMakeModel": "2019 Freightliner Cascadia",
     "vin": "12345678900123456",
-    "partName": "Gearbox Tester ",
+    "partName": "Gearbox Tester",
     "specs": "DD17",
     "oem": "9812346781",
     "condition": "Brand New OEM / Aftermarket",
@@ -270,13 +255,13 @@
     "seeded": "true"
   },
   {
-    "id": "5fd6ceda-764a-479d-b17e-bf8559a963bd",
+    "id": "de6f80bc-f0da-48f8-b5a7-4b7f8f18fa1f",
     "timestamp": "Tue Jun 23 2026 15:37:58 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2025 Freightliner Cascadia ",
+    "yearMakeModel": "2025 Freightliner Cascadia",
     "vin": "12345670654321789",
-    "partName": "Tester Gearbox ",
-    "specs": "DD100 ",
+    "partName": "Tester Gearbox",
+    "specs": "DD100",
     "oem": "345601238541",
     "condition": "Brand New OEM / Aftermarket",
     "budget": "7200",
@@ -285,13 +270,13 @@
     "seeded": "true"
   },
   {
-    "id": "c6198dd6-a7c6-4f5d-9edb-975813eaf571",
+    "id": "c978c40b-642e-4be8-aae0-119534b5e4d9",
     "timestamp": "Tue Jun 23 2026 16:15:21 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
     "yearMakeModel": "2026 Freightliner Cascadia",
     "vin": "12340987654128642",
     "partName": "Tester Gearbox",
-    "specs": "Eaton Fuller 13-speed ",
+    "specs": "Eaton Fuller 13-speed",
     "oem": "8901345891356",
     "condition": "Brand New OEM / Aftermarket",
     "budget": "6800",
@@ -300,12 +285,12 @@
     "seeded": "true"
   },
   {
-    "id": "a7bba74c-1ee2-4372-929b-6700c160d189",
+    "id": "4a8e20c7-1fac-4187-8bcf-d24ac229ed72",
     "timestamp": "Tue Jun 23 2026 16:44:23 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "@023 Freightliner Cascadia ",
+    "yearMakeModel": "@023 Freightliner Cascadia",
     "vin": "12560965432189065",
-    "partName": "Tester Gearbox ",
+    "partName": "Tester Gearbox",
     "specs": "Eaton Fuller 13-speed",
     "oem": "123095642178",
     "condition": "Any Condition (Whatever gets me rolling!)",
@@ -315,10 +300,10 @@
     "seeded": "true"
   },
   {
-    "id": "e7bf5bb5-24b3-4b60-bd00-f8f9556b320c",
+    "id": "c1134516-5beb-4c0d-b53f-6de03a646bfe",
     "timestamp": "Tue Jun 23 2026 16:49:51 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2019 Freightliner Cascadia ",
+    "yearMakeModel": "2019 Freightliner Cascadia",
     "vin": "12309871234560987",
     "partName": "DETROIT DD15 TURBOCHARGER",
     "specs": "Detroit DD15",
@@ -330,12 +315,12 @@
     "seeded": "true"
   },
   {
-    "id": "96a06592-0224-4d8c-8151-6bbdad18f1e9",
+    "id": "a881383d-ce65-4a0e-8842-5129d7e9e3bb",
     "timestamp": "Tue Jun 23 2026 21:12:16 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2025 Freightliner Kenwirth ",
+    "yearMakeModel": "2025 Freightliner Kenwirth",
     "vin": "12778904567812345",
-    "partName": "Turbocharger Tester ",
+    "partName": "Turbocharger Tester",
     "specs": "DD15",
     "oem": "891456790145",
     "condition": "Brand New OEM / Aftermarket",
@@ -345,13 +330,13 @@
     "seeded": "true"
   },
   {
-    "id": "ad3a127b-0f75-4914-b983-69f0ddd0817b",
+    "id": "2742e11e-27ec-4c73-92ca-45b218b75472",
     "timestamp": "Tue Jun 23 2026 21:48:33 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2018 Feightliner Cascadia ",
+    "yearMakeModel": "2018 Feightliner Cascadia",
     "vin": "12345678901234567",
     "partName": "Turbocharger",
-    "specs": "Eaton Fuller 13-speed ",
+    "specs": "Eaton Fuller 13-speed",
     "oem": "1890456782",
     "condition": "Brand New OEM / Aftermarket",
     "budget": "14800",
@@ -360,13 +345,13 @@
     "seeded": "true"
   },
   {
-    "id": "7aa48c47-1ed2-4240-b2ee-b7c8bde6ca97",
+    "id": "74835e69-4bab-4983-a10a-8b2092581b65",
     "timestamp": "Wed Jun 24 2026 00:49:10 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2022 FREIGHTLINER CASCADIA ",
+    "yearMakeModel": "2022 FREIGHTLINER CASCADIA",
     "vin": "12345678901234557",
     "partName": "Turbocharger",
-    "specs": "Eaton Fuller 13 speed ",
+    "specs": "Eaton Fuller 13 speed",
     "oem": "1569014763212",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
     "budget": "6700",
@@ -375,13 +360,13 @@
     "seeded": "true"
   },
   {
-    "id": "0d78ee84-d644-4ac4-ad92-6ca2ff069ef1",
+    "id": "4a4770fb-7b24-46db-b6ad-1ef3ad948b10",
     "timestamp": "Thu Jun 25 2026 16:23:06 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2022 Freightliner Cascadia ",
+    "yearMakeModel": "2022 Freightliner Cascadia",
     "vin": "12345678901234567",
     "partName": "Tester Turbocharger",
-    "specs": "Eaton Fuller 13-Speed ",
+    "specs": "Eaton Fuller 13-Speed",
     "oem": "1234567890",
     "condition": "Any Condition (Whatever gets me rolling!)",
     "budget": "11500",
@@ -390,13 +375,13 @@
     "seeded": "true"
   },
   {
-    "id": "80314f55-723a-40fd-8298-bc804afcddb6",
+    "id": "329badce-1818-4e12-b653-c17b719e8b95",
     "timestamp": "Sun Jun 28 2026 23:47:34 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2025 Freightliner Cascadia ",
+    "yearMakeModel": "2025 Freightliner Cascadia",
     "vin": "123456789001234567",
     "partName": "Steering Gear Box",
-    "specs": "Eaton Fuller 13 Speed ",
+    "specs": "Eaton Fuller 13 Speed",
     "oem": "891234765106",
     "condition": "Any Condition (Whatever gets me rolling!)",
     "budget": "9500",
@@ -405,13 +390,13 @@
     "seeded": "true"
   },
   {
-    "id": "35500d4d-cb71-4a71-9fb7-0d5f0024c6eb",
+    "id": "4af2052c-b9ca-4573-aa39-0d0fe2970340",
     "timestamp": "Mon Jun 29 2026 17:15:36 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
     "yearMakeModel": "2024 Kenworth T680",
     "vin": "12345678901276543",
-    "partName": "Steering Gear Box ",
-    "specs": "Cummins X23 ",
+    "partName": "Steering Gear Box",
+    "specs": "Cummins X23",
     "oem": "123498765408",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
     "budget": "8500",
@@ -420,12 +405,12 @@
     "seeded": "true"
   },
   {
-    "id": "63b8ff90-e70d-469e-8548-8e387aed4621",
+    "id": "a041a104-da53-4554-8a27-97138e29eb9f",
     "timestamp": "Wed Jul 08 2026 14:46:55 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2026 Freightliner Cascadia ",
+    "yearMakeModel": "2026 Freightliner Cascadia",
     "vin": "12345678901234567",
-    "partName": "Gear Box Tester ",
+    "partName": "Gear Box Tester",
     "specs": "Eaton Fuller 13-speed",
     "oem": "1234567890",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
@@ -435,12 +420,12 @@
     "seeded": "true"
   },
   {
-    "id": "81a4a36f-61de-490f-8081-c08d504ffcb6",
+    "id": "950e7095-ddd9-410e-ab89-dbc2abb5b0df",
     "timestamp": "Wed Jul 08 2026 15:01:24 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2027 Freightliner Cascadia ",
+    "yearMakeModel": "2027 Freightliner Cascadia",
     "vin": "12345678901234567",
-    "partName": "Gear Box Teser ",
+    "partName": "Gear Box Teser",
     "specs": "Eaton Fuller 13-Speed",
     "oem": "1234567890",
     "condition": "Brand New OEM / Aftermarket",
@@ -450,7 +435,7 @@
     "seeded": "true"
   },
   {
-    "id": "64315421-e6ae-499e-bcac-34e3a6bf9c60",
+    "id": "403e1f00-45ef-4b55-b57b-7bf389693273",
     "timestamp": "Wed Jul 08 2026 17:23:00 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
     "yearMakeModel": "2028 Freightliner Cascadia",
@@ -465,12 +450,12 @@
     "seeded": "true"
   },
   {
-    "id": "bee739d7-3ade-4010-907e-1f9334e9b908",
+    "id": "183ea19e-3abc-4ec1-8a1c-0d3aea40348c",
     "timestamp": "Wed Jul 08 2026 17:38:40 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2028 Freightliner Cascadia ",
+    "yearMakeModel": "2028 Freightliner Cascadia",
     "vin": "12345123451234567",
-    "partName": "Gear Box Teser ",
+    "partName": "Gear Box Teser",
     "specs": "Detroit DD15",
     "oem": "123456789012",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
@@ -480,13 +465,13 @@
     "seeded": "true"
   },
   {
-    "id": "52d29115-899e-4723-acba-ddb5f72e8e8b",
+    "id": "2d770a32-6082-40c6-883a-b10439e8e479",
     "timestamp": "Wed Jul 08 2026 18:08:04 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2028 Freightliner Cascadia ",
+    "yearMakeModel": "2028 Freightliner Cascadia",
     "vin": "23456789123456789",
-    "partName": "Gear Box Tester ",
-    "specs": "Eaton Fuller 13-speed ",
+    "partName": "Gear Box Tester",
+    "specs": "Eaton Fuller 13-speed",
     "oem": "1234567890",
     "condition": "Used / Take-Off (Budget Friendly)",
     "budget": "11800",
@@ -495,12 +480,12 @@
     "seeded": "true"
   },
   {
-    "id": "b3060e40-b947-4159-84e0-4022da6751a5",
+    "id": "e9b30fb5-a0c6-4736-883a-a9b5d8db522f",
     "timestamp": "Thu Jul 09 2026 00:12:27 GMT-0400 (Eastern Daylight Time)",
     "region": "Ontario (Golden Horseshoe Region)",
-    "yearMakeModel": "2027 Hino ",
+    "yearMakeModel": "2027 Hino",
     "vin": "12345678901234567",
-    "partName": "Gear Box Sample ",
+    "partName": "Gear Box Sample",
     "specs": "Eaton Fuller 13-speed",
     "oem": "1234567890",
     "condition": "Brand New OEM / Aftermarket",
@@ -510,12 +495,12 @@
     "seeded": "true"
   },
   {
-    "id": "7207c2de-c4a1-416a-8abd-77cadd44f18d",
+    "id": "b52565a7-4ab7-4230-91be-307bc9c7a111",
     "timestamp": "Thu Jul 09 2026 12:14:03 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
-    "yearMakeModel": "2028 Freightliner Cascadia ",
+    "yearMakeModel": "2028 Freightliner Cascadia",
     "vin": "12345678912345678",
-    "partName": "Turbocharger ",
+    "partName": "Turbocharger",
     "specs": "Cummins ISX15",
     "oem": "1234567890",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
@@ -525,37 +510,37 @@
     "seeded": "true"
   },
   {
-    "id": "46002dde-5b2c-45e8-adb3-6d7898d2e28e",
+    "id": "8ee060df-caba-4027-9f8d-e8422d1042e7",
     "timestamp": "Tue Jul 14 2026 09:46:44 GMT-0400 (Eastern Daylight Time)",
     "region": "Global Exchange (US Rust Belt & International)",
     "yearMakeModel": "2026 Kenworth T680",
     "vin": "90876123459876543",
-    "partName": "Turbocharger ",
+    "partName": "Turbocharger",
     "specs": "DD15",
     "oem": "765490432167",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
-    "budget": "Open to quotes ",
+    "budget": "Open to quotes",
     "boosted": "false",
     "unlockUrl": "",
     "seeded": "true"
   },
   {
-    "id": "56802020-572c-4102-bb78-9bf9128fadf9",
+    "id": "46e0f716-dc98-48a7-adbd-37e8c5b90dfa",
     "timestamp": "Tue Jul 14 2026 11:37:30 GMT-0400 (Eastern Daylight Time)",
     "region": "Calgary, AB",
     "yearMakeModel": "2027 Kenworth T680",
     "vin": "90126789012389056",
-    "partName": "Steering Gear Box ",
-    "specs": "Eaton Fuller 13 Speed ",
+    "partName": "Steering Gear Box",
+    "specs": "Eaton Fuller 13 Speed",
     "oem": "891456781239",
     "condition": "Brand New OEM / Aftermarket",
-    "budget": "Open to quotes ",
+    "budget": "Open to quotes",
     "boosted": "false",
     "unlockUrl": "",
     "seeded": "true"
   },
   {
-    "id": "4ddc8dd1-730d-450f-bbfb-190408242b79",
+    "id": "dd2ec6d7-3303-49f4-955a-e2bcaba7cf90",
     "timestamp": "Tue Jul 14 2026 23:05:31 GMT-0400 (Eastern Daylight Time)",
     "region": "Dallas, TX",
     "yearMakeModel": "2026 Kenworth T680",
@@ -570,9 +555,9 @@
     "seeded": "true"
   },
   {
-    "id": "1d7ba105-ed38-4f6d-a9e4-cf04bbccacac",
+    "id": "bc803f11-f942-4434-abbb-aa5390aac96d",
     "timestamp": "Wed Jul 15 2026 18:26:01 GMT-0400 (Eastern Daylight Time)",
-    "region": "Dallas, TX ",
+    "region": "Dallas, TX",
     "yearMakeModel": "2025 Kenworth T680",
     "vin": "90765123456798765",
     "partName": "Turbocharger",
@@ -585,13 +570,13 @@
     "seeded": "true"
   },
   {
-    "id": "dc0b5e3e-07ab-48ff-8d16-7c17f49a1231",
+    "id": "5063df4f-d615-4fb5-896c-051b7266192d",
     "timestamp": "Wed Jul 15 2026 18:42:47 GMT-0400 (Eastern Daylight Time)",
-    "region": "Detroit, MI ",
+    "region": "Detroit, MI",
     "yearMakeModel": "2027 Freighliner Cascadia",
     "vin": "890345578901234589",
     "partName": "Steering Gear Box",
-    "specs": "Eaton Fuller 13-Speed ",
+    "specs": "Eaton Fuller 13-Speed",
     "oem": "903458913561",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
     "budget": "17800",
@@ -600,13 +585,13 @@
     "seeded": "true"
   },
   {
-    "id": "a098c18d-1b2e-4d35-9c1f-6091f151156e",
+    "id": "0e223fb1-eb2f-4780-9050-a1110484a678",
     "timestamp": "Wed Jul 15 2026 19:12:05 GMT-0400 (Eastern Daylight Time)",
     "region": "Calgary, AB",
-    "yearMakeModel": "2027 Freightliner Cascadia ",
+    "yearMakeModel": "2027 Freightliner Cascadia",
     "vin": "90812356789012678",
     "partName": "Steering Gear Box",
-    "specs": "Easton Fuller 13-Speed ",
+    "specs": "Easton Fuller 13-Speed",
     "oem": "890156781234",
     "condition": "Brand New OEM / Aftermarket",
     "budget": "19600",
@@ -615,12 +600,12 @@
     "seeded": "true"
   },
   {
-    "id": "abae0081-50a0-4ca7-99c1-355c9feada9e",
+    "id": "34c32219-cbab-48bd-b8da-497ba6e43d8d",
     "timestamp": "Wed Jul 15 2026 19:29:48 GMT-0400 (Eastern Daylight Time)",
-    "region": "Dallas, TX ",
+    "region": "Dallas, TX",
     "yearMakeModel": "2027 Kenworth T680",
     "vin": "90126789012345891",
-    "partName": "Turbocharger ",
+    "partName": "Turbocharger",
     "specs": "Cummins ISX15",
     "oem": "789125678901",
     "condition": "Brand New OEM / Aftermarket",
@@ -630,12 +615,12 @@
     "seeded": "true"
   },
   {
-    "id": "0d572c20-5b49-4e2e-8bc8-483637858170",
+    "id": "736c0284-ba30-48b3-98a9-f01e485313c4",
     "timestamp": "Sat Jul 18 2026 00:18:14 GMT-0400 (Eastern Daylight Time)",
     "region": "Memphis, TN",
     "yearMakeModel": "2026 Kenwood T680",
     "vin": "18765409126537891",
-    "partName": "Turbocharger ",
+    "partName": "Turbocharger",
     "specs": "Detroit DD15",
     "oem": "671914716430",
     "condition": "Remanufactured / Rebuilt (With Warranty)",
@@ -645,7 +630,7 @@
     "seeded": "true"
   },
   {
-    "id": "f91765de-3060-4765-b0d7-31ed0a11b525",
+    "id": "0a17687a-ae7f-40e7-892a-c66e754e1feb",
     "timestamp": "Sun Jul 19 2026 23:38:06 GMT-0400 (Eastern Daylight Time)",
     "region": "Toronto, ON",
     "yearMakeModel": "2026 Kenworth T680",
@@ -660,7 +645,7 @@
     "seeded": "true"
   },
   {
-    "id": "54bfd4d2-8c85-476a-802d-95aa46e30f8e",
+    "id": "812b3b2a-80ee-479b-adf4-97cbafb760d0",
     "timestamp": "Mon Jul 20 2026 18:32:10 GMT-0400 (Eastern Daylight Time)",
     "region": "Calgary AB",
     "yearMakeModel": "2025 Peterbilt 389",
@@ -675,10 +660,10 @@
     "seeded": "true"
   },
   {
-    "id": "3a135a29-b804-4631-8157-d1c97029174d",
+    "id": "79da27dc-2fd2-4725-a63a-475191e4d1f9",
     "timestamp": "Fri Jul 24 2026 13:15:56 GMT-0400 (Eastern Daylight Time)",
     "region": "Houston TX",
-    "yearMakeModel": "2019 Freightliner Cascadia ",
+    "yearMakeModel": "2019 Freightliner Cascadia",
     "vin": "3AKJHHDR5KSKF7234",
     "partName": "Cummins ISX15 Complete Engine",
     "specs": "Cummins ISX15 — 450HP",
@@ -690,7 +675,7 @@
     "seeded": "true"
   },
   {
-    "id": "d4312534-2f4d-45d5-9697-fcef1d64e289",
+    "id": "6699c117-2058-423f-9c12-8d296a3ace3a",
     "timestamp": "Fri Jul 24 2026 13:31:01 GMT-0400 (Eastern Daylight Time)",
     "region": "Toronto ON",
     "yearMakeModel": "2021 Kenworth T680",
@@ -705,7 +690,7 @@
     "seeded": "true"
   },
   {
-    "id": "69df5396-19ca-4384-9a9a-7f1eca4d5fd2",
+    "id": "8c0b3262-c62b-47f4-b32b-9ab150a9cbd8",
     "timestamp": "Fri Jul 24 2026 13:49:42 GMT-0400 (Eastern Daylight Time)",
     "region": "Atlanta GA",
     "yearMakeModel": "2022 Peterbilt 389",
@@ -720,7 +705,7 @@
     "seeded": "true"
   },
   {
-    "id": "a4890b2c-855d-40fd-8630-bf0e1d594181",
+    "id": "1af0348b-c939-458c-838c-05a3ec14b381",
     "timestamp": "Fri Jul 24 2026 13:58:43 GMT-0400 (Eastern Daylight Time)",
     "region": "Chicago IL",
     "yearMakeModel": "2020 Freightliner Cascadia",
@@ -735,9 +720,9 @@
     "seeded": "true"
   },
   {
-    "id": "544fd38c-74fa-4392-9900-8ccab4881e45",
+    "id": "ed3d4c42-95d1-4120-b8b1-a6d4ce91802e",
     "timestamp": "Fri Jul 24 2026 14:18:52 GMT-0400 (Eastern Daylight Time)",
-    "region": "Dallas, TX ",
+    "region": "Dallas, TX",
     "yearMakeModel": "2018 Mack Anthem",
     "vin": "1M1AN4GY1KM123456",
     "partName": "Meritor Rear Differential",
@@ -750,7 +735,7 @@
     "seeded": "true"
   },
   {
-    "id": "c13b477e-161d-4875-9212-2f3975ea2570",
+    "id": "b675a938-74da-4251-80af-55cd58c2abb7",
     "timestamp": "Fri Jul 24 2026 14:28:12 GMT-0400 (Eastern Daylight Time)",
     "region": "Calgary AB",
     "yearMakeModel": "2020 Kenworth T880",
@@ -765,7 +750,7 @@
     "seeded": "true"
   },
   {
-    "id": "f2ab2037-b5d2-43ec-8596-ede3e2f9c0e3",
+    "id": "205bef89-e0f1-4cb9-8f89-a7aed7ba6462",
     "timestamp": "Fri Jul 24 2026 14:35:05 GMT-0400 (Eastern Daylight Time)",
     "region": "Seattle WA",
     "yearMakeModel": "2021 Volvo VNL 760",
@@ -780,7 +765,7 @@
     "seeded": "true"
   },
   {
-    "id": "2f6c7005-f9c8-42d5-a1aa-75206235e2bc",
+    "id": "777152d8-e41c-432a-b439-63bc362fe608",
     "timestamp": "Fri Jul 24 2026 14:38:56 GMT-0400 (Eastern Daylight Time)",
     "region": "Detroit, MI",
     "yearMakeModel": "2019 International LT",
@@ -795,7 +780,7 @@
     "seeded": "true"
   },
   {
-    "id": "4ed8a887-46bf-4924-bc91-7571ee616314",
+    "id": "b19c287b-a5d1-44a5-84af-dc8cd85afff2",
     "timestamp": "Fri Jul 24 2026 14:50:15 GMT-0400 (Eastern Daylight Time)",
     "region": "Philadelphia PA",
     "yearMakeModel": "2022 Mack Anthem",
@@ -810,7 +795,7 @@
     "seeded": "true"
   },
   {
-    "id": "da2f53f7-717a-4a80-8d2e-05cc60c382e0",
+    "id": "66d988eb-ca3c-42c0-8bed-0d36fc4a2c01",
     "timestamp": "Fri Jul 24 2026 14:57:06 GMT-0400 (Eastern Daylight Time)",
     "region": "Los Angeles CA",
     "yearMakeModel": "2022 Peterbilt 579",
