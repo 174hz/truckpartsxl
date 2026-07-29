@@ -156,6 +156,17 @@
         .tag-priority { color: var(--red); border-color: rgba(200,16,46,0.3); background: var(--red-soft); }
         /* Expired tag — amber/gold tone */
         .tag-expired { color: #7A5800; border-color: rgba(138,106,0,0.3); background: rgba(138,106,0,0.08); }
+        /* Sample/seeded listing tag */
+        .tag-sample { color: #1B3F6E; border-color: rgba(27,63,110,0.3); background: rgba(27,63,110,0.08); }
+        /* Disabled unlock button for seeded listings */
+        .unlock-btn-disabled {
+            background: var(--border); color: var(--subtext); border: none;
+            border-radius: var(--r-md); padding: 10px 16px;
+            font-family: var(--ff-body); font-size: 11px; font-weight: 700;
+            letter-spacing: 0.04em; text-transform: uppercase; cursor: not-allowed;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+            opacity: 0.7;
+        }
 
         .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
         .spec-item { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
@@ -458,6 +469,7 @@
         const region    = getField(bounty, 'region',        'Not Specified');
 
         const isPriority   = bounty.boosted === 'true';
+        const isSeeded     = bounty.seeded === 'true';
         const listingDate  = bounty.timestamp ? new Date(bounty.timestamp) : null;
         const isExpired    = listingDate && (Date.now() - listingDate.getTime()) > THIRTY_DAYS_MS;
         const regionEmoji  = isCanada(region) ? '🍁' : '🇺🇸';
@@ -476,6 +488,7 @@
                     <div class="part-tags">
                         ${isPriority ? '<span class="tag tag-priority">⚡ Priority</span>' : ''}
                         ${isExpired  ? '<span class="tag tag-expired">⏱ May Be Filled</span>' : ''}
+                        ${isSeeded   ? '<span class="tag tag-sample">📋 Sample Listing</span>' : ''}
                     </div>
                 </div>
                 <div class="spec-grid">
@@ -503,10 +516,18 @@
                     <span class="region-pill">${regionEmoji} ${region}</span>
                 </div>
                 <div class="card-actions">
-                    <button class="unlock-btn" onclick="window.open('${unlockUrl}', '_blank')">
-                        🔒 Unlock Contact
-                    </button>
-                    <span class="btn-subtext">Secure via Stripe · $9.99</span>
+                    ${isSeeded
+                        ? `<div>
+                            <div class="unlock-btn-disabled">📋 Sample Listing</div>
+                            <span class="btn-subtext" style="text-align:center;display:block;margin-top:6px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header" target="_blank" style="color:var(--red);font-weight:700;text-decoration:none;">Post your own →</a></span>
+                           </div>`
+                        : `<div>
+                            <button class="unlock-btn" onclick="window.open('${unlockUrl}', '_blank')">
+                                🔒 Unlock Contact
+                            </button>
+                            <span class="btn-subtext">Secure via Stripe · $9.99</span>
+                           </div>`
+                    }
                 </div>
             </div>
         </div>`;
