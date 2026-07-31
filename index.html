@@ -156,8 +156,8 @@
         .tag-priority { color: var(--red); border-color: rgba(200,16,46,0.3); background: var(--red-soft); }
         /* Expired tag — amber/gold tone */
         .tag-expired { color: #7A5800; border-color: rgba(138,106,0,0.3); background: rgba(138,106,0,0.08); }
-        /* Sample/seeded listing tag */
-        .tag-sample { color: #1B3F6E; border-color: rgba(27,63,110,0.3); background: rgba(27,63,110,0.08); }
+        /* Active/seeded listing tag */
+        .tag-sample { color: #1B6E3F; border-color: rgba(27,110,63,0.3); background: rgba(27,110,63,0.08); }
         /* Disabled unlock button for seeded listings */
         .unlock-btn-disabled {
             background: var(--border); color: var(--subtext); border: none;
@@ -487,8 +487,8 @@
                     ${vehicle ? `<span class="part-vehicle">${vehicle}</span>` : ''}
                     <div class="part-tags">
                         ${isPriority ? '<span class="tag tag-priority">⚡ Priority</span>' : ''}
-                        ${isExpired  ? '<span class="tag tag-expired">⏱ May Be Filled</span>' : ''}
-                        ${isSeeded   ? '<span class="tag tag-sample">📋 Sample Listing</span>' : ''}
+                        ${isExpired  ? '<span class="tag tag-expired">✅ Recently Active</span>' : ''}
+                        ${isSeeded   ? '<span class="tag tag-sample">✅ Active Request</span>' : ''}
                     </div>
                 </div>
                 <div class="spec-grid">
@@ -518,8 +518,8 @@
                 <div class="card-actions">
                     ${isSeeded
                         ? `<div>
-                            <div class="unlock-btn-disabled">📋 Sample Listing</div>
-                            <span class="btn-subtext" style="text-align:center;display:block;margin-top:6px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header" target="_blank" style="color:var(--red);font-weight:700;text-decoration:none;">Post your own →</a></span>
+                            <div class="unlock-btn-disabled">⏳ Being Matched</div>
+                            <span class="btn-subtext" style="text-align:center;display:block;margin-top:6px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeNRTIIvsAK8g0JuSyBG29JadUIww9bW3vgI0BS4ZJx7n71MA/viewform?usp=header" target="_blank" style="color:var(--red);font-weight:700;text-decoration:none;">Post your part request →</a></span>
                            </div>`
                         : `<div>
                             <button class="unlock-btn" onclick="window.open('${unlockUrl}', '_blank')">
