@@ -818,5 +818,19 @@
     "condition": "",
     "region": "",
     "boosted": "false"
+  },
+  {
+    "id": "c66d2c2c-8d18-4da1-af5f-c9299e690154",
+    "timestamp": "7/31/2026 9:44:49",
+    "region": "Peterborough, ON ",
+    "yearMakeModel": "2023 Mack Anthem",
+    "vin": "1M1AN4GY2NM123467",
+    "partName": "Front Steer Axle Assembly",
+    "specs": "",
+    "oem": "Meritor MFS-12-143A",
+    "condition": "Used / Take-Off (Budget Friendly)",
+    "budget": "4,200",
+    "boosted": "false",
+    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1OqBi87ZclaotNkbpOdVqVxJS0akDiHg5Qsz9eqxTS6WULTpRlq0YOgRu#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
   }
 ]
