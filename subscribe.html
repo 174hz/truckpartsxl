@@ -414,6 +414,21 @@
 </footer>
 
 <script>
+    // Real Google Form URL for TruckPartsXL Subscriber List
+    var GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfXZ-o5p8AQrq3Kv6UTzc3t3EvnmCpZWWNTpeFIET7EyNlz-A/formResponse';
+
+    // NOTE: To get entry IDs, open your Google Form, right-click → View Page Source
+    // Search for "entry." to find each field's entry ID
+    // Then map them below. Placeholder IDs shown — update after checking your form source.
+    var FIELD_IDS = {
+        companyName: 'entry.COMPANY_NAME',
+        contactName: 'entry.CONTACT_NAME',
+        email:       'entry.EMAIL',
+        phone:       'entry.PHONE',
+        region:      'entry.REGION',
+        bizType:     'entry.BIZ_TYPE'
+    };
+
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -421,33 +436,14 @@
         btn.textContent = 'Submitting...';
         btn.disabled = true;
 
-        var data = {
-            companyName:  document.getElementById('companyName').value,
-            contactName:  document.getElementById('contactName').value,
-            email:        document.getElementById('email').value,
-            phone:        document.getElementById('phone').value,
-            region:       document.getElementById('region').value,
-            bizType:      document.getElementById('bizType').value,
-            timestamp:    new Date().toISOString()
-        };
+        var companyName = document.getElementById('companyName').value;
+        var contactName = document.getElementById('contactName').value;
+        var email       = document.getElementById('email').value;
+        var phone       = document.getElementById('phone').value;
+        var region      = document.getElementById('region').value;
+        var bizType     = document.getElementById('bizType').value;
 
-        // Submit to Google Form
-        // REPLACE THE URL BELOW WITH YOUR SUBSCRIBER GOOGLE FORM URL
-        var FORM_URL = 'YOUR_GOOGLE_FORM_URL_HERE';
-
-        // Build the form submission URL
-        // Map each field to the Google Form entry IDs
-        // You'll get these entry IDs from your Google Form
-        var params = new URLSearchParams({
-            'entry.COMPANY_NAME_ID':  data.companyName,
-            'entry.CONTACT_NAME_ID':  data.contactName,
-            'entry.EMAIL_ID':         data.email,
-            'entry.PHONE_ID':         data.phone,
-            'entry.REGION_ID':        data.region,
-            'entry.BIZ_TYPE_ID':      data.bizType,
-        });
-
-        // Submit via hidden iframe to avoid redirect
+        // Submit via hidden iframe to avoid page redirect
         var iframe = document.createElement('iframe');
         iframe.style.display = 'none';
         iframe.name = 'hidden_iframe';
@@ -455,26 +451,34 @@
 
         var form = document.createElement('form');
         form.method = 'POST';
-        form.action = FORM_URL.replace('/viewform', '/formResponse');
+        form.action = GOOGLE_FORM_URL;
         form.target = 'hidden_iframe';
 
-        Object.keys(data).forEach(function(key) {
+        var fields = {
+            [FIELD_IDS.companyName]: companyName,
+            [FIELD_IDS.contactName]: contactName,
+            [FIELD_IDS.email]:       email,
+            [FIELD_IDS.phone]:       phone,
+            [FIELD_IDS.region]:      region,
+            [FIELD_IDS.bizType]:     bizType
+        };
+
+        Object.keys(fields).forEach(function(key) {
             var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = data[key];
+            input.type  = 'hidden';
+            input.name  = key;
+            input.value = fields[key];
             form.appendChild(input);
         });
 
         document.body.appendChild(form);
+        form.submit();
 
-        // Show success after short delay
+        // Show success state after short delay
         setTimeout(function() {
             document.getElementById('formWrap').style.display = 'none';
             document.getElementById('successState').style.display = 'block';
         }, 1200);
-
-        form.submit();
     }
 </script>
 
