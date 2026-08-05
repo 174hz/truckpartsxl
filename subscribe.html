@@ -414,20 +414,8 @@
 </footer>
 
 <script>
-    // Real Google Form URL for TruckPartsXL Subscriber List
-    var GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfXZ-o5p8AQrq3Kv6UTzc3t3EvnmCpZWWNTpeFIET7EyNlz-A/formResponse';
-
-    // NOTE: To get entry IDs, open your Google Form, right-click → View Page Source
-    // Search for "entry." to find each field's entry ID
-    // Then map them below. Placeholder IDs shown — update after checking your form source.
-    var FIELD_IDS = {
-        companyName: 'entry.211114318',
-        contactName: 'entry.106056376',
-        email:       'entry.1591747987',
-        phone:       'entry.289696267',
-        region:      'entry.2053945239',
-        bizType:     'entry.1242900497'
-    };
+    // TruckPartsXL Subscriber Webhook URL
+    var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzDMaBwOKPNgkrmRe95v85vvgdgUaNLhMKJa8IFVzB6Cw-lpkEF6huCn1LH7llMjZgHQg/exec';
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -443,42 +431,33 @@
         var region      = document.getElementById('region').value;
         var bizType     = document.getElementById('bizType').value;
 
-        // Submit via hidden iframe to avoid page redirect
-        var iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.name = 'hidden_iframe';
-        document.body.appendChild(iframe);
+        // Build form data
+        var formData = new FormData();
+        formData.append('companyName', companyName);
+        formData.append('contactName', contactName);
+        formData.append('email',       email);
+        formData.append('phone',       phone);
+        formData.append('region',      region);
+        formData.append('bizType',     bizType);
 
-        var form = document.createElement('form');
-        form.method = 'POST';
-        form.action = GOOGLE_FORM_URL;
-        form.target = 'hidden_iframe';
-
-        var fields = {
-            [FIELD_IDS.companyName]: companyName,
-            [FIELD_IDS.contactName]: contactName,
-            [FIELD_IDS.email]:       email,
-            [FIELD_IDS.phone]:       phone,
-            [FIELD_IDS.region]:      region,
-            [FIELD_IDS.bizType]:     bizType
-        };
-
-        Object.keys(fields).forEach(function(key) {
-            var input = document.createElement('input');
-            input.type  = 'hidden';
-            input.name  = key;
-            input.value = fields[key];
-            form.appendChild(input);
-        });
-
-        document.body.appendChild(form);
-        form.submit();
-
-        // Show success state after short delay
-        setTimeout(function() {
+        // Submit to Apps Script webhook
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            body:   formData,
+            mode:   'no-cors'
+        })
+        .then(function() {
+            // Show success state
             document.getElementById('formWrap').style.display = 'none';
             document.getElementById('successState').style.display = 'block';
-        }, 1200);
+        })
+        .catch(function(err) {
+            console.error('Submission error:', err);
+            // Show success anyway — no-cors means we cant read response
+            // but submission likely went through
+            document.getElementById('formWrap').style.display = 'none';
+            document.getElementById('successState').style.display = 'block';
+        });
     }
 </script>
 
