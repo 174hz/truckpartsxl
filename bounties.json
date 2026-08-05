@@ -810,51 +810,33 @@
     "seeded": "true"
   },
   {
-    "timestamp": "",
-    "yearMakeModel": "",
-    "partName": "",
-    "oem": "",
-    "specs": "dbelnavis@gmail.com",
-    "condition": "",
-    "region": "",
-    "boosted": "false"
-  },
-  {
     "id": "c66d2c2c-8d18-4da1-af5f-c9299e690154",
-    "timestamp": "7/31/2026 9:44:49",
-    "region": "Peterborough, ON ",
+    "timestamp": "Fri Jul 31 2026 12:44:48 GMT-0400 (Eastern Daylight Time)",
+    "region": "Peterborough, ON",
     "yearMakeModel": "2023 Mack Anthem",
     "vin": "1M1AN4GY2NM123467",
     "partName": "Front Steer Axle Assembly",
-    "specs": "",
+    "specs": "Meritor MFS-12-143A",
     "oem": "Meritor MFS-12-143A",
     "condition": "Used / Take-Off (Budget Friendly)",
-    "budget": "4,200",
+    "budget": "4200",
     "boosted": "false",
-    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_test_a1OqBi87ZclaotNkbpOdVqVxJS0akDiHg5Qsz9eqxTS6WULTpRlq0YOgRu#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPUWwwa0BPSVJvT0BEUTUwcXFTdVZBbmRoX3FRX0pAXGRQRmFSTjFXdTBJSU1STG03N2RtbURGTzA1NVVCbGFkNkdJJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
+    "unlockUrl": "",
+    "seeded": "true"
   },
   {
     "id": "a2b2afd1-6dff-4f8d-af04-3630c41b6dee",
-    "timestamp": "8/3/2026 8:39:18",
-    "region": "Toronto, ON ",
+    "timestamp": "Mon Aug 03 2026 11:39:17 GMT-0400 (Eastern Daylight Time)",
+    "region": "Toronto, ON",
     "yearMakeModel": "2023 Peterbilt 579",
     "vin": "1XPBDP9X2ND123456",
     "partName": "PACCAR MX-13 Engine",
     "specs": "PACCAR MX-13 — 510HP",
     "oem": "1947459PE",
     "condition": "Any Condition (Whatever gets me rolling!)",
-    "budget": "20,500",
+    "budget": "20500",
     "boosted": "false",
-    "unlockUrl": "https://checkout.stripe.com/c/pay/cs_live_a1dO0qkQfptptVwZpgJ6W90EqTeYUWyh3Y3efRSHr7f0Q0XJoneMgdnvDc#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWmlsc2BaNDJPSWA0UH98XzdjakdMX3JUaX9Mc3djU2lSNGBGbkxPS2NtUzxVY3dpN2FkRFRVRHxVTjZBUHxoPDZMXH1uaTdwYFZON1VBUzZzSmtfM3A2XG83aHdPUH01NTR1UEw9SkNcJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
-  },
-  {
-    "timestamp": "",
-    "yearMakeModel": "",
-    "partName": "",
-    "oem": "",
-    "specs": "dbelnavis@gmail.com",
-    "condition": "",
-    "region": "",
-    "boosted": "false"
+    "unlockUrl": "",
+    "seeded": "true"
   }
 ]
